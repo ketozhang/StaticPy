@@ -1,0 +1,37 @@
+<p>Let a bit sequence be <span class="math inline"><em>m</em><sub>1</sub>, <em>m</em><sub>2</sub>, …, <em>m</em><sub><em>n</em></sub></span> of <span class="math inline"><em>n</em></span> bits. We will be dealing with two types of errors:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Erasures</strong>: If up to <span class="math inline"><em>k</em></span> of the <span class="math inline"><em>m</em><sub><em>i</em></sub></span> messages gets corrupted and we know exactly which message.</li>
+<li><strong>General Errors</strong>: If up to <span class="math inline"><em>k</em></span> of the <span class="math inline"><em>m</em><sub><em>i</em></sub></span> messages get corrupted and we don't know which message.</li>
+</ol>
+<h2 id="erasures">Erasures</h2>
+<p>To insure that if <span class="math inline"><em>k</em></span> bits were dropped we would know how to recover the information, we need to send an extra <span class="math inline"><em>k</em></span> bits of data through the channel.</p>
+<ol style="list-style-type: decimal">
+<li><p>Let <span class="math inline"><em>q</em> &gt; <em>n</em> + <em>k</em></span> be a large prime so all packages are in mod <span class="math inline"><em>q</em></span>.</p></li>
+<li><p>Let <span class="math inline"><em>P</em>(<em>x</em>)</span> be the unique polynomial of degree <span class="math inline"><em>n</em> − 1</span> in mod <span class="math inline"><em>q</em></span> that goes through the our message as points <span class="math inline">(<em>i</em>, <em>m</em><sub><em>i</em></sub>)</span> such that <span class="math inline"><em>P</em>(<em>i</em>)=<em>m</em><sub><em>i</em></sub></span> for <span class="math inline">1 ≤ <em>i</em> ≤ <em>n</em></span></p></li>
+<li><p>Let's send <span class="math inline"><em>k</em></span> more messages <span class="math inline"><em>P</em>(<em>i</em>)=<em>m</em><sub><em>i</em></sub></span> for <span class="math inline"><em>n</em> &lt; <em>i</em> ≤ <em>k</em></span> as insurance.</p></li>
+<li><p>With any <span class="math inline"><em>n</em></span> of these <span class="math inline"><em>n</em> + <em>k</em></span> messages we can reconstruct <span class="math inline"><em>P</em>(<em>i</em>)</span> thus we're able to recover the original messages.</p></li>
+</ol>
+<h2 id="general-errors">General Errors</h2>
+<p>We will send <span class="math inline">2<em>k</em></span> extra redundant messages.</p>
+<ol style="list-style-type: decimal">
+<li>Let <span class="math inline"><em>q</em> &gt; <em>n</em> + 2<em>k</em></span> be a large prime.</li>
+<li>Let <span class="math inline"><em>P</em>(<em>i</em>)</span> be a unique degree <span class="math inline"><em>n</em> − 1</span> polynomial in mod <span class="math inline"><em>q</em></span> that goes through <span class="math inline"><em>n</em> + 2<em>k</em></span> points of <span class="math inline">(<em>i</em>, <em>m</em><sub><em>i</em></sub>)</span> for <span class="math inline">1 ≤ <em>i</em> ≤ <em>n</em> + 2<em>k</em></span>.</li>
+<li><p>If any up to <span class="math inline"><em>k</em></span> messages got corrupted we can find a polynomial <span class="math inline"><em>Q</em>′(<em>i</em>)</span> that goes through <span class="math inline"><em>n</em> + <em>k</em></span> recieved points (denoted as <span class="math inline"><em>r</em><sub><em>i</em></sub></span>). We define this polynomial specially as a product of the original polynomial <span class="math inline"><em>P</em>(<em>i</em>)</span> and the error-locating polynomial <span class="math inline"><em>E</em>(<em>i</em>)</span> of degree <span class="math inline"><em>k</em></span> defined as,</p>
+<p><br /><span class="math display">$$
+\begin{gather*}
+    E(i) = (i-e_1)(i-e_2) \ldots (i-e_k)\\
+    Q(i) = E(i)P(i)
+\end{gather*}
+$$</span><br /></p>
+<p>The error-locating polynomial is zero when an corrupted input <span class="math inline"><em>i</em></span> is given.</p>
+<p><br /><span class="math display"><em>P</em>(<em>i</em>)<em>E</em>(<em>i</em>)=<em>r</em><sub><em>i</em></sub><em>E</em>(<em>i</em>)</span><br /></p>
+<p>Now <span class="math inline"><em>Q</em>(<em>i</em>)</span> can be solved because we have <span class="math inline"><em>n</em> + <em>k</em></span> points, along with <span class="math inline"><em>E</em>(<em>x</em>)</span> together.</p>
+<p><br /><span class="math display">$$
+\begin{gather*}
+    Q(i) = a_{n+k+1}x^{n+k+1} + \ldots + a_0\\
+    E(i) = x^{k} + b_{k-1}x^{x-1} + \ldots + b_0
+\end{gather*}
+$$</span><br /></p>
+<p>When <span class="math inline"><em>b</em><sub>0</sub></span> is solved, the error location is <span class="math inline">$b_0 \bmod p$</span>. Now we can solve for <span class="math inline"><em>P</em>(<em>i</em>)</span>,</p>
+<p><br /><span class="math display">$$ P(i) = \frac{Q(x)}{E(x)} $$</span><br /></p></li>
+</ol>
