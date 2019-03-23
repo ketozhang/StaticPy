@@ -5,11 +5,16 @@ from flask import Flask, render_template
 from pathlib import Path
 from shutil import rmtree
 app = Flask(__name__)
-
+ROOT_URL = 'notebook'
 PROJECT_PATH = Path(__file__).resolve().parents[0]
 SOURCE_PATH = PROJECT_PATH / 'notes/'
 TEMPLATES_PATH = PROJECT_PATH / 'templates/'
 BUILD_PATH = TEMPLATES_PATH / 'notes/'
+
+@app.context_processor
+def global_var():
+    var = dict(root_url=ROOT_URL)
+    return var
 
 
 def get_fpath(file_or_path):
