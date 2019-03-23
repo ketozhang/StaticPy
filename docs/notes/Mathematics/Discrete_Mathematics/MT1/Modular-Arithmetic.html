@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+
+</head>
+
+<body>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+    
+<h1>notes/Mathematics/Discrete_Mathematics/MT1/Modular-Arithmetic.html</h1>
+<p>The statement &quot;<span class="math inline"><em>a</em></span> modulo <span class="math inline"><em>b</em></span>&quot; is how many learn modular arithmetic which treats <span class="math inline">mod</span> as an operator like,</p>
+<p><br /><span class="math display">$$
+\begin{gather*}
+   r = a \bmod b \\
+    \big\Downarrow \\
+    a = bc + r
+\end{gather*}
+$$</span><br /></p>
+<p>This notation suggest that when <span class="math inline"><em>a</em>/<em>b</em></span> there exist a remainder <span class="math inline"><em>r</em></span> for <span class="math inline"><em>c</em></span> is some integer.</p>
+<p>A more formal way of writing this is to treat <span class="math inline">mod</span> as a space called the <strong>modular space</strong>. In this notation it means that the remainder <span class="math inline"><em>r</em></span> and the dividend <span class="math inline"><em>a</em></span> are congruent in the space of <span class="math inline">$\bmod b$</span>.</p>
+<p><br /><span class="math display">$$
+    \begin{align*}
+    r &amp;\equiv a \pmod b \\
+    &amp;\big \Downarrow \\
+    a - &amp;r = bc
+\end{align*}
+$$</span><br /></p>
+<p>Here we say that <span class="math inline"><em>r</em></span> and <span class="math inline"><em>a</em></span> are congruent modulo if they have the same remainder (note <span class="math inline">$r \bmod b = r$</span>).</p>
+<ul>
+<li>All values in <span class="math inline">$\bmod m$</span> lives in the set <span class="math inline">$\set{0, \ldots, m-1}$</span></li>
+</ul>
+<h2 id="rules">Rules</h2>
+<p>Modulo arithmetic has the basic rules of arithmetic except for the divison operation.</p>
+<ul>
+<li><span class="math inline">$(x + y) \bmod a \equiv (x \bmod a) + (x\bmod a)$</span></li>
+<li><span class="math inline">$(x y) \bmod a \equiv (x \bmod a) \cdot (x\bmod a)$</span></li>
+</ul>
+<h2 id="division-and-inverses">Division and Inverses</h2>
+<p>For divison, it gets complicated and we wish to preserve the rule of <strong>multiplicative inverse</strong> which states that,</p>
+<p><br /><span class="math display">$$
+\begin{gather*}
+    x \cdot y \equiv 1 \pmod m \\
+    \big \Downarrow \\
+    x \equiv \frac{1}{y} \pmod m
+\end{gather*}
+$$</span><br /></p>
+<p>For <span class="math inline"><em>x</em></span> and <span class="math inline"><em>y</em></span> inverse of each other.</p>
+<ul>
+<li><p>Inverses doesn't exist because it only exist if say for a fixed value <span class="math inline"><em>x</em></span> and varying value <span class="math inline"><em>y</em></span>,</p>
+<p><br /><span class="math display"><em>x</em> ⋅ <em>y</em> = <em>c</em> ⋅ <em>m</em> + 1</span><br /></p></li>
+<li><p>The statement above can be quite difficult to solve since there are two varying parameters (<span class="math inline"><em>c</em></span> and <span class="math inline"><em>y</em></span>). However the statement above is equivalent to,</p>
+<p><br /><span class="math display">$$ \forall x \exists y \Big[(xy) \bmod m = 1 \iff \gcd{(x,m)} = 1  \Big] $$</span><br /></p>
+<p>This statement's RHS is equivalently <em><strong>&quot;<span class="math inline"><em>x</em></span> is a coprime of <span class="math inline"><em>m</em></span>&quot;</strong></em></p></li>
+<li><p>If the modular space value <span class="math inline"><em>p</em></span> in <span class="math inline">$\pmod p$</span> is prime then there always exists an inverse,</p>
+<p><br /><span class="math display">$$ \forall x \forall p \in \text{prime 0} \exists y \Big( x\cdot y \equiv 1 \pmod{p}  \Big) $$</span><br /></p></li>
+</ul>
+<h3 id="euclids-algorithm">Euclid's Algorithm</h3>
+<p>The Euclid's algorithm begins with assuming that the gcd can be written as a linear combination of <span class="math inline"><em>x</em>, <em>y</em></span>,</p>
+<p><br /><span class="math display">gcd(<em>x</em>, <em>y</em>)=<em>a</em><em>x</em> + <em>b</em><em>y</em></span><br /></p>
+<p>Where <span class="math inline"><em>a</em></span> and <span class="math inline"><em>b</em></span> are integers (remember, it's possibly negative). It's not a surprise that we can find,</p>
+<p><br /><span class="math display">$$
+\begin{align*}
+    am + bx &amp;= 1 \\
+    &amp;\big\Downarrow \\
+    bx &amp;\equiv 1 \pmod m
+\end{align*}
+$$</span><br /></p>
+<p>We now see that <span class="math inline"><em>b</em></span> is the inverse of <span class="math inline"><em>x</em></span>. So all we need to do is fine <span class="math inline"><em>a</em></span> and <span class="math inline"><em>b</em></span>. To do that we need to know the gcd. This is where Euler's algorithm comes in,</p>
+<p><em><strong>Theorem:</strong> <span class="math inline">$x \ge y &gt; 0 \implies \gcd(x,y) = \gcd(y,x\bmod y)$</span></em></p>
+<ol style="list-style-type: decimal">
+<li>Take the smaller value <span class="math inline"><em>y</em></span> to be the mod space.</li>
+<li>Continue Euclid's theorem until one of the input variables is zero</li>
+<li><p>When an input variable is zero the gcd is simply the non-zero value,</p>
+<p><br /><span class="math display">$$
+    \begin{align*}
+        \gcd(x,y) &amp;= \gcd(y,x \bmod y)\\
+        &amp;= \ldots \\
+        &amp;= \gcd(d,0)\\
+        &amp;= d
+    \end{align*}
+$$</span><br /></p></li>
+</ol>
+<p>Now we are going to use this for <span class="math inline">gcd(<em>x</em>, <em>y</em>)=<em>a</em><em>x</em> + <em>b</em><em>y</em></span>,</p>
+<p><br /><span class="math display">$$
+    \begin{align*}
+        d &amp;= ay + b(x \bmod y)\\
+        d &amp;= bx + \left(a-\left\lfloor\frac{x}{y}\right\rfloor b\right)y
+    \end{align*}
+$$</span><br /></p>
+<h2 id="negation">Negation</h2>
+<p>Unfortunately negation is not like basic arithmetic. For instance,</p>
+<p><br /><span class="math display">$$
+\begin{gather*}
+    4 \bmod 3 = 1\\
+    -4 \bmod 3 = 2
+\end{gather*}
+$$</span><br /></p>
+<p>The relation for negation is simple,</p>
+<p><br /><span class="math display">$$
+\begin{align*}
+    -a \bmod b &amp;= b - (a \bmod b)\\
+    &amp;= (b-a) \bmod b
+\end{align*}
+$$</span><br /></p>
+
+</body>
+
+</html>

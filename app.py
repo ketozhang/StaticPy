@@ -56,17 +56,16 @@ def build():
         BUILD_PATH.rename(BUILD_PATH.name)
 
 
+def get_all_notes(relative_to=BUILD_PATH):
+    htmls = BUILD_PATH.glob('**/*.html')
+    notes = [str(note.relative_to(relative_to)) for note in htmls]
+    return notes
+
 @app.route('/')
 def main():
-    htmls = BUILD_PATH.glob('**/*.html')
-    notes = [str(note.relative_to(TEMPLATES_PATH)) for note in htmls]
+    notes = get_all_notes(relative_to=TEMPLATES_PATH)
     context = dict(notes=notes)
     return render_template('main.html', **context)
-
-
-@app.route('/example')
-def example():
-    return render_template('example.html')
 
 
 @app.route('/notes/<path:note>')

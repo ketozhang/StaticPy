@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+
+</head>
+
+<body>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+    
+<h1>notes/Mathematics/Discrete_Mathematics/MT1/Logic.html</h1>
+<h2 id="proposition">Proposition</h2>
+<p>A proposition is a mathematical statement that is either True or False. In math, we do not focus on propositions that are vague either because the proposition contains a vague term or the answer can vaguely either be True or False.</p>
+<h2 id="notation">Notation</h2>
+<p><strong>Conjunction / And</strong> : <br /><span class="math display"><em>P</em> ∧ <em>Q</em></span><br /></p>
+<p><strong>Disjoint / Or</strong> : <br /><span class="math display"><em>P</em> ∨ <em>Q</em></span><br /></p>
+<p><strong>Negation / Not</strong> : <br /><span class="math display">¬<em>P</em></span><br /></p>
+<dl>
+<dt><strong>Implications</strong></dt>
+<dd><p>&quot;<span class="math inline"><em>P</em></span> implies <span class="math inline"><em>Q</em></span>&quot; is the same as &quot;if <span class="math inline"><em>P</em></span>, then <span class="math inline"><em>Q</em></span>&quot; and is denoted as,</p>
+<p><br /><span class="math display"><em>P</em> ⟹ <em>Q</em> ≡ ¬<em>P</em> ∨ <em>Q</em></span><br /></p>
+<ul>
+<li><p>An implication is only false if <span class="math inline"><em>Q</em></span> is false and <span class="math inline"><em>P</em></span> is true.</p></li>
+<li><p>If <span class="math inline"><em>P</em></span> is false, then the implication is always true.</p></li>
+<li><p>If <span class="math inline"><em>P</em> ⟹ <em>Q</em></span> and <span class="math inline"><em>Q</em> ⟹ <em>P</em></span> then this means &quot;<span class="math inline"><em>P</em></span> if and only if <span class="math inline"><em>Q</em></span>&quot; in notation,</p>
+<p><br /><span class="math display"><em>P</em> ⇔ <em>Q</em></span><br /></p>
+<p>The advantage of IFF is that if <span class="math inline"><em>P</em></span> then it must be that <span class="math inline"><em>Q</em></span> is true.</p></li>
+</ul>
+</dd>
+</dl>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline"><em>P</em></span></th>
+<th><span class="math inline"><em>Q</em></span></th>
+<th align="center"><span class="math inline"><em>P</em> ⟹ <em>Q</em></span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>T</td>
+<td>T</td>
+<td align="center">T</td>
+</tr>
+<tr class="even">
+<td>T</td>
+<td>F</td>
+<td align="center">F</td>
+</tr>
+<tr class="odd">
+<td>F</td>
+<td>T</td>
+<td align="center">T</td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td>F</td>
+<td align="center">T</td>
+</tr>
+</tbody>
+</table>
+<p>Here <span class="math inline"><em>P</em></span> is the <strong>hypothesis</strong> and <span class="math inline"><em>Q</em></span> is the <strong>conclusion</strong></p>
+<h2 id="logical-truths">Logical Truths</h2>
+<ul>
+<li><strong>Truth Table</strong>: For every logical statement, a truth table can be made</li>
+<li><strong>Logically Equivalent</strong> : Two logical statement are considered logically equivalent if the truth table are the same. This is notated as,</li>
+</ul>
+<p><br /><span class="math display">(<em>P</em>)≡(<em>Q</em>)</span><br /></p>
+<ul>
+<li><strong>Vacuously True</strong>: A statement is vacuously true when an implication is stupidly true because the hypothesis is false</li>
+</ul>
+<h2 id="contrapositive-and-converse">Contrapositive and Converse</h2>
+<dl>
+<dt>Contrapositive</dt>
+<dd>The contrapositive is the negation of both propositions:
+</dd>
+</dl>
+<p><br /><span class="math display">¬<em>Q</em> ⟹ ¬<em>P</em></span><br /></p>
+<dl>
+<dt>Converse</dt>
+<dd>The converse is the flip if the implication,
+</dd>
+</dl>
+<p><br /><span class="math display"><em>Q</em> ⟹ <em>P</em></span><br /></p>
+<h2 id="universal-and-existential-quantifiers">Universal and Existential Quantifiers</h2>
+<dl>
+<dt><strong>For all</strong></dt>
+<dd>The symbol <span class="math inline">∀</span> denotes the statement &quot;for all <span class="math inline">…</span>&quot;
+</dd>
+</dl>
+<p>A full statement with a logical statement <span class="math inline"><em>P</em></span> is used as so:</p>
+<p><br /><span class="math display">∀<em>x</em><em>P</em></span><br /></p>
+<p>This means <span class="math inline">$``$</span>For all $ x P&quot;$ where $ x$ is often some set</p>
+<dl>
+<dt><strong>There exists</strong></dt>
+<dd>The sybmol <span class="math inline">∃</span> denotes the statement &quot;There exists <span class="math inline">…</span>&quot;.
+</dd>
+</dl>
+<p>The relationship between <span class="math inline">∀</span> and <span class="math inline">∃</span> statement is given by a negation relationship,</p>
+<ol style="list-style-type: decimal">
+<li><p>If there exists <span class="math inline"><em>x</em></span> where <span class="math inline"><em>P</em>(<em>x</em>)</span> is false, then not all <span class="math inline"><em>x</em></span> makes <span class="math inline"><em>P</em>(<em>x</em>)</span> true <br /><span class="math display">$$
+\neg(\forall x P( x)) \equiv \exists x \neg P( x)\\
+$$</span><br /></p></li>
+<li><p>If all <span class="math inline"><em>x</em></span> where <span class="math inline"><em>P</em>(<em>x</em>)</span> is false, then there does not exists <span class="math inline"><em>x</em></span> where <span class="math inline"><em>P</em>(<em>x</em>)</span> is true <br /><span class="math display">¬(∃<em>x</em><em>P</em>(<em>x</em>)) ≡ ∀<em>x</em>¬<em>P</em>(<em>x</em>)</span><br /></p></li>
+</ol>
+<h2 id="de-morgans-laws">De Morgan's Laws</h2>
+<ol style="list-style-type: decimal">
+<li><p>If &quot;<span class="math inline"><em>P</em></span> and <span class="math inline"><em>Q</em></span>&quot; is false then &quot;<span class="math inline"><em>P</em></span> is false or <span class="math inline"><em>Q</em></span> is false&quot;</p>
+<p><br /><span class="math display">¬(<em>P</em> ∧ <em>Q</em>)≡(¬<em>P</em> ∨ ¬<em>Q</em>)</span><br /></p></li>
+<li><p>If &quot;<span class="math inline"><em>P</em></span> or <span class="math inline"><em>Q</em></span>&quot; is false then &quot;<span class="math inline"><em>P</em></span> is false and <span class="math inline"><em>Q</em></span> is false&quot;</p>
+<p><br /><span class="math display">¬(<em>P</em> ∨ <em>Q</em>)≡(¬<em>P</em> ∧ ¬<em>Q</em>)</span><br /></p></li>
+<li><p>If &quot;for all <span class="math inline"><em>x</em></span>, <span class="math inline"><em>P</em>(<em>x</em>)</span> is false&quot; then &quot;there must exist an <span class="math inline"><em>x</em></span> that makes <span class="math inline"><em>P</em>(<em>x</em>)</span> false&quot;:</p>
+<p><br /><span class="math display">¬(∀<em>x</em><em>P</em>(<em>x</em>)) ≡ ∃<em>x</em>(¬<em>P</em>(<em>x</em>))</span><br /></p></li>
+<li><p>If &quot;there does not exist an <span class="math inline"><em>x</em></span> that <span class="math inline"><em>P</em>(<em>x</em>)</span> is true&quot; then &quot;for all <span class="math inline"><em>x</em></span>, <span class="math inline"><em>P</em>(<em>x</em>)</span> is false&quot;</p>
+<p><br /><span class="math display">¬(∃<em>x</em><em>P</em>(<em>x</em>)) ≡ ∀<em>x</em>(¬<em>P</em>(<em>x</em>))</span><br /></p></li>
+</ol>
+<p>The De Morgan's laws can be summarize to fully describe the negation operator <span class="math inline">¬</span> such that:</p>
+<p><br /><span class="math display">$$
+\begin{align*}
+    \neg \land \equiv \lor\\
+    \neg \lor \equiv \land\\
+    \neg \forall \equiv \exists\\
+    \neg \exists \equiv \forall
+\end{align*}
+$$</span><br /></p>
+<hr />
+<h2 id="summary">Summary</h2>
+<p>This notes comprise of:</p>
+<ul>
+<li><p>Logical symbols</p>
+<table>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">∧</span></td>
+<td>and</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">∨</span></td>
+<td>or</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">¬</span></td>
+<td>not</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">⇒</span></td>
+<td>implies</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">≡</span></td>
+<td>Equivalence</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>Implications are not as intuitive as one may think. Since implication is only false if the then statement is false while the if statment is true.</p>
+<p><br /><span class="math display"><em>P</em> ⟹ <em>Q</em> ≡ ¬<em>P</em> ∨ <em>Q</em></span><br /></p></li>
+<li><p>De Morgan's Law is the property of negating a logical statement. It can be summarized to:</p></li>
+</ul>
+<p><br /><span class="math display">$$
+\begin{gather*}
+    \lnot\land \equiv \lor\\
+    \lnot\lor \equiv \land\\
+    \lnot\forall \equiv \exists\\
+    \lnot\exists \equiv \forall
+\end{gather*}
+$$</span><br /></p>
+
+</body>
+
+</html>
