@@ -1,19 +1,24 @@
 #!/usr/bin/env python3
 import sys
 import pypandoc as pandoc
-from flask import Flask, render_template
+import logging
+from flask import Flask, render_template, url_for
 from pathlib import Path
 from shutil import rmtree
-app = Flask(__name__)
-ROOT_URL = 'notebook'
+
 PROJECT_PATH = Path(__file__).resolve().parents[0]
 SOURCE_PATH = PROJECT_PATH / 'notes/'
 TEMPLATES_PATH = PROJECT_PATH / 'templates/'
 BUILD_PATH = TEMPLATES_PATH / 'notes/'
+ROOT_URL = '/notebook'
+
+app = Flask(__name__, static_url_path=ROOT_URL + '/static')
+log = app.logger
+
 
 @app.context_processor
 def global_var():
-    var = dict(root_url=ROOT_URL)
+    var = dict(root_url='')
     return var
 
 
@@ -37,28 +42,33 @@ def md_to_html(file_or_path, outputfile):
 
 
 def build():
+    """Converts the notes directory to a directory of html outputted to the templates directory."""
+    # Backup the build directory in templates
+    backup = Path(TEMPLATES_PATH / f'{BUILD_PATH.name}.bak')
     if BUILD_PATH.exists():
-        backup = Path(TEMPLATES_PATH / f'{BUILD_PATH.name}.bak')
-        BUILD_PATH.rename(backup.name)
+        BUILD_PATH.rename(backup)
+
     BUILD_PATH.mkdir()
-    try:
+    try:  # Attempt to convert Markdown notes to HTML
         for note in SOURCE_PATH.glob('**/*.md'):
-            print(note, '>>', end='')
+            log.debug(note, '>>', end=' ')
             parent = note.relative_to(SOURCE_PATH).parent  # /path/to/note/
 
             # mkdir /templates/notes/parent/
-            print(parent)
             if note.parent.stem != '':
-                print(BUILD_PATH / parent)
                 Path.mkdir(BUILD_PATH / parent, exist_ok=True)
 
             outputfile = BUILD_PATH / parent / (note.stem + '.html')
-            # print(outputfile)
-            md_to_html(note.resolve(), outputfile)
-    except Exception as e:
-        print(e)
+            log.debug(outputfile)
+            outputfile = md_to_html(note.resolve(), outputfile)
+            assert outputfile.exists(), "The output file was not created."
+        if backup.exists():
+            rmtree(str(backup))
+    except Exception as e:  # Recover backup when fails
+        log.debug(e)
         rmtree(str(BUILD_PATH))
-        BUILD_PATH.rename(BUILD_PATH.name)
+        if backup.exists():
+            backup.rename(BUILD_PATH)
 
 
 def get_all_notes(relative_to=BUILD_PATH):
@@ -66,26 +76,37 @@ def get_all_notes(relative_to=BUILD_PATH):
     notes = [str(note.relative_to(relative_to)) for note in htmls]
     return notes
 
+
 @app.route('/')
 def main():
-    notes = get_all_notes(relative_to=TEMPLATES_PATH)
+    notes = get_all_notes(relative_to=BUILD_PATH)
     context = dict(notes=notes)
     return render_template('main.html', **context)
 
 
-@app.route('/notes/<path:note>')
+@app.route('/<path:note>')
 def get_note(note):
-    print(note)
+    # Parse path
     if Path(note).suffix != '.html':
-        note += '.html'
-    note = f'notes/{note}'
-    context = dict(note=note)
+        note = BUILD_PATH / (note + '.html')
+    else:
+        note = BUILD_PATH / note
+
+    # Resolve relative to template path
+    # The note should now point to the actual HTML file while its served at /<path:note>
+    # This decision was made to allow users to use any subdirectory url not just "domain.com/note"
+    note = note.relative_to(TEMPLATES_PATH)
+    log.info(f"Rendering {note}")
+    context = dict(note=str(note))
     return render_template('note.html', **context)
 
 
 if __name__ == '__main__':
     args = sys.argv[1:]
     if len(args) == 0:
+        logging.basicConfig(level=logging.DEBUG)
         app.run(debug=True, port=8080)
-    if 'build' in args:
+    elif 'build' in args:
         build()
+    else:
+        raise ValueError("Invalid command. Use `python app.py ['build']`")

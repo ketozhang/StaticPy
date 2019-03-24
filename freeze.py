@@ -1,5 +1,8 @@
+# Converts the Flask setup to build static files.
+import sys
+import logging
 from flask_frozen import Freezer
-from app import app, get_all_notes, PROJECT_PATH
+from app import app, build, log, get_all_notes, PROJECT_PATH
 from shutil import rmtree
 freezer = Freezer(app)
 
@@ -13,21 +16,36 @@ def get_note():
 def freeze():
     app.debug = False
     app.testing = True
-#     asset_manager.config['ASSETS_DEBUG'] = False
+    build()
     freezer.freeze()
 
 
 if __name__ == '__main__':
+    args = sys.argv[1:]
+    if 'debug' in args:
+        app.debug = True
+        logging.basicConfig(level=logging.DEBUG)
+        
     docs = PROJECT_PATH / 'docs'
-    build = PROJECT_PATH / 'build'
+    default_build_path = PROJECT_PATH / 'build'
     backup = PROJECT_PATH / 'docs.bak'
     
-    if docs.exists(): docs.rename(backup)
-    if build.exists(): rmtree(str(build))
+    if docs.exists():
+        log.debug(f"{docs.name} -> {backup.name}")
+        docs.rename(backup)
+    if default_build_path.exists():
+        log.debug(f"deleting {default_build_path.name}")
+        rmtree(str(default_build_path))
     try:
+        log.debug("Building files...")
         freeze()
-        build.rename(docs)
+        
+        log.debug(f"{default_build_path.name} -> {docs.name}")
+        default_build_path.rename(docs)
+        
+        log.debug(f"deleting {backup.name}")
         rmtree(str(backup))
     except Exception as e:
-        print(e)
-        backup.rename(docs)
+        if backup.exists():
+            log.debug(f"restoring {backup.name} -> {docs.name}")
+            backup.rename(docs)

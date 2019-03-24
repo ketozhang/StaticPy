@@ -9,6 +9,7 @@ verify_ssl = true
 flask = "*"
 pypandoc = "*"
 frozen-flask = "*"
+werkzeug = "*"
 
 [requires]
 python_version = "3.7"
