@@ -14,8 +14,6 @@ def get_note():
 
 
 def freeze():
-    app.debug = False
-    app.testing = True
     build()
     freezer.freeze()
 
@@ -31,21 +29,22 @@ if __name__ == '__main__':
     backup = PROJECT_PATH / 'docs.bak'
     
     if docs.exists():
-        log.debug(f"{docs.name} -> {backup.name}")
+        log.info(f"{docs.name} -> {backup.name}")
         docs.rename(backup)
-    if default_build_path.exists():
-        log.debug(f"deleting {default_build_path.name}")
-        rmtree(str(default_build_path))
     try:
-        log.debug("Building files...")
+        log.info("Building files...")
         freeze()
         
-        log.debug(f"{default_build_path.name} -> {docs.name}")
+        log.info(f"{default_build_path.name} -> {docs.name}")
         default_build_path.rename(docs)
         
-        log.debug(f"deleting {backup.name}")
+        log.info(f"deleting {backup.name}")
         rmtree(str(backup))
     except Exception as e:
+        log.debug(e)
         if backup.exists():
-            log.debug(f"restoring {backup.name} -> {docs.name}")
+            log.info(f"restoring {backup.name} -> {docs.name}")
             backup.rename(docs)
+        if default_build_path.exists():
+            log.info(f"deleting {default_build_path.name}")
+            rmtree(str(default_build_path))

@@ -10,15 +10,15 @@ PROJECT_PATH = Path(__file__).resolve().parents[0]
 SOURCE_PATH = PROJECT_PATH / 'notes/'
 TEMPLATES_PATH = PROJECT_PATH / 'templates/'
 BUILD_PATH = TEMPLATES_PATH / 'notes/'
-ROOT_URL = '/notebook'
+ROOT_URL = 'ketozhang.github.io/notebook/'
 
-app = Flask(__name__, static_url_path=ROOT_URL + '/static')
+app = Flask(__name__)
 log = app.logger
 
 
 @app.context_processor
 def global_var():
-    var = dict(root_url='')
+    var = dict(root_url=ROOT_URL)
     return var
 
 
@@ -51,7 +51,6 @@ def build():
     BUILD_PATH.mkdir()
     try:  # Attempt to convert Markdown notes to HTML
         for note in SOURCE_PATH.glob('**/*.md'):
-            log.debug(note, '>>', end=' ')
             parent = note.relative_to(SOURCE_PATH).parent  # /path/to/note/
 
             # mkdir /templates/notes/parent/
@@ -59,7 +58,7 @@ def build():
                 Path.mkdir(BUILD_PATH / parent, exist_ok=True)
 
             outputfile = BUILD_PATH / parent / (note.stem + '.html')
-            log.debug(outputfile)
+            log.debug(f"{note} >> {outputfile}")
             outputfile = md_to_html(note.resolve(), outputfile)
             assert outputfile.exists(), "The output file was not created."
         if backup.exists():
@@ -79,12 +78,12 @@ def get_all_notes(relative_to=BUILD_PATH):
 
 @app.route('/')
 def main():
-    notes = get_all_notes(relative_to=BUILD_PATH)
+    notes = get_all_notes(relative_to=TEMPLATES_PATH)
     context = dict(notes=notes)
     return render_template('main.html', **context)
 
 
-@app.route('/<path:note>')
+@app.route('/notes/<path:note>')
 def get_note(note):
     # Parse path
     if Path(note).suffix != '.html':
@@ -104,6 +103,7 @@ def get_note(note):
 if __name__ == '__main__':
     args = sys.argv[1:]
     if len(args) == 0:
+        ROOT_URL = ''
         logging.basicConfig(level=logging.DEBUG)
         app.run(debug=True, port=8080)
     elif 'build' in args:
