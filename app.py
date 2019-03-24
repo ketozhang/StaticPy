@@ -10,7 +10,7 @@ PROJECT_PATH = Path(__file__).resolve().parents[0]
 SOURCE_PATH = PROJECT_PATH / 'notes/'
 TEMPLATES_PATH = PROJECT_PATH / 'templates/'
 BUILD_PATH = TEMPLATES_PATH / 'notes/'
-ROOT_URL = 'ketozhang.github.io/notebook/'
+ROOT_URL = 'https://ketozhang.github.io/notebook'
 
 app = Flask(__name__)
 log = app.logger
