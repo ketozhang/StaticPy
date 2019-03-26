@@ -3,31 +3,34 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>TODO</title>
+    <title>Give Me a Name</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://ketozhang.github.io/notebook/static/css/base.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <!-- yep Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 
 <body>
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
-
-
     
-<h1>notes/Mathematics/Linear_Algebra/Linear_Transformation.html</h1>
-<p>A linear transformation is an operation on a vector that preserves the operations of addition and scalar multiplication,</p>
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col=6">
+            <h1>Linear Transformation</h1>
+            <p>A linear transformation is an operation on a vector that preserves the operations of addition and scalar multiplication,</p>
 <ul>
-<li><span class="math inline"><em>L</em>(<em>u</em> + <em>v</em>)=<em>L</em>(<em>u</em>)+<em>L</em>(<em>v</em>)</span></li>
-<li><span class="math inline"><em>L</em>(<em>α</em><em>u</em>)=<em>α</em><em>L</em>(<em>u</em>)</span></li>
+<li><span class="math inline">\(L(u + v) = L(u) + L(v)\)</span></li>
+<li><span class="math inline">\(L(\alpha u) = \alpha L(u)\)</span></li>
 </ul>
 <h2 id="matrix-vector-multiplication">Matrix-Vector Multiplication</h2>
 <p>The most intuitive way to think of a matrix matrix-vector multiplication is to see it as a transformation in two steps:</p>
 <ol style="list-style-type: decimal">
 <li><p>The matrix applies a linear transformation to the basis vectors</p>
-<p><br /><span class="math display">$$
+<p><span class="math display">\[
 \begin{bmatrix}
     a_1 &amp; b_1\\
     a_2 &amp; b_2
@@ -42,12 +45,12 @@
         b_2
     \end{bmatrix}
 \end{matrix}
-$$</span><br /></p>
+\]</span></p>
 <ul>
 <li>Note that it is not necessary for the basis vector to be normalized.</li>
 </ul></li>
 <li><p>The scalar of the vector scales the basis vectors</p>
-<p><br /><span class="math display">$$
+<p><span class="math display">\[
 \begin{bmatrix}
     a_1 &amp; b_1\\
     a_2 &amp; b_2
@@ -66,14 +69,16 @@ y
     b_1\\
     b_2
 \end{bmatrix}
-$$</span><br /></p></li>
+\]</span></p></li>
 </ol>
 <h2 id="matrix-matrix-multiplication">Matrix-Matrix Multiplication</h2>
-<p>Consider the linear transformation where <span class="math inline"><em>M</em><sub>1</sub></span> and <span class="math inline"><em>M</em><sub>2</sub></span> are matrices of linear transformation,</p>
-<p><br /><span class="math display"><em>L</em>(<em>v</em>)=<em>M</em><sub>2</sub><em>M</em><sub>1</sub><em>v</em></span><br /></p>
-<p>We can think of <span class="math inline"><em>M</em><sub>1</sub><em>M</em><sub>2</sub></span> as a matrix-matrix multiplication whose product is called the <strong>composite matrix</strong>. The composite matrix can be thought of appying a single linear transformation to <span class="math inline"><em>v</em></span> rather than one after another.</p>
-<p>You can easily see how matrix multiplication affects the basis vectors. Consider the columns of <span class="math inline"><em>M</em><sub>1</sub></span> as the new basis vectors because that is exactly correct by vector-matrix multiplication. What <span class="math inline"><em>M</em><sub>2</sub></span> does to <span class="math inline"><em>M</em><sub>1</sub></span> is to apply another linear transformation to the new basis vectors.</p>
-<p><br /><span class="math display">$$
+<p>Consider the linear transformation where <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> are matrices of linear transformation,</p>
+<p><span class="math display">\[
+L(v) = M_2M_1 v
+\]</span></p>
+<p>We can think of <span class="math inline">\(M_1M_2\)</span> as a matrix-matrix multiplication whose product is called the <strong>composite matrix</strong>. The composite matrix can be thought of appying a single linear transformation to <span class="math inline">\(v\)</span> rather than one after another.</p>
+<p>You can easily see how matrix multiplication affects the basis vectors. Consider the columns of <span class="math inline">\(M_1\)</span> as the new basis vectors because that is exactly correct by vector-matrix multiplication. What <span class="math inline">\(M_2\)</span> does to <span class="math inline">\(M_1\)</span> is to apply another linear transformation to the new basis vectors.</p>
+<p><span class="math display">\[
 \begin{bmatrix}
     c_1 &amp; d_1\\
     c_2 &amp; d_2
@@ -87,9 +92,38 @@ $$</span><br /></p></li>
     a_1 &amp; b_1\\
     a_2 &amp; b_2
 \end{bmatrix}
-$$</span><br /></p>
-<p><br /><span class="math display"><em>A</em><em>B</em> ≠ <em>B</em><em>A</em></span><br /></p>
+\]</span></p>
+<p><span class="math display">\[
+AB \neq BA
+\]</span></p>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
 
+
+    <!-- Scripts -->
+    
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    
+        <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
 </body>
 
 </html>

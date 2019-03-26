@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>{{note}}</h1>
-{% include note %}
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col=6">
+            <h1>{{note['title']}}</h1>
+            {% include content_path %}
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
 {% endblock %}

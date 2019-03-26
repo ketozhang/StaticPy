@@ -3,55 +3,58 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>TODO</title>
+    <title>Give Me a Name</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://ketozhang.github.io/notebook/static/css/base.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <!-- yep Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 
 <body>
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
-
-
     
-<h1>notes/Mathematics/Discrete_Mathematics/MT1/Proofs.html</h1>
-<h2 id="proof-by-contradiction">Proof by Contradiction</h2>
-<p>For a single statement <span class="math inline"><em>P</em></span> (does not have to be an implication), a proof by contradiction is done by first assuming <span class="math inline">¬<em>P</em></span> is true then find another statement <span class="math inline"><em>R</em></span> that is true and also <span class="math inline">¬<em>R</em></span> is true.</p>
-<p><br /><span class="math display">$$ \Big[\neg P \implies \underbrace{(R \land \neg R}_\text{true})\Big] \implies P$$</span><br /></p>
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col=6">
+            <h1>Proofs</h1>
+            <h2 id="proof-by-contradiction">Proof by Contradiction</h2>
+<p>For a single statement <span class="math inline">\(P\)</span> (does not have to be an implication), a proof by contradiction is done by first assuming <span class="math inline">\(\neg P\)</span> is true then find another statement <span class="math inline">\(R\)</span> that is true and also <span class="math inline">\(\neg R\)</span> is true.</p>
+<p><span class="math display">\[ \Big[\neg P \implies \underbrace{(R \land \neg R}_\text{true})\Big] \implies P\]</span></p>
 <h2 id="proof-by-cases">Proof by Cases</h2>
-<p>If <span class="math inline"><em>P</em></span> can be decomposed into different statements such that <span class="math inline"><em>P</em></span> can be prove if all cases prove <span class="math inline"><em>P</em></span> to hold.</p>
+<p>If <span class="math inline">\(P\)</span> can be decomposed into different statements such that <span class="math inline">\(P\)</span> can be prove if all cases prove <span class="math inline">\(P\)</span> to hold.</p>
 <h2 id="proof-by-induction">Proof by Induction</h2>
 <p>A proof by induction proves that an infinite series or an infinite list of numbers can be proven with finite means. A statement that may be proven be induction is in the form</p>
-<p><br /><span class="math display">$$
+<p><span class="math display">\[
     \forall n \in \mathbb U P(n)
-$$</span><br /></p>
+\]</span></p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Base Case</strong></p>
-<p>We must begin by proving the base case (e.g., <span class="math inline"><em>n</em> = 0</span>)</p></li>
+<p>We must begin by proving the base case (e.g., <span class="math inline">\(n=0\)</span>)</p></li>
 <li><p><strong>Induction Hypothesis</strong></p>
-<p>Assume <span class="math inline"><em>P</em>(<em>n</em>)</span> is true from the base case to some value <span class="math inline"><em>k</em></span>. Say <span class="math inline"><em>n</em> − <em>j</em></span> then we assume the theorem is true for <span class="math inline">0 ≤ <em>j</em> ≤ <em>k</em></span>. Alternatively you may just assume true for some single value <span class="math inline"><em>k</em></span>.</p></li>
+<p>Assume <span class="math inline">\(P(n)\)</span> is true from the base case to some value <span class="math inline">\(k\)</span>. Say <span class="math inline">\(n-j\)</span> then we assume the theorem is true for <span class="math inline">\(0 \le j \le k\)</span>. Alternatively you may just assume true for some single value <span class="math inline">\(k\)</span>.</p></li>
 <li><p><strong>Induction Step</strong></p>
-<p>With the assumptoin that <span class="math inline"><em>P</em>(<em>n</em> = <em>k</em>)</span> is true, prove that <span class="math inline"><em>P</em>(<em>n</em> = <em>k</em> + 1)</span> is true.</p></li>
+<p>With the assumptoin that <span class="math inline">\(P(n=k)\)</span> is true, prove that <span class="math inline">\(P(n = k + 1)\)</span> is true.</p></li>
 </ol>
 <h2 id="proving-implications">Proving Implications</h2>
 <p>A proof of implication is the processing of proving that some statement in the form,</p>
-<p><br /><span class="math display"><em>P</em> ⟹ <em>Q</em></span><br /></p>
+<p><span class="math display">\[ P \implies Q \]</span></p>
 <p>is true.</p>
-<p>Recall that an implication is only if <span class="math inline"><em>P</em></span> is true and <span class="math inline"><em>Q</em></span> is false,</p>
-<p><br /><span class="math display">(<em>P</em> ⟹ <em>Q</em>)≡(¬<em>P</em> ∨ <em>Q</em>)</span><br /></p>
+<p>Recall that an implication is only if <span class="math inline">\(P\)</span> is true and <span class="math inline">\(Q\)</span> is false,</p>
+<p><span class="math display">\[ (P \implies Q) \equiv (\neg P \lor Q) \]</span></p>
 <h3 id="direct-proofs">Direct Proofs</h3>
-<p>A direct proof first assumes that <span class="math inline"><em>P</em></span> is true then prove <span class="math inline"><em>Q</em></span> is true</p>
-<p><br /><span class="math display"><em>P</em> ∧ <em>Q</em></span><br /></p>
+<p>A direct proof first assumes that <span class="math inline">\(P\)</span> is true then prove <span class="math inline">\(Q\)</span> is true</p>
+<p><span class="math display">\[ P \land Q\]</span></p>
 <h3 id="proof-by-contraposition">Proof by Contraposition</h3>
 <p>A contraposition is a proof of the contrapositive of the statement,</p>
-<p><br /><span class="math display">(<em>P</em> ⟹ <em>Q</em>)≡(¬<em>Q</em> ⟹ ¬<em>P</em>)</span><br /></p>
+<p><span class="math display">\[ (P \implies Q) \equiv (\neg Q \implies \neg P) \]</span></p>
 <h3 id="implication-contradiction">Implication Contradiction</h3>
-<p>Because we usually assume <span class="math inline"><em>P</em></span> is true, implication has a special identity that,</p>
-<p><br /><span class="math display"><em>P</em> ⟹ <em>Q</em> ≡ ¬(<em>P</em> ⟹ ¬<em>Q</em>)</span><br /></p>
-<p>Where <span class="math inline"><em>P</em></span> is always true. This is equivalent to saying if <span class="math inline"><em>P</em> ⟹ ¬<em>Q</em></span> causes a contradiction (or in general false) then the implication <span class="math inline"><em>P</em> ⟹ <em>Q</em></span> is true.</p>
+<p>Because we usually assume <span class="math inline">\(P\)</span> is true, implication has a special identity that,</p>
+<p><span class="math display">\[ P \implies Q \equiv \lnot\big(P \implies \lnot Q\big)\]</span></p>
+<p>Where <span class="math inline">\(P\)</span> is always true. This is equivalent to saying if <span class="math inline">\(P \implies \neg Q\)</span> causes a contradiction (or in general false) then the implication <span class="math inline">\(P\implies Q\)</span> is true.</p>
 <hr />
 <h2 id="summary">Summary</h2>
 <p>This note takes a look at all the ways one can prove a theorem. In general a theorem can be proven:</p>
@@ -65,23 +68,50 @@ $$</span><br /></p>
 <tbody>
 <tr class="odd">
 <td><strong>Direct</strong></td>
-<td><br /><span class="math display"><em>P</em> ∧ (<em>P</em> ⟹ <em>Q</em>)</span><br /></td>
+<td><span class="math display">\[P \land  (P \implies Q)\]</span></td>
 </tr>
 <tr class="even">
 <td><strong>Contradiction</strong></td>
-<td><br /><span class="math display">[<em>P</em> ⟹ (<em>R</em> ∧ ¬<em>R</em>)] ⟹ ¬<em>P</em></span><br /></td>
+<td><span class="math display">\[ \big[P \implies (R \land \neg R)\big] \implies \lnot P \]</span></td>
 </tr>
 <tr class="odd">
 <td><strong>Contraposition</strong></td>
-<td><br /><span class="math display">¬<em>Q</em> ⟹ ¬<em>P</em></span><br /></td>
+<td><span class="math display">\[ \neg Q \implies \neg P \]</span></td>
 </tr>
 <tr class="even">
 <td><strong>Induction</strong></td>
-<td><br /><span class="math display">Base Case ∧ (IH ⟹ IS)</span><br /></td>
+<td><span class="math display">\[ \text{Base Case} \land (\text{IH} \implies \text{IS}) \]</span></td>
 </tr>
 </tbody>
 </table>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
 
+
+    <!-- Scripts -->
+    
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    
+        <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
 </body>
 
 </html>

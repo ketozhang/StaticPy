@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>A Simple Static Site Generator for Math Notebooks</h1>
+<div class="container">
+<h1>Simple Static Site Generator for Math Notebooks</h1>
+<p><em>This needs a name</em></p>
+
 {% for note in notes %}
     <p><a href={{note}}>{{note}}</a></p>
 {% endfor %}
+</div>
 {% endblock %}

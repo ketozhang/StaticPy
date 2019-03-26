@@ -2,6 +2,7 @@
 import sys
 import pypandoc as pandoc
 import logging
+import frontmatter
 from flask import Flask, render_template, url_for
 from pathlib import Path
 from shutil import rmtree
@@ -29,20 +30,15 @@ def get_fpath(file_or_path):
         fpath = file_or_path.resolve()
     return fpath
 
-
 def md_to_html(file_or_path, outputfile):
     fpath = get_fpath(file_or_path)
     outputfile = get_fpath(outputfile)
-    pandoc.convert_file(str(fpath), 'html', outputfile=str(outputfile))
+    pandoc.convert_file(str(fpath), 'html', outputfile=str(outputfile), extra_args=['--mathjax'])
     return outputfile
 
 
-# def get_outputfile(file_or_path):
-#     fpath = get_fpath(file_or_path)
-
-
 def build():
-    """Converts the notes directory to a directory of html outputted to the templates directory."""
+    """Converts the notes directory (`SOURCE_PATH`) to a directory of html (`BUILD_PATH`) outputted to the templates directory."""
     # Backup the build directory in templates
     backup = Path(TEMPLATES_PATH / f'{BUILD_PATH.name}.bak')
     if BUILD_PATH.exists():
@@ -85,10 +81,13 @@ def main():
 
 @app.route('/notes/<path:note>')
 def get_note(note):
-    # Parse path
+
+    # Get metadata and parse path
     if Path(note).suffix != '.html':
+        metadata = frontmatter.load(SOURCE_PATH/(note + '.md'))
         note = BUILD_PATH / (note + '.html')
     else:
+        metadata = frontmatter.load(SOURCE_PATH/(note.replace('.html', '.md')))
         note = BUILD_PATH / note
 
     # Resolve relative to template path
@@ -96,7 +95,11 @@ def get_note(note):
     # This decision was made to allow users to use any subdirectory url not just "domain.com/note"
     note = note.relative_to(TEMPLATES_PATH)
     log.info(f"Rendering {note}")
-    context = dict(note=str(note))
+    
+    context = dict(
+        content_path=str(note),
+        note=metadata
+        )
     return render_template('note.html', **context)
 
 

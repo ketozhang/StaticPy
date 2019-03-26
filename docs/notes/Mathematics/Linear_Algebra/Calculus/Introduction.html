@@ -3,72 +3,102 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>TODO</title>
+    <title>Give Me a Name</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://ketozhang.github.io/notebook/static/css/base.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <!-- yep Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 
 <body>
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
-
-
     
-<h1>notes/Mathematics/Linear_Algebra/Calculus/Introduction.html</h1>
-<p>From here on out matrix are <span class="math inline">$A \in \mathbb R^{m \times n}$</span> and vectors <span class="math inline">$v \in \mathbb R^{1 \times n}$</span> are column vectors. It is also equivalent to simply denote vectors as a matrix with a single column dimension.</p>
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col=6">
+            <h1>Introduction</h1>
+            <p>From here on out matrix are <span class="math inline">\(A \in \mathbb R^{m \times n}\)</span> and vectors <span class="math inline">\(v \in \mathbb R^{1 \times n}\)</span> are column vectors. It is also equivalent to simply denote vectors as a matrix with a single column dimension.</p>
 <h2 id="matrix-gradient">Matrix Gradient</h2>
-<p>The <strong>gradient</strong> is defined as the derivative of some scalar function <span class="math inline"><em>f</em></span> with respect to some matrix <span class="math inline">$A \in \mathbb R^{n \times m}$</span>.</p>
-<p>We take the convention that the gradient of a scalar function <span class="math inline"><em>f</em></span> with respect to a vector (i.e., a matrix <span class="math inline">$v \in \mathbb R^{1 \times n}$</span>) gives us a column vector,</p>
-<p><br /><span class="math display">$$
+<p>The <strong>gradient</strong> is defined as the derivative of some scalar function <span class="math inline">\(f\)</span> with respect to some matrix <span class="math inline">\(A \in \mathbb R^{n \times m}\)</span>.</p>
+<p>We take the convention that the gradient of a scalar function <span class="math inline">\(f\)</span> with respect to a vector (i.e., a matrix <span class="math inline">\(v \in \mathbb R^{1 \times n}\)</span>) gives us a column vector,</p>
+<p><span class="math display">\[
 \nabla f(v) = \begin{bmatrix} \frac{\partial f}{v_1} &amp; \frac{\partial f}{v_2} &amp; \ldots &amp; \frac{\partial f}{v_n} \end{bmatrix}^\top
-$$</span><br /></p>
-<p>It's is natural that if <span class="math inline"><em>v</em></span> is expanded to a general matrix and let's renotated it as <span class="math inline">$A \in \mathbb R^{m \times n}$</span> there should simply just be <span class="math inline"><em>m</em></span> more rows. Notice that this convention preserves the shape of the <span class="math inline"><em>A</em></span>. We will change the notation a bit to allow the subscript to denote &quot;with respect to&quot;.</p>
-<p><br /><span class="math display">$$
+\]</span></p>
+<p>It's is natural that if <span class="math inline">\(v\)</span> is expanded to a general matrix and let's renotated it as <span class="math inline">\(A \in \mathbb R^{m \times n}\)</span> there should simply just be <span class="math inline">\(m\)</span> more rows. Notice that this convention preserves the shape of the <span class="math inline">\(A\)</span>. We will change the notation a bit to allow the subscript to denote &quot;with respect to&quot;.</p>
+<p><span class="math display">\[
 \nabla_A f = \begin{bmatrix}
 \frac{\partial f}{\partial A_{11}} &amp; \frac{\partial f}{\partial A_{12}} &amp; \ldots &amp; \frac{\partial f}{\partial A_{1n}}\\
 \frac{\partial f}{\partial A_{12}} &amp; \frac{\partial f}{\partial A_{22}} &amp; \ldots &amp; \frac{\partial f}{\partial A_{2n}}\\
 \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
 \frac{\partial f}{\partial A_{m1}} &amp; \frac{\partial f}{\partial A_{m2}} &amp; \ldots &amp; \frac{\partial f}{\partial A_{mn}}\\
 \end{bmatrix}
-$$</span><br /></p>
-<p>It is crucially important to note that the resulting gradient matrix can only be applied to a row vector <span class="math inline">$v^\top \in \mathbb R^{1 \times n}$</span>. Alternatively we can use the transpose of the gradient vector which by convention we have another notation,</p>
-<p><br /><span class="math display">$$
+\]</span></p>
+<p>It is crucially important to note that the resulting gradient matrix can only be applied to a row vector <span class="math inline">\(v^\top \in \mathbb R^{1 \times n}\)</span>. Alternatively we can use the transpose of the gradient vector which by convention we have another notation,</p>
+<p><span class="math display">\[
 \frac{\partial f}{\partial A} \equiv \nabla_A f^\top
-$$</span><br /></p>
+\]</span></p>
 <h2 id="jacobian---vector-by-vector">Jacobian - Vector by Vector</h2>
-<p>Let <span class="math inline">$f(x): \mathbb R^n \rightarrow \mathbb R^m$</span> be a vector function. It's derivative with respect to the vector <span class="math inline">$x \in \mathbb R^n$</span> is called the <strong>Jacobian matrix</strong> <span class="math inline">$J \in \mathbb R^{m \times n}$</span>.</p>
-<p><br /><span class="math display">$$
+<p>Let <span class="math inline">\(f(x): \mathbb R^n \rightarrow \mathbb R^m\)</span> be a vector function. It's derivative with respect to the vector <span class="math inline">\(x \in \mathbb R^n\)</span> is called the <strong>Jacobian matrix</strong> <span class="math inline">\(J \in \mathbb R^{m \times n}\)</span>.</p>
+<p><span class="math display">\[
 J(f) \equiv \frac{\partial f}{\partial x} = \begin{bmatrix}
 \frac{\partial f_1}{\partial x_1} &amp; \ldots &amp; \frac{\partial f_1}{\partial x_n}\\
 \vdots &amp; \ddots &amp; \vdots\\
 \frac{\partial f_m}{\partial x_1} &amp; \ldots &amp; \frac{\partial f_m}{\partial x_n}
 \end{bmatrix}
-$$</span><br /></p>
+\]</span></p>
 <h2 id="hessian---gradient-by-vector">Hessian - Gradient by Vector</h2>
-<p>Now let <span class="math inline"><em>f</em></span> be a twice-differential scalar function of the vector <span class="math inline"><em>x</em></span>. It's <strong>Hessian</strong> is defined as the Jacobian of its gradient vector.</p>
-<p><br /><span class="math display">$$
+<p>Now let <span class="math inline">\(f\)</span> be a twice-differential scalar function of the vector <span class="math inline">\(x\)</span>. It's <strong>Hessian</strong> is defined as the Jacobian of its gradient vector.</p>
+<p><span class="math display">\[
 H(f) \equiv J(\nabla f^\top) = \nabla_x^2 f = \begin{bmatrix}
 \frac{\partial^2 f}{\partial x^2_1} &amp; \ldots &amp; \frac{\partial f}{\partial x_1 \partial x_n}\\
 \vdots &amp; \ddots &amp; \vdots\\
 \frac{\partial f}{\partial x_n \partial x_1} &amp; \ldots &amp; \frac{\partial^2 f_m}{\partial x^2_n}
 \end{bmatrix}
-$$</span><br /></p>
-<p><br /><span class="math display">$$
+\]</span></p>
+<p><span class="math display">\[
 H_{ij}(f) = \frac{\partial f}{\partial x_i \partial x_j}
-$$</span><br /></p>
-<p>The Hessian can be interpreted as the second gradient of a scalar function. Take note that <span class="math inline">∇<sub><em>x</em></sub>(∇<sub><em>x</em></sub><em>f</em>)≠∇<sub><em>x</em></sub><sup>2</sup><em>f</em></span> because we can't take the gradient of a vector so its technically not the second gradient. We should actualaly mean that the Hessian build up of the second derivative of the gradient which entials the Jacobian of the gradient (modulo the transpose).</p>
-<p><br /><span class="math display">$$
+\]</span></p>
+<p>The Hessian can be interpreted as the second gradient of a scalar function. Take note that <span class="math inline">\(\nabla_x(\nabla_x f) \neq \nabla^2_x f\)</span> because we can't take the gradient of a vector so its technically not the second gradient. We should actualaly mean that the Hessian build up of the second derivative of the gradient which entials the Jacobian of the gradient (modulo the transpose).</p>
+<p><span class="math display">\[
 H(f) = \frac{\partial }{\partial x}\begin{bmatrix}
 (\nabla_x f)_1 \\
 (\nabla_x f)_2 \\
 \vdots \\
 (\nabla_x f)_n
 \end{bmatrix}
-$$</span><br /></p>
+\]</span></p>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
 
+
+    <!-- Scripts -->
+    
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    
+        <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
 </body>
 
 </html>

@@ -3,37 +3,67 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>TODO</title>
+    <title>Give Me a Name</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://ketozhang.github.io/notebook/static/css/base.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <!-- yep Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 
 <body>
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
-
-
     
-<h1>notes/Mathematics/Linear_Algebra/Decompositions/Single-Value-Decomposition.html</h1>
-<p><br /><span class="math display"><em>A</em> = <em>U</em><em>S</em><em>V</em><sup><em>T</em></sup></span><br /></p>
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col=6">
+            <h1>Single Value Decomposition</h1>
+            <p><span class="math display">\[ A = U S V^T\]</span></p>
 <ul>
-<li><span class="math inline"><em>V</em></span> : Orthogonal matrix of <span class="math inline"><em>M</em> × <em>M</em></span></li>
-<li><span class="math inline"><em>S</em></span> : Rank diagonal matrix of <span class="math inline"><em>m</em> × <em>m</em></span></li>
-<li><span class="math inline"><em>U</em></span> : Column orthogonal matrix of <span class="math inline"><em>n</em> × <em>m</em></span></li>
+<li><span class="math inline">\(V\)</span> : Orthogonal matrix of <span class="math inline">\(M \times M\)</span></li>
+<li><span class="math inline">\(S\)</span> : Rank diagonal matrix of <span class="math inline">\(m \times m\)</span></li>
+<li><span class="math inline">\(U\)</span> : Column orthogonal matrix of <span class="math inline">\(n \times m\)</span></li>
 </ul>
 <h2 id="rank-diagonal-matrix">Rank Diagonal Matrix</h2>
-<p><span class="math inline"><em>S</em></span> is a diagonal matrix limited by its rank. This means that the number of nonzero entries are determined by the rank of <span class="math inline"><em>A</em></span> (let <span class="math inline"><em>r</em> = rank(<em>A</em>)</span>)</p>
-<p><br /><span class="math display">$$ S = \begin{pmatrix}
+<p><span class="math inline">\(S\)</span> is a diagonal matrix limited by its rank. This means that the number of nonzero entries are determined by the rank of <span class="math inline">\(A\)</span> (let <span class="math inline">\(r = \text{rank} (A)\)</span>)</p>
+<p><span class="math display">\[ S = \begin{pmatrix}
     \lambda_1   &amp;   0           &amp;   \ldots  &amp;   0\\
     0           &amp;   \lambda_2   &amp;   \ldots  &amp;   0\\
     \vdots           &amp;   0           &amp;   \ddots  &amp;   0\\
                &amp;              &amp;     &amp;   \lambda_r\\
                &amp;              &amp;     &amp;   &amp;      0
-\end{pmatrix} $$</span><br /></p>
+\end{pmatrix} \]</span></p>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
 
+
+    <!-- Scripts -->
+    
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    
+        <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
 </body>
 
 </html>

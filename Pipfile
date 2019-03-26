@@ -10,6 +10,7 @@ flask = "*"
 pypandoc = "*"
 frozen-flask = "*"
 werkzeug = "*"
+python-frontmatter = "*"
 
 [requires]
 python_version = "3.7"

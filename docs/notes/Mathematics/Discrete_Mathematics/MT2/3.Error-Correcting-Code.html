@@ -3,59 +3,91 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>TODO</title>
+    <title>Give Me a Name</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://ketozhang.github.io/notebook/static/css/base.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <!-- yep Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 
 <body>
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
-
-
     
-<h1>notes/Mathematics/Discrete_Mathematics/MT2/3.Error-Correcting-Code.html</h1>
-<p>Let a bit sequence be <span class="math inline"><em>m</em><sub>1</sub>, <em>m</em><sub>2</sub>, …, <em>m</em><sub><em>n</em></sub></span> of <span class="math inline"><em>n</em></span> bits. We will be dealing with two types of errors:</p>
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col=6">
+            <h1>Error Correcting Code</h1>
+            <p>Let a bit sequence be <span class="math inline">\(m_1,m_2,\ldots,m_n\)</span> of <span class="math inline">\(n\)</span> bits. We will be dealing with two types of errors:</p>
 <ol style="list-style-type: decimal">
-<li><strong>Erasures</strong>: If up to <span class="math inline"><em>k</em></span> of the <span class="math inline"><em>m</em><sub><em>i</em></sub></span> messages gets corrupted and we know exactly which message.</li>
-<li><strong>General Errors</strong>: If up to <span class="math inline"><em>k</em></span> of the <span class="math inline"><em>m</em><sub><em>i</em></sub></span> messages get corrupted and we don't know which message.</li>
+<li><strong>Erasures</strong>: If up to <span class="math inline">\(k\)</span> of the <span class="math inline">\(m_i\)</span> messages gets corrupted and we know exactly which message.</li>
+<li><strong>General Errors</strong>: If up to <span class="math inline">\(k\)</span> of the <span class="math inline">\(m_i\)</span> messages get corrupted and we don't know which message.</li>
 </ol>
 <h2 id="erasures">Erasures</h2>
-<p>To insure that if <span class="math inline"><em>k</em></span> bits were dropped we would know how to recover the information, we need to send an extra <span class="math inline"><em>k</em></span> bits of data through the channel.</p>
+<p>To insure that if <span class="math inline">\(k\)</span> bits were dropped we would know how to recover the information, we need to send an extra <span class="math inline">\(k\)</span> bits of data through the channel.</p>
 <ol style="list-style-type: decimal">
-<li><p>Let <span class="math inline"><em>q</em> &gt; <em>n</em> + <em>k</em></span> be a large prime so all packages are in mod <span class="math inline"><em>q</em></span>.</p></li>
-<li><p>Let <span class="math inline"><em>P</em>(<em>x</em>)</span> be the unique polynomial of degree <span class="math inline"><em>n</em> − 1</span> in mod <span class="math inline"><em>q</em></span> that goes through the our message as points <span class="math inline">(<em>i</em>, <em>m</em><sub><em>i</em></sub>)</span> such that <span class="math inline"><em>P</em>(<em>i</em>)=<em>m</em><sub><em>i</em></sub></span> for <span class="math inline">1 ≤ <em>i</em> ≤ <em>n</em></span></p></li>
-<li><p>Let's send <span class="math inline"><em>k</em></span> more messages <span class="math inline"><em>P</em>(<em>i</em>)=<em>m</em><sub><em>i</em></sub></span> for <span class="math inline"><em>n</em> &lt; <em>i</em> ≤ <em>k</em></span> as insurance.</p></li>
-<li><p>With any <span class="math inline"><em>n</em></span> of these <span class="math inline"><em>n</em> + <em>k</em></span> messages we can reconstruct <span class="math inline"><em>P</em>(<em>i</em>)</span> thus we're able to recover the original messages.</p></li>
+<li><p>Let <span class="math inline">\(q &gt; n + k\)</span> be a large prime so all packages are in mod <span class="math inline">\(q\)</span>.</p></li>
+<li><p>Let <span class="math inline">\(P(x)\)</span> be the unique polynomial of degree <span class="math inline">\(n-1\)</span> in mod <span class="math inline">\(q\)</span> that goes through the our message as points <span class="math inline">\((i, m_i)\)</span> such that <span class="math inline">\(P(i) = m_i\)</span> for <span class="math inline">\(1 \le i \le n\)</span></p></li>
+<li><p>Let's send <span class="math inline">\(k\)</span> more messages <span class="math inline">\(P(i) = m_i\)</span> for <span class="math inline">\(n &lt; i \le k\)</span> as insurance.</p></li>
+<li><p>With any <span class="math inline">\(n\)</span> of these <span class="math inline">\(n+k\)</span> messages we can reconstruct <span class="math inline">\(P(i)\)</span> thus we're able to recover the original messages.</p></li>
 </ol>
 <h2 id="general-errors">General Errors</h2>
-<p>We will send <span class="math inline">2<em>k</em></span> extra redundant messages.</p>
+<p>We will send <span class="math inline">\(2k\)</span> extra redundant messages.</p>
 <ol style="list-style-type: decimal">
-<li>Let <span class="math inline"><em>q</em> &gt; <em>n</em> + 2<em>k</em></span> be a large prime.</li>
-<li>Let <span class="math inline"><em>P</em>(<em>i</em>)</span> be a unique degree <span class="math inline"><em>n</em> − 1</span> polynomial in mod <span class="math inline"><em>q</em></span> that goes through <span class="math inline"><em>n</em> + 2<em>k</em></span> points of <span class="math inline">(<em>i</em>, <em>m</em><sub><em>i</em></sub>)</span> for <span class="math inline">1 ≤ <em>i</em> ≤ <em>n</em> + 2<em>k</em></span>.</li>
-<li><p>If any up to <span class="math inline"><em>k</em></span> messages got corrupted we can find a polynomial <span class="math inline"><em>Q</em>′(<em>i</em>)</span> that goes through <span class="math inline"><em>n</em> + <em>k</em></span> recieved points (denoted as <span class="math inline"><em>r</em><sub><em>i</em></sub></span>). We define this polynomial specially as a product of the original polynomial <span class="math inline"><em>P</em>(<em>i</em>)</span> and the error-locating polynomial <span class="math inline"><em>E</em>(<em>i</em>)</span> of degree <span class="math inline"><em>k</em></span> defined as,</p>
-<p><br /><span class="math display">$$
+<li>Let <span class="math inline">\(q &gt; n + 2k\)</span> be a large prime.</li>
+<li>Let <span class="math inline">\(P(i)\)</span> be a unique degree <span class="math inline">\(n-1\)</span> polynomial in mod <span class="math inline">\(q\)</span> that goes through <span class="math inline">\(n+2k\)</span> points of <span class="math inline">\((i, m_i)\)</span> for <span class="math inline">\(1 \le i \le n + 2k\)</span>.</li>
+<li><p>If any up to <span class="math inline">\(k\)</span> messages got corrupted we can find a polynomial <span class="math inline">\(Q&#39;(i)\)</span> that goes through <span class="math inline">\(n+k\)</span> recieved points (denoted as <span class="math inline">\(r_i\)</span>). We define this polynomial specially as a product of the original polynomial <span class="math inline">\(P(i)\)</span> and the error-locating polynomial <span class="math inline">\(E(i)\)</span> of degree <span class="math inline">\(k\)</span> defined as,</p>
+<p><span class="math display">\[
 \begin{gather*}
     E(i) = (i-e_1)(i-e_2) \ldots (i-e_k)\\
     Q(i) = E(i)P(i)
 \end{gather*}
-$$</span><br /></p>
-<p>The error-locating polynomial is zero when an corrupted input <span class="math inline"><em>i</em></span> is given.</p>
-<p><br /><span class="math display"><em>P</em>(<em>i</em>)<em>E</em>(<em>i</em>)=<em>r</em><sub><em>i</em></sub><em>E</em>(<em>i</em>)</span><br /></p>
-<p>Now <span class="math inline"><em>Q</em>(<em>i</em>)</span> can be solved because we have <span class="math inline"><em>n</em> + <em>k</em></span> points, along with <span class="math inline"><em>E</em>(<em>x</em>)</span> together.</p>
-<p><br /><span class="math display">$$
+\]</span></p>
+<p>The error-locating polynomial is zero when an corrupted input <span class="math inline">\(i\)</span> is given.</p>
+<p><span class="math display">\[
+    P(i)E(i) = r_i E(i)
+\]</span></p>
+<p>Now <span class="math inline">\(Q(i)\)</span> can be solved because we have <span class="math inline">\(n+k\)</span> points, along with <span class="math inline">\(E(x)\)</span> together.</p>
+<p><span class="math display">\[
 \begin{gather*}
     Q(i) = a_{n+k+1}x^{n+k+1} + \ldots + a_0\\
     E(i) = x^{k} + b_{k-1}x^{x-1} + \ldots + b_0
 \end{gather*}
-$$</span><br /></p>
-<p>When <span class="math inline"><em>b</em><sub>0</sub></span> is solved, the error location is <span class="math inline">$b_0 \bmod p$</span>. Now we can solve for <span class="math inline"><em>P</em>(<em>i</em>)</span>,</p>
-<p><br /><span class="math display">$$ P(i) = \frac{Q(x)}{E(x)} $$</span><br /></p></li>
+\]</span></p>
+<p>When <span class="math inline">\(b_0\)</span> is solved, the error location is <span class="math inline">\(b_0 \bmod p\)</span>. Now we can solve for <span class="math inline">\(P(i)\)</span>,</p>
+<p><span class="math display">\[ P(i) = \frac{Q(x)}{E(x)} \]</span></p></li>
 </ol>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
 
+
+    <!-- Scripts -->
+    
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    
+        <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
 </body>
 
 </html>

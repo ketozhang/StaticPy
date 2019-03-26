@@ -3,22 +3,25 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>TODO</title>
+    <title>Give Me a Name</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://ketozhang.github.io/notebook/static/css/base.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <!-- yep Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 
 <body>
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
-
-
     
-<h1>notes/Mathematics/Discrete_Mathematics/MT2/5.Computability.html</h1>
-<p>From here on, a program is the same thing as a strip/tape of instructions. A program can be denoted like a function <span class="math inline"><em>P</em>(<em>x</em>)=<em>y</em></span> where <span class="math inline"><em>x</em></span> is the input and <span class="math inline"><em>y</em></span> the output.</p>
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col=6">
+            <h1>Computability</h1>
+            <p>From here on, a program is the same thing as a strip/tape of instructions. A program can be denoted like a function <span class="math inline">\(P(x)=y\)</span> where <span class="math inline">\(x\)</span> is the input and <span class="math inline">\(y\)</span> the output.</p>
 <h2 id="self-replicating-program">Self-Replicating Program</h2>
 <p>A program that is able to output itself is called a <strong>quine</strong>. A simple example is,</p>
 <div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="kw">def</span> quine(s):
@@ -27,7 +30,7 @@
 <span class="op">&gt;&gt;&gt;</span> quine(quine)
     quine(quine)</code></pre></div>
 <ul>
-<li><p><strong>Quine and Recursion Theorem</strong>: Any program <span class="math inline"><em>P</em>(<em>x</em>, <em>y</em>)</span> can always be converted to another program <span class="math inline"><em>Q</em>(<em>x</em>)</span> such that <span class="math inline"><em>Q</em>(<em>x</em>)=<em>P</em>(<em>x</em>, <em>Q</em>)</span></p>
+<li><p><strong>Quine and Recursion Theorem</strong>: Any program <span class="math inline">\(P(x,y)\)</span> can always be converted to another program <span class="math inline">\(Q(x)\)</span> such that <span class="math inline">\(Q(x) = P(x,Q)\)</span></p>
 <div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="kw">def</span> P(x,y):
     <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{y}</span><span class="ss">(</span><span class="sc">{x}</span><span class="ss">)&quot;</span>)
 <span class="kw">def</span> Q(x):
@@ -51,27 +54,54 @@
 <p>The answer is no and the key reason is due to the self reference paradox.</p>
 <dl>
 <dt>Proof</dt>
-<dd><p>Let's proceed by contradiciton, assume there exists a halting decision program <span class="math inline"><em>H</em>(<em>P</em>, <em>x</em>)</span> that determines if <span class="math inline"><em>P</em>(<em>x</em>)</span> halts. <span class="math inline"><em>H</em></span> is simply programmed as so,</p>
-<p><br /><span class="math display">$$ H(P,x) = \begin{cases} \texttt{True} &amp; P(x) \text{ halts} \\ \texttt{False} &amp; \text{otherwise} \end{cases} $$</span><br /></p>
-<p>We will run this program against itself so <span class="math inline"><em>H</em>(<em>P</em>, <em>P</em>)</span> as an input to a turing-complete machine <span class="math inline"><em>M</em></span></p>
+<dd><p>Let's proceed by contradiciton, assume there exists a halting decision program <span class="math inline">\(H(P,x)\)</span> that determines if <span class="math inline">\(P(x)\)</span> halts. <span class="math inline">\(H\)</span> is simply programmed as so,</p>
+<p><span class="math display">\[ H(P,x) = \begin{cases} \texttt{True} &amp; P(x) \text{ halts} \\ \texttt{False} &amp; \text{otherwise} \end{cases} \]</span></p>
+<p>We will run this program against itself so <span class="math inline">\(H(P,P)\)</span> as an input to a turing-complete machine <span class="math inline">\(M\)</span></p>
 <div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="kw">def</span> M(P):
     <span class="cf">if</span> H(P, P) <span class="kw">is</span> <span class="va">True</span>:
         <span class="cf">continue</span> <span class="co">#loop forever</span>
     <span class="cf">else</span>:
         <span class="cf">break</span> <span class="co">#halt</span></code></pre></div>
-<p>We will have a contradiciton if we try to perform <span class="math inline"><em>M</em>(<em>M</em>)</span>,</p>
+<p>We will have a contradiciton if we try to perform <span class="math inline">\(M(M)\)</span>,</p>
 <ol style="list-style-type: decimal">
-<li><p><span class="math inline"><em>M</em>(<em>M</em>)</span> halts.</p>
-<p>If the program halts that must mean that <span class="math inline"><em>H</em>(<em>M</em>, <em>M</em>)</span> returns false but that suggest <span class="math inline"><em>M</em>(<em>M</em>)</span> does not halt</p></li>
-<li><p><span class="math inline"><em>M</em>(<em>M</em>)</span> does halt</p>
-<p>If the program didn't halt that must mean <span class="math inline"><em>H</em>(<em>M</em>, <em>M</em>)</span> return true but that suggest <span class="math inline"><em>M</em>(<em>M</em>)</span> would loop on forever.</p></li>
+<li><p><span class="math inline">\(M(M)\)</span> halts.</p>
+<p>If the program halts that must mean that <span class="math inline">\(H(M,M)\)</span> returns false but that suggest <span class="math inline">\(M(M)\)</span> does not halt</p></li>
+<li><p><span class="math inline">\(M(M)\)</span> does halt</p>
+<p>If the program didn't halt that must mean <span class="math inline">\(H(M,M)\)</span> return true but that suggest <span class="math inline">\(M(M)\)</span> would loop on forever.</p></li>
 </ol>
-<p>This is contradictive so one of our assumption must be wrong. The only assumption we've made was that there exists a program <span class="math inline"><em>H</em></span> that can solve the halting problem. Thus, there must not exists an <span class="math inline"><em>H</em></span> that solves the halting problem.</p>
+<p>This is contradictive so one of our assumption must be wrong. The only assumption we've made was that there exists a program <span class="math inline">\(H\)</span> that can solve the halting problem. Thus, there must not exists an <span class="math inline">\(H\)</span> that solves the halting problem.</p>
 </dd>
 </dl>
 <h2 id="godels-incompleteness-theorem">Godel's Incompleteness Theorem</h2>
 <p>There does not exists a proof system for arithmetic that is both consistent (no contradictions) and complete (can prove all true statements).</p>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
 
+
+    <!-- Scripts -->
+    
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    
+        <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
 </body>
 
 </html>

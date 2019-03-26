@@ -3,98 +3,101 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>TODO</title>
+    <title>Give Me a Name</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://ketozhang.github.io/notebook/static/css/base.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <!-- yep Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 
 <body>
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
-
-
     
-<h1>notes/Mathematics/Discrete_Mathematics/MT2/4.Countability.html</h1>
-<h2 id="bijection">Bijection</h2>
-<p>Two sets <span class="math inline"><em>A</em></span> and <span class="math inline"><em>B</em></span> have the same size if there exists a function <span class="math inline"><em>f</em> : <em>A</em> → <em>B</em></span> is a bijection. A function is bijection if and only if:</p>
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col=6">
+            <h1>Countability</h1>
+            <h2 id="bijection">Bijection</h2>
+<p>Two sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> have the same size if there exists a function <span class="math inline">\(f : A \rightarrow B\)</span> is a bijection. A function is bijection if and only if:</p>
 <ol style="list-style-type: decimal">
-<li><p><span class="math inline"><em>f</em></span> is injective (one to one)</p>
-<p><br /><span class="math display"><em>a</em><sub>1</sub> ≠ <em>a</em><sub>2</sub> ⟹ <em>f</em>(<em>a</em><sub>1</sub>)≠<em>f</em>(<em>a</em><sub>2</sub>)  (∀<em>a</em><sub>1</sub>, <em>a</em><sub>2</sub> ∈ <em>A</em>)</span><br /> <br /><span class="math display">$$ \abs{A} \le \abs{B} $$</span><br /></p></li>
-<li><p><span class="math inline"><em>f</em></span> is surjective</p>
-<p><br /><span class="math display"><em>f</em>(<em>a</em>)=<em>b</em>  (∀<em>b</em> ∈ <em>B</em>,  ∃<em>a</em> ∈ <em>A</em>)</span><br /> <br /><span class="math display">$$ \abs{A} \ge \abs{B} $$</span><br /></p></li>
+<li><p><span class="math inline">\(f\)</span> is injective (one to one)</p>
+<p><span class="math display">\[ a_1 \neq a_2 \implies f(a_1) \neq f(a_2) \qquad (\forall a_1,a_2 \in A) \]</span> <span class="math display">\[ \abs{A} \le \abs{B} \]</span></p></li>
+<li><p><span class="math inline">\(f\)</span> is surjective</p>
+<p><span class="math display">\[ f(a) = b \qquad (\forall b \in B,~\exists a \in A) \]</span> <span class="math display">\[ \abs{A} \ge \abs{B} \]</span></p></li>
 </ol>
 <ul>
 <li>A function is also a bijection if an inverse function exists.</li>
-<li>In an infinite set even if <span class="math inline"><em>A</em> ⊂ <em>B</em></span> the cardinality <span class="math inline">$\abs{A} = \abs{B}$</span> as long as there exists a bijective function between them.</li>
+<li>In an infinite set even if <span class="math inline">\(A \subset B\)</span> the cardinality <span class="math inline">\(\abs{A} = \abs{B}\)</span> as long as there exists a bijective function between them.</li>
 </ul>
 <h3 id="proving-bijections">Proving Bijections</h3>
 <ol style="list-style-type: decimal">
-<li><strong>Find a identity mapping</strong> <br /><span class="math display"><em>f</em>(<em>a</em><sub><em>i</em></sub>)=<em>b</em><sub><em>i</em></sub></span><br /></li>
-<li><strong>Find an offset mapping</strong> <br /><span class="math display"><em>f</em>(<em>a</em><sub><em>i</em></sub> = <em>b</em><sub><em>i</em> + 1</sub>)</span><br /></li>
-<li><strong>Find an alternating mapping</strong> <br /><span class="math display">$$ f(a_{i}) = \begin{cases} b_\text{odd} &amp; i\text{ is odd}\\ b_\text{even} &amp; i\text{ is even} \end{cases} $$</span><br /></li>
+<li><strong>Find a identity mapping</strong> <span class="math display">\[ f(a_i) = b_i \]</span></li>
+<li><strong>Find an offset mapping</strong> <span class="math display">\[ f(a_{i} = b_{i+1}) \]</span></li>
+<li><strong>Find an alternating mapping</strong> <span class="math display">\[ f(a_{i}) = \begin{cases} b_\text{odd} &amp; i\text{ is odd}\\ b_\text{even} &amp; i\text{ is even} \end{cases} \]</span></li>
 <li><p><strong>Cantor-Bernstein Theorem</strong></p>
-<p>If there exists an injection for <span class="math inline"><em>A</em> → <em>B</em></span> and for <span class="math inline"><em>B</em> → <em>A</em></span> then there exists a bijection between <span class="math inline"><em>A</em></span> and <span class="math inline"><em>B</em></span>.</p>
+<p>If there exists an injection for <span class="math inline">\(A \rightarrow B\)</span> and for <span class="math inline">\(B \rightarrow A\)</span> then there exists a bijection between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</p>
 <p>Unfortunately this method is hard to do.</p></li>
 </ol>
 <h2 id="countable">Countable</h2>
-<p>A set is <strong>countable</strong> if there exists a bijetion between <span class="math inline"><em>S</em></span> and <span class="math inline">$\mathbb N$</span> or some subset of <span class="math inline">$\mathbb N$</span>. Equivalently, a set is <strong>countable</strong> if there exists an injection between <span class="math inline"><em>S</em></span> and <span class="math inline">$\mathbb N$</span> (an onto relationship for <span class="math inline"><em>f</em> : <em>S</em> → <em>A</em></span> for <span class="math inline"><em>A</em> ⊆ <em>N</em></span>). This is simply denoted as,</p>
-<p><br /><span class="math display"><em>S</em> → <em>N</em> ⟹ |<em>S</em>|≤|<em>N</em>|</span><br /></p>
+<p>A set is <strong>countable</strong> if there exists a bijetion between <span class="math inline">\(S\)</span> and <span class="math inline">\(\mathbb N\)</span> or some subset of <span class="math inline">\(\mathbb N\)</span>. Equivalently, a set is <strong>countable</strong> if there exists an injection between <span class="math inline">\(S\)</span> and <span class="math inline">\(\mathbb N\)</span> (an onto relationship for <span class="math inline">\(f: S \to A\)</span> for <span class="math inline">\(A \subseteq N\)</span>). This is simply denoted as,</p>
+<p><span class="math display">\[ S \longrightarrow N \implies |S| \le |N| \]</span></p>
 <p>The following set are countables:</p>
 <ol style="list-style-type: decimal">
-<li>Natural numbers <span class="math inline">$\mathbb N$</span></li>
-<li>Rational numbers <span class="math inline">$\mathbb Q$</span></li>
-<li>A string of <span class="math inline"><em>n</em></span> radix <span class="math inline">$\set{0,1,2,\ldots,n-1}^*$</span></li>
+<li>Natural numbers <span class="math inline">\(\mathbb N\)</span></li>
+<li>Rational numbers <span class="math inline">\(\mathbb Q\)</span></li>
+<li>A string of <span class="math inline">\(n\)</span> radix <span class="math inline">\(\set{0,1,2,\ldots,n-1}^*\)</span></li>
 </ol>
 <p>The following set are not countable:</p>
 <ol style="list-style-type: decimal">
-<li>Real numbers <span class="math inline">$\mathbb R$</span></li>
-<li>The power set of the natural numbers <span class="math inline">$\mathcal P(\mathbb N)$</span></li>
+<li>Real numbers <span class="math inline">\(\mathbb R\)</span></li>
+<li>The power set of the natural numbers <span class="math inline">\(\mathcal P(\mathbb N)\)</span></li>
 </ol>
 <h2 id="n-radix-strings">N-Radix Strings</h2>
-<p>For a positive integer <span class="math inline"><em>N</em></span>, <span class="math inline"><em>N</em></span>-radix string denoted as <span class="math inline">$\set{0,1,\ldots,N-1}^*$</span> is countable and has a bijection to <span class="math inline">$\mathbb N$</span></p>
-<p><br /><span class="math display">$$ \set{0,1,\ldots,N-1}^* \longleftrightarrow \mathbb N $$</span><br /></p>
-<p>N-radix strings become useful if you can encode some set $N(x) $ with <span class="math inline"><em>N</em></span> radices (aka indices). Doing so allow an injection from <span class="math inline">$\mathbb N(x) \rightarrow \set{0,1,\ldots,N-1}^*$</span> thus,</p>
-<p><br /><span class="math display">$$
+<p>For a positive integer <span class="math inline">\(N\)</span>, <span class="math inline">\(N\)</span>-radix string denoted as <span class="math inline">\(\set{0,1,\ldots,N-1}^*\)</span> is countable and has a bijection to <span class="math inline">\(\mathbb N\)</span></p>
+<p><span class="math display">\[ \set{0,1,\ldots,N-1}^* \longleftrightarrow \mathbb N \]</span></p>
+<p>N-radix strings become useful if you can encode some set $N(x) $ with <span class="math inline">\(N\)</span> radices (aka indices). Doing so allow an injection from <span class="math inline">\(\mathbb N(x) \rightarrow \set{0,1,\ldots,N-1}^*\)</span> thus,</p>
+<p><span class="math display">\[
 \begin{gather*}
     \mathbb N(x) \rightarrow \set{0,1,\ldots,N-1}^* \longleftrightarrow \mathbb N \\
     \downarrow
     \mathbb N(x) \rightarrow \mathbb N
 \end{gather*}
-$$</span><br /></p>
+\]</span></p>
 <h3 id="binary-strings">Binary Strings</h3>
 <p>Let's start out with considering a 2-radix string (i.e., binary string). We may denote all possible binary string as the set,</p>
-<p><br /><span class="math display">$$ \set{0,1}^* : \emptyset, 0, 1, 00, 01, 10, 11, \ldots $$</span><br /></p>
+<p><span class="math display">\[ \set{0,1}^* : \emptyset, 0, 1, 00, 01, 10, 11, \ldots \]</span></p>
 <ul>
-<li>Notice that <span class="math inline">0</span> and <span class="math inline">00</span> are not equal (even thought they represent the integer <span class="math inline">0</span> in binary).</li>
+<li>Notice that <span class="math inline">\(0\)</span> and <span class="math inline">\(00\)</span> are not equal (even thought they represent the integer <span class="math inline">\(0\)</span> in binary).</li>
 </ul>
 <h3 id="ternary-string">Ternary String</h3>
-<p>The more useful string is the ternary string <span class="math inline">$\set{0,1,2}^*$</span>. We can use <span class="math inline">1</span> and <span class="math inline">0</span> to build the integer and <span class="math inline">2</span> as a delimiter.</p>
+<p>The more useful string is the ternary string <span class="math inline">\(\set{0,1,2}^*\)</span>. We can use <span class="math inline">\(1\)</span> and <span class="math inline">\(0\)</span> to build the integer and <span class="math inline">\(2\)</span> as a delimiter.</p>
 <ul>
-<li><p>For instance the polynomial <span class="math inline">5<em>x</em><sup>24</sup> + 2<em>x</em><sup>4</sup> + 7<em>x</em><sup>3</sup> + 4<em>x</em> + 6</span> can be presented as,</p>
-<p><br /><span class="math display">1012  102  1112  2  1002  110</span><br /></p>
+<li><p>For instance the polynomial <span class="math inline">\(5x^24 + 2x^4 + 7x^3 + 4x + 6\)</span> can be presented as,</p>
+<p><span class="math display">\[ 1012~~102~~1112~~2~~1002~~110 \]</span></p>
 <p>With this we can prove that the set of all integer coefficient polynomials are countable.</p></li>
 </ul>
 <h3 id="uncountability-by-cantors-diagonalization">Uncountability by Cantor's Diagonalization</h3>
-<p>A set <span class="math inline"><em>S</em></span> is uncountable if the diagonal of the row sets <span class="math inline"><em>f</em>(1),<em>f</em>(2),<em>f</em>(3),…,<em>f</em>(<em>n</em>)</span> for <span class="math inline">$f: S \rightarrow \mathbb N$</span> generates another row set not in <span class="math inline"><em>f</em></span> then the set is not countable.</p>
+<p>A set <span class="math inline">\(S\)</span> is uncountable if the diagonal of the row sets <span class="math inline">\(f(1), f(2), f(3), \ldots, f(n)\)</span> for <span class="math inline">\(f: S \rightarrow \mathbb N\)</span> generates another row set not in <span class="math inline">\(f\)</span> then the set is not countable.</p>
 <ul>
-<li><p><strong><span class="math inline">$\mathbb R$</span> is not countable</strong></p>
-<p>We continue to prove this by showing that that interval <span class="math inline">$\mathbb R[0,1]$</span> is not countable. Using Cantor's theorem, we see that <span class="math inline">$\mathbb R \rightarrow \mathbb N$</span> now we can test on <span class="math inline">$\mathbb N \rightarrow \mathbb R$</span></p>
-<p>To do this, let's assume for contradiction that the interval is countable <span class="math inline">$N \rightarrow \mathbb R [0,1]$</span>. That means for every <span class="math inline">$n \in \mathbb N$</span> <span class="math inline"><em>f</em></span> is a bijection function that maps to every real number denoted as <span class="math inline">0.<em>d</em><sub>1</sub><em>d</em><sub>2</sub><em>d</em><sub>3</sub>…</span>,</p>
-<p><br /><span class="math display">$$
+<li><p><strong><span class="math inline">\(\mathbb R\)</span> is not countable</strong></p>
+<p>We continue to prove this by showing that that interval <span class="math inline">\(\mathbb R[0,1]\)</span> is not countable. Using Cantor's theorem, we see that <span class="math inline">\(\mathbb R \rightarrow \mathbb N\)</span> now we can test on <span class="math inline">\(\mathbb N \rightarrow \mathbb R\)</span></p>
+<p>To do this, let's assume for contradiction that the interval is countable <span class="math inline">\(N \rightarrow \mathbb R [0,1]\)</span>. That means for every <span class="math inline">\(n \in \mathbb N\)</span> <span class="math inline">\(f\)</span> is a bijection function that maps to every real number denoted as <span class="math inline">\(0.d_1d_2d_3\ldots\)</span>,</p>
+<p><span class="math display">\[
 \begin{matrix}
 f(0) = 0.&amp;\boxed{9} &amp;8  &amp;7  &amp;\ldots\\
 f(1) = 0.&amp;8   &amp;\boxed{7}  &amp;6    &amp;\ldots\\
 f(2) = 0.&amp;7 &amp;6    &amp;\boxed{5} &amp;\ldots\\
 \vdots &amp; \vdots
 \end{matrix}
-$$</span><br /></p>
-<p>Let the diagonal be another decimal number <span class="math inline"><em>r</em> = 0.975…</span> and take each digit <span class="math inline">$d+2 \bmod 10$</span> such that <span class="math inline"><em>s</em> = 0.197…</span></p>
-<p>We know for sure that <span class="math inline"><em>s</em></span> does not exist in the table since every digit differs from each row. However, this contradicts <span class="math inline">$\mathbb N \rightarrow \mathbb R$</span> thus <span class="math inline">$\mathbb R$</span> is not countable.</p></li>
-<li><p><strong>No power set are countable</strong> We prove this by proving that <span class="math inline">$\mathscr{P}(\mathbb N)$</span> is not countable. We do this by contradiction assuming there exists an injection from <span class="math inline">$N \rightarrow \mathscr{P}(\mathbb N)$</span>. We may denote all power set as a binary string with the mapping bijective function <span class="math inline"><em>f</em></span>. Let the <span class="math inline"><em>i</em></span>th position of the string denote each natural number. Let <span class="math inline">1</span> denote that the natural number is present in the set and <span class="math inline">0</span> means not.</p>
-<p><br /><span class="math display">$$
+\]</span></p>
+<p>Let the diagonal be another decimal number <span class="math inline">\(r=0.975\ldots\)</span> and take each digit <span class="math inline">\(d+2 \bmod 10\)</span> such that <span class="math inline">\(s=0.197\ldots\)</span></p>
+<p>We know for sure that <span class="math inline">\(s\)</span> does not exist in the table since every digit differs from each row. However, this contradicts <span class="math inline">\(\mathbb N \rightarrow \mathbb R\)</span> thus <span class="math inline">\(\mathbb R\)</span> is not countable.</p></li>
+<li><p><strong>No power set are countable</strong> We prove this by proving that <span class="math inline">\(\mathscr{P}(\mathbb N)\)</span> is not countable. We do this by contradiction assuming there exists an injection from <span class="math inline">\(N \rightarrow \mathscr{P}(\mathbb N)\)</span>. We may denote all power set as a binary string with the mapping bijective function <span class="math inline">\(f\)</span>. Let the <span class="math inline">\(i\)</span>th position of the string denote each natural number. Let <span class="math inline">\(1\)</span> denote that the natural number is present in the set and <span class="math inline">\(0\)</span> means not.</p>
+<p><span class="math display">\[
 \begin{matrix}
            &amp;0   &amp;1   &amp;2   &amp;\ldots\\
     f(0)   &amp;\boxed 0   &amp;0   &amp;0   &amp;\ldots\\
@@ -102,10 +105,37 @@ $$</span><br /></p>
     f(2)   &amp;1   &amp;1   &amp;\boxed 0   &amp;\ldots\\
     \vdots  &amp;&amp;\vdots
 \end{matrix}
-$$</span><br /></p>
-<p>Flipping every bit along the diagonal we get the binary string <span class="math inline"><em>b</em></span>. <span class="math inline"><em>b</em></span> should be part of the power set however this isn't possible since every row should be different from <span class="math inline"><em>b</em></span>. This contradiction shows that <span class="math inline">$\mathscr P (\mathbb N)$</span> is not countable.</p></li>
+\]</span></p>
+<p>Flipping every bit along the diagonal we get the binary string <span class="math inline">\(b\)</span>. <span class="math inline">\(b\)</span> should be part of the power set however this isn't possible since every row should be different from <span class="math inline">\(b\)</span>. This contradiction shows that <span class="math inline">\(\mathscr P (\mathbb N)\)</span> is not countable.</p></li>
 </ul>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
 
+
+    <!-- Scripts -->
+    
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    
+        <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
 </body>
 
 </html>
