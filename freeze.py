@@ -30,7 +30,6 @@ def freeze():
     default_build_path = PROJECT_PATH / 'build'  # Default specified by Frozen-Flask
     build_path = PROJECT_PATH / config['build_path']
     backup = PROJECT_PATH / (build_path.name + '.bak')
-    print(build_path, backup)
 
     if build_path.exists():
         log.info(f"{build_path.name} -> {backup.name}")
@@ -42,8 +41,9 @@ def freeze():
         log.info(f"{default_build_path.name} -> {build_path.name}")
         default_build_path.rename(build_path)
 
-        log.info(f"deleting {backup.name}")
-        rmtree(str(backup))
+        if backup.exists():
+            log.info(f"deleting {backup.name}")
+            rmtree(str(backup))
     except Exception as e:
         log.error(e)
         if backup.exists():

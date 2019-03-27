@@ -5,7 +5,7 @@ import frontmatter
 import pypandoc as pandoc
 from flask import Flask, render_template, url_for
 from pathlib import Path
-from shutil import rmtree
+from shutil import rmtree, copyfile
 from src.config_handler import get_config
 
 PROJECT_PATH = Path(__file__).resolve().parents[0]
@@ -25,8 +25,10 @@ log = app.logger
 
 @app.context_processor
 def global_var():
-    var = dict(root_url=ROOT_URL)
-    print(var)
+    var = dict(
+        root_url=ROOT_URL,
+        links=config['links']
+        )
     return var
 
 
@@ -57,8 +59,10 @@ def build(context):
         output_path.rename(backup)
 
     output_path.mkdir()
-    try:  # Attempt to convert Markdown notes to HTML
-        for note in source_path.glob('**/*.md'):
+    try:  
+        # Convert Markdown/HTML notes to HTML
+        notes = list(source_path.glob('**/*.md')) + list(source_path.glob('**/*.html'))
+        for note in notes:
             parent = note.relative_to(source_path).parent  # /path/to/note/
 
             # mkdir /templates/notes/parent/
@@ -67,12 +71,22 @@ def build(context):
 
             outputfile = output_path / parent / (note.stem + '.html')
             log.debug(f"{note} >> {outputfile}")
-            outputfile = md_to_html(note.resolve(), outputfile)
+            if note.suffix == '.md':
+                outputfile = md_to_html(note.resolve(), outputfile)
+            else:
+                copyfile(str(note), str(outputfile))
             assert outputfile.exists(), "The output file was not created."
+        
+        # Copy over any raw HTML files
+        for note in source_path.glob('**/*.html'):
+            parent = note.relative_to(source_path).parent
+
+
+        # Success, remove backup
         if backup.exists():
             rmtree(str(backup))
     except Exception as e:  # Recover backup when fails
-        log.debug(e)
+        log.error(e)
         rmtree(str(output_path))
         if backup.exists():
             backup.rename(output_path)
@@ -86,7 +100,8 @@ def build_all():
 def get_all_notes():
     """Retrieve notes path relative to specified argument."""
     notes = TEMPLATES_PATH.glob('*/**/*.html')
-    return [str(note.relative_to(TEMPLATES_PATH)) for note in notes]  # Ignores files at first level
+    notes = [str(note.relative_to(TEMPLATES_PATH)) for note in notes]  # Ignores files at first level
+    return notes
 
 ############
 # MAIN
@@ -100,19 +115,27 @@ def main():
     return render_template('main.html', **context)
 
 
+@app.route(f'/<context>')
 @app.route(f'/<context>/<path:note>')
-def get_note(context, note):
-    context = config['contexts'][context]
+def get_note(context, note='index.html'):
+    try:
+        context = config['contexts'][context]
+    except KeyError as e:
+        log.error(str(e) + f', when attempting with args get_note({context}, {note}).')
     source_path = PROJECT_PATH / context['source_path']
     output_path = TEMPLATES_PATH / context['source_path']
 
     # Get metadata and parse path
     if Path(note).suffix != '.html':
-        metadata = frontmatter.load(source_path/(note + '.md'))
+        metadata = source_path/(note + '.md')
         note = output_path / (note + '.html')
     else:
-        metadata = frontmatter.load(source_path/(note.replace('.html', '.md')))
+        metadata = source_path/(note.replace('.html', '.md'))
         note = output_path / note
+    if metadata.exists():
+        metadata = frontmatter.load(metadata)
+    else: 
+        metadata = None
 
     # Resolve relative to template path
     # The note should now point to the actual HTML file while its served at /<path:note>
@@ -122,9 +145,13 @@ def get_note(context, note):
 
     context.update(dict(
         content_path=str(note),
-        note=metadata
+        note=metadata,
     ))
-    return render_template('note.html', **context)
+
+    if metadata is None:
+        return render_template(str(note), **context)
+    else:
+        return render_template(context['template'], **context)
 
 
 if __name__ == '__main__':

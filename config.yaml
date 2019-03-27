@@ -17,6 +17,13 @@ contexts:
   notes:
     source_path: 'notes/'
     url: '/notes'
+    template: 'note.html'
   posts:
     source_path: 'posts'
     url: '/posts'
+    template: 'post.html'
+
+links:
+  linkedin: 'https://www.linkedin.com/'
+  github: 'https://www.github.com/'
+  email: 'https://www.gmail.com/'
