@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-3"></div>
-        <div class="col=6">
-            <h1>{{note['title']}}</h1>
+        <div class="col-3 d-none d-lg-block"></div>
+        <div class="col-sm-9 col-lg-6">
+            <h1 class="title">{{note['title']}}</h1>
             {% include content_path %}
         </div>
-        <div class="col-3"></div>
+        <div class="col-3 d-none d-md-block">
+        </div>
     </div>
 </div>
 {% endblock %}

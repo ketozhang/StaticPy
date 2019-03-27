@@ -1,3 +1,17 @@
 * {
     font-family: 'Open Sans', sans-serif;
 }
+
+@media (min-width: 992px) {
+    .container-fluid {
+      width: 80%;
+    }
+  }
+
+.sourceCode {
+    background-color: darkgray;
+}
+
+.pre {
+    font-family: 'Courier New', Courier, monospace;
+}

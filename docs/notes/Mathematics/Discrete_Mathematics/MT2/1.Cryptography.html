@@ -5,22 +5,22 @@
     <meta charset="UTF-8">
     <title>Give Me a Name</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://ketozhang.github.io/notebook/static/css/base.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
     <!-- yep Bootstrap time -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/home/keto/Repository/notebook/https:/ketozhang.github.io/notebook/static/css/base.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
 
 </head>
 
 <body>
     
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-3"></div>
-        <div class="col=6">
-            <h1>Cryptography</h1>
+        <div class="col-3 d-none d-lg-block"></div>
+        <div class="col-sm-9 col-lg-6">
+            <h1 class="title">Cryptography</h1>
             <p>The basics of cryptography begins with a story of Alice wanting to send a message <span class="math inline">\(x\)</span> to Bob. They both know Eve who is an eavesdropper thus they need a why to send their messages securily. Alice encrypts her message with an ecryption <span class="math inline">\(E\)</span> such that the message send to Bob is <span class="math inline">\(E(x)\)</span>. Bob on the other hand has a decryption <span class="math inline">\(D\)</span> such that <span class="math inline">\(D(E(x)) = x\)</span>.</p>
 <h2 id="rsa-public-key-schemes">RSA Public Key Schemes</h2>
 <p>Public key schemes are methods to allow Bob to recieve encrypted messages without ever meeting Alice. In other words, Bob never had a decryption sent from by Alice. How this work is that Bob creates a digital locker and sends the locker to Alice. Alice can now lock messages in the locker and sends that back to Bob where Bob only has the locker keys. The actual scheme works as so:</p>
@@ -62,16 +62,17 @@
 <p>Another way is to find all the prime factors of <span class="math inline">\(N = pq\)</span> and use <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> to determine the private key <span class="math inline">\(d\)</span>.</p></li>
 </ol>
         </div>
-        <div class="col-3"></div>
+        <div class="col-3 d-none d-md-block">
+        </div>
     </div>
 </div>
 
 
     <!-- Scripts -->
-    
+
     <!-- MathJax -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
-    
+
     <!-- Bootstrap JS -->
     <!-- TODO: trim JS if not needed -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -83,8 +84,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    
-        <!-- React -->
+
+    <!-- React -->
     <!-- TODO: do we need React? -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>

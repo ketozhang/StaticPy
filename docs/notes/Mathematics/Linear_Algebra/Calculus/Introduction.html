@@ -5,22 +5,22 @@
     <meta charset="UTF-8">
     <title>Give Me a Name</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://ketozhang.github.io/notebook/static/css/base.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
     <!-- yep Bootstrap time -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/home/keto/Repository/notebook/https:/ketozhang.github.io/notebook/static/css/base.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
 
 </head>
 
 <body>
     
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-3"></div>
-        <div class="col=6">
-            <h1>Introduction</h1>
+        <div class="col-3 d-none d-lg-block"></div>
+        <div class="col-sm-9 col-lg-6">
+            <h1 class="title">Introduction</h1>
             <p>From here on out matrix are <span class="math inline">\(A \in \mathbb R^{m \times n}\)</span> and vectors <span class="math inline">\(v \in \mathbb R^{1 \times n}\)</span> are column vectors. It is also equivalent to simply denote vectors as a matrix with a single column dimension.</p>
 <h2 id="matrix-gradient">Matrix Gradient</h2>
 <p>The <strong>gradient</strong> is defined as the derivative of some scalar function <span class="math inline">\(f\)</span> with respect to some matrix <span class="math inline">\(A \in \mathbb R^{n \times m}\)</span>.</p>
@@ -72,16 +72,17 @@ H(f) = \frac{\partial }{\partial x}\begin{bmatrix}
 \end{bmatrix}
 \]</span></p>
         </div>
-        <div class="col-3"></div>
+        <div class="col-3 d-none d-md-block">
+        </div>
     </div>
 </div>
 
 
     <!-- Scripts -->
-    
+
     <!-- MathJax -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
-    
+
     <!-- Bootstrap JS -->
     <!-- TODO: trim JS if not needed -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -93,8 +94,8 @@ H(f) = \frac{\partial }{\partial x}\begin{bmatrix}
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    
-        <!-- React -->
+
+    <!-- React -->
     <!-- TODO: do we need React? -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>

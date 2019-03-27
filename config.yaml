@@ -1,0 +1,22 @@
+# The full url to be hosted (e.g., http://example.com/notes)
+site_url: 'https://ketozhang.github.io/notebook'
+
+# # All paths are relative to project path
+# # Absolute path: `/dir`
+# # Relative path: `dir` or `dir/`
+# # Where your markdown notes live
+# source_path: 'notes/'
+# # Where you like to output the html to be served
+build_path: 'docs/' # Use `docs/` for GitHub Pages compatibility.
+
+# Flask defaults
+templates_path: 'templates/'
+static_path: 'static/'
+
+contexts:
+  notes:
+    source_path: 'notes/'
+    url: '/notes'
+  posts:
+    source_path: 'posts'
+    url: '/posts'

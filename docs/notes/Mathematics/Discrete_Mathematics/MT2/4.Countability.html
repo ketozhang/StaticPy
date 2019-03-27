@@ -5,22 +5,22 @@
     <meta charset="UTF-8">
     <title>Give Me a Name</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://ketozhang.github.io/notebook/static/css/base.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
     <!-- yep Bootstrap time -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/home/keto/Repository/notebook/https:/ketozhang.github.io/notebook/static/css/base.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
 
 </head>
 
 <body>
     
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-3"></div>
-        <div class="col=6">
-            <h1>Countability</h1>
+        <div class="col-3 d-none d-lg-block"></div>
+        <div class="col-sm-9 col-lg-6">
+            <h1 class="title">Countability</h1>
             <h2 id="bijection">Bijection</h2>
 <p>Two sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> have the same size if there exists a function <span class="math inline">\(f : A \rightarrow B\)</span> is a bijection. A function is bijection if and only if:</p>
 <ol style="list-style-type: decimal">
@@ -109,16 +109,17 @@ f(2) = 0.&amp;7 &amp;6    &amp;\boxed{5} &amp;\ldots\\
 <p>Flipping every bit along the diagonal we get the binary string <span class="math inline">\(b\)</span>. <span class="math inline">\(b\)</span> should be part of the power set however this isn't possible since every row should be different from <span class="math inline">\(b\)</span>. This contradiction shows that <span class="math inline">\(\mathscr P (\mathbb N)\)</span> is not countable.</p></li>
 </ul>
         </div>
-        <div class="col-3"></div>
+        <div class="col-3 d-none d-md-block">
+        </div>
     </div>
 </div>
 
 
     <!-- Scripts -->
-    
+
     <!-- MathJax -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
-    
+
     <!-- Bootstrap JS -->
     <!-- TODO: trim JS if not needed -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -130,8 +131,8 @@ f(2) = 0.&amp;7 &amp;6    &amp;\boxed{5} &amp;\ldots\\
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    
-        <!-- React -->
+
+    <!-- React -->
     <!-- TODO: do we need React? -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
