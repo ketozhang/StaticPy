@@ -15,7 +15,7 @@ PROJECT_PATH = Path(__file__).resolve().parents[0]
 config = get_config()
 
 # TODO: Choose either `site_url` or `root_url`.
-ROOT_URL = Path(config['site_url'])
+ROOT_URL = config['site_url']
 # BUILD_PATH = Path(config['build_path']).resolve()
 TEMPLATES_PATH = Path(config['templates_path']).resolve()
 
@@ -28,6 +28,7 @@ log = app.logger
 @app.context_processor
 def global_var():
     var = dict(root_url=ROOT_URL)
+    print(var)
     return var
 
 
