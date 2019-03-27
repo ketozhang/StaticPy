@@ -4,7 +4,6 @@ import logging
 import frontmatter
 import pypandoc as pandoc
 from flask import Flask, render_template, url_for
-# from flask_scss import Scss
 from pathlib import Path
 from shutil import rmtree
 from src.config_handler import get_config
@@ -18,10 +17,9 @@ config = get_config()
 ROOT_URL = config['site_url']
 # BUILD_PATH = Path(config['build_path']).resolve()
 TEMPLATES_PATH = Path(config['templates_path']).resolve()
-
+ASSETS_PATH = PROJECT_PATH / 'assets'
 
 app = Flask(__name__)
-# Scss(app, static_dir='static', asset_dir='static')
 log = app.logger
 
 
