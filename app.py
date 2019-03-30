@@ -24,8 +24,13 @@ log = app.logger
 
 @app.context_processor
 def global_var():
+    # TODO ROOT_URL best handled by a config parser 
+    root_url = ROOT_URL if ROOT_URL else '/'
+    if root_url[-1] != '/':
+        root_url += '/'
+
     var = dict(
-        root_url=ROOT_URL if ROOT_URL else '/',
+        root_url=root_url,
         links=config['links']
         )
     return var
