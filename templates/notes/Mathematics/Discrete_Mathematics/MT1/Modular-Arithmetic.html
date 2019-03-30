@@ -1,4 +1,4 @@
-<p>The statement &quot;<span class="math inline">\(a\)</span> modulo <span class="math inline">\(b\)</span>&quot; is how many learn modular arithmetic which treats <span class="math inline">\(\text{mod}\)</span> as an operator like,</p>
+<p>The statement “<span class="math inline">\(a\)</span> modulo <span class="math inline">\(b\)</span>” is how many learn modular arithmetic which treats <span class="math inline">\(\text{mod}\)</span> as an operator like,</p>
 <p><span class="math display">\[
 \begin{gather*}
    r = a \bmod b \\
@@ -36,18 +36,18 @@
 \]</span></p>
 <p>For <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> inverse of each other.</p>
 <ul>
-<li><p>Inverses doesn't exist because it only exist if say for a fixed value <span class="math inline">\(x\)</span> and varying value <span class="math inline">\(y\)</span>,</p>
+<li><p>Inverses doesn’t exist because it only exist if say for a fixed value <span class="math inline">\(x\)</span> and varying value <span class="math inline">\(y\)</span>,</p>
 <p><span class="math display">\[ x \cdot y = c\cdot m + 1 \]</span></p></li>
 <li><p>The statement above can be quite difficult to solve since there are two varying parameters (<span class="math inline">\(c\)</span> and <span class="math inline">\(y\)</span>). However the statement above is equivalent to,</p>
 <p><span class="math display">\[ \forall x \exists y \Big[(xy) \bmod m = 1 \iff \gcd{(x,m)} = 1  \Big] \]</span></p>
-<p>This statement's RHS is equivalently <em><strong>&quot;<span class="math inline">\(x\)</span> is a coprime of <span class="math inline">\(m\)</span>&quot;</strong></em></p></li>
+<p>This statement’s RHS is equivalently <em><strong>“<span class="math inline">\(x\)</span> is a coprime of <span class="math inline">\(m\)</span>”</strong></em></p></li>
 <li><p>If the modular space value <span class="math inline">\(p\)</span> in <span class="math inline">\(\pmod p\)</span> is prime then there always exists an inverse,</p>
 <p><span class="math display">\[ \forall x \forall p \in \text{prime 0} \exists y \Big( x\cdot y \equiv 1 \pmod{p}  \Big) \]</span></p></li>
 </ul>
-<h3 id="euclids-algorithm">Euclid's Algorithm</h3>
-<p>The Euclid's algorithm begins with assuming that the gcd can be written as a linear combination of <span class="math inline">\(x, y\)</span>,</p>
+<h3 id="euclids-algorithm">Euclid’s Algorithm</h3>
+<p>The Euclid’s algorithm begins with assuming that the gcd can be written as a linear combination of <span class="math inline">\(x, y\)</span>,</p>
 <p><span class="math display">\[ \gcd(x,y) = ax + by \]</span></p>
-<p>Where <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are integers (remember, it's possibly negative). It's not a surprise that we can find,</p>
+<p>Where <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are integers (remember, it’s possibly negative). It’s not a surprise that we can find,</p>
 <p><span class="math display">\[
 \begin{align*}
     am + bx &amp;= 1 \\
@@ -55,20 +55,20 @@
     bx &amp;\equiv 1 \pmod m
 \end{align*}
 \]</span></p>
-<p>We now see that <span class="math inline">\(b\)</span> is the inverse of <span class="math inline">\(x\)</span>. So all we need to do is fine <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. To do that we need to know the gcd. This is where Euler's algorithm comes in,</p>
+<p>We now see that <span class="math inline">\(b\)</span> is the inverse of <span class="math inline">\(x\)</span>. So all we need to do is fine <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. To do that we need to know the gcd. This is where Euler’s algorithm comes in,</p>
 <p><em><strong>Theorem:</strong> <span class="math inline">\(x \ge y &gt; 0 \implies \gcd(x,y) = \gcd(y,x\bmod y)\)</span></em></p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Take the smaller value <span class="math inline">\(y\)</span> to be the mod space.</li>
-<li>Continue Euclid's theorem until one of the input variables is zero</li>
+<li>Continue Euclid’s theorem until one of the input variables is zero</li>
 <li><p>When an input variable is zero the gcd is simply the non-zero value,</p>
 <p><span class="math display">\[
-    \begin{align*}
-        \gcd(x,y) &amp;= \gcd(y,x \bmod y)\\
-        &amp;= \ldots \\
-        &amp;= \gcd(d,0)\\
-        &amp;= d
-    \end{align*}
-\]</span></p></li>
+     \begin{align*}
+         \gcd(x,y) &amp;= \gcd(y,x \bmod y)\\
+         &amp;= \ldots \\
+         &amp;= \gcd(d,0)\\
+         &amp;= d
+     \end{align*}
+ \]</span></p></li>
 </ol>
 <p>Now we are going to use this for <span class="math inline">\(\gcd(x,y) = ax + by\)</span>,</p>
 <p><span class="math display">\[

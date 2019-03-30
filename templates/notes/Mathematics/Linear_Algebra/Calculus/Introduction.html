@@ -5,7 +5,7 @@
 <p><span class="math display">\[
 \nabla f(v) = \begin{bmatrix} \frac{\partial f}{v_1} &amp; \frac{\partial f}{v_2} &amp; \ldots &amp; \frac{\partial f}{v_n} \end{bmatrix}^\top
 \]</span></p>
-<p>It's is natural that if <span class="math inline">\(v\)</span> is expanded to a general matrix and let's renotated it as <span class="math inline">\(A \in \mathbb R^{m \times n}\)</span> there should simply just be <span class="math inline">\(m\)</span> more rows. Notice that this convention preserves the shape of the <span class="math inline">\(A\)</span>. We will change the notation a bit to allow the subscript to denote &quot;with respect to&quot;.</p>
+<p>It’s is natural that if <span class="math inline">\(v\)</span> is expanded to a general matrix and let’s renotated it as <span class="math inline">\(A \in \mathbb R^{m \times n}\)</span> there should simply just be <span class="math inline">\(m\)</span> more rows. Notice that this convention preserves the shape of the <span class="math inline">\(A\)</span>. We will change the notation a bit to allow the subscript to denote “with respect to”.</p>
 <p><span class="math display">\[
 \nabla_A f = \begin{bmatrix}
 \frac{\partial f}{\partial A_{11}} &amp; \frac{\partial f}{\partial A_{12}} &amp; \ldots &amp; \frac{\partial f}{\partial A_{1n}}\\
@@ -19,7 +19,7 @@
 \frac{\partial f}{\partial A} \equiv \nabla_A f^\top
 \]</span></p>
 <h2 id="jacobian---vector-by-vector">Jacobian - Vector by Vector</h2>
-<p>Let <span class="math inline">\(f(x): \mathbb R^n \rightarrow \mathbb R^m\)</span> be a vector function. It's derivative with respect to the vector <span class="math inline">\(x \in \mathbb R^n\)</span> is called the <strong>Jacobian matrix</strong> <span class="math inline">\(J \in \mathbb R^{m \times n}\)</span>.</p>
+<p>Let <span class="math inline">\(f(x): \mathbb R^n \rightarrow \mathbb R^m\)</span> be a vector function. It’s derivative with respect to the vector <span class="math inline">\(x \in \mathbb R^n\)</span> is called the <strong>Jacobian matrix</strong> <span class="math inline">\(J \in \mathbb R^{m \times n}\)</span>.</p>
 <p><span class="math display">\[
 J(f) \equiv \frac{\partial f}{\partial x} = \begin{bmatrix}
 \frac{\partial f_1}{\partial x_1} &amp; \ldots &amp; \frac{\partial f_1}{\partial x_n}\\
@@ -28,7 +28,7 @@ J(f) \equiv \frac{\partial f}{\partial x} = \begin{bmatrix}
 \end{bmatrix}
 \]</span></p>
 <h2 id="hessian---gradient-by-vector">Hessian - Gradient by Vector</h2>
-<p>Now let <span class="math inline">\(f\)</span> be a twice-differential scalar function of the vector <span class="math inline">\(x\)</span>. It's <strong>Hessian</strong> is defined as the Jacobian of its gradient vector.</p>
+<p>Now let <span class="math inline">\(f\)</span> be a twice-differential scalar function of the vector <span class="math inline">\(x\)</span>. It’s <strong>Hessian</strong> is defined as the Jacobian of its gradient vector.</p>
 <p><span class="math display">\[
 H(f) \equiv J(\nabla f^\top) = \nabla_x^2 f = \begin{bmatrix}
 \frac{\partial^2 f}{\partial x^2_1} &amp; \ldots &amp; \frac{\partial f}{\partial x_1 \partial x_n}\\
@@ -39,7 +39,7 @@ H(f) \equiv J(\nabla f^\top) = \nabla_x^2 f = \begin{bmatrix}
 <p><span class="math display">\[
 H_{ij}(f) = \frac{\partial f}{\partial x_i \partial x_j}
 \]</span></p>
-<p>The Hessian can be interpreted as the second gradient of a scalar function. Take note that <span class="math inline">\(\nabla_x(\nabla_x f) \neq \nabla^2_x f\)</span> because we can't take the gradient of a vector so its technically not the second gradient. We should actualaly mean that the Hessian build up of the second derivative of the gradient which entials the Jacobian of the gradient (modulo the transpose).</p>
+<p>The Hessian can be interpreted as the second gradient of a scalar function. Take note that <span class="math inline">\(\nabla_x(\nabla_x f) \neq \nabla^2_x f\)</span> because we can’t take the gradient of a vector so its technically not the second gradient. We should actualaly mean that the Hessian build up of the second derivative of the gradient which entials the Jacobian of the gradient (modulo the transpose).</p>
 <p><span class="math display">\[
 H(f) = \frac{\partial }{\partial x}\begin{bmatrix}
 (\nabla_x f)_1 \\

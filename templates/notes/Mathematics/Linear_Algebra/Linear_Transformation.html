@@ -5,48 +5,48 @@
 </ul>
 <h2 id="matrix-vector-multiplication">Matrix-Vector Multiplication</h2>
 <p>The most intuitive way to think of a matrix matrix-vector multiplication is to see it as a transformation in two steps:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><p>The matrix applies a linear transformation to the basis vectors</p>
 <p><span class="math display">\[
-\begin{bmatrix}
-    a_1 &amp; b_1\\
-    a_2 &amp; b_2
-\end{bmatrix} \implies
-\begin{matrix}
-    \hat x \rightarrow \begin{bmatrix}
-        a_1\\
-        a_2
-    \end{bmatrix}\\
-    \hat y \rightarrow \begin{bmatrix}
-        b_1\\
-        b_2
-    \end{bmatrix}
-\end{matrix}
-\]</span></p>
+ \begin{bmatrix}
+     a_1 &amp; b_1\\
+     a_2 &amp; b_2
+ \end{bmatrix} \implies
+ \begin{matrix}
+     \hat x \rightarrow \begin{bmatrix}
+         a_1\\
+         a_2
+     \end{bmatrix}\\
+     \hat y \rightarrow \begin{bmatrix}
+         b_1\\
+         b_2
+     \end{bmatrix}
+ \end{matrix}
+ \]</span></p>
 <ul>
 <li>Note that it is not necessary for the basis vector to be normalized.</li>
 </ul></li>
 <li><p>The scalar of the vector scales the basis vectors</p>
 <p><span class="math display">\[
-\begin{bmatrix}
-    a_1 &amp; b_1\\
-    a_2 &amp; b_2
-\end{bmatrix}
-\begin{bmatrix}
-    x\\
-    y
-\end{bmatrix} =
-x
-\begin{bmatrix}
-    a_1 \\
-    a_2
-\end{bmatrix} +
-y
-\begin{bmatrix}
-    b_1\\
-    b_2
-\end{bmatrix}
-\]</span></p></li>
+ \begin{bmatrix}
+     a_1 &amp; b_1\\
+     a_2 &amp; b_2
+ \end{bmatrix}
+ \begin{bmatrix}
+     x\\
+     y
+ \end{bmatrix} =
+ x
+ \begin{bmatrix}
+     a_1 \\
+     a_2
+ \end{bmatrix} +
+ y
+ \begin{bmatrix}
+     b_1\\
+     b_2
+ \end{bmatrix}
+ \]</span></p></li>
 </ol>
 <h2 id="matrix-matrix-multiplication">Matrix-Matrix Multiplication</h2>
 <p>Consider the linear transformation where <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> are matrices of linear transformation,</p>

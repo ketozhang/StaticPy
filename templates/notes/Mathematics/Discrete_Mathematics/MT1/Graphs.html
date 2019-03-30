@@ -5,7 +5,7 @@
 <li><span class="math inline">\((v_1,v_2)\)</span> : Edge describing the connection betwen two vertices. We consider <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> to be <strong>adjacent</strong> or <strong>neighbors</strong> if there exists an edge between them.</li>
 <li>In general, a graph is directed so <span class="math inline">\((a,b) \neq (b,a)\)</span> otherwise undirected</li>
 <li>The following are not conisdered graphs in this class:
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Self loops (e.g., <span class="math inline">\((a,a)\)</span>)</li>
 <li>Multiple loops (i.e., sets are unique)</li>
 </ol></li>
@@ -56,7 +56,7 @@
 </ul>
 <h2 id="trees">Trees</h2>
 <p>A graph is a tree if any of the following satisfies:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Graph is connected and no cycles.</li>
 <li>Graph is connected and exactly n-1 edges</li>
 <li>Graph is connected and removal of any edge disconnects the graph</li>
@@ -73,7 +73,7 @@
 <p>A graph is planar if it can be drawn in the plane such that none of its edges cross.</p>
 <ul>
 <li>The whole graph can be colored with four colors such that no two vertices share the same color and same edge.</li>
-<li><p><strong>Euler's Formula</strong>: A graph is planar if,</p>
+<li><p><strong>Euler’s Formula</strong>: A graph is planar if,</p>
 <p><span class="math display">\[ v- e + f = 2 \]</span></p>
 <ul>
 <li><span class="math inline">\(v\)</span>: vertices</li>
@@ -95,7 +95,7 @@ Unfortunately, this formula is not so useful because the graph must at first be 
 <p>A hypercube (denoted as <span class="math inline">\(H_n\)</span> for <span class="math inline">\(n\)</span> dimensions) is a connected graph of <span class="math inline">\(2^n\)</span> vertices with every vertex having degree <span class="math inline">\(n\)</span>.</p>
 <p><span class="math display">\[ \deg(v) = n\]</span></p>
 <ul>
-<li><p>Vertices of a hypercube can be represent as binary bits. Each vertex's neighbors are on bit away from the vertex (known as hamming distance 1). In other words a hypercube is generated as,</p>
+<li><p>Vertices of a hypercube can be represent as binary bits. Each vertex’s neighbors are on bit away from the vertex (known as hamming distance 1). In other words a hypercube is generated as,</p>
 <p><span class="math display">\[H_n = \set{(v_i, v_j) \mid d(v_i, v_j) = 1}\]</span></p>
 <p>Where <span class="math inline">\(d(v_i,v_j)\)</span> is the hamming distance between two vertices.</p></li>
 <li>All hypercubes have a Hamiltonian tour since the cycle <span class="math inline">\((s,s+1,s+2,\ldots,s+2^n,s)\)</span> always exists</li>

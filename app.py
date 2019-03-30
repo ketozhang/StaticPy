@@ -28,7 +28,6 @@ def global_var():
         root_url=ROOT_URL if ROOT_URL else '/',
         links=config['links']
         )
-    print(var)
     return var
 
 
@@ -52,10 +51,12 @@ def build(context):
     """Converts the source directory (`source_path`) to a directory of html (`output_path`) outputted to the templates directory."""
     source_path = PROJECT_PATH / context['source_path']
     output_path = TEMPLATES_PATH / context['source_path']
+    print(f"{TEMPLATES_PATH / context['source_path']}")
 
     # Backup the build directory in templates
     backup = Path(TEMPLATES_PATH / f'{output_path.name}.bak')
     if output_path.exists():
+        log.info(f"{output_path.name} -> {backup.name}")
         output_path.rename(backup)
 
     output_path.mkdir()
@@ -157,9 +158,9 @@ def get_note(context, note='index.html'):
 
 if __name__ == '__main__':
     args = sys.argv[1:]
+    logging.basicConfig(level=logging.DEBUG)
     if len(args) == 0:
         ROOT_URL = ''
-        logging.basicConfig(level=logging.DEBUG)
         app.run(debug=True, port=8080)
     elif 'build' in args:
         build_all()

@@ -9,8 +9,8 @@
 <h2 id="the-gale-shapley-algorithm">The Gale-Shapley Algorithm</h2>
 <p>The Gale-Shapley or propose-and-reject algorithm (usually called the SMA) is a solution to the marriage problem.</p>
 <p>The algorithm follows as so:</p>
-<ol style="list-style-type: decimal">
-<li>At the start of the day, every men propose to the women that's top of their list</li>
+<ol type="1">
+<li>At the start of the day, every men propose to the women that’s top of their list</li>
 <li>Of the women proposed, each women choose the top man and puts him on hold and rejects the rest.</li>
 <li>Repeat step 1. given the rejected men can no longer propose to the women that rejected him.</li>
 </ol>
@@ -37,87 +37,87 @@
 <p><span class="math display">\[ \max(\text{rejection}) = (n-1)^2 \]</span></p></li>
 <li><p>The maximum days of SMA one more than the maximum number of rejections,</p>
 <p><span class="math display">\[ d_\text{max} = 1 + \max(\text{rejection}) = n^2 - 2n + 2 \]</span></p></li>
-<li><p>All men get their top preferences if all their top preferences are unique. This is true regardless of the women's preferences.</p>
+<li><p>All men get their top preferences if all their top preferences are unique. This is true regardless of the women’s preferences.</p>
 <table>
 <thead>
 <tr class="header">
-<th align="center">Men</th>
-<th align="center"></th>
+<th style="text-align: center;">Men</th>
+<th style="text-align: center;"></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><span class="math inline">\(M_1\)</span></td>
-<td align="center"><span class="math inline">\(W_1 &gt; \ldots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(M_1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(W_1 &gt; \ldots\)</span></td>
 </tr>
 <tr class="even">
-<td align="center"><span class="math inline">\(M_2\)</span></td>
-<td align="center"><span class="math inline">\(W_2 &gt; \ldots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(M_2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(W_2 &gt; \ldots\)</span></td>
 </tr>
 <tr class="odd">
-<td align="center"><span class="math inline">\(\vdots\)</span></td>
-<td align="center"><span class="math inline">\(W_3 &gt; \ldots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(W_3 &gt; \ldots\)</span></td>
 </tr>
 <tr class="even">
-<td align="center"><span class="math inline">\(M_n\)</span></td>
-<td align="center"><span class="math inline">\(W_n &gt; \ldots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(M_n\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(W_n &gt; \ldots\)</span></td>
 </tr>
 </tbody>
 </table>
 <p><span class="math display">\[ \set{(M_1,W_1), (M_2,W_2), \ldots, (M_n,W_n)}  \]</span></p>
 <ul>
-<li>If the women's preference also prefers the respective men's first choice as their first choice then this result is both male and female optimal.</li>
+<li>If the women’s preference also prefers the respective men’s first choice as their first choice then this result is both male and female optimal.</li>
 <li>This table always finish on day <span class="math inline">\(d=1\)</span></li>
 </ul></li>
-<li><p>If all men has the same preference say <span class="math inline">\(W_1 &gt; W_2 &gt; \ldots &gt; W_n\)</span>, then <span class="math inline">\(W_1\)</span> gets her first choice, <span class="math inline">\(W_2\)</span> her best choice that isn't chosen by <span class="math inline">\(W_1\)</span>, <span class="math inline">\(W_3\)</span> her best choice that isn't chosen by previous two, and so on.</p>
+<li><p>If all men has the same preference say <span class="math inline">\(W_1 &gt; W_2 &gt; \ldots &gt; W_n\)</span>, then <span class="math inline">\(W_1\)</span> gets her first choice, <span class="math inline">\(W_2\)</span> her best choice that isn’t chosen by <span class="math inline">\(W_1\)</span>, <span class="math inline">\(W_3\)</span> her best choice that isn’t chosen by previous two, and so on.</p>
 <table>
 <thead>
 <tr class="header">
-<th align="center">Men</th>
-<th align="center"></th>
+<th style="text-align: center;">Men</th>
+<th style="text-align: center;"></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><span class="math inline">\(M_1\)</span></td>
-<td align="center"><span class="math inline">\(P: W_1 &gt; \ldots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(M_1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(P: W_1 &gt; \ldots\)</span></td>
 </tr>
 <tr class="even">
-<td align="center"><span class="math inline">\(M_2\)</span></td>
-<td align="center"><span class="math inline">\(P\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(M_2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(P\)</span></td>
 </tr>
 <tr class="odd">
-<td align="center"><span class="math inline">\(\vdots\)</span></td>
-<td align="center"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
 </tr>
 <tr class="even">
-<td align="center"><span class="math inline">\(M_n\)</span></td>
-<td align="center"><span class="math inline">\(P\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(M_n\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(P\)</span></td>
 </tr>
 </tbody>
 </table></li>
 </ul>
-<h2 id="the-roommates-problem">The Roommates' Problem</h2>
+<h2 id="the-roommates-problem">The Roommates’ Problem</h2>
 <p>If we remove gender from the stable marriage problem, then we have the roommates problem. For <span class="math inline">\(n\)</span> even number of people each person has a preference list of size <span class="math inline">\(n-1\)</span>.</p>
 <ul>
 <li><p>Unfortunately this problem does not always have a stable pairing. For example,</p>
 <table>
 <tbody>
 <tr class="odd">
-<td align="center"><span class="math inline">\(A\)</span></td>
-<td align="center"><span class="math inline">\(B&gt;C&gt;D\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(A\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(B&gt;C&gt;D\)</span></td>
 </tr>
 <tr class="even">
-<td align="center"><span class="math inline">\(B\)</span></td>
-<td align="center"><span class="math inline">\(C&gt;A&gt;D\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(B\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(C&gt;A&gt;D\)</span></td>
 </tr>
 <tr class="odd">
-<td align="center"><span class="math inline">\(C\)</span></td>
-<td align="center"><span class="math inline">\(A&gt;B&gt;D\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(C\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(A&gt;B&gt;D\)</span></td>
 </tr>
 <tr class="even">
-<td align="center"><span class="math inline">\(D\)</span></td>
-<td align="center">Any</td>
+<td style="text-align: center;"><span class="math inline">\(D\)</span></td>
+<td style="text-align: center;">Any</td>
 </tr>
 </tbody>
 </table></li>

@@ -1,6 +1,6 @@
 <h2 id="bijection">Bijection</h2>
 <p>Two sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> have the same size if there exists a function <span class="math inline">\(f : A \rightarrow B\)</span> is a bijection. A function is bijection if and only if:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><p><span class="math inline">\(f\)</span> is injective (one to one)</p>
 <p><span class="math display">\[ a_1 \neq a_2 \implies f(a_1) \neq f(a_2) \qquad (\forall a_1,a_2 \in A) \]</span> <span class="math display">\[ \abs{A} \le \abs{B} \]</span></p></li>
 <li><p><span class="math inline">\(f\)</span> is surjective</p>
@@ -11,7 +11,7 @@
 <li>In an infinite set even if <span class="math inline">\(A \subset B\)</span> the cardinality <span class="math inline">\(\abs{A} = \abs{B}\)</span> as long as there exists a bijective function between them.</li>
 </ul>
 <h3 id="proving-bijections">Proving Bijections</h3>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><strong>Find a identity mapping</strong> <span class="math display">\[ f(a_i) = b_i \]</span></li>
 <li><strong>Find an offset mapping</strong> <span class="math display">\[ f(a_{i} = b_{i+1}) \]</span></li>
 <li><strong>Find an alternating mapping</strong> <span class="math display">\[ f(a_{i}) = \begin{cases} b_\text{odd} &amp; i\text{ is odd}\\ b_\text{even} &amp; i\text{ is even} \end{cases} \]</span></li>
@@ -23,13 +23,13 @@
 <p>A set is <strong>countable</strong> if there exists a bijetion between <span class="math inline">\(S\)</span> and <span class="math inline">\(\mathbb N\)</span> or some subset of <span class="math inline">\(\mathbb N\)</span>. Equivalently, a set is <strong>countable</strong> if there exists an injection between <span class="math inline">\(S\)</span> and <span class="math inline">\(\mathbb N\)</span> (an onto relationship for <span class="math inline">\(f: S \to A\)</span> for <span class="math inline">\(A \subseteq N\)</span>). This is simply denoted as,</p>
 <p><span class="math display">\[ S \longrightarrow N \implies |S| \le |N| \]</span></p>
 <p>The following set are countables:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Natural numbers <span class="math inline">\(\mathbb N\)</span></li>
 <li>Rational numbers <span class="math inline">\(\mathbb Q\)</span></li>
 <li>A string of <span class="math inline">\(n\)</span> radix <span class="math inline">\(\set{0,1,2,\ldots,n-1}^*\)</span></li>
 </ol>
 <p>The following set are not countable:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Real numbers <span class="math inline">\(\mathbb R\)</span></li>
 <li>The power set of the natural numbers <span class="math inline">\(\mathcal P(\mathbb N)\)</span></li>
 </ol>
@@ -45,7 +45,7 @@
 \end{gather*}
 \]</span></p>
 <h3 id="binary-strings">Binary Strings</h3>
-<p>Let's start out with considering a 2-radix string (i.e., binary string). We may denote all possible binary string as the set,</p>
+<p>Let’s start out with considering a 2-radix string (i.e., binary string). We may denote all possible binary string as the set,</p>
 <p><span class="math display">\[ \set{0,1}^* : \emptyset, 0, 1, 00, 01, 10, 11, \ldots \]</span></p>
 <ul>
 <li>Notice that <span class="math inline">\(0\)</span> and <span class="math inline">\(00\)</span> are not equal (even thought they represent the integer <span class="math inline">\(0\)</span> in binary).</li>
@@ -57,31 +57,31 @@
 <p><span class="math display">\[ 1012~~102~~1112~~2~~1002~~110 \]</span></p>
 <p>With this we can prove that the set of all integer coefficient polynomials are countable.</p></li>
 </ul>
-<h3 id="uncountability-by-cantors-diagonalization">Uncountability by Cantor's Diagonalization</h3>
+<h3 id="uncountability-by-cantors-diagonalization">Uncountability by Cantor’s Diagonalization</h3>
 <p>A set <span class="math inline">\(S\)</span> is uncountable if the diagonal of the row sets <span class="math inline">\(f(1), f(2), f(3), \ldots, f(n)\)</span> for <span class="math inline">\(f: S \rightarrow \mathbb N\)</span> generates another row set not in <span class="math inline">\(f\)</span> then the set is not countable.</p>
 <ul>
 <li><p><strong><span class="math inline">\(\mathbb R\)</span> is not countable</strong></p>
-<p>We continue to prove this by showing that that interval <span class="math inline">\(\mathbb R[0,1]\)</span> is not countable. Using Cantor's theorem, we see that <span class="math inline">\(\mathbb R \rightarrow \mathbb N\)</span> now we can test on <span class="math inline">\(\mathbb N \rightarrow \mathbb R\)</span></p>
-<p>To do this, let's assume for contradiction that the interval is countable <span class="math inline">\(N \rightarrow \mathbb R [0,1]\)</span>. That means for every <span class="math inline">\(n \in \mathbb N\)</span> <span class="math inline">\(f\)</span> is a bijection function that maps to every real number denoted as <span class="math inline">\(0.d_1d_2d_3\ldots\)</span>,</p>
+<p>We continue to prove this by showing that that interval <span class="math inline">\(\mathbb R[0,1]\)</span> is not countable. Using Cantor’s theorem, we see that <span class="math inline">\(\mathbb R \rightarrow \mathbb N\)</span> now we can test on <span class="math inline">\(\mathbb N \rightarrow \mathbb R\)</span></p>
+<p>To do this, let’s assume for contradiction that the interval is countable <span class="math inline">\(N \rightarrow \mathbb R [0,1]\)</span>. That means for every <span class="math inline">\(n \in \mathbb N\)</span> <span class="math inline">\(f\)</span> is a bijection function that maps to every real number denoted as <span class="math inline">\(0.d_1d_2d_3\ldots\)</span>,</p>
 <p><span class="math display">\[
-\begin{matrix}
-f(0) = 0.&amp;\boxed{9} &amp;8  &amp;7  &amp;\ldots\\
-f(1) = 0.&amp;8   &amp;\boxed{7}  &amp;6    &amp;\ldots\\
-f(2) = 0.&amp;7 &amp;6    &amp;\boxed{5} &amp;\ldots\\
-\vdots &amp; \vdots
-\end{matrix}
-\]</span></p>
+  \begin{matrix}
+  f(0) = 0.&amp;\boxed{9} &amp;8  &amp;7  &amp;\ldots\\
+  f(1) = 0.&amp;8   &amp;\boxed{7}  &amp;6    &amp;\ldots\\
+  f(2) = 0.&amp;7 &amp;6    &amp;\boxed{5} &amp;\ldots\\
+  \vdots &amp; \vdots
+  \end{matrix}
+  \]</span></p>
 <p>Let the diagonal be another decimal number <span class="math inline">\(r=0.975\ldots\)</span> and take each digit <span class="math inline">\(d+2 \bmod 10\)</span> such that <span class="math inline">\(s=0.197\ldots\)</span></p>
 <p>We know for sure that <span class="math inline">\(s\)</span> does not exist in the table since every digit differs from each row. However, this contradicts <span class="math inline">\(\mathbb N \rightarrow \mathbb R\)</span> thus <span class="math inline">\(\mathbb R\)</span> is not countable.</p></li>
 <li><p><strong>No power set are countable</strong> We prove this by proving that <span class="math inline">\(\mathscr{P}(\mathbb N)\)</span> is not countable. We do this by contradiction assuming there exists an injection from <span class="math inline">\(N \rightarrow \mathscr{P}(\mathbb N)\)</span>. We may denote all power set as a binary string with the mapping bijective function <span class="math inline">\(f\)</span>. Let the <span class="math inline">\(i\)</span>th position of the string denote each natural number. Let <span class="math inline">\(1\)</span> denote that the natural number is present in the set and <span class="math inline">\(0\)</span> means not.</p>
 <p><span class="math display">\[
-\begin{matrix}
-           &amp;0   &amp;1   &amp;2   &amp;\ldots\\
-    f(0)   &amp;\boxed 0   &amp;0   &amp;0   &amp;\ldots\\
-    f(1)   &amp;1   &amp;\boxed 0   &amp;0   &amp;\ldots\\
-    f(2)   &amp;1   &amp;1   &amp;\boxed 0   &amp;\ldots\\
-    \vdots  &amp;&amp;\vdots
-\end{matrix}
-\]</span></p>
-<p>Flipping every bit along the diagonal we get the binary string <span class="math inline">\(b\)</span>. <span class="math inline">\(b\)</span> should be part of the power set however this isn't possible since every row should be different from <span class="math inline">\(b\)</span>. This contradiction shows that <span class="math inline">\(\mathscr P (\mathbb N)\)</span> is not countable.</p></li>
+  \begin{matrix}
+             &amp;0   &amp;1   &amp;2   &amp;\ldots\\
+      f(0)   &amp;\boxed 0   &amp;0   &amp;0   &amp;\ldots\\
+      f(1)   &amp;1   &amp;\boxed 0   &amp;0   &amp;\ldots\\
+      f(2)   &amp;1   &amp;1   &amp;\boxed 0   &amp;\ldots\\
+      \vdots  &amp;&amp;\vdots
+  \end{matrix}
+  \]</span></p>
+<p>Flipping every bit along the diagonal we get the binary string <span class="math inline">\(b\)</span>. <span class="math inline">\(b\)</span> should be part of the power set however this isn’t possible since every row should be different from <span class="math inline">\(b\)</span>. This contradiction shows that <span class="math inline">\(\mathscr P (\mathbb N)\)</span> is not countable.</p></li>
 </ul>

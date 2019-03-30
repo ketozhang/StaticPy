@@ -10,22 +10,22 @@
 <p><span class="math display">\[ p(x) = c(x-\lambda_1)\cdots(x-\lambda_d) \]</span></p></li>
 <li><p><strong>Uniqueness</strong>: A set of points with unique <span class="math inline">\(x_i\)</span>,</p>
 <p><span class="math display">\[
-\begin{gather*}
-    \set{(x_i,y_i) | f(x_i) = y_i, ~ \text{unique } x_i}\\
-    \abs{(x_i,y_i)} = d+1
-\end{gather*}
-\]</span></p>
+  \begin{gather*}
+      \set{(x_i,y_i) | f(x_i) = y_i, ~ \text{unique } x_i}\\
+      \abs{(x_i,y_i)} = d+1
+  \end{gather*}
+  \]</span></p>
 <p>Uniquely describes a polynomial of degree <span class="math inline">\(d\)</span></p></li>
 </ul>
 <h2 id="lagrange-interpolation">Lagrange Interpolation</h2>
-<p>The second property of the polynomial can be interpreted as a set of pair of values where the <span class="math inline">\(x\)</span>'s are unique of size <span class="math inline">\(d+1\)</span> can always be described by a polynomial of degree <span class="math inline">\(d\)</span>. We can construct such polynomial by Lagrange interpolation:</p>
+<p>The second property of the polynomial can be interpreted as a set of pair of values where the <span class="math inline">\(x\)</span>’s are unique of size <span class="math inline">\(d+1\)</span> can always be described by a polynomial of degree <span class="math inline">\(d\)</span>. We can construct such polynomial by Lagrange interpolation:</p>
 <h3 id="general-case">General Case</h3>
-<p>The general case of Lagrange interpolation is similar let's once again define,</p>
+<p>The general case of Lagrange interpolation is similar let’s once again define,</p>
 <p><span class="math display">\[ \Delta_i = \frac{\prod_{j\neq i}(x-x_j)}{\prod_{j \neq i} (x_i - x_j)} \]</span> <span class="math display">\[ \Delta_i(x) = \begin{cases} y_i~, &amp; x = x_i \\ 0~, &amp; x = x_{j\neq i} \\ \text{arb.}~, &amp; \text{otherwise} \end{cases}\]</span></p>
 <p>The polynomial interpolation <span class="math inline">\(p (x)\)</span> is then,</p>
 <p><span class="math display">\[\hat p(x) = \sum_{i=1}^{d+1} y_i \Delta_i(x) \]</span></p>
 <h2 id="coefficient-interpolations">Coefficient Interpolations</h2>
-<p>Lagrange interpolation may be a pain so another method is to determine the <span class="math inline">\(x\)</span>'s of <span class="math inline">\(P(x)\)</span> as a linear system of equations. Given that we have <span class="math inline">\(d+1\)</span> points (<span class="math inline">\(\boldsymbol x\)</span>, <span class="math inline">\(\boldsymbol y\)</span>) we can construct the matrix equation,</p>
+<p>Lagrange interpolation may be a pain so another method is to determine the <span class="math inline">\(x\)</span>’s of <span class="math inline">\(P(x)\)</span> as a linear system of equations. Given that we have <span class="math inline">\(d+1\)</span> points (<span class="math inline">\(\boldsymbol x\)</span>, <span class="math inline">\(\boldsymbol y\)</span>) we can construct the matrix equation,</p>
 <p><span class="math display">\[\begin{gather*}
     P(\boldsymbol x) =\boldsymbol y\\
     \big\Downarrow \\
@@ -52,7 +52,7 @@
 <p>The criteria for secret sharing is:</p>
 <p>There are <span class="math inline">\(n\)</span> generals to share a secret <span class="math inline">\(s \pmod p\)</span> (for <span class="math inline">\(p\)</span> is a large prime). If there are <span class="math inline">\(k\)</span> generals then the secret can be revealed otherwise not.</p>
 <p>To do so:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Construct a random polynomial <span class="math inline">\(p(x) \pmod p\)</span> of degree <span class="math inline">\(d = k-1\)</span> such that <span class="math inline">\(p(0) = s\)</span></li>
 <li>Give each general the value <span class="math inline">\(p(i)\)</span> where <span class="math inline">\(1 \le i \le k\)</span></li>
 <li>If at least <span class="math inline">\(k\)</span> generals come together, then by Lagrange interpolation <span class="math inline">\(p(x)\)</span> thus <span class="math inline">\(s=p(0)\)</span> can be revealed.</li>

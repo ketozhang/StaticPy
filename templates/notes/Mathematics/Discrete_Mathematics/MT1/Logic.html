@@ -12,14 +12,14 @@
     \]</span></p>
 <dl>
 <dt><strong>Implications</strong></dt>
-<dd><p>&quot;<span class="math inline">\(P\)</span> implies <span class="math inline">\(Q\)</span>&quot; is the same as &quot;if <span class="math inline">\(P\)</span>, then <span class="math inline">\(Q\)</span>&quot; and is denoted as,</p>
+<dd><p>“<span class="math inline">\(P\)</span> implies <span class="math inline">\(Q\)</span>” is the same as “if <span class="math inline">\(P\)</span>, then <span class="math inline">\(Q\)</span>” and is denoted as,</p>
 <p><span class="math display">\[
 P \implies Q \equiv \neg P \lor Q
 \]</span></p>
 <ul>
 <li><p>An implication is only false if <span class="math inline">\(Q\)</span> is false and <span class="math inline">\(P\)</span> is true.</p></li>
 <li><p>If <span class="math inline">\(P\)</span> is false, then the implication is always true.</p></li>
-<li><p>If <span class="math inline">\(P \implies Q\)</span> and <span class="math inline">\(Q \implies P\)</span> then this means &quot;<span class="math inline">\(P\)</span> if and only if <span class="math inline">\(Q\)</span>&quot; in notation,</p>
+<li><p>If <span class="math inline">\(P \implies Q\)</span> and <span class="math inline">\(Q \implies P\)</span> then this means “<span class="math inline">\(P\)</span> if and only if <span class="math inline">\(Q\)</span>” in notation,</p>
 <p><span class="math display">\[P \iff Q\]</span></p>
 <p>The advantage of IFF is that if <span class="math inline">\(P\)</span> then it must be that <span class="math inline">\(Q\)</span> is true.</p></li>
 </ul>
@@ -30,29 +30,29 @@ P \implies Q \equiv \neg P \lor Q
 <tr class="header">
 <th><span class="math inline">\(P\)</span></th>
 <th><span class="math inline">\(Q\)</span></th>
-<th align="center"><span class="math inline">\(P\implies Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P\implies Q\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>T</td>
 <td>T</td>
-<td align="center">T</td>
+<td style="text-align: center;">T</td>
 </tr>
 <tr class="even">
 <td>T</td>
 <td>F</td>
-<td align="center">F</td>
+<td style="text-align: center;">F</td>
 </tr>
 <tr class="odd">
 <td>F</td>
 <td>T</td>
-<td align="center">T</td>
+<td style="text-align: center;">T</td>
 </tr>
 <tr class="even">
 <td>F</td>
 <td>F</td>
-<td align="center">T</td>
+<td style="text-align: center;">T</td>
 </tr>
 </tbody>
 </table>
@@ -84,7 +84,7 @@ P \implies Q \equiv \neg P \lor Q
 <h2 id="universal-and-existential-quantifiers">Universal and Existential Quantifiers</h2>
 <dl>
 <dt><strong>For all</strong></dt>
-<dd>The symbol <span class="math inline">\(\forall\)</span> denotes the statement &quot;for all <span class="math inline">\(\ldots\)</span>&quot;
+<dd>The symbol <span class="math inline">\(\forall\)</span> denotes the statement “for all <span class="math inline">\(\ldots\)</span>”
 </dd>
 </dl>
 <p>A full statement with a logical statement <span class="math inline">\(P\)</span> is used as so:</p>
@@ -94,11 +94,11 @@ P \implies Q \equiv \neg P \lor Q
 <p>This means <span class="math inline">\(``\)</span>For all $ x P&quot;$ where $ x$ is often some set</p>
 <dl>
 <dt><strong>There exists</strong></dt>
-<dd>The sybmol <span class="math inline">\(\exists\)</span> denotes the statement &quot;There exists <span class="math inline">\(\ldots\)</span>&quot;.
+<dd>The sybmol <span class="math inline">\(\exists\)</span> denotes the statement “There exists <span class="math inline">\(\ldots\)</span>”.
 </dd>
 </dl>
 <p>The relationship between <span class="math inline">\(\forall\)</span> and <span class="math inline">\(\exists\)</span> statement is given by a negation relationship,</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><p>If there exists <span class="math inline">\(x\)</span> where <span class="math inline">\(P(x)\)</span> is false, then not all <span class="math inline">\(x\)</span> makes <span class="math inline">\(P(x)\)</span> true <span class="math display">\[
 \neg(\forall x P( x)) \equiv \exists x \neg P( x)\\
 \]</span></p></li>
@@ -106,22 +106,22 @@ P \implies Q \equiv \neg P \lor Q
 \neg(\exists x P( x)) \equiv \forall x \neg P( x)
 \]</span></p></li>
 </ol>
-<h2 id="de-morgans-laws">De Morgan's Laws</h2>
-<ol style="list-style-type: decimal">
-<li><p>If &quot;<span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span>&quot; is false then &quot;<span class="math inline">\(P\)</span> is false or <span class="math inline">\(Q\)</span> is false&quot;</p>
+<h2 id="de-morgans-laws">De Morgan’s Laws</h2>
+<ol type="1">
+<li><p>If “<span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span>” is false then “<span class="math inline">\(P\)</span> is false or <span class="math inline">\(Q\)</span> is false”</p>
 <p><span class="math display">\[
-\neg (P \land Q) \equiv (\neg P \lor \neg Q)
-\]</span></p></li>
-<li><p>If &quot;<span class="math inline">\(P\)</span> or <span class="math inline">\(Q\)</span>&quot; is false then &quot;<span class="math inline">\(P\)</span> is false and <span class="math inline">\(Q\)</span> is false&quot;</p>
+ \neg (P \land Q) \equiv (\neg P \lor \neg Q)
+ \]</span></p></li>
+<li><p>If “<span class="math inline">\(P\)</span> or <span class="math inline">\(Q\)</span>” is false then “<span class="math inline">\(P\)</span> is false and <span class="math inline">\(Q\)</span> is false”</p>
 <p><span class="math display">\[
-\neg (P \lor Q) \equiv (\neg P \land \neg Q)
-\]</span></p></li>
-<li><p>If &quot;for all <span class="math inline">\(x\)</span>, <span class="math inline">\(P(x)\)</span> is false&quot; then &quot;there must exist an <span class="math inline">\(x\)</span> that makes <span class="math inline">\(P(x)\)</span> false&quot;:</p>
+ \neg (P \lor Q) \equiv (\neg P \land \neg Q)
+ \]</span></p></li>
+<li><p>If “for all <span class="math inline">\(x\)</span>, <span class="math inline">\(P(x)\)</span> is false” then “there must exist an <span class="math inline">\(x\)</span> that makes <span class="math inline">\(P(x)\)</span> false”:</p>
 <p><span class="math display">\[\neg(\forall x P(x)) \equiv \exists x (\neg P (x))\]</span></p></li>
-<li><p>If &quot;there does not exist an <span class="math inline">\(x\)</span> that <span class="math inline">\(P(x)\)</span> is true&quot; then &quot;for all <span class="math inline">\(x\)</span>, <span class="math inline">\(P(x)\)</span> is false&quot;</p>
+<li><p>If “there does not exist an <span class="math inline">\(x\)</span> that <span class="math inline">\(P(x)\)</span> is true” then “for all <span class="math inline">\(x\)</span>, <span class="math inline">\(P(x)\)</span> is false”</p>
 <p><span class="math display">\[\neg(\exists x P(x)) \equiv \forall x (\neg P(x))\]</span></p></li>
 </ol>
-<p>The De Morgan's laws can be summarize to fully describe the negation operator <span class="math inline">\(\neg\)</span> such that:</p>
+<p>The De Morgan’s laws can be summarize to fully describe the negation operator <span class="math inline">\(\neg\)</span> such that:</p>
 <p><span class="math display">\[
 \begin{align*}
     \neg \land \equiv \lor\\
@@ -167,7 +167,7 @@ P \implies Q \equiv \neg P \lor Q
 </table></li>
 <li><p>Implications are not as intuitive as one may think. Since implication is only false if the then statement is false while the if statment is true.</p>
 <p><span class="math display">\[ P \implies Q \equiv \lnot P \lor Q \]</span></p></li>
-<li><p>De Morgan's Law is the property of negating a logical statement. It can be summarized to:</p></li>
+<li><p>De Morgan’s Law is the property of negating a logical statement. It can be summarized to:</p></li>
 </ul>
 <p><span class="math display">\[
 \begin{gather*}

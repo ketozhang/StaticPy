@@ -13,14 +13,12 @@ build_path: 'docs/' # Use `docs/` for GitHub Pages compatibility.
 templates_path: 'templates/'
 static_path: 'static/'
 
+home:
+  template: 'main.html'
+  frontpage: [
+    '/posts/python-simple-package-structure.html'
+  ]
 contexts:
-  home:
-    source_path: '/'
-    url: '/'
-    template: 'main.html'
-    frontpage: [
-      '/posts/python-simple-package-structure.html'
-    ]
   notes:
     source_path: 'notes/'
     url: '/notes'

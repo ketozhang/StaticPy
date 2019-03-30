@@ -10,9 +10,11 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="{{script_root}}{{ url_for('static', filename='css/base.css')}}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <body>
-    {% block content %}{% endblock %}
+    {% block content %}
+    {% endblock %}
 
     <!-- Scripts -->
 
