@@ -14,6 +14,13 @@ templates_path: 'templates/'
 static_path: 'static/'
 
 contexts:
+  home:
+    source_path: '/'
+    url: '/'
+    template: 'main.html'
+    frontpage: [
+      '/posts/python-simple-package-structure.html'
+    ]
   notes:
     source_path: 'notes/'
     url: '/notes'
@@ -26,4 +33,4 @@ contexts:
 links:
   linkedin: 'https://www.linkedin.com/'
   github: 'https://www.github.com/'
-  email: 'https://www.gmail.com/'
+  email: 'first.last@domain.com'

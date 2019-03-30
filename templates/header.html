@@ -1,22 +1,25 @@
 <header class="flex-md-row flex-column">
     <div class="container">
-        <div class="pt-5 text-center"><a class="brand" href="/">Keto</a></div>
+        <div class="pt-5 text-center"><a class="brand" href="{{root_url}}">Keto</a></div>
         <nav class="navbar navbar-expand navbar-light">
             <div class="d-flex mx-auto">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link active" href="/">Home</a>
+                    <li class="nav-item"><a class="nav-link active" href="{{root_url}}">Home</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="/posts">Posts</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/notes">Notes</a>
+                    <li class="nav-item"><a class="nav-link" href="{{script_root}}/posts">Posts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{script_root}}/notes">Notes</a>
                     </li>
                 </ul>
             </div>
         </nav>
         <div class="mt-1">
             <ul class="nav justify-content-center">
-                <li class="nav-item mx-2"><a href="{{links['email']}}"><img src="https://img.icons8.com/material/24/000000/filled-message.png"></a></li>
-                <li class="nav-item mx-2"><a href="{{links['linkedin']}}"><img src="https://img.icons8.com/ios-glyphs/24/000000/linkedin.png"></a></li>
-                <li class="nav-item mx-2"><a href="{{links['github']}}"><img src="https://img.icons8.com/ios-glyphs/24/000000/github.png"></a></li>
+                <li class="nav-item mx-2"><a href="mailto:{{links['email']}}" target="_blank"><img class="social-link"
+                            src="https://img.icons8.com/material/24/000000/filled-message.png"></a></li>
+                <li class="nav-item mx-2"><a href="{{links['linkedin']}}" target="_blank"><img class="social-link"
+                            src="https://img.icons8.com/ios-glyphs/24/000000/linkedin.png"></a></li>
+                <li class="nav-item mx-2"><a href="{{links['github']}}" target="_blank"><img class="social-link"
+                            src="https://img.icons8.com/ios-glyphs/24/000000/github.png"></a></li>
             </ul>
         </div>
         <hr class="gradient">

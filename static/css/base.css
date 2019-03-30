@@ -6,6 +6,26 @@ header .nav-item {
   font-weight: bold;
 }
 
+.navbar-light .navbar-nav .nav-link.active::after {
+  content: "";
+  display: block;
+  margin: 0 auto;
+  padding-top: 5px;
+  border-bottom: 2px solid #FDB515;
+  width: 90%;
+  color: black;
+}
+
+.navbar-light .navbar-nav .nav-link:hover::after {
+  content: "";
+  display: block;
+  margin: 0 auto;
+  padding-top: 5px;
+  border-bottom: 2px solid rgba(253, 181, 21, 0.7);
+  width: 90%;
+  color: black;
+}
+
 body {
   color: #616161;
   font-family: 'Open Sans', sans-serif;
@@ -32,20 +52,19 @@ h1.title {
 a.brand {
   font-size: 36px;
   text-decoration: none;
-  color: black
+  color: black;
 }
 
 .navbar-light .navbar-nav .nav-link {
   color: black;
 }
 
-.navbar-light .navbar-nav .nav-link.active {
-  border-bottom: 2px solid #FDB515;
-  color: black;
+hr.gradient {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0));
 }
 
-hr.gradient {
-    border: 0;
-    height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0));
+img.social-link:hover {
+  opacity: 0.7;
 }

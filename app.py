@@ -17,7 +17,6 @@ config = get_config()
 ROOT_URL = config['site_url']
 # BUILD_PATH = Path(config['build_path']).resolve()
 TEMPLATES_PATH = Path(config['templates_path']).resolve()
-ASSETS_PATH = PROJECT_PATH / 'assets'
 
 app = Flask(__name__)
 log = app.logger
@@ -26,9 +25,10 @@ log = app.logger
 @app.context_processor
 def global_var():
     var = dict(
-        root_url=ROOT_URL,
+        root_url=ROOT_URL if ROOT_URL else '/',
         links=config['links']
         )
+    print(var)
     return var
 
 
@@ -100,7 +100,7 @@ def build_all():
 def get_all_notes():
     """Retrieve notes path relative to specified argument."""
     notes = TEMPLATES_PATH.glob('*/**/*.html')
-    notes = [str(note.relative_to(TEMPLATES_PATH)) for note in notes]  # Ignores files at first level
+    notes = [str(note.relative_to(TEMPLATES_PATH).as_posix()) for note in notes]  # Ignores files at first level
     return notes
 
 ############
@@ -140,8 +140,9 @@ def get_note(context, note='index.html'):
     # Resolve relative to template path
     # The note should now point to the actual HTML file while its served at /<path:note>
     # This decision was made to allow users to use any subdirectory url not just "domain.com/note"
-    note = note.relative_to(TEMPLATES_PATH)
+    note = note.relative_to(TEMPLATES_PATH).as_posix()
     log.info(f"Rendering {note}")
+    print(f"Rendering {note}")
 
     context.update(dict(
         content_path=str(note),
