@@ -1,78 +1,98 @@
 {% extends "base.html" %}
 {% block content %}
-{% include 'header.html' %}
-<div class="container">
-    <div style="margin-top: 600px; margin-bottom: 600px"></div>
-    <div class="card mb-3">
-        <div class="row no-gutter">
-            <div class="col-3">
-                <img class="card-img" src="https://via.placeholder.com/460">
+{% include "header.html" %}
+<main>
+    <div class="container">
+        <div style="margin-top: 600px; margin-bottom: 600px"></div>
+        <div class="card mb-3">
+            <div class="row no-gutter">
+                <div class="col-3">
+                    <img class="card-img" src="https://via.placeholder.com/460">
+                </div>
+                <div class="col">
+                    <div class="card-body">
+                        <h4 class="card-title mb-0">Title</h4>
+                        <small class="card-subtitle">2019-04-08</small>
+                        <p class="mt-2 card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In orci nisl,
+                            fermentum et felis in, pharetra scelerisque tellus. Sed tempor eros quis ipsum dapibus
+                            dignissim. Suspendisse posuere, odio sit amet ornare rhoncus, ex est tempus urna, ac
+                            consectetur
+                            ligula odio nec nisl. Mauris non lorem quis ligula blandit semper. Nullam sagittis, ante at
+                            cursus egestas, lorem sem euismod mauris, nec dignissim dolor est quis ipsum. Praesent
+                            facilisis
+                            turpis quis lacus sodales, ut ultrices arcu sodales. </p>
+                    </div>
+                </div>
             </div>
-            <div class="col">
-                <div class="card-body">
-                    <h4 class="card-title mb-0">Title</h4>
-                    <small class="card-subtitle">2019-04-08</small>
-                    <p class="mt-2 card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In orci nisl,
-                        fermentum et felis in, pharetra scelerisque tellus. Sed tempor eros quis ipsum dapibus
-                        dignissim. Suspendisse posuere, odio sit amet ornare rhoncus, ex est tempus urna, ac
-                        consectetur
-                        ligula odio nec nisl. Mauris non lorem quis ligula blandit semper. Nullam sagittis, ante at
-                        cursus egestas, lorem sem euismod mauris, nec dignissim dolor est quis ipsum. Praesent
-                        facilisis
-                        turpis quis lacus sodales, ut ultrices arcu sodales. </p>
+        </div>
+        <div class="card mb-3">
+            <div class="row no-gutter">
+                <div class="col">
+                    <div class="card-body">
+                        <h4 class="card-title mb-0">Title</h4>
+                        <small class="card-subtitle">2019-04-08</small>
+                        <p class="mt-2 card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In orci nisl,
+                            fermentum et felis in, pharetra scelerisque tellus. Sed tempor eros quis ipsum dapibus
+                            dignissim. Suspendisse posuere, odio sit amet ornare rhoncus, ex est tempus urna, ac
+                            consectetur
+                            ligula odio nec nisl. Mauris non lorem quis ligula blandit semper. Nullam sagittis, ante at
+                            cursus egestas, lorem sem euismod mauris, nec dignissim dolor est quis ipsum. Praesent
+                            facilisis
+                            turpis quis lacus sodales, ut ultrices arcu sodales. </p>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <img class="card-img" src="https://via.placeholder.com/460">
+                </div>
+            </div>
+        </div>
+        <div class="card mb-3">
+            <div class="row no-gutter">
+                <div class="col-3">
+                    <img class="card-img" src="https://via.placeholder.com/460">
+                </div>
+                <div class="col">
+                    <div class="card-body">
+                        <h4 class="card-title mb-0">Title</h4>
+                        <small class="card-subtitle">2019-04-08</small>
+                        <p class="mt-2 card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In orci nisl,
+                            fermentum et felis in, pharetra scelerisque tellus. Sed tempor eros quis ipsum dapibus
+                            dignissim. Suspendisse posuere, odio sit amet ornare rhoncus, ex est tempus urna, ac
+                            consectetur
+                            ligula odio nec nisl. Mauris non lorem quis ligula blandit semper. Nullam sagittis, ante at
+                            cursus egestas, lorem sem euismod mauris, nec dignissim dolor est quis ipsum. Praesent
+                            facilisis
+                            turpis quis lacus sodales, ut ultrices arcu sodales. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div id="siteMap">
+                    <div class="card">
+                        <div class="card-header" id="siteMapHeading">
+                            <button class="btn btn-block btn-link collapsed text-left" type="button"
+                                style="text-decoration: none;" data-toggle="collapse" data-target="#siteMapCollapse"
+                                aria-expanded="false" aria-controls="siteMapCollapse">
+                                Site Map
+                            </button>
+                        </div>
+                        <div id="siteMapCollapse" class="collapse show" aria-labelledby="siteMapHeading"
+                            data-parent="#siteMap">
+                            <div class="card-body">
+                                <ul>
+                                    {% for note in notes %}
+                                    <li><a href={{note}}>{{note}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="card mb-3">
-        <div class="row no-gutter">
-            <div class="col">
-                <div class="card-body">
-                    <h4 class="card-title mb-0">Title</h4>
-                    <small class="card-subtitle">2019-04-08</small>
-                    <p class="mt-2 card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In orci nisl,
-                        fermentum et felis in, pharetra scelerisque tellus. Sed tempor eros quis ipsum dapibus
-                        dignissim. Suspendisse posuere, odio sit amet ornare rhoncus, ex est tempus urna, ac
-                        consectetur
-                        ligula odio nec nisl. Mauris non lorem quis ligula blandit semper. Nullam sagittis, ante at
-                        cursus egestas, lorem sem euismod mauris, nec dignissim dolor est quis ipsum. Praesent
-                        facilisis
-                        turpis quis lacus sodales, ut ultrices arcu sodales. </p>
-                </div>
-            </div>
-            <div class="col-3">
-                <img class="card-img" src="https://via.placeholder.com/460">
-            </div>
-        </div>
-    </div>
-    <div class="card mb-3">
-        <div class="row no-gutter">
-            <div class="col-3">
-                <img class="card-img" src="https://via.placeholder.com/460">
-            </div>
-            <div class="col">
-                <div class="card-body">
-                    <h4 class="card-title mb-0">Title</h4>
-                    <small class="card-subtitle">2019-04-08</small>
-                    <p class="mt-2 card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In orci nisl,
-                        fermentum et felis in, pharetra scelerisque tellus. Sed tempor eros quis ipsum dapibus
-                        dignissim. Suspendisse posuere, odio sit amet ornare rhoncus, ex est tempus urna, ac
-                        consectetur
-                        ligula odio nec nisl. Mauris non lorem quis ligula blandit semper. Nullam sagittis, ante at
-                        cursus egestas, lorem sem euismod mauris, nec dignissim dolor est quis ipsum. Praesent
-                        facilisis
-                        turpis quis lacus sodales, ut ultrices arcu sodales. </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <h3>Site Map</h3>
-
-    <ul>
-        {% for note in notes %}
-        <li><a href={{note}}>{{note}}</a></li>
-        {% endfor %}
-    </ul>
-</div>
+</main>
+{% include "footer.html" %}
 {% endblock %}
