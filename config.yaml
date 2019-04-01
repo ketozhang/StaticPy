@@ -29,6 +29,7 @@ contexts:
     template: 'post.html'
 
 links:
-  linkedin: 'https://www.linkedin.com/'
-  github: 'https://www.github.com/'
-  email: 'first.last@domain.com'
+  cv: 'static/KetoZhangCV.pdf'
+  linkedin: 'https://www.linkedin.com/in/ketozhang/'
+  github: 'https://www.github.com/ketozhang'
+  email: 'keto.zhang@gmail.com'
