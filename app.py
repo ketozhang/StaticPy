@@ -24,7 +24,7 @@ log = app.logger
 
 @app.context_processor
 def global_var():
-    # TODO ROOT_URL best handled by a config parser 
+    # TODO ROOT_URL best handled by a config parser
     root_url = ROOT_URL if ROOT_URL else '/'
     if root_url[-1] != '/':
         root_url += '/'
@@ -32,7 +32,7 @@ def global_var():
     var = dict(
         root_url=root_url,
         links=config['links']
-        )
+    )
     return var
 
 
@@ -65,9 +65,10 @@ def build(context):
         output_path.rename(backup)
 
     output_path.mkdir()
-    try:  
+    try:
         # Convert Markdown/HTML notes to HTML
-        notes = list(source_path.glob('**/*.md')) + list(source_path.glob('**/*.html'))
+        notes = list(source_path.glob('**/*.md')) + \
+            list(source_path.glob('**/*.html'))
         for note in notes:
             parent = note.relative_to(source_path).parent  # /path/to/note/
 
@@ -82,11 +83,10 @@ def build(context):
             else:
                 copyfile(str(note), str(outputfile))
             assert outputfile.exists(), "The output file was not created."
-        
+
         # Copy over any raw HTML files
         for note in source_path.glob('**/*.html'):
             parent = note.relative_to(source_path).parent
-
 
         # Success, remove backup
         if backup.exists():
@@ -106,13 +106,14 @@ def build_all():
 def get_all_notes():
     """Retrieve notes path relative to specified argument."""
     notes = TEMPLATES_PATH.glob('*/**/*.html')
-    notes = [str(note.relative_to(TEMPLATES_PATH).as_posix()) for note in notes]  # Ignores files at first level
+    notes = [str(note.relative_to(TEMPLATES_PATH).as_posix())
+             for note in notes]  # Ignores files at first level
     return notes
+
 
 ############
 # MAIN
 ############
-
 
 @app.route('/')
 def main():
@@ -127,7 +128,8 @@ def get_note(context, note='index.html'):
     try:
         context = config['contexts'][context]
     except KeyError as e:
-        log.error(str(e) + f', when attempting with args get_note({context}, {note}).')
+        log.error(
+            str(e) + f', when attempting with args get_note({context}, {note}).')
     source_path = PROJECT_PATH / context['source_path']
     output_path = TEMPLATES_PATH / context['source_path']
 
@@ -140,7 +142,7 @@ def get_note(context, note='index.html'):
         note = output_path / note
     if metadata.exists():
         metadata = frontmatter.load(metadata)
-    else: 
+    else:
         metadata = None
 
     # Resolve relative to template path
