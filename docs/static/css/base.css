@@ -41,6 +41,10 @@ pre, code {
   font-family: 'Source Code Pro', 'Courier New', Courier, monospace;
 }
 
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  line-height: 2.5;
+}
+
 h1 {
   color: black;
 }
@@ -67,4 +71,9 @@ hr.gradient {
 
 img.social-link:hover {
   opacity: 0.7;
+}
+
+.btn-link {
+  font-weight: inherit;
+  color: inherit;
 }
