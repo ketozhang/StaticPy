@@ -13,6 +13,8 @@ werkzeug = "*"
 python-frontmatter = "*"
 pyyaml = "*"
 e1839a8 = {editable = true,path = "."}
+pyscss = "*"
+flask-assets = "*"
 
 [requires]
 python_version = "3.7"

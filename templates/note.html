@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="note container-fluid">
+<div class="container-fluid" id="note">
     <div class="row">
         <div class="col-3 d-none d-lg-block"></div>
         <div class="col-sm-10 col-lg-7">
-            <h1 class="title">{{note['title']}}</h1>
+            <h1 class="title">{{frontmatter['title']}}</h1>
             {% include content_path %}
         </div>
         <div class="col-2 d-none d-md-block">

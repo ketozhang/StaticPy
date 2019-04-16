@@ -3,7 +3,7 @@ import sys
 import logging
 import frontmatter
 import pypandoc as pandoc
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, send_from_directory
 from pathlib import Path
 from shutil import rmtree, copyfile
 from src.config_handler import get_config
@@ -111,6 +111,28 @@ def get_all_notes():
     return notes
 
 
+def get_frontmatter(file_or_path):
+    """
+    Arguments
+    ---------
+    file_or_path : str or pathlib.Path
+        The path to the markdown file with frontmatter. 
+        Because frontmatter is loaded on request, the argument should be relative to project path.
+        If URL is given, the path is assumed relative to project path with ".md" extension.
+    """
+    if isinstance(file_or_path, str):
+        fpath = Path(file_or_path)
+    else:
+        fpath = file_or_path
+
+    if fpath.suffix == '':
+        fpath = fpath.with_suffix('.md')
+    if not fpath.is_absolute():
+        fpath = PROJECT_PATH / fpath
+
+    return frontmatter.load(fpath).metadata if fpath.exists() else None
+
+
 ############
 # MAIN
 ############
@@ -118,32 +140,37 @@ def get_all_notes():
 @app.route('/')
 def main():
     notes = get_all_notes()
-    context = dict(notes=notes)
+    posts = config['home']['posts']
+    posts_dict = {}
+    for i, post in enumerate(posts):
+        fm = get_frontmatter(post)
+        posts_dict[post] = fm
+    context = dict(
+        notes=notes,
+        posts=posts_dict
+    )
     return render_template('main.html', **context)
 
 
 @app.route(f'/<context>')
 @app.route(f'/<context>/<path:note>')
-def get_note(context, note='index.html'):
+def get_note(context, note='index'):
     try:
         context = config['contexts'][context]
     except KeyError as e:
         log.error(
             str(e) + f', when attempting with args get_note({context}, {note}).')
+    
+    print(context, note)
     source_path = PROJECT_PATH / context['source_path']
     output_path = TEMPLATES_PATH / context['source_path']
 
     # Get metadata and parse path
-    if Path(note).suffix != '.html':
-        metadata = source_path/(note + '.md')
-        note = output_path / (note + '.html')
-    else:
-        metadata = source_path/(note.replace('.html', '.md'))
-        note = output_path / note
-    if metadata.exists():
-        metadata = frontmatter.load(metadata)
-    else:
-        metadata = None
+    if Path(note).suffix == '.html':
+        note = str(Path(note).parent / Path(note).stem)
+
+    fm = get_frontmatter(source_path/(str(note) + '.md'))
+    note = output_path / (note + '.html')
 
     # Resolve relative to template path
     # The note should now point to the actual HTML file while its served at /<path:note>
@@ -154,14 +181,17 @@ def get_note(context, note='index.html'):
 
     context.update(dict(
         content_path=str(note),
-        note=metadata,
+        frontmatter=fm,
     ))
 
-    if metadata is None:
+    if fm is None:
         return render_template(str(note), **context)
     else:
         return render_template(context['template'], **context)
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('static', 'favicon.ico')
 
 if __name__ == '__main__':
     args = sys.argv[1:]

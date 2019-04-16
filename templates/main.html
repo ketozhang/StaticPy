@@ -6,21 +6,21 @@
     <!-- Main Showcase -->
     <div class="row my-5">
       <div class="col-md-4">
-        <h2>Heading</h2>
+        <h2 class="title">Heading</h2>
         <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
           condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
           Donec sed odio dui. </p>
         <p><a class="btn btn-warning" href="#" role="button">View details »</a></p>
       </div>
       <div class="col-md-4">
-        <h2>Heading</h2>
+        <h2 class="title">Heading</h2>
         <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
           condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
           Donec sed odio dui. </p>
         <p><a class="btn btn-warning" href="#" role="button">View details »</a></p>
       </div>
       <div class="col-md-4">
-        <h2>Heading</h2>
+        <h2 class="title">Heading</h2>
         <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta
           felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum
           massa justo sit amet risus.</p>
@@ -29,51 +29,22 @@
     </div>
 
     <!-- Blogpost Cards -->
+    {% for post_url, post in posts.items() %}
     <div class="card mb-3 box-shadow">
       <div class="row no-gutter">
         <div class="col-12 col-md-4">
-          <img class="card-img" src="https://via.placeholder.com/320x240">
+          <img class="card-img" src={{post['image']}}>
         </div>
         <div class="col">
           <div class="card-body">
-            <h4 class="card-title title mb-0  ">Title</h4>
+            <h4 class="card-title title mb-0  "><a href={{post_url}}>{{post['title']}}</a></h4>
             <p class="card-text"><small class="text-muted">Last updated 2019-04-08</small></p>
-            <p class="mt-2 card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum
-              rutrum sodales. Nullam mattis fermentum libero, non volutpat.</p>
+            <p class="mt-2 card-text">{{post['description']}}</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="card mb-3 box-shadow">
-      <div class="row no-gutter">
-        <div class="col-12 col-md-4">
-          <img class="card-img" src="https://via.placeholder.com/320x240">
-        </div>
-        <div class="col">
-          <div class="card-body">
-            <h4 class="card-title title mb-0  ">Title</h4>
-            <p class="card-text"><small class="text-muted">Last updated 2019-04-08</small></p>
-            <p class="mt-2 card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum
-              rutrum sodales. Nullam mattis fermentum libero, non volutpat.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card mb-3 box-shadow">
-      <div class="row no-gutter">
-        <div class="col-12 col-md-4">
-          <img class="card-img" src="https://via.placeholder.com/320x240">
-        </div>
-        <div class="col">
-          <div class="card-body">
-            <h4 class="card-title title mb-0  ">Title</h4>
-            <p class="card-text"><small class="text-muted">Last updated 2019-04-08</small></p>
-            <p class="mt-2 card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum
-              rutrum sodales. Nullam mattis fermentum libero, non volutpat.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    {% endfor %}
 
     <!-- Sitemap Collapsible -->
     <div class="row">
@@ -81,9 +52,8 @@
         <div id="siteMap">
           <div class="card">
             <div class="card-header" id="siteMapHeading">
-              <button class="btn btn-block btn-link collapsed text-left" type="button" style="text-decoration: none;"
-                data-toggle="collapse" data-target="#siteMapCollapse" aria-expanded="false"
-                aria-controls="siteMapCollapse">
+              <button class="btn btn-block btn-link collapsed text-left" type="button" data-toggle="collapse"
+                data-target="#siteMapCollapse" aria-expanded="false" aria-controls="siteMapCollapse">
                 Site Map
               </button>
             </div>

@@ -15,9 +15,12 @@ static_path: 'static/'
 
 home:
   template: 'main.html'
-  frontpage: [
-    '/posts/python-simple-package-structure.html'
+  posts: [
+    'posts/python-simple-package-structure',
+    'posts/markdown-examples',
+    'posts/mathjax-examples' 
   ]
+
 contexts:
   notes:
     source_path: 'notes/'

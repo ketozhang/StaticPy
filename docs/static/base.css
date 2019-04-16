@@ -12,7 +12,7 @@ header .nav-item {
   font-weight: bold;
 }
 
-.navbar-light .navbar-nav .nav-link.active::after {
+p .navbar-light .navbar-nav .nav-link.active::after {
   content: "";
   display: block;
   margin: 0 auto;
@@ -43,13 +43,19 @@ pre, code {
   font-family: 'Source Code Pro', 'Courier New', Courier, monospace;
 }
 
-.note, .post {
-  line-height: 2.5;
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
+  text-decoration: none;
 }
 
 .title {
   color: black;
   white-space: nowrap;
+  text-decoration: none;
 }
 
 a.brand {
@@ -81,8 +87,17 @@ img.social-link:hover {
 /* Buttons */
 
 .btn-link {
+  text-decoration: none;
   font-weight: inherit;
   color: inherit;
+}
+
+.btn-link:hover {
+  text-decoration: none;
+}
+
+.btn-warning {
+  background-color: #FDB515;
 }
 
 /* Card */
@@ -101,4 +116,10 @@ img.social-link:hover {
 
 .icon {
   height: 1em;
+}
+
+/* Ids */
+
+#note h1, #note h2, #note h3, #note h4, #note h5, #note h6, #post h1, #post h2, #post h3, #post h4, #post h5, #post h6 {
+  line-height: 2.5;
 }

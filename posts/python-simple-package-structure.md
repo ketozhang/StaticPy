@@ -1,7 +1,7 @@
 ---
 title: "Python Simple Package Structure"
 description: "Let me show you a simple workflow for structuring your package."
-date: 2019-04-08
+image: https://via.placeholder.com/320x240
 # toc: true
 ---
 

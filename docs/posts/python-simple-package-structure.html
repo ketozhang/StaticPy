@@ -14,7 +14,7 @@
         </nav>
         <div class="mt-1">
             <ul class="nav justify-content-center">
-                <li class="nav-item mx-2"><a href="static/KetoZhangCV.pdf" title="See my CV" target="_blank"><img src="https://img.icons8.com/material/24/000000/parse-resume.png"></a></li>
+                <li class="nav-item mx-2"><a href="static/KetoZhangCV.pdf" title="See my CV" target="_blank"><img src="https://img.icons8.com/material/24/0000 00/parse-resume.png"></a></li>
                 <li class="nav-item mx-2"><a href="mailto:keto.zhang@gmail.com" title="Email me" target="_blank"><img class="social-link"
                             src="https://img.icons8.com/material/24/000000/filled-message.png"></a></li>
                 <li class="nav-item mx-2"><a href="https://www.linkedin.com/in/ketozhang/" title="LinkedIn" target="_blank"><img class="social-link"
@@ -35,19 +35,22 @@
     <!-- yep Bootstrap time -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://ketozhang.github.io/notebook/static/css/base.css" rel="stylesheet">
+    <link href="https://ketozhang.github.io/notebook/static/base.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
     <link rel="shortcut icon" href="https://ketozhang.github.io/notebook/static/favicon.ico">
 </head>
 <body>
     
-<div class="post container-fluid">
+<div class="container" id="post">
     <div class="row">
-        <div class="col-3 d-none d-lg-block"></div>
-        <div class="col-sm-10 col-lg-7">
+        <!-- Content -->
+        <div class="col-10">
             <h1 class="title">Python Simple Package Structure</h1>
-            <small>2019-04-08</small>
-            <blockquote style="background-color:rgba(0, 0, 0, 0.1)">Let me show you a simple workflow for structuring your package.</blockquote>
+            <small></small>
+            <blockquote class="blockquote">Let me show you a simple workflow for structuring your package.</blockquote>
+            
+            <img class="mx-auto d-block" src=https://via.placeholder.com/320x240>
+            
             <div class="mb-3"></div>
             <h2 id="motivation">Motivation</h2>
 <p>Before we start a bit of motivation why I needed to write this when great guides like <a href="http://docs.python-guide.org/en/latest/">The Hitchhiker's Guide to Python</a> and <a href="http://python-packaging.readthedocs.io/en/latest/minimal.html">Minimal Structure</a> exist.</p>
@@ -272,6 +275,8 @@ pip install . <span class="co"># popular package management system often install
 <pre class="shell"><code>twine upload dist/*</code></pre>
 <p>If you get an error it's likely due to your package name being taken or you put your credential in wrong.</p>
         </div>
+
+        <!-- On This Page -->
         <div class="col-2 d-none d-md-block">
         </div>
     </div>
