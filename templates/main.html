@@ -5,41 +5,27 @@
   <div class="container">
     <!-- Main Showcase -->
     <div class="row my-5">
+      {% for project in projects %}
       <div class="col-md-4">
-        <h2 class="title">Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-          condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
-          Donec sed odio dui. </p>
-        <p><a class="btn btn-warning" href="#" role="button">View details »</a></p>
+        <h2 class="title">{{project['header']}}</h2>
+        <p>{{project['description']}}</p>
+        <p><a class="btn btn-warning" href="{{project['view_details']}}" role="button">View details »</a></p>
       </div>
-      <div class="col-md-4">
-        <h2 class="title">Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-          condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
-          Donec sed odio dui. </p>
-        <p><a class="btn btn-warning" href="#" role="button">View details »</a></p>
-      </div>
-      <div class="col-md-4">
-        <h2 class="title">Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta
-          felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum
-          massa justo sit amet risus.</p>
-        <p><a class="btn btn-warning" href="#" role="button">View details »</a></p>
-      </div>
+      {% endfor %}
     </div>
 
     <!-- Blogpost Cards -->
     {% for post_url, post in posts.items() %}
     <div class="card mb-3 box-shadow">
       <div class="row no-gutter">
-        <div class="col-12 col-md-4">
-          <img class="card-img" src={{post['image']}}>
+        <div class="col-md-5">
+          <a href={{post_url}}><img class="card-img" src={{post['image']}}></a>
         </div>
-        <div class="col">
+        <div class="col-md-7">
           <div class="card-body">
-            <h4 class="card-title title mb-0  "><a href={{post_url}}>{{post['title']}}</a></h4>
+            <h4 class="card-title mb-0  "><a href={{post_url}}>{{post['title']}}</a></h4>
             <p class="card-text"><small class="text-muted">Last updated 2019-04-08</small></p>
-            <p class="mt-2 card-text">{{post['description']}}</p>
+            <p class="mt-2 card-text limit-2-lines">{{post['description']}}</p>
           </div>
         </div>
       </div>
@@ -72,5 +58,4 @@
     </div>
   </div>
 </main>
-{% include "footer.html" %}
 {% endblock %}

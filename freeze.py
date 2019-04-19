@@ -2,7 +2,7 @@
 import sys
 import logging
 from flask_frozen import Freezer
-from app import app, build_all, config, log, get_all_notes, PROJECT_PATH
+from app import app, build_all, base_config, log, get_all_notes, PROJECT_PATH
 from shutil import rmtree
 freezer = Freezer(app)
 
@@ -28,7 +28,7 @@ def freeze():
     build_all()
 
     default_build_path = PROJECT_PATH / 'build'  # Default specified by Frozen-Flask
-    build_path = PROJECT_PATH / config['build_path']
+    build_path = PROJECT_PATH / base_config['build_path']
     backup = PROJECT_PATH / (build_path.name + '.bak')
 
     if build_path.exists():

@@ -1,3 +1,18 @@
+<!doctype html>
+<html lang='en'>
+<head>
+    <meta charset="UTF-8">
+    <title>Give Me a Name</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- yep Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://ketozhang.github.io/notebook/static/base.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
+    <link rel="shortcut icon" href="https://ketozhang.github.io/notebook/static/favicon.ico">
+</head>
+<body>
+    
 <header class="flex-md-row flex-column">
     <div class="container">
         <div class="pt-5 text-center"><a class="brand" href="https://ketozhang.github.io/notebook/">Keto</a></div>
@@ -25,34 +40,19 @@
         </div>
         <hr class="gradient">
     </div>
-</header><!doctype html>
-<html lang='en'>
-
-<head>
-    <meta charset="UTF-8">
-    <title>Give Me a Name</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- yep Bootstrap time -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://ketozhang.github.io/notebook/static/base.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
-    <link rel="shortcut icon" href="https://ketozhang.github.io/notebook/static/favicon.ico">
-</head>
-<body>
-    
+</header>
 <div class="container" id="post">
-    <div class="row">
-        <!-- Content -->
-        <div class="col-10">
-            <h1 class="title">Python Simple Package Structure</h1>
-            <small></small>
-            <blockquote class="blockquote">Let me show you a simple workflow for structuring your package.</blockquote>
-            
-            <img class="mx-auto d-block" src=https://via.placeholder.com/320x240>
-            
-            <div class="mb-3"></div>
-            <h2 id="motivation">Motivation</h2>
+    <!-- Content -->
+    <h1 class="title">Python Simple Package Structure</h1>
+    <small></small>
+    
+    <img class="mx-auto d-block" src=https://via.placeholder.com/320x240>
+    
+    <p class="description">Let me show you a simple workflow for structuring your package.</p>
+    <hr>
+    <hr>
+    <div class="mb-3"></div>
+    <h2 id="motivation">Motivation</h2>
 <p>Before we start a bit of motivation why I needed to write this when great guides like <a href="http://docs.python-guide.org/en/latest/">The Hitchhiker's Guide to Python</a> and <a href="http://python-packaging.readthedocs.io/en/latest/minimal.html">Minimal Structure</a> exist.</p>
 <p>The Hitchhiker's guide is a long read but a good read especially if you're wondering how you should <a href="http://docs.python-guide.org/en/latest/writing/structure/">structure your project</a>. Unfortunately the guide does not dwell on how you should code the preamble of your code (e.g., <code>from package import module</code>, <code>sys.path.append(...)</code> ) which is my next step was to consult the Minimal Structure. Unfortunately the Minimal Structure is too minimal ignoring the general case that your package may often have more than just one python file (excluding <code>__init__.py</code>). The preamble for greater than one python file is surprisingly a bit more complex than minimal structure.</p>
 <h2 id="module-vs-package">Module vs Package</h2>
@@ -274,12 +274,7 @@ pip install . <span class="co"># popular package management system often install
 <p>Finally we upload your package (everything inside <code>dist/</code>) to PyPI which will also check if your package name is taken (<code>python setup.py register</code> is deprecated):</p>
 <pre class="shell"><code>twine upload dist/*</code></pre>
 <p>If you get an error it's likely due to your package name being taken or you put your credential in wrong.</p>
-        </div>
-
-        <!-- On This Page -->
-        <div class="col-2 d-none d-md-block">
-        </div>
-    </div>
+    <!-- On This Page -->
 </div>
 
 
@@ -305,6 +300,11 @@ pip install . <span class="co"># popular package management system often install
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
+    <footer class="mt-auto py-3">
+    <hr>
+    <div class="container">
+        <span class="text-muted">Keto Zhang</span>
+    </div>
+</footer>
 </body>
-
 </html>

@@ -2,14 +2,18 @@ import yaml
 from pathlib import Path
 PROJECT_PATH = Path(__file__).resolve().parents[1]
 
-config = PROJECT_PATH / 'config.yaml'
+CONFIGS_PATH = PROJECT_PATH / 'configs'
+config = CONFIGS_PATH / 'config.yaml'
 assert config.exists(), "`config.yaml` is required. Make one even if it's empty."
 
-def get_config(file_or_path=config):
-    if isinstance(file_or_path, Path):
-        fpath = str(file_or_path)
+def get_config(name_or_path=config):
+    if isinstance(name_or_path, Path):
+        assert name_or_path.is_absolute(), "If pathlib.Path specified, it must be an absolute path."
+        fpath = str(name_or_path)
+    elif isinstance(name_or_path, str):
+        fpath = CONFIGS_PATH / (name_or_path + '.yaml')
     else:
-        fpath = file_or_path
+        raise ValueError("Argument (0) should either be a configuration name or path.")
     
     with open(fpath) as file:
         config = yaml.safe_load(file)

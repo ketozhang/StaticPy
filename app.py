@@ -10,13 +10,13 @@ from src.config_handler import get_config
 
 PROJECT_PATH = Path(__file__).resolve().parents[0]
 
-# Load configurations
-config = get_config()
+# Load base_configurations
+base_config = get_config()
 
 # TODO: Choose either `site_url` or `root_url`.
-ROOT_URL = config['site_url']
-# BUILD_PATH = Path(config['build_path']).resolve()
-TEMPLATES_PATH = Path(config['templates_path']).resolve()
+ROOT_URL = base_config['site_url']
+# BUILD_PATH = Path(base_config['build_path']).resolve()
+TEMPLATES_PATH = Path(base_config['templates_path']).resolve()
 
 app = Flask(__name__)
 log = app.logger
@@ -24,14 +24,14 @@ log = app.logger
 
 @app.context_processor
 def global_var():
-    # TODO ROOT_URL best handled by a config parser
+    # TODO ROOT_URL best handled by a base_config parser
     root_url = ROOT_URL if ROOT_URL else '/'
     if root_url[-1] != '/':
         root_url += '/'
 
     var = dict(
         root_url=root_url,
-        links=config['links']
+        links=base_config['links']
     )
     return var
 
@@ -99,7 +99,7 @@ def build(context):
 
 
 def build_all():
-    for context in config['contexts'].values():
+    for context in base_config['contexts'].values():
         build(context)
 
 
@@ -139,24 +139,30 @@ def get_frontmatter(file_or_path):
 
 @app.route('/')
 def main():
+    config = get_config('home')
     notes = get_all_notes()
-    posts = config['home']['posts']
+
+    posts = config['posts']
     posts_dict = {}
     for i, post in enumerate(posts):
         fm = get_frontmatter(post)
         posts_dict[post] = fm
+
+    projects = config['projects']
+
     context = dict(
         notes=notes,
-        posts=posts_dict
+        posts=posts_dict,
+        projects=projects
     )
-    return render_template('main.html', **context)
+    return render_template(config['template'], **context)
 
 
 @app.route(f'/<context>')
 @app.route(f'/<context>/<path:note>')
 def get_note(context, note='index'):
     try:
-        context = config['contexts'][context]
+        context = base_config['contexts'][context]
     except KeyError as e:
         log.error(
             str(e) + f', when attempting with args get_note({context}, {note}).')
