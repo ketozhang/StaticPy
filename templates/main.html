@@ -3,6 +3,7 @@
 {% include "header.html" %}
 <main>
   <div class="container">
+
     <!-- Main Showcase -->
     <div class="row my-5">
       {% for project in projects %}
@@ -18,14 +19,14 @@
     {% for post_url, post in posts.items() %}
     <div class="card mb-3 box-shadow">
       <div class="row no-gutter">
-        <div class="col-md-5">
+        <div class="col-md-5 col-lg-4">
           <a href={{post_url}}><img class="card-img" src={{post['image']}}></a>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-7 col-lg-8">
           <div class="card-body">
-            <h4 class="card-title mb-0  "><a href={{post_url}}>{{post['title']}}</a></h4>
+            <h4 class="card-title mb-0"><a href={{post_url}}>{{post['title']}}</a></h4>
             <p class="card-text"><small class="text-muted">Last updated 2019-04-08</small></p>
-            <p class="mt-2 card-text limit-2-lines">{{post['description']}}</p>
+            <p class="mt-2 card-text">{{post['description']}}</p>
           </div>
         </div>
       </div>

@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
+import os
 import sys
 import logging
 import frontmatter
 import pypandoc as pandoc
+from collections import OrderedDict
 from flask import Flask, render_template, url_for, send_from_directory
 from pathlib import Path
 from shutil import rmtree, copyfile
 from src.config_handler import get_config
 
-PROJECT_PATH = Path(__file__).resolve().parents[0]
-
 # Load base_configurations
 base_config = get_config()
-
+PROJECT_PATH = Path(__file__).resolve().parents[0]
 # TODO: Choose either `site_url` or `root_url`.
 ROOT_URL = base_config['site_url']
-# BUILD_PATH = Path(base_config['build_path']).resolve()
 TEMPLATES_PATH = Path(base_config['templates_path']).resolve()
 
 app = Flask(__name__)
@@ -144,7 +143,7 @@ def main():
 
     posts = config['posts']
     posts_dict = {}
-    for i, post in enumerate(posts):
+    for post in posts:
         fm = get_frontmatter(post)
         posts_dict[post] = fm
 
@@ -155,7 +154,48 @@ def main():
         posts=posts_dict,
         projects=projects
     )
+
     return render_template(config['template'], **context)
+
+@app.route('/notes')
+def notes_landing():
+    return render_template('notes_landing.html')
+
+@app.route('/posts')
+def posts_landing():
+    def get_all_posts():
+        """
+        Get post urls (path relative to `TEMPLATES_PATH`).
+
+        Returns
+        -------
+        posts: list[str]
+            A list of post urls as strings.
+        """
+        posts_path = TEMPLATES_PATH / 'posts'
+        posts = posts_path.glob('**/[!index]*.html')
+        posts = [str(post.relative_to(TEMPLATES_PATH).as_posix())
+                 for post in posts]
+
+        return posts
+
+    posts = get_all_posts()
+    posts_dict = OrderedDict()
+    modified_times = []
+    for post in posts:
+        post_md_path = (PROJECT_PATH / post).with_suffix('.md')
+        modified_times.append(os.path.getctime(post_md_path))
+        fm = get_frontmatter(post_md_path)
+        posts_dict[post] = fm
+    sort_idx = sorted(range(len(modified_times)), key=modified_times.__getitem__)[::-1]
+    print(posts_dict.items())
+    posts_dict = OrderedDict((list(posts_dict.items())[i]) for i in sort_idx)
+
+    context = dict(
+        posts=posts_dict
+    )
+
+    return render_template('posts_landing.html', **context)
 
 
 @app.route(f'/<context>')
@@ -166,7 +206,7 @@ def get_note(context, note='index'):
     except KeyError as e:
         log.error(
             str(e) + f', when attempting with args get_note({context}, {note}).')
-    
+
     print(context, note)
     source_path = PROJECT_PATH / context['source_path']
     output_path = TEMPLATES_PATH / context['source_path']
@@ -195,9 +235,11 @@ def get_note(context, note='index'):
     else:
         return render_template(context['template'], **context)
 
+
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory('static', 'favicon.ico')
+
 
 if __name__ == '__main__':
     args = sys.argv[1:]

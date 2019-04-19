@@ -22,6 +22,15 @@ p .navbar-light .navbar-nav .nav-link.active::after {
   color: black;
 }
 
+/* Add some height for the border on hover */
+.navbar-light .navbar-nav .nav-link::after{
+  content: "";
+  display: block;
+  padding-top: 5px;
+  border-bottom: 2px solid transparent;
+}
+
+/* border on hover */
 .navbar-light .navbar-nav .nav-link:hover::after {
   content: "";
   display: block;
@@ -56,6 +65,7 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
   color: black;
   white-space: nowrap;
   text-decoration: none;
+  margin-bottom: 0.5em;
 }
 
 .card-title {
