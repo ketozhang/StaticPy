@@ -8,14 +8,14 @@ freezer = Freezer(app)
 
 
 @freezer.register_generator
-def get_note():
+def get_page():
     """
-    A static URL generator for app.py::get_note.
+    A static URL generator for app.py::get_page.
 
     Yields
     -------
     args: dict
-       The arguments of app.py::get_note.
+       The arguments of app.py::get_page.
     """
     for note_url in get_all_notes():
         note_url = note_url.split('/')

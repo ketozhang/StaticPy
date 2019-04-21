@@ -19,22 +19,9 @@ TEMPLATES_PATH = Path(base_config['templates_path']).resolve()
 app = Flask(__name__)
 log = app.logger
 
-
-@app.context_processor
-def global_var():
-    # TODO SITE_URL best handled by a base_config parser
-    site_url = SITE_URL if SITE_URL else '/'
-    if site_url[-1] != '/':
-        site_url += '/'
-
-    var = dict(
-        site_url=site_url,
-        site_brand=base_config['site_brand'],
-        links=base_config['links']
-    )
-    return var
-
-
+########################
+# HELPER FUNCTIONS
+########################
 def get_fpath(file_or_path):
     if isinstance(file_or_path, str):
         fpath = Path(file_or_path).resolve()
@@ -136,13 +123,36 @@ def get_frontmatter(file_or_path):
 
     return frontmatter.load(fpath).metadata if fpath.exists() else None
 
+########################
+# META
+########################
+@app.context_processor
+def global_var():
+    # TODO SITE_URL best handled by a base_config parser
+    site_url = SITE_URL if SITE_URL else '/'
+    if site_url[-1] != '/':
+        site_url += '/'
 
-############
+    var = dict(
+        site_url=site_url,
+        site_brand=base_config['site_brand'],
+        links=base_config['links']
+    )
+    return var
+
+
+@app.route('/favicon.ico')
+def favicon():
+    """Renders the favicon in /static/favicon.ico ."""
+    return send_from_directory('static', 'favicon.ico')
+
+
+########################
 # MAIN
-############
-
+########################
 @app.route('/')
 def home():
+    """Renders the home page."""
     config = get_config('home')
     notes = get_all_notes()
 
@@ -163,13 +173,21 @@ def home():
     return render_template(config['template'], **context)
 
 
+@app.route('/<file>')
+def get_file_page(file):
+    """Renders root level file located in `TEMPLATES_PATH`/<file>.html ."""
+    return render_template(f'{file}.html')
+
+
 @app.route('/notes/')
-def notes_home():
+def notes_home_page():
+    """Renders the notes home page located in /notes/index.html ."""
     return render_template('notes/index.html')
 
 
 @app.route('/posts/')
-def posts_home():
+def posts_home_page():
+    """Renders the posts home page located in /notes/index.html ."""
     def get_all_posts():
         """
         Get post urls (path relative to `TEMPLATES_PATH`).
@@ -191,9 +209,11 @@ def posts_home():
     modified_times = []
     for post in posts:
         post_md_path = (PROJECT_PATH / post).with_suffix('.md')
-        modified_times.append(os.path.getctime(post_md_path))
+        last_updated = os.path.getctime(post_md_path)
+        modified_times.append(last_updated)
         fm = get_frontmatter(post_md_path)
         posts_dict[post] = fm
+        posts_dict[post]['last_updated'] = last_updated
     sort_idx = sorted(range(len(modified_times)),
                       key=modified_times.__getitem__)[::-1]
     posts_dict = OrderedDict((list(posts_dict.items())[i]) for i in sort_idx)
@@ -205,18 +225,18 @@ def posts_home():
     return render_template('posts/index.html', **context)
 
 
-@app.route(f'/<context>/<path:note>')
-def get_note(context, note='index.html'):
-    log.info(f"Parsing /{context}/{note}")
-    
-    if note[-1] == '/':
-        note = note[:-1] + '/index.html'
-    
+@app.route(f'/<context>/<path:page>')
+def get_page(context, page='index.html'):
+    log.info(f"Parsing /{context}/{page}")
+
+    if page[-1] == '/':
+        page = page[:-1] + '/index.html'
+
     # Attempt to find Flask route
-    if note == 'index.html':
-        try: # If found redirect to /context/
-            return redirect(url_for(f"{context}_home"))
-        except NameError as e:
+    if page == 'index.html':
+        try:  # If found redirect to /context/
+            return redirect(url_for(f"{context}_home_page"))
+        except Exception as e:  # TODO: Change to werkzeug BuildError
             log.debug(e)
             pass
 
@@ -225,21 +245,21 @@ def get_note(context, note='index.html'):
         context = base_config['contexts'][context]
     except KeyError as e:
         log.error(
-            str(e) + f', when attempting with args get_note({context}, {note}).')
+            str(e) + f', when attempting with args get_page({context}, {page}).')
 
     source_path = PROJECT_PATH / context['source_path']
     output_path = TEMPLATES_PATH / context['source_path']
 
     # If suffix is .html, then remove it with proper path
-    if Path(note).suffix == '.html':
-        note = str(Path(note).parent / Path(note).stem)
+    if Path(page).suffix == '.html':
+        page = str(Path(page).parent / Path(page).stem)
 
-    fm = get_frontmatter(source_path/(str(note) + '.md'))
-    page = output_path / (note + '.html')
+    fm = get_frontmatter(source_path/(str(page) + '.md'))
+    page = output_path / (page + '.html')
 
     # Resolve relative to template path
-    # The page should now point to the actual HTML file while its served at /<path:note>
-    # This decision was made to allow users to use any subdirectory url not just "domain.com/note"
+    # The page should now point to the actual HTML file while its served at /<path:page>
+    # This decision was made to allow users to use any subdirectory url not just "domain.com/page"
     page = page.relative_to(TEMPLATES_PATH).as_posix()
     log.info(f"Rendering {page}")
 
@@ -252,11 +272,6 @@ def get_note(context, note='index.html'):
         return render_template(str(page), **context)
     else:  # Equivalent to checking if file is markdown.
         return render_template(context['template'], **context)
-
-
-@app.route('/favicon.ico')
-def favicon():
-    return send_from_directory('static', 'favicon.ico')
 
 
 if __name__ == '__main__':
