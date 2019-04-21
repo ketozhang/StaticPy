@@ -3,10 +3,10 @@ from pathlib import Path
 PROJECT_PATH = Path(__file__).resolve().parents[1]
 
 CONFIGS_PATH = PROJECT_PATH / 'configs'
-config = CONFIGS_PATH / 'config.yaml'
-assert config.exists(), "`config.yaml` is required. Make one even if it's empty."
+base_config = CONFIGS_PATH / 'base.yaml'
+assert base_config.exists(), "`base.yaml` is required. Make one even if it's empty."
 
-def get_config(name_or_path=config):
+def get_config(name_or_path=base_config):
     if isinstance(name_or_path, Path):
         assert name_or_path.is_absolute(), "If pathlib.Path specified, it must be an absolute path."
         fpath = str(name_or_path)

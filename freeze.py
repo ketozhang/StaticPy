@@ -56,8 +56,8 @@ def freeze():
 
 if __name__ == '__main__':
     args = sys.argv[1:]
-    if 'debug' in args:
-        app.debug = True
-        logging.basicConfig(level=logging.DEBUG)
+    # if 'debug' in args:
+    app.debug = True
+    logging.basicConfig(level=logging.DEBUG)
 
     freeze()
