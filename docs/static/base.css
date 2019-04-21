@@ -159,6 +159,11 @@ blockquote.blockquote {
   background:linear-gradient(transparent 150px, white);
 }
 
+.project-description {
+  height: 9em;
+  overflow: hidden;
+}
+
 /* Ids */
 
 #note h1, #note h2, #note h3, #note h4, #note h5, #note h6, #post h1, #post h2, #post h3, #post h4, #post h5, #post h6 {
