@@ -181,7 +181,7 @@ def posts_home():
         """
         posts_path = TEMPLATES_PATH / 'posts'
         posts = posts_path.glob('**/[!index]*.html')
-        posts = [str(post.relative_to(TEMPLATES_PATH).as_posix())
+        posts = [str(post.relative_to(posts_path).as_posix())
                  for post in posts]
 
         return posts
