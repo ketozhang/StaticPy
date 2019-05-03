@@ -1,0 +1,72 @@
+<h1 id="lecture-notes-12">Lecture Notes 12</h1>
+<h2 id="joins">Joins</h2>
+<p>The query to join two table:</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> [<span class="kw">DISTINCT</span>] &lt;columns&gt;
+    <span class="kw">FROM</span> &lt;tables&gt;
+    ...;</code></pre></div>
+<p>Where <code>&lt;tables&gt;</code> can look like <code>table1 as t1, table2 as t2</code>. The <code>as</code> statement assigns <code>table1</code> to have an <strong>alias</strong> <code>t1</code>.</p>
+<p>There are multiple types of joins:</p>
+<dl>
+<dt>Inner</dt>
+<dd><p>The <strong>inner join</strong> (aka <strong>full inner join</strong> or <strong>natural join</strong>) joins the intersection of the two table by looking at the shared column. This is done by default on the <code>FROM</code> clause.</p>
+<p>One may do an inner join even if there exist no shared column by specifying which column and how to compare (conditional statement). The format of this is:</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> [<span class="kw">DISTINCT</span>] &lt;columns&gt;
+    <span class="kw">FROM</span> &lt;table1&gt; <span class="kw">INNER</span> <span class="kw">JOIN</span> &lt;table2&gt;
+    <span class="kw">ON</span> &lt;condition&gt;;</code></pre></div>
+<p>A join by looking at the primary key is,</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> [<span class="kw">DISTINCT</span>] &lt;columns&gt;
+    <span class="kw">FROM</span> &lt;table1&gt; <span class="kw">NATURAL</span> <span class="kw">JOIN</span> &lt;table2&gt;
+    <span class="kw">ON</span> &lt;condition&gt;;</code></pre></div>
+</dd>
+<dt>Left and Right:</dt>
+<dd><p><strong>Left join</strong> and <strong>right join</strong> (aka <strong>left outer join</strong>, <strong>right outer join</strong>) does an inner join but includes unmatched entries from either the left table or right table.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> [<span class="kw">DISTINCT</span>] &lt;columns&gt;
+    <span class="kw">FROM</span> &lt;left_table&gt; &lt;LEFT|RIGHT&gt; <span class="kw">JOIN</span> &lt;right_table&gt;
+    <span class="kw">ON</span> &lt;condition&gt;;</code></pre></div>
+</dd>
+</dl>
+<p>Note that a left join's unmatched entries will take the left index and pair it with a <code>NULL</code> index. Similar idea for right joins.</p>
+<dl>
+<dt>Full:</dt>
+<dd><p>The <strong>full join</strong> (aka <strong>full outer join</strong>) includes all entries and pairs any missing entries as <code>NULL</code>.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> [<span class="kw">DISTINCT</span>] &lt;columns&gt;
+    <span class="kw">FROM</span> &lt;left_table&gt; <span class="kw">FULL</span> <span class="kw">JOIN</span> &lt;right_table&gt;
+    <span class="kw">ON</span> &lt;condition&gt;;</code></pre></div>
+</dd>
+</dl>
+<h2 id="null">NULL</h2>
+<p>A note about <code>NULL</code> values. <code>NULL</code> values are special values for many cases signifying missing data or some aggregation/arithmetic error. There is are a few rules to follow.</p>
+<dl>
+<dt>Comparison with <code>NULL</code></dt>
+<dd>Any boolean operator <code>&lt; &lt;= &gt; &gt;= =</code> applied on <code>NULL</code> returns NULL.
+</dd>
+<dt>Finding <code>NULL</code></dt>
+<dd><p>To check if an entry <code>NULL</code> use:</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> &lt;columns&gt; 
+    <span class="kw">FROM</span> &lt;table&gt; 
+    <span class="kw">WHERE</span> &lt;column&gt; <span class="kw">IS</span> <span class="kw">NULL</span>;</code></pre></div>
+</dd>
+<dt><code>NULL</code> has special booleans</dt>
+<dd><p><code>NULL</code> is has special rules when special boolean operators are applied on <code>NULL</code> data. These special boolean operators are:</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql">...
+<span class="kw">WHERE</span> &lt;column&gt; &lt;NOT|AND|OR&gt; <span class="kw">null</span>;</code></pre></div>
+<p>Few great examples are (in psuedo-code):</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">NOT NULL     <span class="op">==</span>   NULL
+T <span class="op">&amp;</span> NULL     <span class="op">==</span>   NULL  <span class="co"># as if NULL is falsy</span>
+F <span class="op">&amp;</span> NULL     <span class="op">==</span>   F
+NULL <span class="op">&amp;</span> F     <span class="op">==</span>   F     <span class="co"># F is more false than NULL</span>
+NULL <span class="op">&amp;</span> NULL  <span class="op">==</span>   F
+
+NULL <span class="kw">or</span> T    <span class="op">==</span>  T
+NULL <span class="kw">or</span> F    <span class="op">==</span>  NULL   <span class="co"># NULL is more true than F</span>
+NULL <span class="kw">or</span> NULL <span class="op">==</span>  NULL</code></pre></div>
+<p>Boolean operations on <code>NULL</code> is symmetric such the reverse of any boolean operation is the same (e.g., <code>NULL or T == T or NULL</code>).</p>
+<h2 id="sql-simple-random-sample">SQL Simple Random Sample</h2>
+<p>To do a simple random sample in SQL:</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">CREATE</span> <span class="kw">TABLE</span> &lt;sample_name&gt; <span class="kw">AS</span>
+<span class="kw">SELECT</span> *, <span class="kw">RANDOM</span>() <span class="kw">as</span> u
+<span class="kw">FROM</span> &lt;table <span class="kw">of</span> data&gt;
+<span class="kw">ORDER</span> <span class="kw">BY</span> u
+<span class="kw">LIMIT</span> &lt;integer&gt;</code></pre></div>
+</dd>
+</dl>

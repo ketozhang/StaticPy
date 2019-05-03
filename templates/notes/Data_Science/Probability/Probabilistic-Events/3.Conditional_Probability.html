@@ -1,0 +1,31 @@
+<p>A conditional probability can be generalized by the phrase.</p>
+<center>
+<strong>&quot;What is the probability of y given x&quot;</strong>
+</center>
+<p>Which is defined with the <strong>division rule</strong> and notated as,</p>
+<p><span class="math display">\[ \boxed{P(y \mid x) \equiv \frac{P(x\cap y )}{P(x)}} \]</span></p>
+<ul>
+<li><span class="math inline">\(P(x\cap y)\)</span> : The joint probability of both <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> occuring</li>
+<li>The RHS comes from an axiom of probability.</li>
+</ul>
+<h2 id="bayes-rule">Bayes' Rule</h2>
+<p><strong>Bayes' rule</strong> (or <strong>Bayes' Theorem</strong>) describes the probability of two relating events <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. If we have information on <em>a priori</em> (i.e., first event) then we can more accurately determine the probability of <em>a posteriori</em> (i.e., second event)</p>
+<p><span class="math display">\[
+\boxed{P(y \mid x) = \frac{P(x \mid y) P(y)}{P(x)}}\\
+\]</span></p>
+<ul>
+<li><span class="math inline">\(P(y \mid x)\)</span> : <strong>Posterior</strong></li>
+<li><p><span class="math inline">\(P(y)\)</span> : <strong>Prior</strong></p></li>
+<li><p>The denominator is called the <strong>marginal probability</strong> which is given by,</p>
+<p><span class="math display">\[
+    P(x) = \sum_{y \in Y}{P(x \mid y)P(y)}
+\]</span></p></li>
+<li><p>The numerator is the joint probability between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> <span class="math display">\[
+    P(x \cap y) = P(x \mid y) P(y)
+\]</span></p>
+<p>Once again the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> can be swapped since <span class="math inline">\(x \cap y = y \cap x\)</span></p></li>
+<li><p>Plugging in the marginal probability and the joint probability, we see that the conditional probability is the joint probability normalized by the marginal.</p>
+<p><span class="math display">\[ P(y \mid x) = \frac{P(x \cap y)}{\sum_\limits{y\in Y} P(x \cap y)} \]</span></p></li>
+<li><p><strong>Uniform Distribution:</strong> Like before, when each event in the outcome space are equally likely then the conditional probability is,</p></li>
+</ul>
+<p><span class="math display">\[ P(A\mid B) = \frac{\abs{A \cap B}}{\abs B} \]</span></p>

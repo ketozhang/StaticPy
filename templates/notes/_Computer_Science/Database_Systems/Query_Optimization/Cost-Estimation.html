@@ -1,0 +1,62 @@
+<table>
+<thead>
+<tr class="header">
+<th>Statistics</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>NTuples</td>
+<td># of tuples in a table</td>
+</tr>
+<tr class="even">
+<td>NPages</td>
+<td># of disk pages in a table</td>
+</tr>
+<tr class="odd">
+<td>Low/High</td>
+<td>min/max value in a column</td>
+</tr>
+<tr class="even">
+<td>Nkeys</td>
+<td># of distinct values in a column</td>
+</tr>
+<tr class="odd">
+<td>IHeight</td>
+<td>Index height</td>
+</tr>
+<tr class="even">
+<td>INPages</td>
+<td># of disk pages in an index</td>
+</tr>
+</tbody>
+</table>
+<h2 id="selectivity">Selectivity</h2>
+<p>The ratio of output to to all possible outputs. This is similar to probability</p>
+<p><span class="math display">\[P_\text{sel} = \frac{\text{out}}{\text{in}}\]</span></p>
+<ul>
+<li><p>col = value <span class="math display">\[P_\text{sel} = \frac{1}{\text{NKeys}(t)}\]</span></p></li>
+<li><p>col1 = col2 <span class="math display">\[P_\text{sel} = \frac{1}{\max(\text{NKeys(t1)}, \text{NKeys(t2))}}\]</span></p></li>
+<li><p>col &gt; value <span class="math display">\[P_\text{sel} = \frac{\text{High}(t) - \text{value}}{\text{High}(t) - \text{Low}(t) + 1}\]</span></p></li>
+<li><p>Missing Information <span class="math inline">\(\rightarrow\)</span> assume <span class="math inline">\(1/10\)</span></p></li>
+</ul>
+<h3 id="joint-selectivity">Joint Selectivity</h3>
+<p>Selectivity on two or more tables by either <code>AND</code>, <code>OR</code>, or <code>JOIN</code> is calculated with the following two assumption:</p>
+<ul>
+<li>Each binning or grouping of the records in the table are uniformly distributed</li>
+<li>Each predicate is independent of the other</li>
+</ul>
+<p>Thus, the three operations has the selectivity of:</p>
+<ul>
+<li><code>AND</code></li>
+</ul>
+<p><span class="math display">\[ \prod P_\text{sel}(t_i) \]</span></p>
+<ul>
+<li><code>OR</code></li>
+</ul>
+<p><span class="math display">\[ \text{Inclusion-Exclusion Principle} \]</span></p>
+<ul>
+<li><code>JOIN</code></li>
+</ul>
+<p><span class="math display">\[ \prod P_\text{sel}(t_i) \cdot \abs{t_i} \]</span></p>

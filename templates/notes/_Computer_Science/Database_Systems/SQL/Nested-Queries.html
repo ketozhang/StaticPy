@@ -1,0 +1,41 @@
+<h2 id="where-predicate">Where Predicate</h2>
+<p>A nested query in a where precdicate can be used after a nested query keyword</p>
+<dl>
+<dt><code>IN</code></dt>
+<dd>Return the column entires that intersects with the column output of subquery
+</dd>
+</dl>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">WHERE</span> &lt;col&gt; &lt;keyword&gt;
+    (&lt;subquery&gt;)</code></pre></div>
+<dl>
+<dt><code>NOT IN</code></dt>
+<dd>Return the column entires that doesn't intersect with the column output of subquery
+</dd>
+<dt><code>EXISTS</code></dt>
+<dd><center>
+<strong>Return if true for each row</strong>
+</center>
+<p>For each row in the table, plug it into the subquery. If the subquery returns true, return that row.</p>
+<p>The format of <code>EXISTS</code> does not need require a column, however must have a correlation (i.e., outer table is referenced inside inner table) in the subquery where predicate:</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">WHERE</span> <span class="kw">EXISTS</span>
+    (
+        ...
+        <span class="kw">WHERE</span> &lt;correlation-prediate&gt;
+    )</code></pre></div>
+</dd>
+</dl>
+<ul>
+<li><p><code>NOT EXISTS</code></p></li>
+<li><code>ANY</code>
+<center>
+<strong>Return if predicate satisfies any subquery</strong>
+</center></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">WHERE</span> &lt;col&gt; &lt;condition&gt; &lt;ANY|ALL&gt;
+    (&lt;subquery&gt;)</code></pre></div>
+<ul>
+<li><code>ALL</code>
+<center>
+<strong>Return if predicate satisfies all subquery</strong>
+</center></li>
+</ul>

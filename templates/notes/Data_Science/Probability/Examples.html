@@ -1,0 +1,41 @@
+<h2 id="bootstrap-problem">Bootstrap Problem</h2>
+<p>Consider a population of size <span class="math inline">\(n\)</span> and a boostrap sample of size <span class="math inline">\(N\)</span>. The variations of this problem are all either with or without replacement.</p>
+<ol style="list-style-type: decimal">
+<li><p>Without replacement, let the population be consist of males and females such that <span class="math inline">\(n=m+f\)</span>. What is the probability of getting <span class="math inline">\(M=k\)</span> males?</p>
+<p><span class="math display">\[ P(M=k) = \frac{}{} \]</span></p></li>
+<li><p>With replacement, if <span class="math inline">\(N=n\)</span> what is the probability that the bootstrap consist of everyone from the original pouplation.</p>
+<p>There are <span class="math inline">\(n!\)</span> ways to shuffle <span class="math inline">\(n\)</span> unique amount of people. The length of the outcome space is <span class="math inline">\(n^n\)</span>,</p>
+<p><span class="math display">\[ P(\text{all unique}) = \frac{n!}{n^n}\]</span></p></li>
+</ol>
+<h2 id="shuffling-problem">Shuffling Problem</h2>
+<p>Consider a deck of <span class="math inline">\(n=52\)</span> conventional cards shuffled randomly. The variations of this problem are all without replacement.</p>
+<ol style="list-style-type: decimal">
+<li><p>What is the probability that the first card picked is the ace of spades?</p>
+<p>Consider all situation where the ace of spades is on the first card. Permutate the rest and you'll get the number of outcomes that ace of spades is first.</p></li>
+</ol>
+<p><span class="math display">\[
+    P(\Omega_1 = A\spadesuit) = \frac{(n-1)!}{n!} = \frac{1}{n}
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>What is the probability that the <span class="math inline">\(k\)</span>-th card is the ace of spades?</p>
+<p>The position of the card doesn't matter. We will still use the same strategy before.</p>
+<p><span class="math display">\[
+P(\Omega_k = A\spadesuit) = \frac{(n-1)!}{n!} = \frac{1}{n}
+\]</span></p></li>
+<li><p>What is the probability that the first <span class="math inline">\(k\)</span>-th card is spades?</p>
+<p>There are <span class="math inline">\(N=13\)</span> spades in a deck. There are two ways to solve this problem:</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math display">\[P(k) = \frac{N}{n} \cdot \frac{N-1}{n-1} \cdots \frac{N-k+1}{n-k+1} = \frac{N!}{n!}\frac{(n-k)!}{(N-k)!}\]</span></p></li>
+<li><p><span class="math display">\[P(k) = \frac{\binom{N}{k}\binom{n-N}{n-k}}{n!}\]</span></p></li>
+</ol></li>
+</ol>
+<h2 id="min-max-problem">Min-Max Problem</h2>
+<p>Consider a six-sided die rolled <span class="math inline">\(n\)</span> times.</p>
+<ol style="list-style-type: decimal">
+<li><p>What is the probability that the minimum roll observed is <span class="math inline">\(m\)</span> (<span class="math inline">\(\min = m\)</span>) ? Using combinatorics iterating through the event that <span class="math inline">\(k\)</span> of the rolls is exactly <span class="math inline">\(X=m\)</span> while <span class="math inline">\(n-k\)</span> rolls are <span class="math inline">\(X&gt;m\)</span> gives the binomial distribution,</p>
+<p><span class="math display">\[ P(\min = m) = \sum_{k=1}^k {n \choose k} \left(\frac{1}{6}\right)^k\left(\frac{6-m}{6}\right)^{n-k}\]</span></p></li>
+<li><p>What is the probability that the minimum roll observed <span class="math inline">\(\min\)</span> is at least <span class="math inline">\(m\)</span> ?</p>
+<p><span class="math display">\[ P(\min \ge m) = P\left(\bigcap{i=1}^n X_i \ge m\right) = \left(\frac{6-(m-1)}{6}\right)^n \]</span></p></li>
+<li><p>What is the expected value of <span class="math inline">\(\min\)</span>? Use the tail sum formula with part 2</p>
+<p><span class="math display">\[ E[\min] = \sum_{m=1}^6 P(\min \ge m) \]</span></p></li>
+</ol>

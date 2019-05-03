@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang='en'>
+<head>
+    <meta charset="UTF-8">
+    <title>PyStatic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- yep Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://ketozhang.github.io/notebook/static/base.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
+    <link rel="shortcut icon" href="https://ketozhang.github.io/notebook/static/favicon.ico">
+</head>
+<body>
+    
+<div class="container-fluid" id="note">
+    <div class="row">
+        <div class="col-3 d-none d-lg-block"></div>
+        <div class="col-sm-10 col-lg-7">
+            <h1 class="title">Lecture Notes15</h1>
+            <h1 id="lecture-notes-15">Lecture Notes 15</h1>
+<h2 id="modeling-and-estimation">Modeling and Estimation</h2>
+<p>The steps of modeling is summarized to:</p>
+<ol style="list-style-type: decimal">
+<li>Define the Model
+<ul>
+<li>Simplified representation of the world</li>
+</ul></li>
+<li>Define the Loss Function
+<ul>
+<li>Measures how well a particular instance of the model &quot;fits&quot; the data.</li>
+</ul></li>
+<li>Minimize the Loss Function
+<ul>
+<li>Analytically using calculus</li>
+<li>Numerically using gradient descent</li>
+</ul></li>
+</ol>
+<h3 id="loss-function">Loss Function</h3>
+<ul>
+<li>Absolute Loss <span class="math inline">\(\mathbb{L}^1\)</span>
+<ul>
+<li>Not Sensitive to outliers</li>
+<li>Difficult to differentiate</li>
+<li>Minimizes at the <strong>median</strong> <span class="math display">\[ \mathbb{L}^1(\theta) = \frac{1}{n}\sum_{i=1}^{n}\abs{y_i - \theta}\]</span></li>
+</ul></li>
+<li>Square Loss <span class="math inline">\(\mathbb{L}^2\)</span>
+<ul>
+<li>Sensitive to outliers</li>
+<li>Easily differentiable</li>
+<li>Average square loss minimizes at the <strong>mean</strong> <span class="math display">\[ \mathbb{L}^2(\theta) = \frac{1}{n}\sum_{i=1}^{n}(y_i - \theta)^2 \]</span></li>
+</ul></li>
+<li>Huber Loss
+<ul>
+<li>Not Sensitive to outliers</li>
+<li>Numerically differentiable</li>
+</ul></li>
+</ul>
+<h3 id="gradient-descent">Gradient Descent</h3>
+<p><span class="math display">\[\boxed{ \theta^{(t+1)} = \theta^{(t)} - \alpha\nabla \ell(\theta^{(t)}) }\]</span></p>
+<p><span class="math display">\[\boxed{ \mathbf x^{(n)} =  \mathbf x^{(0)} - a_1 \nabla f(\mathbf x^{(0)}) - a_2 \nabla f(\mathbf x^{(1)}) - \ldots - a_n\nabla f(\mathbf x^{(n-1)})}\]</span></p>
+<h2 id="coding">Coding</h2>
+<ul>
+<li>Python (basics)</li>
+<li>Matplotlib (<code>plt.plot</code>, <code>plt.xlabel</code>, <code>plt.ylabel</code>)</li>
+<li>Numpy</li>
+<li>Pandas (Dataframe, Series)
+<ul>
+<li>Indexing</li>
+<li>Groupby</li>
+<li>Joins, Merge</li>
+</ul></li>
+<li>SQL</li>
+<li>Regex</li>
+</ul>
+<h2 id="data-visualization">Data Visualization</h2>
+<ul>
+<li>Differentiate quantitative, nominal, ordinal</li>
+<li>Histogram, rug/scatter plot, smoothed density estimator</li>
+<li>Example of bad plots
+<ul>
+<li>Pie charts</li>
+<li>stacking (placing data on top of data)</li>
+<li>jiggling (data's y-value is consistent across each data plot)</li>
+<li>overplotting</li>
+</ul></li>
+</ul>
+<h2 id="web-technology">Web Technology</h2>
+<ul>
+<li>GET - get information</li>
+<li>POST - send information</li>
+<li>Languages
+<ul>
+<li>XML, HTML, JSON</li>
+</ul></li>
+</ul>
+<h2 id="string-manipulation-and-regular-expression">String Manipulation and Regular Expression</h2>
+        </div>
+        <div class="col-2 d-none d-md-block">
+        </div>
+    </div>
+</div>
+
+
+    <!-- Scripts -->
+
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
+    <footer class="mt-auto py-2 ">
+    <hr>
+    <div class="container">
+        <span class="text-muted">
+            <p class="text-right"> Generated by <a href="https://github.com/ketozhang/PyStatic">PyStatic</a> | Designed
+                by <a href="https://github.com/ketozhang">Keto Z.</a></p>
+        </span>
+    </div>
+</footer>
+</body>
+</html>

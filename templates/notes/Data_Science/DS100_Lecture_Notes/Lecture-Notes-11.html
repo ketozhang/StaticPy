@@ -1,0 +1,92 @@
+<h1 id="lecture-notes-11">Lecture Notes 11</h1>
+<h2 id="rest---representational-state-transfer">REST - Representational State Transfer</h2>
+<p>A way of architecting widely accessible, efficient, and extensible web service (typically using HTTP).</p>
+<p>Here are the following properties of REST</p>
+<ul>
+<li><strong>Cilent-Server</strong>: Client and server operate and evolve independently.</li>
+<li><strong>Stateless</strong>: Server do not store the state of the client thus the any sequential request must be handled by the client.</li>
+<li><strong>Cacheable</strong>: There exist client-server rules on what things are cacheable.</li>
+<li><strong>Uniform Interface</strong>: Provide a consistent interface for getting and updating data in a system.</li>
+</ul>
+<p>You will be using the REST API for Twitter in project 1.</p>
+<h2 id="databases">Databases</h2>
+<p>A <strong>database</strong> is an organized collection of data. In this class we will be using a <strong>database management system (DBMS)</strong>.</p>
+<p>A DBMS has the following properties:</p>
+<ul>
+<li>Stores data</li>
+<li>Organizes the data and manages data properties (e.g., type)</li>
+<li>Facilitates access</li>
+</ul>
+<p>The type of DBMS often used are called <strong>relatoinal DBMS</strong> where the data are not stored as one would think (a table of row and column) but instead in a data structure in some sort of relation (e.g., tree, heap) that are hidden away from the user interface. In the end relational models are a table system.</p>
+<h2 id="structured-query-language-sql">Structured Query Language (SQL)</h2>
+<blockquote>
+<p>&quot;What we want to compute not how we want to compute it&quot;</p>
+</blockquote>
+<p>SQL (pronounced like &quot;sequel&quot; not &quot;S-Q-L&quot;) is a <strong>declarative</strong> language (see quote above).</p>
+<p>Here are some vocabulary to know:</p>
+<dl>
+<dt>Relations</dt>
+<dd>Table
+</dd>
+<dt>Attribute</dt>
+<dd>Column
+</dd>
+<dt>Tuple</dt>
+<dd>Record or row
+</dd>
+<dt>Schema</dt>
+<dd>description of columns, their types, and constraints
+</dd>
+<dt>Schema of the Database</dt>
+<dd>a set of schemas of its relations
+</dd>
+<dt>Instance</dt>
+<dd>data satisfying the schema
+</dd>
+</dl>
+<h3 id="sql-types">SQL Types</h3>
+<ul>
+<li><strong>CHAR(size)</strong>: Fixed number of characters</li>
+<li><strong>TEXT</strong>: Arbitrary number of character strings</li>
+<li><strong>INTEGER &amp; BIGINT</strong>: Integer of various sizes</li>
+<li><strong>REAL &amp; DOUBLE PRECISION</strong>: Floating point numbers</li>
+<li><strong>DATE &amp; DATETIME</strong>: Date and Date+Time formats</li>
+</ul>
+<h3 id="create-table">Create Table</h3>
+<hr />
+<p><img src="2018-02-22-20-22-16.png" width="75%" height="75%"></img></p>
+<hr />
+<h3 id="inserting-records">Inserting Records</h3>
+<p>Inserting records is writing data into a table</p>
+<hr />
+<p><img src="2018-02-22-20-24-26.png" width="75%" height="75%"></p>
+<hr />
+<h3 id="modifying-records">Modifying Records</h3>
+<ul>
+<li><p><strong>Delete</strong> an entry</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">DELETE</span> <span class="kw">FROM</span> table_name <span class="kw">WHERE</span> column_name = <span class="st">&#39;[value]&#39;</span></code></pre></div></li>
+<li><p>Change an entry</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">UPDATE</span> students
+    <span class="kw">SET</span> column_name1 = <span class="st">&#39;[value]&#39;</span>
+    <span class="kw">WHERE</span> column_name2 = <span class="st">&#39;[value]&#39;</span></code></pre></div></li>
+</ul>
+<h3 id="querying-records">Querying Records</h3>
+<p>The basic structure of a single table query is:</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> [<span class="kw">DISTINCT</span>] &lt;column expression list&gt;
+    <span class="kw">FROM</span> &lt;single table&gt;
+    [<span class="kw">WHERE</span> &lt;predicate&gt;]
+    [GROUPBY &lt;column list&gt;]
+    [<span class="kw">HAVING</span> &lt;predicate&gt;]
+    [<span class="kw">ORDER</span> <span class="kw">BY</span> &lt;column list&gt;]
+    [<span class="kw">LIMIT</span> &lt;integer&gt;]</code></pre></div>
+<p>Thing in square brackets <code>[]</code> are optional and angle brackets <code>&lt;&gt;</code> are placeholders.</p>
+<h2 id="python-and-sql">Python and SQL</h2>
+<h3 id="sqlite">SQLite</h3>
+<p>Python has many tools to operator with SQL. Python can create its own database with <strong>pySQLite</strong> (<code>sqlite</code>)or <strong>SQLite</strong> for short. SQLite is a very basic DBMS where one may create a local database stored in a <code>.db</code> file and execute SQL queries.</p>
+<h3 id="sqlalchemy">SQLAlchemy</h3>
+<p>A really powerful DBMS for python is <strong>SQLAlchemy</strong> (<code>sqlalchemy</code>) which supports database created by SQLite. What SQLAlchemy provide is all the functionality of SQLite with object oriented method of handling database. This method is called Object Relational Mapper (<strong>ORM</strong>) which treats the relations inside a database as class and objects</p>
+<blockquote>
+<p>SQLALchemy is so powerful they cannot write a simpler (pythonic) documentation. See <a href="http://docs.sqlalchemy.org/en/latest/">docs</a>.</p>
+</blockquote>
+<h3 id="pandas-and-sql">Pandas and SQL</h3>
+<p>Pandas has built to handle SQL including SQLite database.</p>

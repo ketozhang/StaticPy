@@ -1,0 +1,31 @@
+<h2 id="trapezoidal-rule">Trapezoidal Rule</h2>
+<p>Recall that the area of a trapezoid is the average length of the two sides multiplied by the width <span class="math inline">\(\Delta x\)</span>:</p>
+<p><span class="math display">\[ A_\text{trapezoid} = \frac{f(x_1) + f(x_2)}{2}\Delta x\]</span></p>
+<p>The trapezoidal rule approximates the integral of some function <span class="math inline">\(f(x)\)</span> by summing the trapezoidal area of <span class="math inline">\(N-1\)</span> slices. Each slice is made with a straight line boundary from <span class="math inline">\(x_n\)</span> to <span class="math inline">\(x_{n+1}\)</span></p>
+<p><span class="math display">\[
+\int_{x_n}^{x_{n+1}} f(x)\ \mathrm d x = \frac{f(x_n) + f(x_{n+1})}{2}\Delta x + \mathcal{O}(hf&#39;&#39;)\\
+\int_{x_1}^{x_N} f(x)\ \mathrm d x = \frac{\Delta x}{N} \left(\frac{1}{2} f(x_1) + f(x_2) + \ldots \frac{1}{2}f(x_N) \right) + \mathcal O\left(\frac{(\Delta x)^3 f&#39;&#39;}{N^2}\right)
+\]</span></p>
+<ul>
+<li>The trapezoidal rule is the exact solution for the linear equation <span class="math inline">\(f(x) = mx\)</span></li>
+</ul>
+<h2 id="simpsons-rule">Simpson's Rule</h2>
+<p>The Simpson's rule uses parabolic slices instead of linear slices</p>
+<p><span class="math display">\[
+\int_{x_n}^{x_{n+2}} f(x) \ \mathrm dx = \frac{\Delta x}{3} \Big[f(x_1) + 4f(x_2) + f(x_3)\Big]\\
+\int_{x_1}^{x_N} f(x) \mathrm dx = \frac{\Delta x}{3N} \Big[f(x_1) + 4f(x_2) + 2f(x_3) + 4f(x_4) + 2f(x_5) + \ldots + f(x_N)\Big] + \mathcal O\left(\frac{1}{N^4}\right)
+\]</span></p>
+<ul>
+<li>The Simpson's rule is the exact solution for the 3rd degree polynomial <span class="math inline">\(f(x) = ax + bx^2 + cx^3\)</span></li>
+</ul>
+<h2 id="improper-integrals">Improper Integrals</h2>
+<ol style="list-style-type: decimal">
+<li><p>Integrable Singularity</p>
+<p>If from the interval <span class="math inline">\(a\)</span> to <span class="math inline">\(b\)</span>, <span class="math inline">\(f(a) = \infty\)</span></p></li>
+<li><p>Exponential Fall-off</p>
+<p>An integral from <span class="math inline">\(a\)</span> to <span class="math inline">\(\infty\)</span> can be converted into an exponential integral by change of variables:</p>
+<p><span class="math display">\[
+    u = e^{-x} \qquad x = -\log u\\
+    \int_{a}^{\infty} f(x)\ \mathrm dx = \int_{0}^{e^{-a}} \frac{f(-\log u)}{u}\ du
+\]</span></p></li>
+</ol>

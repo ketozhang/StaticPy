@@ -1,0 +1,45 @@
+<p>The decision tree is a nonlinear method for classification and regression. The decision tree is a tree with two node types:</p>
+<ul>
+<li>Internal nodes for each features</li>
+<li>Leaf nodes for each class</li>
+</ul>
+<h2 id="tree-algorithm">Tree Algorithm</h2>
+<p>The tree algorithm goes as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Import all sample points at the top level calling the set of indices <span class="math inline">\(S\)</span></li>
+<li>Case:
+<ul>
+<li>If all sample points belong to a certain class <span class="math inline">\(y_i = c; \exists (c \in C)\forall (i \in S)\)</span> then return a new leaf with class <span class="math inline">\(c\)</span>. This is condition is called when the leaves are <strong>pure</strong>.</li>
+<li>Otherwise choose a splitting feature <span class="math inline">\(j\)</span> and splitting boundary <span class="math inline">\(\beta\)</span> where we partition the class into left and right subsets:
+<ul>
+<li><span class="math inline">\(S_L = \{i : X_{ij} &lt; \beta\}\)</span></li>
+<li><span class="math inline">\(S_R = \{i : X_{ij} \ge \beta\}\)</span></li>
+</ul></li>
+</ul></li>
+</ol>
+<p>Note that if the first case in step two succeeds then we have a classified all those points where <span class="math inline">\(y_i = c\)</span> as class <span class="math inline">\(c\)</span>.</p>
+<h2 id="splitting-feature">Splitting Feature</h2>
+<p>Given <span class="math inline">\(d\)</span> splitting features indexed by <span class="math inline">\(j \in \{1,2,\ldots,d\}\)</span>, there are a few way of choosing best splitting feature to implement in the second condition of the tree algorithm at step 2.</p>
+<p>The most natural one would be to compute some loss fuction. Let <span class="math inline">\(\mathcal L_j(S)\)</span> be the cost function using splitting feature <span class="math inline">\(j\)</span>. The best split can be chosen to be the one that has the least weighted average cost:</p>
+<p><span class="math display">\[
+d = \mathop{\arg\min}_{d} \frac{|S_L|\mathcal L_j(S_L) + |S_R|\mathcal L_j(S_R)}{|S_L| + |S_R|}
+\]</span></p>
+<p>Now the problem left is to choose a loss function. A heuristic choice is the cross entropy.</p>
+<h2 id="splitting-boundary">Splitting Boundary</h2>
+<p>An algorithm of finding the bondary cost <span class="math inline">\(\mathcal O(n \cdot d \cdot \texttt{depth})\)</span>.</p>
+<h2 id="regression">Regression</h2>
+<p>Using decision trees to do regression requires choosing piecewise boundaries at every node. At the leaf you may get a subset of sample points which a single value can be outputted by taking some aggregate.</p>
+<h2 id="stopping-condition">Stopping Condition</h2>
+<p>The tree training algorithm can be stopped to:</p>
+<ul>
+<li>Limit tree depth</li>
+<li>Limit tree size</li>
+<li>Prevent overfit</li>
+</ul>
+<p>The following are examples of stopping conditions * Next split doesn't reduce entropy/error enough * Most of the node points are in the same class * Nodes contains few sample points * Cell's edges are all tiny * Depth is too great * Validation performance does not improve. * Pruning * Remove splits that the removal will improve cross-validation.</p>
+<p>When a stopping condition is made the leaves may not be pure thus we need a decision rule for the unpure leaves:</p>
+<ul>
+<li>Return the majority (classification).</li>
+<li>Return the posterior probability.</li>
+<li>Return the aggregate (regression).</li>
+</ul>

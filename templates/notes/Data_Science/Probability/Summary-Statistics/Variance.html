@@ -1,0 +1,45 @@
+<h2 id="variance">Variance</h2>
+<p><span class="math display">\[\text{Var}[X] = \mathbb E\left[ (X-\mu)^2 \right]\]</span></p>
+<ul>
+<li><p>More useful identity:</p>
+<p><span class="math display">\[\text{Var}[X] = \mathbb E[X^2] - \mathbb E[X]^2\]</span></p></li>
+<li><p>Sum</p>
+<p><span class="math display">\[\text{Var}\left[\sum X_i\right] = \sum \text{Var}[X_i] + \sum_{i \neq j} \text{Cov}[X_i,X_j]\]</span></p>
+<p>If all random variable are independent:</p>
+<p><span class="math display">\[\text{Var}\left[\sum X_i\right] = \sum \text{Var}[X_i] \]</span></p></li>
+</ul>
+<h2 id="covariance">Covariance</h2>
+<h3 id="properties">Properties</h3>
+<ul>
+<li><p>Positive covariance:</p>
+<p><span class="math display">\[
+\text{Cov}[X,Y] &gt; 0 \implies \abs{X - E[X]} &gt; 0 \land \abs{Y - E[Y]} &gt; 0
+\]</span></p></li>
+<li><p>Negative covariance:</p>
+<p><span class="math display">\[
+\text{Cov}[X,Y] &gt; 0 \implies \Big( \abs{X - E[X]} &gt; 0 \land \abs{Y - E[Y]} &lt; 0 \Big) \lor \Big(\abs{X - E[X]} &lt; 0 \land \abs{Y - E[Y]} &gt; 0 \Big)
+\]</span></p></li>
+<li><p>Bilinearity:</p>
+<p><span class="math display">\[
+\text{Cov}[\boldsymbol{a \cdot X}, \boldsymbol{b \cdot Y}] = \sum_{i}\sum_{j}a_ib_j \text{Cov}[X_i,X_j]
+\]</span></p></li>
+</ul>
+<h2 id="correlation">Correlation</h2>
+<h3 id="properties-1">Properties</h3>
+<ul>
+<li><p><strong>Standardized Random Variables</strong> With standardized random variables <span class="math inline">\(X&#39;\)</span> and <span class="math inline">\(Y&#39;\)</span>:</p>
+<p><span class="math display">\[ X&#39; = \frac{X - \mathbb E[X]}{\sigma(X)} \]</span> <span class="math display">\[ Y&#39; = \frac{Y - \mathbb E[Y]}{\sigma(Y)} \]</span></p>
+<p><span class="math display">\[ \text{Corr}[X,Y] = E[X&#39;Y&#39;]  \]</span></p></li>
+<li><p><strong>Unity Bound</strong></p>
+<p><span class="math display">\[ -1 \le \text{Corr}[X,Y] \le 1 \]</span></p>
+<dl>
+<dt>Proof</dt>
+<dd>Consider the standardize random variable <span class="math inline">\(X&#39;\)</span> and <span class="math inline">\(Y&#39;\)</span>. By the Cauchy-Schwarz Inequality
+</dd>
+</dl>
+<p><span class="math display">\[ \abs{\mathbb E[X&#39;Y&#39;]} \le \abs{\mathbb E[X&#39;] \mathbb E[Y&#39;]} = 1\]</span></p>
+<p>Thus,</p>
+<p><span class="math display">\[ -1 \le \text{Corr}[X,Y] \le 1  \]</span></p></li>
+<li><p><strong>Perfectly Correlated or Anticorrelated</strong></p></li>
+</ul>
+<p><span class="math display">\[ \text{Corr}[X,Y] = 1 \implies X = Y \]</span> <span class="math display">\[ \text{Corr}[X,Y] = -1 \implies X = -Y\]</span></p>

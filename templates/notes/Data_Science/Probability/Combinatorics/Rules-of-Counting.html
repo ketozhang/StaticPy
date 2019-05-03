@@ -1,0 +1,37 @@
+<p>Combinatorics is the study of counting a systems that can be represented as a finite sets.</p>
+<h2 id="without-replacement">Without Replacement</h2>
+<p>A system without replacement can be counted either with permutation or combination,</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>First Rule of Counting (Ordered Counting)</strong> <span class="math display">\[ C(n,k) = \frac{n!}{(n-k)!} \]</span></p></li>
+<li><p><strong>Second Rule of Counting (Unordered Counting)</strong> <span class="math display">\[ P(n,k) = {n\choose k} = \frac{C(n,k)}{k!} \]</span></p></li>
+</ol>
+<h2 id="with-replacement">With Replacement</h2>
+<p>Say there are a set of length <span class="math inline">\(n\)</span> and we wish to create subset of length <span class="math inline">\(k\)</span></p>
+<h3 id="third-rule-of-counting-ordered">Third Rule of Counting (Ordered)</h3>
+<p><span class="math display">\[k^n\]</span></p>
+<h3 id="fourth-rule-of-counting-unordered">Fourth Rule of Counting (Unordered)</h3>
+<p><span class="math display">\[{k+n-1 \choose k} = \frac{(k+n-1)!}{k!(n-1)!}\]</span></p>
+<h4 id="example">Example</h4>
+<p>Let's say you want to invest into <span class="math inline">\(k\)</span> stocks of the <span class="math inline">\(n\)</span> companies. An outcome space can be generated out of the sequence of companies</p>
+<p><span class="math display">\[\Omega = \set{\omega \mid \set{C_i}^k}\]</span></p>
+<h2 id="derangement">Derangement</h2>
+<p>A derangement set <span class="math inline">\(D\)</span> of two sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is,</p>
+<p><span class="math display">\[ D = \set{(a,b) : a\in A,~ b\in B,~ a \neq b} \]</span></p>
+<p>The size of the deranged set depends on three characteristics:</p>
+<ol style="list-style-type: decimal">
+<li>Are the elements of <span class="math inline">\(D\)</span> distinguishable</li>
+<li>Are we sampling with or without replacement.</li>
+<li>Are objects ordered or not.</li>
+</ol>
+<p><span class="math display">\[ D_n \equiv \abs{D}\]</span> <span class="math display">\[ D_n = (n-1) \cdot \left(D_{n-1} + D_{n-2}\right) \]</span></p>
+<p>We can solve for this recursion letting <span class="math inline">\(Q_n := D_n - nD_{n-1}\)</span> and noticing <span class="math inline">\(Q_n = -Q_{n-1}\)</span> thus <span class="math inline">\(Q_n = (-1)^{n}\)</span> and then,</p>
+<p><span class="math display">\[
+\begin{gather*}
+    \frac{Q_n}{n!} = \frac{D_n}{n!} - \frac{D_{n-1}}{(n-1)!} = \frac{(-1)^n}{n!}\\
+    \frac{D_n}{n!} = \frac{D_{n-1}}{(n-1)!} + \frac{(-1)^n}{n!}\\\\
+    \boxed{D_n = n!\sum_{i=0}^{n}\frac{(-1)^{i}}{i!}}\\
+    \boxed{\lim_{n\rightarrow \infty} D_n = \frac{n!}{e}}
+\end{gather*}
+\]</span></p>
+<h2 id="useful-identities">Useful Identities</h2>
+<p><span class="math display">\[ {n \choose k + 1} = {n-1 \choose k} + {n-2 \choose k} + \ldots + {k \choose k} \]</span></p>

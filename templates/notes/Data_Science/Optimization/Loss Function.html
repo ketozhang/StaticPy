@@ -1,0 +1,75 @@
+<p>The <strong>loss function</strong> is a function that describe the cost, error, or loss resulting from a choice of a model. Mathematically you may interpret this as the function that calculates the deviation of the model from the actual answer/system.</p>
+<p>Say for some data <span class="math inline">\(y(x)\)</span> is estimated by a prediction (model) <span class="math inline">\(\theta(x)\)</span>, then the loss function <span class="math inline">\(L\)</span> takes in the two functions <span class="math inline">\(L(\theta,y)\)</span> and computes the error.</p>
+<p>Still confused? Just go to the next section, this requires examples.</p>
+<h2 id="motivation">Motivation</h2>
+<p>A common way to measure error between some data and model is directly get the residual (subtract the two together). This subtraction may be written as some function (the loss function) as,</p>
+<p><span class="math display">\[ L(\theta,y_i) =  |y_i - \theta|\]</span></p>
+<p>We wish to find some model <span class="math inline">\(\theta(x)\)</span> that fits as closely to the data <span class="math inline">\(y(x)\)</span> as possible. The loss function method attempts to do so by minimizing the loss for some parameter <span class="math inline">\(\theta\)</span>. We begin by using a single parameter to guess a zeroth order approximation,</p>
+<p><span class="math display">\[ y \approx \hat\theta \]</span></p>
+<ul>
+<li><span class="math inline">\(\hat \theta\)</span> : Best parameter that minimizes the loss function.</li>
+</ul>
+<p>Later on we will attempt to do better by either introducing other parameters (if it exists) or use other expansion like the power series of <span class="math inline">\(\theta\)</span>.</p>
+<h2 id="types-of-loss-functions">Types of Loss Functions</h2>
+<h3 id="absolute-loss-function">Absolute Loss Function</h3>
+<p>The <strong>absolute loss function</strong> denoted as <span class="math inline">\(\Bbb{L}_1​\)</span> is defined as the <strong>residual</strong> or <strong>difference</strong> the data and model is given by,</p>
+<p><span class="math display">\[\boxed{L(\theta,y_i) =  |y_i - \theta|}​\]</span></p>
+<ul>
+<li><strong>Pros</strong>
+<ul>
+<li>Not sensitive to the outlier</li>
+</ul></li>
+<li><strong>Cons</strong>
+<ul>
+<li>Minimum is difficult at <span class="math inline">\(\theta - y_i = 0​\)</span> since the absolute value is not differentiable at the turning point.</li>
+</ul></li>
+<li><strong>Minimum of Average <span class="math inline">\(\Bbb L\)</span></strong>
+<ul>
+<li>The minimum of <span class="math inline">\(\Bbb{L}\)</span> occurs at the <strong>median</strong> of the dataset <span class="math inline">\(y\)</span></li>
+</ul></li>
+</ul>
+<h3 id="squared-distance-loss-function">Squared Distance Loss Function</h3>
+<p>The Euclidean distance or square distance loss function denoted as <span class="math inline">\(\Bbb{L}_2​\)</span> simply computes the distance between the data and the model. It may be written as,</p>
+<p><span class="math display">\[\boxed{ L(\theta, y_i) = (y_i-\theta)^2 }\]</span></p>
+<ul>
+<li><strong>Pros</strong>
+<ul>
+<li>Minimum is easy to find since differentiable</li>
+</ul></li>
+<li><strong>Cons</strong>
+<ul>
+<li>Any error (<span class="math inline">\(\abs{y-\theta} &gt; 0​\)</span>) is amplified squarely</li>
+<li>Sensitive to the outlier</li>
+</ul></li>
+<li><strong>Minimum of Average <span class="math inline">\(\Bbb L^2\)</span></strong>
+<ul>
+<li>The minimum of <span class="math inline">\(\Bbb{L}^2​\)</span> occurs at the <strong>mean</strong> of the dataset <span class="math inline">\(y​\)</span></li>
+</ul></li>
+</ul>
+<h3 id="huber-loss-function">Huber Loss Function</h3>
+<p>A popular loss function is the Huber loss that attempts to blend the two loss functions <span class="math inline">\(\Bbb L_1\)</span> and <span class="math inline">\(\Bbb L_2\)</span> by a piecewise function:</p>
+<p><span class="math display">\[ L_\alpha(\theta,y_i) = \begin{cases}
+    \frac{1}{2}(y-\theta)^2 &amp; \abs{y-\theta} &lt; \alpha\\
+    \alpha(\abs{y-\theta} - \frac{\alpha}{2}) &amp; \text{elsewhere}
+\end{cases}\]</span></p>
+<ul>
+<li><span class="math inline">\(\alpha\)</span> : a parameter that adjust how much of <span class="math inline">\(\Bbb{L}_2\)</span> dominates the loss function. So at <span class="math inline">\(\alpha \ll 1\)</span>, the loss function is similar to <span class="math inline">\(\Bbb{L}_1\)</span>.</li>
+</ul>
+<h3 id="discrete-loss-function">Discrete Loss Function</h3>
+<p>A discrete loss function assigns a constant value if some error is made. A very common type of this loss is called the <strong>one-zero loss function</strong> or <strong>binary loss function</strong>.</p>
+<p><span class="math display">\[
+L(\theta, y_i) =
+\begin{cases}
+    0, &amp; \hat y = y\\
+    1, &amp; \hat y \neq y
+\end{cases}
+\]</span></p>
+<p>Other discrete loss function can be built to portray for instance great loss for false negative versus small loss for false positives (e.g., medical diagnosis).</p>
+<h2 id="ensemble-loss-function">Ensemble Loss Function</h2>
+<p>Given <span class="math inline">\(n\)</span> sample points and predictions <span class="math inline">\((y,\hat y )\)</span> we'd like to get a value out of the loss for among every sample point. Take the loss as a vector <span class="math inline">\(L\)</span> and apply some aggregation function <span class="math inline">\(f\)</span> to get the <strong>ensemble loss function</strong>. <span class="math display">\[
+\mathcal L = f(L)
+\]</span></p>
+<h3 id="risk-function">Risk Function</h3>
+<p>A common example of the an ensemble loss function is to take the expected value. This is called the <strong>risk function</strong> <span class="math display">\[
+R(X,\theta) = \mathbb E[L]
+\]</span></p>

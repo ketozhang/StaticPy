@@ -1,0 +1,21 @@
+<h2 id="forward-stepwise-selection">Forward Stepwise Selection</h2>
+<p><span class="math inline">\(\mathcal O(d^2)\)</span> algorithm that builds a model by adding features iteratively:</p>
+<ol style="list-style-type: decimal">
+<li>Start with no features (null model)</li>
+<li>Score single-feature models</li>
+<li>Add the best scoring single-feature model to the null model</li>
+<li>Repeatedly add the best scoring feature until validation error starts increasing.</li>
+</ol>
+<h2 id="backward-stepwise-selection">Backward Stepwise Selection</h2>
+<p><span class="math inline">\(\mathcal O(d^2)\)</span> algorithm that builds a model by removing features iteratively:</p>
+<ol style="list-style-type: decimal">
+<li>Start with all-features model</li>
+<li>Remove the feature that results to the best <span class="math inline">\(d-1\)</span> feature model.</li>
+</ol>
+<h2 id="selection-by-parameter">Selection by Parameter</h2>
+<p>Remove features with small parameters. This is best used for normalized data.</p>
+<p>If the data is not normalized, alternatively some metric called the <strong>z-score</strong> can be used to score the features' importance. <span class="math display">\[
+z_j = \frac{\theta_j}{\sigma \sqrt{(X^\top X)_{jj}}}
+\]</span></p>
+<h3 id="lasso">LASSO</h3>
+<p>Naturally adding the LASSO regularization would set some of the features to zero. Using this these features may as well be removed from the dataset.</p>

@@ -1,0 +1,76 @@
+<p>Given that not all data can be fitted by a <strong>maximal margin classifier</strong> (MMC), the <strong>Support Vector Classifier</strong> attempts to generalize this classifier.</p>
+<h2 id="hard-margin-svc">Hard Margin SVC</h2>
+<p>This term is equivalent to the MMC which perfectly separates a linearly separable dataset in the feature space. As usually it's easier to talk about binary classes. The goal of hard margin SVC is to separate one class of points away from the other class by a hyperplane decision boundary in the feature space given by, <span class="math display">\[
+X^\top \theta + \theta_0 = 0
+\]</span> The minimum distance between all points to the hyperplane is called the <strong>margin</strong> <span class="math inline">\(M\)</span>. We motivate that the larger the <span class="math inline">\(M​\)</span> the more confident the SVC successfully separate the two classes. Hence, the optimization problem for the SVC is to maximize the margin given, <span class="math display">\[
+\begin{gather}
+\max_{\theta, \theta_0} M~; \qquad |\theta|=1\\
+y_i(X_i^\top\theta + \theta_0) \ge  M~; \qquad i \in [1,n]
+\end{gather}
+\]</span> <img src="D:\Google%20Drive\Documents\Notes_Data_Science\Statistical_Modeling\Classification\SVC.png" alt="SVC" /></p>
+<p>We can remove the constraint of <span class="math inline">\(|\theta|=1\)</span> by noting that when <span class="math inline">\(\theta\)</span> isn't normalized, <span class="math inline">\(M \propto 1/|\theta|\)</span>. This justify that it is equivalent to let the optimization problem be in terms purely of <span class="math inline">\(|\theta|\)</span> (i.e., <span class="math inline">\(M:= 1/|\theta|\)</span>), <span class="math display">\[
+\begin{gather}
+\min_{\theta, \theta_0} |\theta|~\\
+y_i(X^\top\theta + \theta_0) \ge 1~; \qquad i \in [1,n]
+\end{gather}
+\]</span></p>
+<h2 id="soft-margin-svc">Soft Margin SVC</h2>
+<p>To be <strong>soft margin</strong> is to allow some training points to lie within the margin <span class="math inline">\(y(X_i) \le M\)</span> and some points to be on the wrong side of the decision boundary. This could lead to training error but improve MMC in:</p>
+<ul>
+<li>Greater robustness to new training points.</li>
+<li>Can describe more general training points.</li>
+</ul>
+<p>We relax the conditions by introducing a slack variable <span class="math inline">\(\epsilon\)</span>.</p>
+<p><span class="math display">\[
+\begin{gather*}
+     \min_{\theta} |\theta|\\
+     y_i(\theta^TX_i + \theta_0) \ge 1-\epsilon_i~; \qquad i \in [1,n]\\ \epsilon_i \ge 0~; \qquad \sum_{i=1}^n\epsilon_i \le C
+\end{gather*}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\epsilon\)</span> : <strong>slack variable</strong> or <strong>error variable</strong>
+<ul>
+<li>If <span class="math inline">\(\epsilon_i &gt; 0\)</span> then <span class="math inline">\(i\)</span>-th point is on the wrong side of the margin</li>
+<li>If <span class="math inline">\(\epsilon_i &gt; 1\)</span> then the <span class="math inline">\(i\)</span>-th point is on the wrong side of the hyperplane.</li>
+</ul></li>
+<li><span class="math inline">\(C\)</span>: <strong>C penalty</strong>, a hyperparameter that can be intuitively think of as the budget for the amount of training points that can violate the margin (be within the margin or even on the opposite side).
+<ul>
+<li>For <span class="math inline">\(C&gt;0\)</span>, there can be no more than <span class="math inline">\(C\)</span> training points on the wrong side of the hyperplane (being on the hyperplane is also being on the wrong side).</li>
+</ul></li>
+<li><strong>Support Vectors</strong>: we redefine support vectors to be the training points that lie on or within the margin. In fact, only support vectors effective the decision boundaries. Any new data point outside the margin (not a support vector) have no effect on the decision boundary.</li>
+</ul>
+<p>We can convert the SVC into a quadratic form,</p>
+<p><span class="math display">\[
+\begin{gather*}
+    \min_{\theta, \epsilon}{\lvert \theta \rvert^2} + \frac{1}{C} \sum_{i=1}^n \epsilon_i\\
+    y_i(\theta^TX_i + \alpha) \ge 1 - \epsilon_i~; \qquad i \in [1,n]\\
+    \epsilon_i \ge 0\\
+\end{gather*}
+\]</span></p>
+<h2 id="solutions-to-svc">Solutions to SVC</h2>
+<p>The solution (the hyperplane) to the SVC optimizing problem can be shown to always take the form,</p>
+<p><span class="math display">\[ f(x) = \theta_0 + \sum_{i=1}^n{\alpha_i K(X_i,x)} \]</span></p>
+<ul>
+<li><span class="math inline">\(K(X_i,x)\)</span> : The kernel function that takes in the training points and the input value. Here are the following frequently used kernels:
+<ul>
+<li><strong>Linear:</strong> <span class="math display">\[K(X_i,x) = X_i \cdot x\]</span></li>
+<li><strong>Polynomial</strong> <span class="math display">\[K(X_i,x) = (1 + X_i \cdot x)^d\]</span></li>
+<li><strong>Radial:</strong> <span class="math display">\[K(X_i,x) = \exp\left(-\gamma \sum_{j=1}^p{(X_{ij} - x_{j})^2}\right)\]</span></li>
+</ul></li>
+<li><span class="math inline">\(\alpha_i\)</span>: Nonzero only for support vectors.</li>
+</ul>
+<h2 id="nonlinear-feature-transformation">Nonlinear Feature Transformation</h2>
+<h3 id="feature-lifting">Feature Lifting</h3>
+<p>For example, a parabolic feature transformation adds another dimension to the feature vector where the new dimension is <span class="math inline">\(X_{i, d+1} = \lvert{X_i}^2\rvert\)</span>,</p>
+<p><span class="math display">\[
+\Phi(X_i) = \begin{bmatrix}
+    X_i \\
+    \lvert X_i \rvert^2
+\end{bmatrix}
+\]</span></p>
+<p>Effectively this adds a squared length feature as the <span class="math inline">\((d+1)\)</span>th dimension that lifs feature points up higher if they are further away from the origin. A hyperplane can then slice through the gap if say class A is lifted higher than class B.</p>
+<dl>
+<dt>Theorem</dt>
+<dd><span class="math inline">\(\Phi(X)\)</span> are linearly separable iff <span class="math inline">\(X\)</span> is separable by a hypersphere.
+</dd>
+</dl>

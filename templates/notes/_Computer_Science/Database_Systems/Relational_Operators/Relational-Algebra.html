@@ -1,0 +1,71 @@
+<h2 id="relational-calculus">Relational Calculus</h2>
+<p>Relational calculus is a declarative representation of queries with operation description which we see in relational algebra (Codd's Theorem).</p>
+<h2 id="operators">Operators</h2>
+<dl>
+<dt>Unary</dt>
+<dd>Operators of a single relation
+</dd>
+</dl>
+<ul>
+<li><strong>Projection</strong> (<span class="math inline">\(\pi\)</span>): Retains only desired columns
+<ul>
+<li><p><code>SELECT</code> <span class="math display">\[ \pi_\texttt{col_expr} \]</span></p></li>
+<li><p>Cascade property: <span class="math display">\[ \pi_{c1} \equiv \pi_{c1}(\pi_{c1 \land c2}) \]</span></p></li>
+</ul></li>
+<li><strong>Selection</strong> (<span class="math inline">\(\sigma\)</span>): Select a subset of rows
+<ul>
+<li><code>WHERE</code> <span class="math display">\[\sigma_\texttt{pred}\]</span></li>
+<li><p>Cascade property: <span class="math display">\[ \sigma_{c1 \land c2} \equiv \sigma_{c1}\sigma_{c2} \]</span></p></li>
+<li>Commutative property: <span class="math display">\[ \sigma_{c1}\sigma_{c2} \equiv \sigma_{c2}\sigma_{c1} \]</span></li>
+</ul></li>
+<li><strong>Renaming</strong> (<span class="math inline">\(\rho\)</span>): Rename attributes and relations
+<ul>
+<li><code>AS</code> <span class="math display">\[\rho(\texttt{rename}, \texttt{relational_expr})\]</span></li>
+</ul></li>
+</ul>
+<dl>
+<dt>Binary</dt>
+<dd>Operators of a pair relations
+</dd>
+</dl>
+<ul>
+<li><strong>Union</strong> (<span class="math inline">\(\cup\)</span>)
+<ul>
+<li><code>UNION [ALL]</code></li>
+<li>Think of it as concatenation</li>
+<li>Requires the pairs to be union compatible (same number of field in the same order)</li>
+</ul></li>
+<li><strong>Difference</strong> (<span class="math inline">\(-\)</span>)
+<ul>
+<li><code>EXCEPT [ALL]</code></li>
+</ul></li>
+<li><strong>Cross Product</strong> (<span class="math inline">\(\times\)</span>)
+<ul>
+<li><code>JOIN</code></li>
+</ul></li>
+</ul>
+<dl>
+<dt>Compound</dt>
+<dd>A combination of operators
+</dd>
+</dl>
+<ul>
+<li><strong>Intersection</strong> (<span class="math inline">\(\cap\)</span>)
+<ul>
+<li><code>INTERSECT</code> <span class="math display">\[ A \cap B \equiv A - (A-B) \]</span></li>
+</ul></li>
+<li><strong>Join</strong> (<span class="math inline">\(\Join\)</span>)
+<ul>
+<li>Theta join <span class="math display">\[ \Join_\texttt{ON} \]</span> <span class="math display">\[ A \Join B \equiv \sigma_\texttt{pred}(A \times B) \]</span></li>
+<li><p>Natural join <span class="math display">\[ A \Join B \equiv \pi_\texttt{col_expr} \sigma_\texttt{pred}(A \times B) \]</span></p>
+<p>Where <span class="math inline">\(\texttt{pred}\)</span> is common columns.</p></li>
+</ul></li>
+</ul>
+<dl>
+<dt>Other</dt>
+<dd><p>Some academics use the following as useful macros</p>
+<ul>
+<li>Group by, aggregation, and having <span class="math display">\[ \gamma_\texttt{groupby, aggregate, having} \]</span></li>
+</ul>
+</dd>
+</dl>

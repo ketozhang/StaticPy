@@ -1,0 +1,19 @@
+<p>Consider a dataset as a matrix of <span class="math inline">\(X \in \mathbb{R}^{m\times n}\)</span> where we've extracted <span class="math inline">\(m\)</span> numbers of data records/rows and <span class="math inline">\(n\)</span> numbers of feature columns. We may map the dataset <span class="math inline">\(X_0\)</span> to a feature function which outputs the design matrix <span class="math inline">\(X = f(X_0)\)</span>. Our linear model can easily be written in the form of a dot product,</p>
+<p><span class="math display">\[ \hat y = X \beta \]</span></p>
+<ul>
+<li><span class="math inline">\(\hat y\)</span> : Model output vector</li>
+<li><span class="math inline">\(\beta^T\)</span> : Row vector of the transposed parameter vector</li>
+<li><span class="math inline">\(X\)</span> : Feature or Design matrix</li>
+</ul>
+<h2 id="solution-to-square-design-matrix">Solution to Square Design Matrix</h2>
+<p>In rare cases, the design matrix is a square matrix. In this case the solution is possibly,</p>
+<p><span class="math display">\[ \beta = X^{-1}\hat y \]</span></p>
+<h2 id="normal-equation">Normal Equation</h2>
+<p>We may force the design matrix to be a square matrix by multiplying both sides by its transpose,</p>
+<p><span class="math display">\[ X^T\hat y = X^T X \beta  \]</span></p>
+<p>We still have a linear equation and the solution for <span class="math inline">\(\beta\)</span> is can be done in two ways:</p>
+<ol style="list-style-type: decimal">
+<li><p>Assuming <span class="math inline">\(X^TX\)</span> is an invertible matrix,</p>
+<p><span class="math display">\[ \beta = (X^TX)^{-1} X^T\hat y \]</span></p></li>
+<li><p>Gaussian Elimination (traditional way of solving linear algebra equations)</p></li>
+</ol>

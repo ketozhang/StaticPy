@@ -1,5 +1,4 @@
 ---
-layout: post
 title: The Jekyll Nokogiri Problem
 description: ""
 image: https://via.placeholder.com/320x240

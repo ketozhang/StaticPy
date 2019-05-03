@@ -1,0 +1,34 @@
+<h2 id="axioms">Axioms</h2>
+<h3 id="non-negative-probability">1. Non-negative Probability</h3>
+<p>The probability of any event must be non-negative:</p>
+<p><span class="math display">\[
+    P(x) \ge 0
+\]</span></p>
+<h3 id="outcome-space-is-unitary">2. Outcome Space is Unitary</h3>
+<p>The length of the outcome space must be 1,</p>
+<p><span class="math display">\[
+P(\Omega) = 1\\
+\text{or}\\
+\sum_{x \in X}p(x) = 1
+\]</span></p>
+<h3 id="mutually-exclusive---addition-rule">3. Mutually Exclusive - Addition Rule</h3>
+<ul>
+<li><p>Two events are mutually exclusive if the intersection is the empty set</p>
+<p><span class="math display">\[A \cap B = \emptyset\]</span></p></li>
+<li><p>If two events are mutually exclusive then the probability is additive:</p>
+<p><span class="math display">\[ P(A \cup B) = P(A) + P(B)\]</span></p>
+<p>In general, one may see the notation</p>
+<p><span class="math display">\[ P\left(\bigcup_i^n A_i\right) = \sum_{i}^n P(A_i) \]</span></p>
+<p>This is called the <strong>addition rule</strong></p></li>
+</ul>
+<h2 id="rules">Rules</h2>
+<h3 id="difference-rule">Difference Rule</h3>
+<p>From the additive rule we can derive the difference rule. The difference rule is if we have two events of relations <span class="math inline">\(B \subseteq A\)</span> then we can find the probability of events in <span class="math inline">\(A\)</span> but not in <span class="math inline">\(B\)</span> denoted as <span class="math inline">\(A \backslash B\)</span> or <span class="math inline">\(A - B\)</span>,</p>
+<p><span class="math display">\[
+    P(A \backslash B) = P(A - B) = P(A) - P(B)
+\]</span></p>
+<p>Additionally another result of the difference rule is the <strong>complement set</strong> <span class="math inline">\(B^c\)</span> which means the event that <span class="math inline">\(B\)</span> doesn't happen,</p>
+<p><span class="math display">\[
+B^C = \Omega - B\\
+P(B^C) = 1-P(B)
+\]</span></p>

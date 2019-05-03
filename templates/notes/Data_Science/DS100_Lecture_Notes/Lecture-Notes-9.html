@@ -1,0 +1,57 @@
+<h1 id="lecture-notes-9">Lecture Notes 9</h1>
+<h2 id="kernel-density-estimator">Kernel Density Estimator</h2>
+<p>A <strong>kernel density estimator</strong> is an attempt to convert discrete data point to some continuous function by estimating the missing values. This is done by converting a point to some kernel function <span class="math inline">\(K\)</span>. What one gets out of a KDE is a estimated density distribution (hence its name) <span class="math inline">\(p(x)\)</span> which is given by,</p>
+<p><span class="math display">\[ p(x) = \frac{1}{n} \sum_{i=1}^{n}{K}(x-x_i)\]</span></p>
+<p>A very common kernel function is the gaussian where we may add an extra parameter <span class="math inline">\(\alpha\)</span> to adjust the bandwidth of the gaussian hence,</p>
+<p><span class="math display">\[ K = K(r, \alpha) = \frac{1}{\sqrt{2\pi\alpha^2}}e^{-\frac{r^2}{2\alpha^2}} \]</span></p>
+<h2 id="data-scraping">Data Scraping</h2>
+<p>Data mining is the process to collect data from formatted source (e.g., webpage, PDF, etc).</p>
+<h3 id="pandas-html-parsing">Pandas HTML Parsing</h3>
+<p>Pandas is able to parse data from HTML using well formatted table tags (<code>&lt;table&gt;&lt;/table&gt;</code>). This function is called <code>Pandas.read_html</code>. The function returns a <code>list</code> of <code>Pandas.DataFrame</code> and is used like so:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">tables <span class="op">=</span> pd.read_html(<span class="st">&quot;[URL | HTML FILE]&quot;</span>)</code></pre></div>
+<h3 id="hypertext-transfer-protocol-http">Hypertext Transfer Protocol (HTTP)</h3>
+<p>Hypertext Transfer Protocol (HTTP) is a protocol that governs how servers and client request and update information to one another often used in some browser-based environment (i.e., language of communication is HTML, JavaScript, PHP, etc). Do not confuse this with TDP and UDP which is protocol that governs server-server or server-client traffic (handling packages) and communication (request) in general.</p>
+<p>For data scraping, the header is important which is the actual message that the server and clients send to each other. There are two types:</p>
+<dl>
+<dt>GET: get information</dt>
+<dd><ul>
+<li>Should never change the state of the server.</li>
+</ul>
+</dd>
+<dt>POST: send information</dt>
+<dd><ul>
+<li>Are able to change the state of the server.</li>
+</ul>
+</dd>
+</dl>
+<p>A typical response to a request is also in the header. What you should pay attention to is the <strong>response status codes</strong> which are either:</p>
+<ul>
+<li>100s Informational</li>
+<li>200 Success</li>
+<li>300s Redirection or Conditional Action</li>
+<li>400s Client Error</li>
+<li>500s Internal Server Error or Broken Request</li>
+</ul>
+<p>The body or content of these request are either of the following languages:</p>
+<ul>
+<li><strong>JavaScript Object Notation (JSON)</strong>
+<ul>
+<li>Nested data structure that looks very similar to a dictionary</li>
+<li>Values in JSON are greatly versatile it may be a string, number, list, or dictionary.</li>
+</ul></li>
+<li><strong>Extensible Markup Language (XML)</strong>
+<ul>
+<li>Nested data structure that require the keys-value pair to be a tag structure <code>&lt;key&gt; value &lt;key/&gt;</code></li>
+<li>Semi-human readable.</li>
+</ul></li>
+<li><strong>Hypertext Markup Language (HTML)</strong>
+<ul>
+<li>Nested data structure very similar to XML</li>
+<li>Main difference between XML is that there exist specific tags (e.g., <code>&lt;div&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;head&gt;</code>) that are reserved to be displayed as something.</li>
+</ul></li>
+<li><strong>Document Object Model (DOM)</strong>
+<ul>
+<li>Not a separate language but a convention that convert XML or HTML as a tree type.</li>
+<li>Used heavily in HTML to separate the <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code>.</li>
+</ul></li>
+</ul>

@@ -1,0 +1,86 @@
+<p>The <strong>logistic regression</strong> transforms the linear regression problem with the <strong>logistic</strong> or <strong>sigmoid function</strong> <span class="math inline">\(s(z)\)</span> used for posterior distribution estimation and classification<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<p>We will motivate this with a binary problem where <span class="math inline">\(Y: \{0,1\}\)</span> notice that the logistic function transforms the linear regression to the interval <span class="math inline">\([0,1]\)</span>. <span class="math display">\[
+\begin{gather}
+P(X \mid Y=\hat y) = s(\hat y); \qquad \hat y  = X\theta \\
+s(z) = \frac{e^z}{1+e^{z}} = \frac{1}{1+e^{-z}}; \qquad s(z) \in [0,1]
+\end{gather}
+\]</span> * <span class="math inline">\(\hat y\)</span> : Model</p>
+<p>This is purposely done so that we can interpret the logistic regression as a probability of classification given the data <span class="math inline">\(P(X \mid Y)\)</span>. From here on out we will choose to classify if <span class="math inline">\(Y=1\)</span>.</p>
+<p>A more insight into what we're modeling with <span class="math inline">\(\hat y\)</span> is to notice the following identity <span class="math display">\[
+\begin{equation}
+\log \left[\frac{P(X \mid Y=1)}{1 - P(X\mid Y=1)}\right] = \hat y
+\end{equation}
+\]</span> This identity is called <strong>log-odds</strong> or <strong>logit</strong> hence we're fitting some model to the log ratio of probabilities that <span class="math inline">\(Y=1\)</span> compared to <span class="math inline">\(Y=0\)</span>.</p>
+<p>The objective function to solve for <span class="math inline">\(\theta\)</span> is chosen to be the maximum likelihood (we will discuss why this is equivalent to minimum loss later). The likelihood function is naturally the binomial distribution. We will disregard the leading coefficient because it will be irrelevant in maximization. The decision rule will be discussion later in the <a href="#Decision_Rule">Decision Rule</a> section. <span class="math display">\[
+\begin{align*}
+\log P(X \mid Y=1) &amp;= \sum_{i: y_i = 1} \log P(X_i \mid Y=1~;~\theta) + \sum_{i : y_i = 0} \log \left[1 - P(X_i \mid Y=1~;~\theta)\right]\\
+&amp;= \sum_{i=1}^n y_i\log P(X_i \mid Y=1~;~\theta) + (1-y_i) \log \left[1 - P(X_i \mid Y=1~;~\theta)\right]
+\end{align*}
+\]</span> We can write this out more compactly by plugging substituting the log-likelihood for each data point with the logistic function where <span class="math inline">\(s_i = s(\hat y)\)</span>, <span class="math display">\[
+\log P(X \mid Y=1) = \sum_{i=1}^n y_i \log s_i + (1-y_i) \log (1 - s_i)
+\]</span> The objective function is then, <span class="math display">\[
+\theta^* = \mathop{\arg\max}_{\theta} \bigg[\log P(X \mid Y=1) \bigg] \label{eq:objective}
+\]</span></p>
+<p>The solution to this is discussion in the <a href="#solution">Solution</a> section.</p>
+<h2 id="solutions">Solutions</h2>
+<p>The gradient for the objective function <span class="math inline">\(\eqref{eq:objective}\)</span> (let's denote it as <span class="math inline">\(\log P\)</span> for brevity is, <span class="math display">\[
+\nabla_\theta \log P = -X^\top(y-s) = 0
+\]</span> * <span class="math inline">\(y\)</span> : Vector of labels * <span class="math inline">\(s\)</span>: Vector of the sigmoid for each data point <span class="math inline">\(s = [s_1 \quad s_2 \quad \ldots \quad s_n]^\top\)</span></p>
+<p>Hence, the normal equation is, <span class="math display">\[
+X^\top y = X^\top s
+\]</span> Unfortunately there is no analytical solution that solves for <span class="math inline">\(\theta^*\)</span>. Numerical solutions can be estimated with the methods below:</p>
+<ol style="list-style-type: decimal">
+<li>Newton's Method</li>
+<li>Gradient Descent</li>
+</ol>
+<p>The Newton's method is well behaved since the Hessian is easily calculated: <span class="math display">\[
+H_\theta(\log P) = X^\top \Omega X
+\]</span> Where <span class="math inline">\(\Omega \in \mathbb R^{d \times d}\)</span> is a diagonal matrix with entries <span class="math inline">\(\omega_i = s_i(1-s_i)\)</span>. Using the gradient and the Hessian, Newton's method approximates the next step <span class="math inline">\(\theta(t+1)\)</span> given the current step <span class="math inline">\(\theta(t)\)</span> as, <span class="math display">\[
+\begin{gather*}
+\theta(t+1) = \theta(t) + \Delta \theta\\
+[X^\top \Omega X]\Delta \theta = -X^\top(y-s)
+\end{gather*}
+\]</span> Unfortunately the solution is not well behaved if <span class="math inline">\(X^\top X​\)</span> is not always positive definite. However, a ridge regularization discussed in the section <a href="#regularization">Regularization</a> can guarantee this.</p>
+<h2 id="decision-rule">Decision Rule</h2>
+<p>The decision rule is simple following the Bayes optimal rule: <span class="math display">\[
+\hat Y = \begin{cases}
+1 &amp; P(X \mid Y=1) &gt; 0.5\\
+0 &amp; \text{otherwise.}
+\end{cases}
+\]</span></p>
+<h2 id="regularization">Regularization</h2>
+<p>The most practical regularization is to add the <span class="math inline">\(L_2\)</span> (Ridge) regularization which guarantees that Newton's method is solvable by inversion because the Hessian is positive definite. <span class="math display">\[
+\begin{gather*}
+H_\theta(\log P) = X^\top \Omega X + 2\lambda I\\
+\Delta \theta = -X^\top(y-s)[X^\top \Omega X + 2\lambda I]^{-1}
+\end{gather*}
+\]</span></p>
+<h2 id="multiclass-generalization">Multiclass Generalization</h2>
+<h2 id="equivalence-to-loss-function">Equivalence to Loss Function</h2>
+<p>The logistics regression is linear regression with a logistic loss function. We motivate using logistic loss with the example of data that comes from two classes <span class="math inline">\(y: {0,1}\)</span>. The probability that we receive <span class="math inline">\(y=0\)</span> along with some data <span class="math inline">\(x\)</span> is <span class="math inline">\(P(y=0 \mid x)\)</span>. The probability of the other class is then ​<span class="math inline">\(1 - P(y=0 \mid x)\)</span>. <span class="math display">\[
+P(X \mid \hat y) = \sum_{i=1}^n  \bigg[ \log P(y_i \mid X_i) + \log\Big(1-P(y_i \mid X_i)\Big) \bigg]
+\]</span></p>
+<p>Given <span class="math inline">\(y \in (0,1)\)</span> the logistics function is a discriminant model</p>
+<p>The optimization problem is then,</p>
+<p><span class="math display">\[
+\hat y = \mathop{\arg\min} \sum_{i=1}^n - \left[ y_i \log s_i + (1-y_i)\log(1-s_i)\right]
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(s_i\)</span> : The logistic function for row <span class="math inline">\(i\)</span>,</p>
+<p><span class="math display">\[s_i(X_i^\top \theta) = \frac{1}{1+e^{-X_i^T \theta}}\]</span></p>
+<p>Notice its derivative is,</p>
+<p>$$s_i' = s_i(1-s_i)​</p></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li>Differs from LDA or QDA by emphasizing the decision boundary</li>
+<li>Less sensitive to outliers</li>
+<li>Robust on non-Gaussians. (LDA is better if data is near Gaussian)</li>
+<li>Unstable to new points for well separated classes.</li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>It's unfortunate that it's called logistics regression, but the fact that logistic regression does estimate a posterior distribution is why it's justifiable.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>

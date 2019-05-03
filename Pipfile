@@ -13,7 +13,7 @@ frozen-flask = "*"
 werkzeug = "*"
 python-frontmatter = "*"
 pyyaml = "*"
-e1839a8 = {editable = true,path = "."}
+# e1839a8 = {editable = true,path = "."}
 pyscss = "*"
 flask-assets = "*"
 

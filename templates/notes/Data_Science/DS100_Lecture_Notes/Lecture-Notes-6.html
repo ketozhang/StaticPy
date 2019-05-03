@@ -1,0 +1,61 @@
+<h1 id="lecture-note-6---eda-and-visualization">Lecture Note 6 - EDA and Visualization</h1>
+<h2 id="temporality">Temporality</h2>
+<h3 id="dealing-with-time">Dealing with Time</h3>
+<ul>
+<li>There are evidence in the date and time that shows whether or not the record was handwritten or by computer (e.g., computers often put decimal in times)</li>
+<li>Timezone are a nuisance to deal with but we must deal with it. Luckily there are packages like <code>datetime</code> in Python.</li>
+<li>Conventions of time
+<ul>
+<li>UTC (Coordinated Universal Time) is the best timezone to use because you can simply transform them to any region. The only con is that UTC does not account for daylight savings.</li>
+<li>UNIX/POSIX time is a convention that started counting seconds ever since January 1, 1970</li>
+</ul></li>
+</ul>
+<h2 id="faithfulness">Faithfulness</h2>
+<p>Prefer to consider this as the integrity of the data. Faithfulness/integrity depends on whether or not one should trust the data, does it have bias, is it consistent.</p>
+<ul>
+<li>Missing Values / Default Values:
+<ul>
+<li>Drop missing values</li>
+<li>Infer on missing values</li>
+</ul></li>
+<li>Time Zone Inconsistencies
+<ul>
+<li>Convert to common time zone (e.g., UTC)</li>
+<li>Convert to local time zone</li>
+</ul></li>
+<li>Duplications
+<ul>
+<li>Identify and drop (using primary key)</li>
+</ul></li>
+<li>Spelling Errors
+<ul>
+<li>Apply corrections and rop records not in dictionary</li>
+</ul></li>
+<li>Units Inconsistencies or Unknown
+<ul>
+<li>Infer units.</li>
+</ul></li>
+<li>Truncated Data
+<ul>
+<li>Look for the complete data set.</li>
+</ul></li>
+</ul>
+<h2 id="visualization">Visualization</h2>
+<ul>
+<li>Quantitative Data
+<ul>
+<li>Histogram, box plots, rug plots, smoothed interpolations (KDE - Kernel Density Estimators)</li>
+<li>Look fro spread, shape, modes, outliers, unreasonable values</li>
+</ul></li>
+<li>Nominal &amp; Ordinal Data
+<ul>
+<li>Bar plots (sorted by frequency or ordinal dimension)</li>
+<li>Look for skew, frequent and rare categories, or invalid categories</li>
+<li>Consider grouping categories and repeating analysis</li>
+</ul></li>
+</ul>
+<h3 id="histogram">Histogram</h3>
+<div class="figure">
+<img src="2018-02-03-16-15-22.png" />
+
+</div>

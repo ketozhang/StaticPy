@@ -1,0 +1,20 @@
+<h2 id="symmetry">Symmetry</h2>
+<p>For these problems, we have a symmetry among ordered random variables.</p>
+<ol style="list-style-type: decimal">
+<li><p>The probability of the <span class="math inline">\(i\)</span>-th random variable does not matter about order</p>
+<p><span class="math display">\[ P(X_i=x) = \frac{1}{n} \]</span></p></li>
+<li><p>The probability of the multiple random variable does not care about order</p>
+<p><span class="math display">\[ P(\boldsymbol{X} = \boldsymbol{x}) = \frac{1}{n} \cdot \frac{1}{n-1} \cdots \frac{1}{n-k+1} \]</span></p>
+<ul>
+<li><span class="math inline">\(\boldsymbol X\)</span> : Random variable vector ordered by sequence</li>
+<li><span class="math inline">\(\boldsymbol x\)</span> : Outcomes in any order</li>
+<li><span class="math inline">\(k\)</span>: Length of <span class="math inline">\(\boldsymbol x\)</span></li>
+</ul></li>
+</ol>
+<h2 id="hypergeometric-probability">Hypergeometric Probability</h2>
+<p>For problem where you only care if there are <span class="math inline">\(k\)</span> number of a desired outcome (without care for order). The subset is length <span class="math inline">\(G\)</span>, the outcome space is length <span class="math inline">\(N\)</span>, and the number of sampling is <span class="math inline">\(n\)</span> (where <span class="math inline">\(G \le N\)</span>). Let the random variable <span class="math inline">\(X\)</span> be the number of the desired subset (of size <span class="math inline">\(G\)</span>) in the sample.</p>
+<p>Let <span class="math inline">\(g\le n, g\in \mathbb N\)</span>, the hypergeometric series describe this probability,</p>
+<p><span class="math display">\[ P(X=g) = \frac{\binom{G}{g} \binom{N-G}{n-g}}{\binom{N}{n}} \]</span></p>
+<ul>
+<li>This is used very often for simple random samples without replacement.</li>
+</ul>

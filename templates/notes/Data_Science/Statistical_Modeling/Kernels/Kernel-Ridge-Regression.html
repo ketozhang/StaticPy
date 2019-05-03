@@ -1,0 +1,42 @@
+<p>Take some cenetered data <span class="math inline">\(X, y\)</span> such that we can confidently write the normal equation for ridge regression as:</p>
+<p><span class="math display">\[
+(X^\top X + \lambda I) \theta = X^\top y
+\]</span></p>
+<p>Now to write <span class="math inline">\(\theta\)</span> in terms of the linear combination of <span class="math inline">\(X\)</span>,</p>
+<p><span class="math display">\[
+\begin{gather*}
+\theta = \frac{1}{\lambda}(X^\top y - X^\top X \theta) = X^\top a\\
+a = \frac{1}{\lambda}(y-X\theta)
+\end{gather*}
+\]</span></p>
+<p>Now to remove the <span class="math inline">\(\theta\)</span> dependency,</p>
+<p><span class="math display">\[
+a = (XX^\top + \lambda I)^{-1}y
+\]</span></p>
+<p>Replacing <span class="math inline">\(\theta\)</span> in the ridge regression loss function,</p>
+<p><span class="math display">\[
+\mathcal L = |XX^\top a - y|^2 + \lambda |X^\top a|^2
+\]</span></p>
+<p>Another property is when solving for a out of sample point <span class="math inline">\(z\)</span>,</p>
+<p><span class="math display">\[
+\hat y(z) = w^\top z = a^\top X z = \sum_{i=1}^n a_i(X_i^\top z)
+\]</span></p>
+<p>Here motivates the kernel function,</p>
+<p><span class="math display">\[
+k(X_i, z) = X_i^\top z
+\]</span></p>
+<p>thus also the kernel matrix <span class="math inline">\(K\)</span>. Now we can summarize the optimization solution (i.e., the normal equation) and the model</p>
+<p><span class="math display">\[
+\begin{gather}
+(K + \lambda I) a = y\\
+\hat y (z) = \sum_{i=1}^n a_i k(X_i,z)
+\end{gather}
+\]</span></p>
+<h2 id="performance">Performance</h2>
+<p>The dual (or kernel) form of ridge regression has the performance:</p>
+<p><span class="math display">\[
+\mathcal O (n^3 + n^2 d)
+\]</span></p>
+<p>compared with the primal form which has the performance:</p>
+<p><span class="math inline">\(\mathcal O(d^3 + d^2 n)\)</span></p>
+<p>So whenever <span class="math inline">\(d &gt; n\)</span> , the kernel form is best used. Furthermore any increase in <span class="math inline">\(d\)</span> due to the design transformation is ignored with kernels.</p>

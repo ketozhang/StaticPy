@@ -1,0 +1,24 @@
+<p>All set operations output a set of unique values unless the keyword <code>ALL</code> is appended after.</p>
+<h2 id="union">UNION</h2>
+<p><span class="math display">\[ A \cup B\]</span></p>
+<ul>
+<li>Distinct <span class="math display">\[ |A| + |B|\]</span></li>
+<li>ALL <span class="math display">\[ |A| + |B|\]</span></li>
+</ul>
+<h2 id="intersect">INTERSECT</h2>
+<p><span class="math display">\[ A \cap B\]</span></p>
+<ul>
+<li><p>Distinct <span class="math display">\[ \min(|A|, |B|)\]</span></p></li>
+<li><p>ALL <span class="math display">\[ \sum_i\min(|a_i|,|b_i|), \qquad a \subseteq A,~ b \subseteq B\]</span></p></li>
+</ul>
+<h2 id="except">EXCEPT</h2>
+<p><span class="math display">\[ A \backslash B\]</span></p>
+<ul>
+<li>ALL <span class="math display">\[ \sum_i \Delta_i, \qquad a \subseteq A,~ b \subseteq B\\
+\Delta_i =
+\begin{cases}
+0~,                 &amp;|a_i| - |b_i| &lt; 0 \\
+|a_i| - |b_i|~,     &amp;\text{else}\\
+\end{cases}
+\]</span></li>
+</ul>

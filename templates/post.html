@@ -4,10 +4,10 @@
 <div class="container" id="post">
     <!-- Content -->
     <h1 class="title">{{frontmatter['title']}}</h1>
-    <small>{{frontmatter['date']}}</small>
     {% if 'image' in frontmatter %}
-    <img class="mx-auto d-block" src={{frontmatter['image']}}>
+    <img id="post-img" class="mx-auto d-block" src={{frontmatter['image']}}>
     {% endif %}
+    <small>Last updated {{frontmatter['date']}}</small>
     <p class="description">{{frontmatter['description']}}</p>
     <hr>
     <hr>

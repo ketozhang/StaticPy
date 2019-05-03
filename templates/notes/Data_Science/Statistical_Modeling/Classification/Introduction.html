@@ -1,0 +1,24 @@
+<h2 id="decision-bound">Decision Bound</h2>
+<p>A <strong>decision bound</strong> is a boundary chosen by the classifier to determine if data points are within a certain class or another. Typically a decision bound is a function <span class="math inline">\(f: x \in \mathbb R^d \rightarrow \mathbb R\)</span> such that <span class="math inline">\(f(x)=0\)</span>.</p>
+<h3 id="hyperplane-as-decision-bounds">Hyperplane as Decision Bounds</h3>
+<p>A hyperplane is a <span class="math inline">\(p-1\)</span> dimension subspace living in <span class="math inline">\(p\)</span>-dimension. The hyperplane is mathmetically described as the equation,</p>
+<p><span class="math display">\[ \theta \cdot x + \theta_0 = 0 \]</span> <span class="math display">\[ \theta_0 + \theta_1x_1 + \theta_2x_2 + \ldots + \theta_px_p = 0 \]</span></p>
+<ul>
+<li><span class="math inline">\(\theta\)</span> : A vector normal to the hyperplane. This determines the direction that the hyperplane points to.</li>
+<li><span class="math inline">\(\theta_0\)</span> : The intersect point which may be interpeted as the distance the hyperplane is from the origin.</li>
+</ul>
+<p>We may use the hyperplane as a decision bound. In 2D, the hyperplane is a line. In this case the decision function is thought of as:</p>
+<blockquote>
+<p>If the input falls on the left of the line then it's class A otherwise class B.</p>
+</blockquote>
+<p>In math, the decision function takes in an input vector <span class="math inline">\(X_i\)</span> and outputs a label (strictly this is numerically represented),</p>
+<p><span class="math display">\[
+y = \begin{cases}
+    \text{1}, &amp; \theta \cdot X_i &gt; 0\\
+    \text{-1}, &amp; \theta \cdot X_i &lt; 0
+\end{cases}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(y=1\)</span> can be represent class A and <span class="math inline">\(y=-1\)</span> can be class B</li>
+<li>You can immediately tell that hyerplane are great for <strong>linearly separable</strong> data</li>
+</ul>

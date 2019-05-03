@@ -1,6 +1,7 @@
 # The full url to be hosted (e.g., http://example.com/notes)
 site_url: 'https://ketozhang.github.io/notebook'
-site_brand: 'Keto'
+site_brand: 'PyStatic'
+site_title: 'PyStatic'
 # # All paths are relative to project path
 # # Absolute path: `/dir`
 # # Relative path: `dir` or `dir/`
@@ -13,6 +14,10 @@ build_path: 'docs/' # Use `docs/` for GitHub Pages compatibility.
 templates_path: 'templates/'
 static_path: 'static/'
 
+root_pages:
+  about: 'about.html'
+  contacts: 'contacts.html'
+
 contexts:
   notes:
     source_path: 'notes/'
@@ -23,7 +28,7 @@ contexts:
     url: '/posts'
     template: 'post.html'
 
-links:
+social_links:
   cv: 'static/KetoZhangCV.pdf'
   linkedin: 'https://www.linkedin.com/in/ketozhang/'
   email: 'keto.zhang@gmail.com'

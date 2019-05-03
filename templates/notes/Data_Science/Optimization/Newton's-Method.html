@@ -1,0 +1,17 @@
+<p>The Newton's method is an optimization method requiring the curvature of the interested optimization problem <span class="math inline">\(L(\theta)\)</span>.</p>
+<p>Starting at an initial step <span class="math inline">\(\theta(t=0)\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li>Approximate a quadratic function at the current step.</li>
+<li>Jump to the unique critical point.</li>
+<li>Repeat 1-2 until satisfied.</li>
+</ol>
+<h2 id="taylor-expansion">Taylor Expansion</h2>
+<p>The quadratic function comes from the second term of the Taylor series,</p>
+<p><span class="math display">\[
+\nabla L(\theta) = \nabla L(\theta)\big\rvert_{\theta(t)} + \mathcal H (L(\theta))\big\rvert_{\theta(t)}\Delta \theta + \mathcal O(|\Delta \theta |^2)
+\]</span></p>
+<p>Where <span class="math inline">\(\mathcal H\)</span> is the Hessian operator.</p>
+<p>The critical point lies where <span class="math inline">\(\nabla L(\theta) = 0\)</span> so we can solve for <span class="math inline">\(\Delta\theta\)</span>,</p>
+<p><span class="math display">\[
+\Delta \theta = -\left[H(L(\theta))\big\rvert_{\theta(t)}\right]^{-1}\nabla L(\theta)\big\rvert_{\theta(t)}
+\]</span></p>

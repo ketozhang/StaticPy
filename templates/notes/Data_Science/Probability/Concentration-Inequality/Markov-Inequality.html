@@ -1,0 +1,28 @@
+<h2 id="first-moment-markovs-inequality">First Moment Markov's Inequality</h2>
+<p>Markov's inequality at its simplest deals with the mean or first moment of the distribution. Suppose <span class="math inline">\(X \ge 0\)</span> and <span class="math inline">\(\abs{\mathbb E[X]} &lt; \infty\)</span>, for any constant <span class="math inline">\(c\)</span>,</p>
+<p><span class="math display">\[
+P(X \ge c) \le \frac{\mathbb E[X]}{c}
+\]</span></p>
+<dl>
+<dt>Proof</dt>
+<dd><p>Consider the following lemma:</p>
+<p><span class="math display">\[
+\begin{gather*}
+    X \ge c I \set{X \ge c}
+    \mathbb E[X] \ge c \mathbb E[I \set{X \ge c}]\\
+    \mathbb E[X] \ge c P(X \ge c)\\\\
+    P(X \ge c) \le \frac{\mathbb E[X]}{c}
+\end{gather*}
+\]</span></p>
+</dd>
+</dl>
+<h2 id="markovs-inequality---monotonically-increasing-function">Markov's Inequality - Monotonically Increasing Function</h2>
+<p>To generalize the simple Markov's inequality, we allow the first moment to be of any monotonically increasing function <span class="math inline">\(\varphi(X)\)</span>,</p>
+<p><span class="math display">\[
+P(X \ge c) \le \frac{\mathbb E[\varphi(X)]}{\varphi(c)}
+\]</span></p>
+<h3 id="general-moment-markov-inequality">General Moment Markov Inequality</h3>
+<p>Any <span class="math inline">\(k\)</span>-th moment is also a monotonically increasing function thus w e can generalize the moment to any <span class="math inline">\(k\)</span>,</p>
+<p><span class="math display">\[
+P(X \ge c) \le \frac{\mathbb E[X^k]}{c^k}
+\]</span></p>

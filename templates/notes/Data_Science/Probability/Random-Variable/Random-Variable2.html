@@ -1,0 +1,29 @@
+<p>Formally, the <strong>random variable</strong> is defined as a function that maps the outcome space to the real space,</p>
+<p><span class="math display">\[
+    X : \Omega \to \mathbb R\\
+    \big\downarrow \\
+    X(\omega_i) = x_i \in \mathbb R
+\]</span></p>
+<ul>
+<li><p>We can further define as outcome set in real space as <span class="math inline">\(\Omega_X\)</span> which is the result of,</p>
+<p><span class="math display">\[
+    \Omega \stackrel{X}{\longrightarrow} \Omega_X\\
+    \Omega_X \equiv \set{x: X(\omega \in \Omega)}
+\]</span></p></li>
+<li><p>If an event <span class="math inline">\(A \subseteq \Omega\)</span> occurs in outcomes space then a corresponding event <span class="math inline">\(A&#39; \subseteq \mathbb{R}\)</span> occurs in real space such that,</p>
+<p><span class="math display">\[
+    X : A \rightarrow A&#39;\\
+    A&#39; = X \in A&#39; = \set{x : x = X(\omega) \in A&#39;}
+\]</span></p></li>
+</ul>
+<h2 id="distribution">Distribution</h2>
+<p>The random variable carries the information of the probability distrubtion such that there always exist the probability function for all <span class="math inline">\(x \in \Omega_X\)</span> denoted as:</p>
+<p><span class="math display">\[
+    P_X(x) \text{ or } P(X=x)
+\]</span></p>
+<h3 id="equivalence-of-two-random-variables">Equivalence of Two Random Variables</h3>
+<p>Two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are equivalent only if they represent the same space in the outcome space. However in most cases, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> represent two different trials (e.g., first flip and second flip). In this case the two random variables can only be equal in distribution denoted as,</p>
+<p><span class="math display">\[
+    X \stackrel{d}{=} Y\\
+    X \ne Y
+\]</span></p>

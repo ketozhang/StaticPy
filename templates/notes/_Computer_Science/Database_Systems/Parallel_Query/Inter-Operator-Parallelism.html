@@ -1,0 +1,35 @@
+<h2 id="types-of-partitioning">Types of Partitioning</h2>
+<p>Shared data can be partitioned in three ways by:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Range</strong>
+<ul>
+<li>Great for equijoins, ranged queries, and group by</li>
+</ul></li>
+<li><strong>Hash</strong>
+<ul>
+<li>Great for equijoins and group by</li>
+</ul></li>
+<li><strong>Random (Round-Robin)</strong>
+<ul>
+<li>Good for spreading load</li>
+</ul></li>
+</ol>
+<h2 id="queries">Queries</h2>
+<ul>
+<li><strong>Scan</strong>
+<ul>
+<li>Scan in parallel and merge before output</li>
+<li><span class="math inline">\(\sigma_p\)</span> skip entire machines that has no tuples satisfying <span class="math inline">\(p\)</span></li>
+</ul></li>
+<li><strong>Search by Key</strong>
+<ul>
+<li>If data partitioned by range of key then use only that machine</li>
+<li>Otherwise have every machine do lookup.</li>
+</ul></li>
+<li><strong>Insert</strong>
+<ul>
+<li>If partitioned by key, then insert there</li>
+<li>Otherwise insert anywhere</li>
+<li>If the key field is unique then check everything.</li>
+</ul></li>
+</ul>

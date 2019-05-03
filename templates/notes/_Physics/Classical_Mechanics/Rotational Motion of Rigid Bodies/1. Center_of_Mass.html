@@ -1,0 +1,61 @@
+<!-- TOC -->
+<ul>
+<li><a href="#external-force---point-particle-property">External Force - Point Particle Property</a></li>
+<li><a href="#total-angular-momentum">Total Angular Momentum</a>
+<ul>
+<li><a href="#proof">Proof</a></li>
+<li><a href="#relationship-with-torque">Relationship with Torque</a></li>
+<li><a href="#proof-1">Proof</a></li>
+</ul></li>
+<li><a href="#total-kinetic-energy">Total Kinetic Energy</a>
+<ul>
+<li><a href="#proof-2">Proof</a></li>
+</ul></li>
+<li><a href="#total-potential-energy">Total Potential Energy</a></li>
+</ul>
+<!-- /TOC -->
+<p>The center of mass <span class="math inline">\(\mathbf R\)</span> is defined as the position given by the mass weighted average in math that is for <span class="math inline">\(N\)</span> particles,</p>
+<p><span class="math display">\[ \boxed{\mathbf{R} = \frac{1}{M}\sum_{\alpha = 1}^{N}{m_\alpha \mathbf r_\alpha}} \]</span></p>
+<p>The following section we will look at the properties of the center of mass.</p>
+<h2 id="external-force---point-particle-property">External Force - Point Particle Property</h2>
+<p>The center of mass is often very useful because we can always justify almost any rigid body as point particles. This is due to,</p>
+<p><span class="math display">\[ \mathbf{P} = \sum_\alpha{m_\alpha \dot{\mathbf r}} = M\mathbf{\dot R} \\
+\boxed{\mathbf F_\text{ext} = \dot{\mathbf P} = M\ddot{\mathbf{R}}}
+\]</span></p>
+<p>Of course we're assuming the mass does not change over time (part of rigid body definition).</p>
+<h2 id="total-angular-momentum">Total Angular Momentum</h2>
+<p>The total angular momentum <span class="math inline">\(\mathbf J\)</span> is composed of the angular momentun of the CM (orbital angular momentum <span class="math inline">\(\mathbf L\)</span>) and the angular momentum of each rigid body particle relative to the CM (spin angular momentum <span class="math inline">\(\mathbf S\)</span>).</p>
+<p><span class="math display">\[
+\boxed{\mathbf J = \underbrace{\vphantom{\sum}\mathbf R \times \mathbf P}_{\mathbf L} + \underbrace{\sum\mathbf {r}&#39;_\alpha \times m_\alpha \dot{\mathbf r}_\alpha&#39;}_{\mathbf S}}
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(\mathbf r_\alpha&#39;\)</span> : Position vector describing the distance away from the center of mass</p>
+<p><span class="math display">\[ \mathbf r_\alpha&#39; \equiv \mathbf{\mathbf r_\alpha - \mathbf R} \]</span></p></li>
+</ul>
+<h3 id="proof">Proof</h3>
+<p>This is easily proven knowing that the total angular momentum is define as the angular momentum of each particle relative to some origin,</p>
+<p><span class="math display">\[
+\mathbf{J} \equiv \mathbf{r_\alpha} \times \mathbf{p_\alpha} = \mathbf{r_\alpha} \times m_\alpha\dot{\mathbf{r}}_\alpha
+\]</span></p>
+<p>In terms of the distance away from the origin we can replace <span class="math inline">\(\mathbf{r_\alpha}\)</span> with,</p>
+<p><span class="math display">\[ \mathbf r_\alpha&#39; \equiv \mathbf{\mathbf r_\alpha - \mathbf R} \]</span></p>
+<p>Doing so and crossing out zeroes gives,</p>
+<p><span class="math display">\[ \mathbf J = \underbrace{\vphantom{\sum}\mathbf R \times \mathbf P}_{\mathbf L} + \underbrace{\sum\mathbf {r}&#39;_\alpha \times m_\alpha \dot{\mathbf r}_\alpha&#39;}_{\mathbf S} \]</span></p>
+<h3 id="relationship-with-torque">Relationship with Torque</h3>
+<p>Let's define the total torque applied to the system about the origin as <span class="math inline">\(\boldsymbol \tau\)</span>,</p>
+<p><span class="math display">\[ \boldsymbol\tau = \dot {\mathbf J}  \]</span></p>
+<p>As you've guessed it, the total torque is composed of the torque acted upon the CM <span class="math inline">\(\boldsymbol{\tau}_{CM}\)</span> and the torque acted upon each particle relative to the CM <span class="math inline">\(\boldsymbol{\tau}_\text{rot}\)</span>,</p>
+<p><span class="math display">\[\boxed{ \boldsymbol{\tau} = \dot{\mathbf L} + \dot{\mathbf S} = \underbrace{\vphantom{\sum}\boldsymbol{R} \times \mathbf{F}_\text{ext}}_{\boldsymbol{\tau}_{CM}} + \underbrace{\sum{\mathbf{r}&#39;_\alpha \times \mathbf F_\alpha^\text{ext}}}_{\boldsymbol\tau_\text{rot}} }\]</span></p>
+<h3 id="proof-1">Proof</h3>
+<h2 id="total-kinetic-energy">Total Kinetic Energy</h2>
+<p>Similar to the angular momentum, the total kinetic energy is made up of the CM's kinetic energy and the kinetic energy (only rotational) of each rigid body relative to the CM,</p>
+<p><span class="math display">\[ \boxed{K \equiv \underbrace{\frac{1}{2}M\dot{\mathbf R}^2}_{K_\text{CM}} + \underbrace{\frac{1}{2}\sum m_\alpha {\dot{\mathbf{r}}_\alpha&#39;}^2}_{K_\text{rot}}}
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(\mathbf R\)</span> : For the total kinetic energy, it is not necessary that <span class="math inline">\(\mathbf R\)</span> be a located at the center of mass. You may choose any point of reference and preferably one that does not move since if <span class="math inline">\(\dot{\mathbf R } = 0\)</span>,</p>
+<p><span class="math display">\[ K = \frac{1}{2}\sum m_\alpha {\dot{\mathbf{r}}_\alpha&#39;}^2 \tag{$\dot{\mathbf R} = 0$} \]</span></p></li>
+</ul>
+<h3 id="proof-2">Proof</h3>
+<h2 id="total-potential-energy">Total Potential Energy</h2>
+<p>The total potential energy is just the external potential energy of the CM. We can do so because we consider the internal potential as a zeropoint (there should be no differential potential energy for a system of rigid bodies).</p>
+<p><span class="math display">\[\boxed{ U = U_\text{ext} }\]</span></p>

@@ -1,0 +1,39 @@
+<p>Because there may exist infinitely many hyperplane that can classify the input data, we need to determine which hyperplane is the best fit. Naturally, points that are closer to the hyperplane are considered more ambiguous and error-prone than those further away from the hyperplane. Given this metric, we consider the best hyperplane to be one that is furthest away from its immediate neighboring data points. This method is coined the name <strong>maximal margin classifier (MMC)</strong></p>
+<dl>
+<dt>Support Vectors</dt>
+<dd>The &quot;immediate neighboring data points&quot; that are used to determine the best hyperplane.
+</dd>
+<dt>Margin <span class="math inline">\((M)\)</span></dt>
+<dd>The length of the support vector(s). Alternatively, the distance between the hyperplane and the nearest point(s).
+</dd>
+</dl>
+<center>
+<img src="2019-01-29-16-37-12.png" />
+</center>
+<p>Formally, the MMC takes the loss metric as the margin <span class="math inline">\(M\)</span> (actually this is a gain metric) and attempts to maximize <span class="math inline">\(M\)</span> given the following:</p>
+<p><span class="math display">\[
+\begin{gather*}
+     \max_{\theta} M\\
+     \lvert{\theta}\rvert^2 = 1\\
+     y_i(\theta^TX_i + \theta_0) \ge M
+\end{gather*}
+\]</span></p>
+<ul>
+<li>MMC are not always possible as you can think of datasets where the decision boundaries are not linear.</li>
+<li>MMC can be very senesitive to new data points.</li>
+</ul>
+<h2 id="simplified-maximal-margin-classifier">Simplified Maximal Margin Classifier</h2>
+<p>We simplify the constraint by transforming the marign to unity,</p>
+<p><span class="math display">\[ y_i(\theta^T X_i + \theta_0) \ge 1 \]</span></p>
+<ul>
+<li>This transformation is invariant because all we're doing is rescaling <span class="math inline">\(\theta \rightarrow \frac{\theta}{M}\)</span>.</li>
+</ul>
+<p>Now the optimizing problem is over the parameter space which is called the <strong>quadratic program</strong>. As the name suggest, we optimize of <span class="math inline">\(\lvert{\theta}\rvert\)</span> to allow differentiation.</p>
+<p><span class="math display">\[
+\min_{\theta, \alpha} \lvert \theta \rvert^2
+\]</span></p>
+<h3 id="derivation">Derivation</h3>
+<p>The ambiguity of our optimizer coming from a maximizer to a minimizer problem will now be solved here. The distance from the point <span class="math inline">\(X_i\)</span> to the hyperplane in the feature space is given by,</p>
+<p><span class="math display">\[
+\frac{\theta^T X_i + \theta_0}{\lvert \theta \rvert^2}
+\]</span></p>

@@ -1,0 +1,17 @@
+<p>A cumulative distribution function is defined as the sum of the probabilty from the left to some point <span class="math inline">\(x\)</span> on the right,</p>
+<p><span class="math display">\[ F(x) = \int_{-\infty}^x f_X~\mathrm dx \]</span></p>
+<ul>
+<li>Non-decreasing</li>
+<li>Right continuous</li>
+<li>Decreasing to zero <span class="math display">\[ \lim_{x\rightarrow -\infty} F(x) = 0 \]</span></li>
+<li>Increasing to one <span class="math display">\[ \lim_{x\rightarrow \infty} F(x) = 1 \]</span></li>
+</ul>
+<h2 id="cdf-to-pdf">CDF to PDF</h2>
+<p>The CDF is the anti-derivative of the PDF,</p>
+<p><span class="math display">\[ f_X(x) = \frac{\mathrm d F}{dx} \]</span></p>
+<dl>
+<dt>Proof</dt>
+<dd><p>Recall that the anti-derivative is defined by an indefinite integral. The first axiom of probabilty implies that <span class="math inline">\(f_X\)</span> converges from towards the left <span class="math inline">\(f(-\infty) \rightarrow 0\)</span>. Using this fact, the indefinite integral of <span class="math inline">\(f_X(x)\)</span> can be described by the left bound of <span class="math inline">\(-\infty\)</span> and an arbritrary right bound <span class="math inline">\(x\)</span>.</p>
+<p><span class="math display">\[ \int f_X(x)~\mathrm dx = \int_{-\infty}^{x} f_X(x)~\mathrm dx = F(x)\]</span></p>
+</dd>
+</dl>

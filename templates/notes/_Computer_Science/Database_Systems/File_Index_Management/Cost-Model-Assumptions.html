@@ -1,0 +1,25 @@
+<ul>
+<li><strong>B</strong>: Number of data blocks in the file</li>
+<li><strong>R</strong>: Number of records per block</li>
+<li><strong>D</strong>: Average time to read/write disk to block
+<ul>
+<li>Ignore difference between sequential vs. Random I/O</li>
+</ul></li>
+</ul>
+<h2 id="assumptions">Assumptions</h2>
+<ul>
+<li>Average case for uniform random workloads</li>
+<li>Ignore:
+<ul>
+<li>Sequential vs. Random I/O</li>
+<li>Pre-fetching</li>
+<li>Any in-memory cost</li>
+</ul></li>
+</ul>
+<p>Further strict assumptions:</p>
+<ul>
+<li>Single record insert and delete</li>
+<li>Exactly one match for equality</li>
+<li>Heap files always append at end of file</li>
+<li>Sorted files are packed and sorted according to search key</li>
+</ul>

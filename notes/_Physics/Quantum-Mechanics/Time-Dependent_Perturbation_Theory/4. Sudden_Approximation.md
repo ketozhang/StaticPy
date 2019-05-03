@@ -1,0 +1,3 @@
+---
+title: Sudden Approximation
+---

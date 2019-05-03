@@ -1,0 +1,14 @@
+<h2 id="bayes-rule">Bayes Rule</h2>
+<p>For determining parameters (often used in regression),</p>
+<p><span class="math display">\[
+P(\theta \mid D) = \frac{P(D\mid\theta)P(\theta)}{P(D)}
+\]</span></p>
+<p>For classification determining if some data row <span class="math inline">\(D\)</span> is in some class <span class="math inline">\(y\)</span>,</p>
+<p><span class="math display">\[
+P(Y = y\mid D) = \frac{P(D\mid Y = y)P(Y = y)}{P(D)}
+\]</span></p>
+<h2 id="risk-function">Risk Function</h2>
+<p>The risk function is the expected value of the loss function over all possible solutions from the model <span class="math inline">\(\hat y(\theta)\)</span>. This is the marginalization of the loss function over the posterior distribution.</p>
+<p><span class="math display">\[
+R(\theta, y) = \mathbb{E}[L(\theta,y)] = \int\limits_{\min{y}}^{\max{y}} L(\theta,y)P(\theta \mid x)~\mathrm d y
+\]</span></p>

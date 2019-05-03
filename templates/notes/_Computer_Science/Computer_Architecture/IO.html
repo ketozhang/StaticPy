@@ -1,0 +1,15 @@
+<h1 id="input-output-io">Input Output (I/O)</h1>
+<p>The way a machine receives input and gives output.</p>
+<h2 id="polling">Polling</h2>
+<p>Constantly looping an instruction checking if there is an input</p>
+<h2 id="interrupt">Interrupt</h2>
+<p>Input signals the computer to stop what its doing and read the input.</p>
+<ol style="list-style-type: decimal">
+<li>Incoming interrupt suspends instruction stream</li>
+<li>Look up the vector (function address) of a handler in an interrupt vector table stored within the CPU</li>
+<li>Perform a <code>jal</code> to handler
+<ul>
+<li>Save PC in Machine Exception Program Counter (MEPC) register</li>
+</ul></li>
+<li>Handler run on current stack and returns on finish</li>
+</ol>

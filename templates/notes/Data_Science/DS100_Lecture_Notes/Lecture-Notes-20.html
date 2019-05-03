@@ -1,0 +1,63 @@
+<h1 id="lecture-notes-20">Lecture Notes 20</h1>
+<h2 id="derivation-of-the-normal-equation">Derivation of the Normal Equation</h2>
+<p>THe normal equation is no longer bonus material. Consider the system we want to model with data <span class="math inline">\(Y\)</span> and the model denoted as <span class="math inline">\(\hat Y\)</span> which is represented as,</p>
+<p><span class="math display">\[ \hat Y = \Phi\hat \theta \]</span></p>
+<ul>
+<li>This means that <span class="math inline">\(\hat Y\)</span> lives vector space span by <span class="math inline">\(\Phi\)</span> (in other words columns space of <span class="math inline">\(\Phi\)</span>).</li>
+<li><span class="math inline">\(Y\)</span> does not necessarily have to live in the column space of <span class="math inline">\(\Phi\)</span> however there exist a component of of <span class="math inline">\(Y\)</span> that does which is exactly what we meant by the model <span class="math inline">\(\hat Y\)</span>.</li>
+<li>There residual/error is the distance away <span class="math inline">\(Y\)</span> is from the column space of <span class="math inline">\(\Phi\)</span> which we want to minimize (distance always refers to squared loss).</li>
+</ul>
+<p>Recall that the distance vector from <span class="math inline">\(Y\)</span> to some point on the column space <span class="math inline">\(\Phi \theta\)</span> is <span class="math inline">\(Y - \Phi\theta\)</span> for some parameter <span class="math inline">\(\theta\)</span>. The shortest distance (minmize squared loss) is a vector perpendicular/orthogonal to the column space so,</p>
+<p><span class="math display">\[ \Phi^T(Y - \Phi\hat\theta) = 0 \tag{othogonality} \\
+    \boxed{\hat\theta = (\Phi^T\Phi)^{-1} - \Phi^TY}
+\]</span></p>
+<h2 id="bias-variance-tradeoff">Bias-Variance Tradeoff</h2>
+<p>Let's get ack to the bias-variance tradeoff. We need some terms:</p>
+<dl>
+<dt>Training data</dt>
+<dd>The data used by the model
+</dd>
+<dt>Test data</dt>
+<dd>The data used to test the model. We'd use test data to see if model is a good fit for the general case
+</dd>
+</dl>
+<p>The bias-variance tradeoff explains that the more your model matches your training data (decreasing bias, increasing complexity) the less likely your model will match your test data (increasing variance) vice versa.</p>
+<h2 id="train-test-split">Train-Test Split</h2>
+<p>We ask the question if you have a finite amount of data how much should be invested into training and how much should be invested to testing?</p>
+<ul>
+<li>In practice usually train = 90% and test = 10%.
+<ul>
+<li>very bad for stock predictions (way too time dependent)</li>
+</ul></li>
+<li>Larger training set <span class="math inline">\(\rightarrow\)</span> more complex models</li>
+<li>Larger test set <span class="math inline">\(\rightarrow\)</span> better estimate of generalization error</li>
+</ul>
+<h2 id="generalization-and-testing-model">Generalization and Testing Model</h2>
+<ol style="list-style-type: decimal">
+<li>Split data into training and test sets</li>
+<li>Use only the trianing data when designing, trianing, and tuning the model
+<ul>
+<li>Never look at the test data</li>
+<li>If you look at the test data, you must try cross validation</li>
+</ul></li>
+<li>Commit to your final model and train once more using only the training data</li>
+<li>Test the final model using the test data.
+<ul>
+<li>If it sucks, go back to step #2</li>
+</ul></li>
+<li>Train on all available data</li>
+</ol>
+<h3 id="cross-validation">Cross Validation</h3>
+<p>Cross validation is like bootstraping where we take multiple sets of training data and test data instead of one. Say there are <span class="math inline">\(N\)</span> sets then <span class="math inline">\(N\)</span> models are generated, you may test all <span class="math inline">\(N\)</span> models to all available data to see which one is the best.</p>
+<h2 id="regularization">Regularization</h2>
+<p>Regularization once again is the process to weigh the features. We wish to minimize the loss function so there must be some features that increases the loss function too much therefore we regularize that feature to be lower.</p>
+<p><span class="math display">\[ \hat \theta = \hat \theta_0 + \lambda R(\theta) \]</span></p>
+<ul>
+<li><span class="math inline">\(\hat \theta_0\)</span> : Unregularized <span class="math inline">\(\theta\)</span> parameter</li>
+</ul>
+<p>For the regularization parameter <span class="math inline">\(\lambda\)</span> we wish to have,</p>
+<p><span class="math display">\[ \text{Complexity}(f_\theta) \le \lambda \]</span></p>
+<p>Unfortunately complexity isn't easy to computer. We may take this definition that complexity is the sum of the set of our model that contributes something <span class="math inline">\(\Bbb{I[\theta_j \ne \theta]}\)</span>. The quantity that we sum accross is also confusing.</p>
+<p><span class="math display">\[
+\text{Complexity} f(\theta) \equiv \sum_{j=1}^{d}{\Bbb{I[\theta_j \ne \theta]}}
+\]</span></p>

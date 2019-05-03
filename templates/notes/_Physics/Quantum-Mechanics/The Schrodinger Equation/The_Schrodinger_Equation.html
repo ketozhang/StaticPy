@@ -1,0 +1,42 @@
+<p>The Schrodinger equation is an equation followed by all of non-relativstic quantum mechanics. It states that for a quantum mechanical system there exist a wavefunction <span class="math inline">\(\Psi(x,t)\)</span> that satisfies the Schrodinger equation given by,</p>
+<p><span class="math display">\[ \boxed{i\hbar \frac{\partial \Psi}{\partial t} = \hat{H} \Psi} \]</span></p>
+<ul>
+<li><span class="math inline">\(\Psi\)</span> : The wavefunction generally written as <span class="math inline">\(\Psi(x,t)\)</span></li>
+<li><span class="math inline">\(\hat H\)</span> : The Hamiltonian of the system consist of operators that describes the energy of the system.</li>
+</ul>
+<p>The Schrodinger equation is often describe as the equivalent of Newton's second law (<span class="math inline">\(F=ma\)</span>) for quantum mechanics. Recall that Newton's second law is a partial derivative,</p>
+<p><span class="math display">\[ 
+\begin{align}
+    -\frac{\partial V}{\partial x} &amp;= m\frac{d^2x}{dt^2} \tag{Partial Derivative Form}
+\end{align}
+\]</span></p>
+<h2 id="separation-by-variables">Separation By Variables</h2>
+<p>The separation by variables may be applied to the Schrodinger Equation to separate into the product of two solutions given by,</p>
+<p><span class="math display">\[\boxed{\Psi(x,t) = \psi(x)\varphi(t), \quad \varphi(t) = e^{\frac{-iEt}{\hbar}}}\]</span></p>
+<ul>
+<li><span class="math inline">\(\psi\)</span> : the spacial wavefunction defined as <span class="math inline">\(\psi(x) \equiv \Psi(x)\)</span></li>
+<li><span class="math inline">\(\varphi\)</span> : the temporal wavefunction defined as <span class="math inline">\(\varphi(t) \equiv \Psi(t)\)</span>.</li>
+</ul>
+<p>If you were to plug in the separated solution into the Schrodinger equation you will get a very important relationship,</p>
+<p><span class="math display">\[ \frac{i\hbar }{\varphi}\frac{\partial \varphi}{\partial t} = H\hat \psi = \text{constant} \]</span></p>
+<h3 id="derivation">Derivation</h3>
+<h2 id="time-independent-schrodinger-equation">Time Independent Schrodinger Equation</h2>
+<p>The <strong>Time Independent Schrodinger Equation (TISE)</strong> is the separated spacial equation of the Schrodinger Equation for the spacial wavefunction <span class="math inline">\(\psi(x)\)</span> given by,</p>
+<p><span class="math display">\[ \boxed{\hat H \psi = E\psi} \]</span></p>
+<ul>
+<li>E : Total energy of the particle.</li>
+<li>The TISE is special equation called the eigenvector <span class="math inline">\(\psi\)</span> and eigenvalue <span class="math inline">\(E\)</span> problem. It states that for some system describe by its Hamiltonian there exist solution(s) (the wavefunction) with energy <span class="math inline">\(E\)</span>.</li>
+<li>If there are more than one solution with energy <span class="math inline">\(E\)</span> we consider those solution to be <strong>degenerate</strong>.</li>
+</ul>
+<h2 id="general-solution">General Solution</h2>
+<p>Once again we would love to know the solution (a wavefunction) of a system given by some Hamiltonian <span class="math inline">\(\hat H\)</span>. We cannot do so without solving for the <a href="#time-independent-schrodinger-equation">Time Independent Schrodinger Equation</a> which gives us the spacial wavefunction <span class="math inline">\(\psi(x)\)</span>. Knowing <span class="math inline">\(\psi(x)\)</span> we can write a general solution,</p>
+<p><span class="math display">\[ \Psi(x,t) = \sum{c_n\Psi_n(x,t)} =  \sum{c_n\psi_n(x)\varphi_n(t)}\]</span> <span class="math display">\[ \boxed{\Psi(x,t) = \sum{c_n\psi_ne^{\frac{-iE_nt}{\hbar}}}} \]</span></p>
+<h2 id="examples">Examples</h2>
+<h3 id="infinite-square-well">Infinite Square Well</h3>
+<h3 id="finite-square-well-scattering-state">Finite Square Well (Scattering State)</h3>
+<h3 id="finite-square-well-bounded-state">Finite Square Well (Bounded State)</h3>
+<h3 id="free-particle">Free Particle</h3>
+<h3 id="potential-step-scattering-state">Potential Step (Scattering State)</h3>
+<h3 id="potential-step-bound-state">Potential Step (Bound State)</h3>
+<h3 id="delta-potential-scattering-state">Delta Potential (Scattering State)</h3>
+<h3 id="delta-potential-bound-state">Delta Potential (Bound State)</h3>

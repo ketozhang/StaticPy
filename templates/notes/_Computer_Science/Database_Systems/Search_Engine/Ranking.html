@@ -1,0 +1,58 @@
+<h2 id="vector-space-model">Vector Space Model</h2>
+<p>Consider each document as a vector with the basis being all possible terms of all documents.p</p>
+<ul>
+<li><p><strong>Cosine Similarity Distance Metric</strong></p>
+<p>This metric ignores the document length (normalize to unit vectors) thus only care about the relative angle between documents. The actual metric is the cosine of the relative angle which is just their dot product.</p></li>
+<li><p><strong>Rank</strong></p>
+<p>Documents are ranked by its term frequency and inverse document frequency. To do so we need two schema:</p>
+<ol style="list-style-type: decimal">
+<li><code>TermInfo(string term, int numDocs)</code></li>
+<li><code>InvertedFile(string term, int docID, float DocTermRank)</code></li>
+</ol>
+<p>The extra <code>DocTermRank</code> is to store the result of the rankings of the following formula known as the <strong>TFIDF</strong>:</p>
+<pre><code>TF = #occurrences of term in doc
+IDF = log((total #docs) / (#docs with this term))
+DocTermRank = TF * IDF</code></pre>
+<ul>
+<li>Rare terms that appear in fewer documents are ranked the highest.</li>
+<li>Common terms that appear in many docments are ranked the lowest. ## Goodness of Search</li>
+</ul></li>
+</ul>
+<p>We measure goodness of search by precision and recall.</p>
+<ul>
+<li><strong>Precision:</strong> Fraction of true positives to claimed positives</li>
+<li><strong>Recall:</strong> Fraction of true positives to actual positives</li>
+</ul>
+<h2 id="parallelization">Parallelization</h2>
+<p>We can parallelize by either:</p>
+<ol style="list-style-type: decimal">
+<li>Each machine gets different documents.
+<ul>
+<li>Not too bad, however bad for rare terms since machines don't know about the other documents.</li>
+</ul></li>
+<li>Each machine get different search terms.
+<ul>
+<li>Bad if any term is too popular (they usually are by the 80/20 rule<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>)</li>
+</ul></li>
+</ol>
+<h2 id="ranking-algorithms">Ranking Algorithms</h2>
+<ul>
+<li><p><strong>N-Grams</strong></p>
+<p>Index <span class="math inline">\(N\)</span> neighboring words instead of just one word. Higher rank given to matches of higher N-word.</p></li>
+<li><p><strong>Q-Grams</strong></p>
+<p>Index <span class="math inline">\(Q\)</span> neighboring letters of a word into a subset of each element of size <span class="math inline">\(Q\)</span> string.</p>
+<ul>
+<li>Can search for mispellings.</li>
+</ul></li>
+<li><p><strong>Citation Analysis</strong></p>
+<p>A ranking scored using the number of times the document was cited.</p>
+<ul>
+<li>Google's original search engine was a web graph based citation analysis called PageRank. This algorithm is currently used today.</li>
+</ul></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>The 80/20 rule or the Pareto distribution (discrete form is the Zipf distribution) is a power law distribution. An intuition for this used in search engine is that this distribution says things that are popular are very popular while things that aren't are very unpopular.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>

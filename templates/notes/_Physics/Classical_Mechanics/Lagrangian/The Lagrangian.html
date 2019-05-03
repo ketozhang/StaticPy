@@ -1,0 +1,61 @@
+<p>Lagrange found that there exist a principle of variation for all of physics that follows Newton's second law called the <strong>principle of least action</strong>. The principle states that the universe likes to take the last action <span class="math inline">\(S\)</span> along some path dependent on time described by the <strong>Lagrangian</strong> <span class="math inline">\(\mathcal{L}\)</span>.</p>
+<p>This description sets up the shortest path (action) problem where,</p>
+<p><span class="math display">\[
+\begin{align}
+    S = \int_{t_1}^{t_2}{\mathcal{L}\; dt}
+\end{align}
+\]</span></p>
+<p>We define the Lagrangian as the difference between kinetic <span class="math inline">\(K\)</span> and potential energy <span class="math inline">\(U\)</span> (for reason and it's difficult to interpret),</p>
+<p><span class="math display">\[
+\begin{gather}
+    \boxed{\mathcal{L} \equiv K - U}\\
+    \mathcal{L} \equiv \frac{1}{2}m\boldsymbol{\dot r}^2 - U(\boldsymbol{r}) \nonumber
+\end{gather}
+\]</span></p>
+<p>The Lagrangian is define to follow the Lagrange equation you will soon realize it's because the Lagrange equation is a direct relationship to Newton's laws.</p>
+<p>We take a specific case where the Lagrangian is made up of conservative non-constraint forces (like gravity) and any constraint force (forces normal to the particle's motion), Recall that the Lagrange equation for states that if <span class="math inline">\(\mathcal{L}\)</span> is a function of <span class="math inline">\(r\)</span> we may write,</p>
+<p><span class="math display">\[
+    \frac{\partial \mathcal{L}}{\partial r} - \frac{d}{dt}\frac{\partial \mathcal{L}}{\partial \dot r} = 0
+\]</span></p>
+<p>In general, one may decompose <span class="math inline">\(\boldsymbol{r}\)</span> into <span class="math inline">\(n\)</span> Lagrange equations for <span class="math inline">\(n\)</span> parameters (excluding the free parameter <span class="math inline">\(t\)</span>). This is only valid for system considered to be holonomic systems.</p>
+<h2 id="lagrangian-and-newtonian-mechanics">Lagrangian and Newtonian Mechanics</h2>
+<p>By the definition of the Lagrangian, we may compose some components of Newtonian mechanics,</p>
+<p><span class="math display">\[
+\begin{align*}
+    \frac{\partial \mathcal{L}}{\partial \boldsymbol{r}} &amp;= -\nabla U = \boldsymbol{F}\\
+    \frac{\partial \mathcal{L}}{\partial \boldsymbol{\dot r}} &amp;= m\boldsymbol{\dot r} = \boldsymbol{P}
+\end{align*}
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[\begin{gather}
+    \boxed{\boldsymbol{F} = \frac{\partial \mathcal{L}}{\partial \boldsymbol{r}}}\\
+    \boxed{\boldsymbol{P} = \frac{\partial \mathcal{L}}{\partial \boldsymbol{\dot r}} }
+\end{gather}\]</span></p>
+<p>You can see that the Lagrange equation satisfies for the Lagrangian because,</p>
+<p><span class="math display">\[
+\begin{gather*}
+    \boldsymbol{F} = \frac{d}{dt}\boldsymbol{P}\\
+    \frac{\partial \mathcal{L}}{\partial \boldsymbol{r}} = \frac{d}{dt}\frac{\partial \mathcal{L}}{\partial \boldsymbol{\dot r}}
+\end{gather*}
+\]</span></p>
+<p>We may also do this for the rotational counterpart say in polar coordinates <span class="math inline">\(\boldsymbol{r} = \boldsymbol{r}(r,\phi)\)</span>,</p>
+<p><span class="math display">\[
+\begin{align}
+    \boxed{\boldsymbol{\tau} = \frac{\partial \mathcal{L}}{\partial \phi}}\\
+    \boxed{\boldsymbol{L} = \frac{\partial \mathcal{L}}{\partial \boldsymbol{\dot \phi}}}
+\end{align}
+\]</span></p>
+<h2 id="lagrangian-in-a-constrained-system">Lagrangian in a Constrained System</h2>
+<p>A system in constraint is one at which constraint forces come into play (normal force, tension force, etc). While defined so, we prefer to considered a constraint system where we write a relationship between each generalized coordinate</p>
+<dl>
+<dt><strong>Example:</strong></dt>
+<dd>For example the x and y position of a ladder leaning against the wall has the constraint that the ladder is some length <span class="math inline">\(l\)</span>. It is obvious that the constraint is by Pythogorean theorem,
+</dd>
+<dd><p><span class="math display">\[
+\begin{align}
+    x^2 + y^2 = l^2 =\text{const}
+\end{align}\]</span></p>
+</dd>
+<dd><p>We see that there is a relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span></p>
+</dd>
+</dl>

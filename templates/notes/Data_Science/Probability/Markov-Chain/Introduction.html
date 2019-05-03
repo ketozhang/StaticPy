@@ -1,0 +1,46 @@
+<p>Let the chain be a set of random variables with element <span class="math inline">\(X_t\)</span> for the <span class="math inline">\(ith\)</span> step (or link) of the chain.</p>
+<h2 id="two-state-markov-chain">Two-State Markov Chain</h2>
+<p>Consider the initial state be the random variable that can take in the binary value <span class="math inline">\(X_0(\set{a,b}) = \set{0,1}\)</span> with probability <span class="math inline">\(P_a(0), P_b(0)\)</span>. Any subsequent steps the probability now depends on the current state. You can imagine a finite state diagram (aka state transition diagram) with transition probability <span class="math inline">\(P_{ij}(t)\)</span> from the current state <span class="math inline">\(i\)</span> to the next state <span class="math inline">\(j\)</span> at iteration <span class="math inline">\(t\)</span>. We can form this into a matrix where the column represent all the possible state from to and the row represent all the possible state to transition to.</p>
+<p><span class="math display">\[
+P =
+\begin{bmatrix}
+    P_{aa} &amp; P_{ab}\\
+    P_{ba} &amp; P_{bb}
+\end{bmatrix} =
+\begin{bmatrix}
+    P_{aa} &amp; 1-P_{aa}\\
+    1-P_{bb} &amp; P_{bb}
+\end{bmatrix}
+\]</span></p>
+<h2 id="probability-of-state">Probability of State</h2>
+<p>The probability of a state in some iteration <span class="math inline">\(t\)</span> is the state <span class="math inline">\(i_n\)</span>,</p>
+<p><span class="math display">\[ \mathbb P(X_t = i) = \mathbb P_i(t) = \left[\vec P(0)  P^t\right]_{i} \]</span> <span class="math display">\[\vec P(t) = \vec P(0) P^t\]</span></p>
+<ul>
+<li><span class="math inline">\(\vec P(0)\)</span> : Initial state vector</li>
+<li><span class="math inline">\(P\)</span> : Transition Probability matrix (constant throughout iteration)</li>
+</ul>
+<h2 id="first-step-equation">First Step Equation</h2>
+<p>The average time <span class="math inline">\(\tau = \avg{t}\)</span> it takes for some state in all the possible states (<span class="math inline">\(i \in \Omega\)</span>) to end up in some subset of that state (<span class="math inline">\(\Omega_f \subset \Omega\)</span>) is given by the <strong>first step equation</strong>:</p>
+<p><span class="math display">\[ \tau(f) = 0 \qquad f \in \Omega_f\]</span> <span class="math display">\[ \tau(i) = 1 + \sum_{j \in \Omega} P_{ij}\tau(j) \]</span></p>
+<ul>
+<li>The problem of average time to reach some state <span class="math inline">\(f\)</span> in Markov chain is called the <strong>Hitting Time</strong> problem.</li>
+</ul>
+<h2 id="probability-of-hitting-one-before-the-other">Probability of Hitting One Before the Other</h2>
+<p>Let <span class="math inline">\(\Omega_A\)</span> and <span class="math inline">\(\Omega_B\)</span> be two disjoint subsets of <span class="math inline">\(\Omega\)</span>. The probability <span class="math inline">\(\alpha(i)\)</span> that starting at the initial state <span class="math inline">\(i \in \Omega\)</span>, we reach a state in <span class="math inline">\(\Omega_A\)</span> before <span class="math inline">\(\Omega_B\)</span> is:</p>
+<p><span class="math display">\[
+\begin{align*}
+    \alpha(a) = 1 \quad &amp;a \in \Omega_A\\
+    \alpha(b) = 0 \quad &amp;b \in \Omega_B\\
+    \alpha(i) = \sum_{j\in\Omega} P_{ij}\alpha(j) \quad &amp;i \not\in \Omega_A \cup \Omega_B
+\end{align*}
+\]</span></p>
+<h2 id="stationary-distribution">Stationary Distribution</h2>
+<p>When running the Markov chain we can end up at some state <span class="math inline">\(i\)</span> at some iteration <span class="math inline">\(t\)</span> such that the distribution <span class="math inline">\(P_i(t)\)</span> is stationary meaning it's invariant under the transition probability matrix <span class="math inline">\(P\)</span>:</p>
+<p><span class="math display">\[
+P_i(t) = P_i(t)P
+\]</span></p>
+<p>Formally we have the <strong>theorem:</strong></p>
+<p><span class="math inline">\(P(t_0)\)</span> is invariant if and only if the distribution,</p>
+<p><span class="math display">\[
+\vec P(t) = \vec P(t_0) \qquad t \ge t_0\\
+\]</span></p>

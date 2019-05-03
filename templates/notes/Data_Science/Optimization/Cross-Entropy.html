@@ -1,0 +1,16 @@
+<p>The cross entropy is a loss function for data that are naturally in the probability space. To explain <strong>entropy</strong>, we need the quantity called <strong>surprise</strong> which is the quanitty that can be interpreted as the surprise one feels if an event occurs if that even has probability <span class="math inline">\(P(Y=c)\)</span>:</p>
+<p><span class="math display">\[
+-\log_2 P(Y=c)\\
+|\log_2 P(Y=c)|
+\]</span></p>
+<p>The entropy is the average of surprise of the outcome space <span class="math inline">\(C\)</span>.</p>
+<p><span class="math display">\[
+H(S) = - \sum_{c \in C} P(Y=c) \log_2 P(Y=c)
+\]</span></p>
+<p>However, the average surprise being entropy is probably not a great interpretation. Let's look at some edge cases for the entropy:</p>
+<ul>
+<li>All points are same class <span class="math inline">\(c\)</span> : <span class="math inline">\(H(S) = 0\)</span></li>
+<li>Half points are in class <span class="math inline">\(c=1\)</span> and the other <span class="math inline">\(c=0\)</span> : <span class="math inline">\(H(S) = 1\)</span></li>
+<li>All <span class="math inline">\(n\)</span> points are different classes: <span class="math inline">\(H(S) = \log_2 n\)</span></li>
+</ul>
+<p>Hence the entropy can be interpreted as the bitsize needed to represent the possible classes.</p>

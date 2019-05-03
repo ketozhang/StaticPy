@@ -1,0 +1,113 @@
+<h2 id="hookes-law">Hooke's Law</h2>
+<p>The equation for the force that governs simple harmonic motion comes from Hooke's law. In 1D that equation is famously written as,</p>
+<p><span class="math display">\[
+\begin{align}
+    F(x) &amp;= -kx\\
+    U(x) &amp;= \frac{1}{2}kx^2
+\end{align}
+\]</span></p>
+<h2 id="simple-harmonic-oscillator">Simple Harmonic Oscillator</h2>
+<p>By Newton's second law, the equation of motion for the simple harmonic oscillator (follows Hooke's law directly) is,</p>
+<p><span class="math display">\[
+\begin{align}
+    m\ddot{x} &amp;= -kx \nonumber\\
+    \ddot{x} &amp;= -\frac{k}{m} x
+\end{align}
+\]</span></p>
+<p>Most are more used to using the natural frequency constant <span class="math inline">\(\omega \equiv \sqrt{\frac{k}{m}}\)</span></p>
+<p><span class="math display">\[
+\begin{align}
+    \ddot{x} &amp;= -\omega x
+\end{align}
+\]</span></p>
+<p>This second order differential equation has the solutions,</p>
+<p><span class="math display">\[\begin{gather}
+    \boxed{x(t) = C_1e^{i\omega t} + C_2e^{-i\omega t}}\\
+    C_1 = C_2^*\\
+    \nonumber\\
+    \boxed{x(t) = B_1\cos(\omega t) + B_2\sin({\omega t})}\\
+    B_1 = C_1 + C_2 = x(0), \qquad B_2 = i(C_1 - C_2) = \frac{\dot x(0)}{\omega}\\
+    \nonumber\\
+    \boxed{x(t) = A\cos(\omega t - \delta)}\\
+    A = \sqrt{B_1^2 + B_2^2}, \qquad \delta = \tan\left(\frac{B_2}{B_1}\right)\\
+    \nonumber\\
+    \boxed{x(t) = \text{Re }Ce^{i\omega t}}\\
+    C = 2C_1\\
+    \nonumber\\
+    \boxed{x(t) = \text{Re}Ae^{i\omega t - \delta}}
+\end{gather}\]</span></p>
+<h2 id="multivariable-oscillators">Multivariable Oscillators</h2>
+<p>Multivariable oscillators are simple only and a simple harmonic motion can be achieved if we consider Hooke's law to be applied separately for each dimension. Say for <span class="math inline">\(N\)</span>-dimensions, there are <span class="math inline">\(N\)</span> differential equations each with possibly different amplitude <span class="math inline">\(A_i\)</span> and different frequencies <span class="math inline">\(\omega_i\)</span> (where <span class="math inline">\(i\)</span> goes from <span class="math inline">\(x_1\)</span> to <span class="math inline">\(x_2\)</span>) then we may generalized the solution for each dimension to be,</p>
+<p><span class="math display">\[ \begin{equation}
+    \boxed{\boldsymbol{r} = \sum_{i=1}^N{A_i\cos(\omega_i t - \delta_i) \hat{x}_i}}
+\end{equation} \]</span></p>
+<p>We may define a relative phase shift <span class="math inline">\(\delta_{ij} = \delta_j - \delta_i\)</span> for <span class="math inline">\(j \ne i\)</span>. This is ususually useful in only one dimension since there exist only one <span class="math inline">\(\delta_{ij}\)</span> for instance let <span class="math inline">\(\delta \equiv \delta_{yx}\)</span>:</p>
+<p><span class="math display">\[
+\begin{gather}
+    x = A_x\cos(\omega_x t)\\
+    y = A_y\cos(\omega_y t - \delta)
+\end{gather}
+\]</span></p>
+<h2 id="damped-oscillators">Damped Oscillators</h2>
+<p>We consider an oscillator damped by a resistance force <span class="math inline">\(F_{f} = -b\dot x\)</span> such that the differential equation becomes,</p>
+<p><span class="math display">\[ \begin{align}
+    m\ddot x + b\dot x + kx = 0\\
+    \boxed{\ddot x + 2\beta\dot x + \omega^2 x = 0}
+\end{align} \]</span></p>
+<ul>
+<li><span class="math inline">\(\beta\)</span> : <strong>Damping constant</strong> where <span class="math inline">\(\beta \equiv b/2m\)</span>\</li>
+<li><span class="math inline">\(\omega\)</span> : As usual, the natural frequency <span class="math inline">\(\omega^2 = k/m\)</span></li>
+</ul>
+<p>The solution to this equation is an exponential solved by the <strong>auxiliary equation</strong> method where,</p>
+<p><span class="math display">\[ \begin{gather}
+    r_1 \equiv -\beta + \sqrt{\beta^2 - \omega^2}\\
+    r_2 \equiv -\beta - \sqrt{\beta^2 - \omega^2}\\
+    \boxed{x(t) = C_1e^{r_1 t} + C_2e^{r_2 t}}
+\end{gather} \]</span></p>
+<p>To visualize this solution we look at three cases seeing how <span class="math inline">\(\beta\)</span> compares with <span class="math inline">\(\omega\)</span>.</p>
+<dl>
+<dt>Undamped Oscillation</dt>
+<dd>For <span class="math inline">\(\beta = 0\)</span> we expect to get the original harmonic oscillator
+</dd>
+</dl>
+<p><span class="math display">\[ \begin{gather}
+    \boxed{x(t) = C_1e^{i \omega t} + C_2e^{-i \omega t}}
+\end{gather} \]</span></p>
+<dl>
+<dt>Underdamping Oscillation</dt>
+<dd>For <span class="math inline">\(\beta &lt; \omega\)</span>, the solution is a enveloped wave,
+</dd>
+</dl>
+<center>
+<img src="2018-02-21-21-33-20.png" height="50%" width="50%"></img>
+</center>
+<p><span class="math display">\[ \begin{gather}
+    \omega_1 \equiv \sqrt{\omega_0^2 - \beta^2}\\
+    x(t) = e^{-\beta t}\left(C_1e^{i\omega_1 t} + C_2^{-i\omega_1 t} \right)\\
+    \boxed{x(t) = Ae^{-\beta t}\cos(\omega_1 t - \delta)}
+\end{gather} \]</span></p>
+<dl>
+<dt>Overdamping Oscillation</dt>
+<dd>For <span class="math inline">\(\beta &gt; \omega\)</span>, we observer a quickly dying non-periodical wave.
+</dd>
+</dl>
+<center>
+<img src="2018-02-21-21-38-41.png" height="50%" width="50%"></img>
+</center>
+<dl>
+<dt>Critical Damping Oscillation</dt>
+<dd>For <span class="math inline">\(\beta = \omega\)</span>, the solution is an exponential decay,
+</dd>
+</dl>
+<p><span class="math display">\[ \begin{equation}
+    \boxed{x(t) = C_1e^{-\beta t} + C_2 t^{e^{-\beta t}}}
+\end{equation} \]</span></p>
+<h2 id="damped-driven-oscillator">Damped Driven Oscillator</h2>
+<p>A driven oscillator adds in an external force call the driven force <span class="math inline">\(F_d(t)\)</span>. The damped driven oscillator is simply,</p>
+<p><span class="math display">\[ \begin{gather}
+    F(t) = F_d(t) - b\dot x - kx\\
+    \boxed{\ddot x + 2\beta \dot x + \omega_0^2 = f(t)}
+\end{gather} \]</span></p>
+<ul>
+<li><span class="math inline">\(f(t)\)</span> : The acceleration contributed by the external agent where $ f(t) = F_d(t)/m$</li>
+</ul>

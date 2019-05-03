@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang='en'>
+<head>
+    <meta charset="UTF-8">
+    <title>PyStatic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- yep Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://ketozhang.github.io/notebook/static/base.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
+    <link rel="shortcut icon" href="https://ketozhang.github.io/notebook/static/favicon.ico">
+</head>
+<body>
+    
+<div class="container-fluid" id="note">
+    <div class="row">
+        <div class="col-3 d-none d-lg-block"></div>
+        <div class="col-sm-10 col-lg-7">
+            <h1 class="title"></h1>
+            <h1 id="lecture-notes-13---modeling-estimation">Lecture Notes 13 - Modeling Estimation</h1>
+<h2 id="model">Model</h2>
+<p>Model is an <strong>idealized</strong> representation of a system</p>
+<h3 id="defining-the-model">Defining the Model</h3>
+<p>To start out with creating a model, one can make a hypothesis. These hypothesis may be based on <strong>prior knowledge</strong>.</p>
+<h3 id="define-the-loss">Define the Loss</h3>
+<dl>
+<dt><strong>Loss function</strong></dt>
+<dd>A function that characterize the cost, error, or loss resulting from a particular chioce of model or model parameters.
+</dd>
+</dl>
+<h4 id="square-loss">Square Loss</h4>
+<p>A very popular loss function is the <span class="math inline">\({L^2}\)</span> ('el two') loss which is a quadratic loss function.</p>
+<p><span class="math display">\[ L(\theta,y) = (y-\theta)^2 \]</span></p>
+<ul>
+<li><span class="math inline">\(y\)</span> : data</li>
+<li><span class="math inline">\(\theta\)</span> : predicted value</li>
+<li>Pros: If good fit, no loss</li>
+<li>Cons: If bad fit, very bad loss</li>
+</ul>
+<h4 id="absolute-loss">Absolute Loss</h4>
+<p>The <span class="math inline">\(L^1\)</span> loss is the linear loss function,</p>
+<p><span class="math display">\[ L(\theta,y) = \lvert{y-\theta}\rvert \]</span></p>
+<ul>
+<li>Pros: If good fit, no loss</li>
+<li>Cons: If bad fit, some loss</li>
+</ul>
+<h4 id="huber-loss">Huber Loss</h4>
+<p>The Huber's Loss function smooths out the non-differentiable part of the absolute loss as a tradeoff between the pros and cons square and absolute loss.</p>
+<p><span class="math display">\[ L_\alpha(\theta,y) = \begin{cases} \frac{1}{2}(y-\theta)^2 \\ \alpha\left(\lvert{y-\theta}\rvert - \alpha/2\right) \end{cases} \]</span></p>
+<ul>
+<li><span class="math inline">\(\alpha\)</span>: Sensitivity parameters for outliers.</li>
+</ul>
+<h4 id="average-loss">Average Loss</h4>
+<p>The amount of loss for each data point may be calculated the unweighted average,</p>
+<p><span class="math display">\[ L(\theta, \mathcal{D}) = \frac{1}{n}\sum_{i=1}^{n}{L(\theta, y_i)}\]</span></p>
+<h4 id="loss-optimization">Loss Optimization</h4>
+<p>The loss function is optimizeable in parameter <span class="math inline">\(\theta\)</span>. <span class="math inline">\(\theta_\text{min}\)</span> may exist in the critical points where <span class="math inline">\(L&#39;(\theta) = 0\)</span>. I will assume you know calculus and skip the notes on calculus optimization.</p>
+<p>The minmum for the square loss function is the mean of the data: <span class="math display">\[ \hat{\theta} = \frac{1}{n}\sum_{i=1}^n{y_i}\]</span></p>
+<p>For the average absolute loss the minimum is the median of the data:</p>
+<p><span class="math display">\[ \hat{\theta} = \text{median}(y) \]</span></p>
+        </div>
+        <div class="col-2 d-none d-md-block">
+        </div>
+    </div>
+</div>
+
+
+    <!-- Scripts -->
+
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
+    <footer class="mt-auto py-2 ">
+    <hr>
+    <div class="container">
+        <span class="text-muted">
+            <p class="text-right"> Generated by <a href="https://github.com/ketozhang/PyStatic">PyStatic</a> | Designed
+                by <a href="https://github.com/ketozhang">Keto Z.</a></p>
+        </span>
+    </div>
+</footer>
+</body>
+</html>

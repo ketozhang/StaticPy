@@ -1,0 +1,43 @@
+<p>A sampling probability is often one at which follows these sampling rules. For <span class="math inline">\(N\)</span> individuals we wish gather the individuals into <span class="math inline">\(n\)</span> subsets:</p>
+<ol style="list-style-type: decimal">
+<li>Each sample cannot be picked more than once (no replacement)</li>
+<li>Order does not matter</li>
+</ol>
+<p>The probability of a given subset following these two rules being chosen can be solved two ways:</p>
+<h2 id="brute-force---number-of-configurations">Brute Force - Number of Configurations</h2>
+<p>The brute force methods requires the knowledge of all possible configurations. This is the method that is often first taught in statistics and following our rules it sounds like we have to use <strong>combination</strong> (order does not matter). Recall the combination is defined as the number of configuration of group one can make with <span class="math inline">\(n\)</span> things and each group has <span class="math inline">\(k\)</span> things. Combination also simply quoted as the &quot;<span class="math inline">\(n\)</span> choose <span class="math inline">\(k\)</span>&quot; function which is,</p>
+<p><span class="math display">\[\boxed{ \begin{pmatrix}
+    n \\ k
+\end{pmatrix} = \frac{n!}{k!(n-k)!}}\]</span></p>
+<hr />
+<dl>
+<dt>Example</dt>
+<dd>The population of the data is <span class="math inline">\(N=10\)</span>, if you were to group the population into pairs (<span class="math inline">\(k=2\)</span>) how many groups can you make?
+</dd>
+</dl>
+<p><span class="math display">\[ \begin{pmatrix}
+    N \\ k
+\end{pmatrix} = \begin{pmatrix}
+    10 \\ 2
+\end{pmatrix} = \frac{10!}{2!8!} = \frac{9\cdot 10}{2}  = \boxed{45 \text{ pairs}}\]</span></p>
+<hr />
+<p>Back to the sampling problem. Here the number of things are subsets and the the groups are the sample. We wish to ask what is the probability of the sample contain a certain subset. Let's call this particular subset <span class="math inline">\(A\)</span>,</p>
+<p><span class="math display">\[P(A) = \frac{\text{Samples with A}}{\text{Total Posible Samples}}\]</span></p>
+<hr />
+<dl>
+<dt>Example</dt>
+<dd>The sample are once again in pairs, but now my subsets are marked from <span class="math inline">\(A\)</span> to <span class="math inline">\(Z\)</span> (<span class="math inline">\(n=26\)</span>), what is the probability of choosing <span class="math inline">\(A\)</span> as part of my sample?
+</dd>
+</dl>
+<p><span class="math display">\[ C_\text{pairs} = \begin{pmatrix}
+    n \\ 2
+\end{pmatrix} = \frac{n!}{2!(n-2)!}\]</span></p>
+<p><span class="math display">\[ C_A = \begin{pmatrix}
+    n-1 \\ 1
+\end{pmatrix} = n-1 \tag{Pairs with A}\]</span></p>
+<p><span class="math display">\[
+P(A) = \frac{C_A}{C_\text{Pairs}} = \frac{2!(n-2)!(n-1)}{n!}
+\]</span></p>
+<h2 id="probability-by-recursion">Probability by Recursion</h2>
+<p>You may also find the probability by multiplying</p>
+<p><span class="math display">\[ \mathcal{P}(A) = P(A) \cdot P(\neg A) \]</span></p>

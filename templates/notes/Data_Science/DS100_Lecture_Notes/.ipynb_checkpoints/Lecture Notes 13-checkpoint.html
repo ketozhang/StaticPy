@@ -1,0 +1,41 @@
+<h1 id="lecture-notes-13---modeling-estimation">Lecture Notes 13 - Modeling Estimation</h1>
+<h2 id="model">Model</h2>
+<p>Model is an <strong>idealized</strong> representation of a system</p>
+<h3 id="defining-the-model">Defining the Model</h3>
+<p>To start out with creating a model, one can make a hypothesis. These hypothesis may be based on <strong>prior knowledge</strong>.</p>
+<h3 id="define-the-loss">Define the Loss</h3>
+<dl>
+<dt><strong>Loss function</strong></dt>
+<dd>A function that characterize the cost, error, or loss resulting from a particular chioce of model or model parameters.
+</dd>
+</dl>
+<h4 id="square-loss">Square Loss</h4>
+<p>A very popular loss function is the <span class="math inline">\({L^2}\)</span> ('el two') loss which is a quadratic loss function.</p>
+<p><span class="math display">\[ L(\theta,y) = (y-\theta)^2 \]</span></p>
+<ul>
+<li><span class="math inline">\(y\)</span> : data</li>
+<li><span class="math inline">\(\theta\)</span> : predicted value</li>
+<li>Pros: If good fit, no loss</li>
+<li>Cons: If bad fit, very bad loss</li>
+</ul>
+<h4 id="absolute-loss">Absolute Loss</h4>
+<p>The <span class="math inline">\(L^1\)</span> loss is the linear loss function,</p>
+<p><span class="math display">\[ L(\theta,y) = \lvert{y-\theta}\rvert \]</span></p>
+<ul>
+<li>Pros: If good fit, no loss</li>
+<li>Cons: If bad fit, some loss</li>
+</ul>
+<h4 id="huber-loss">Huber Loss</h4>
+<p>The Huber's Loss function smooths out the non-differentiable part of the absolute loss as a tradeoff between the pros and cons square and absolute loss.</p>
+<p><span class="math display">\[ L_\alpha(\theta,y) = \begin{cases} \frac{1}{2}(y-\theta)^2 \\ \alpha\left(\lvert{y-\theta}\rvert - \alpha/2\right) \end{cases} \]</span></p>
+<ul>
+<li><span class="math inline">\(\alpha\)</span>: Sensitivity parameters for outliers.</li>
+</ul>
+<h4 id="average-loss">Average Loss</h4>
+<p>The amount of loss for each data point may be calculated the unweighted average,</p>
+<p><span class="math display">\[ L(\theta, \mathcal{D}) = \frac{1}{n}\sum_{i=1}^{n}{L(\theta, y_i)}\]</span></p>
+<h4 id="loss-optimization">Loss Optimization</h4>
+<p>The loss function is optimizeable in parameter <span class="math inline">\(\theta\)</span>. <span class="math inline">\(\theta_\text{min}\)</span> may exist in the critical points where <span class="math inline">\(L&#39;(\theta) = 0\)</span>. I will assume you know calculus and skip the notes on calculus optimization.</p>
+<p>The minmum for the square loss function is the mean of the data: <span class="math display">\[ \hat{\theta} = \frac{1}{n}\sum_{i=1}^n{y_i}\]</span></p>
+<p>For the average absolute loss the minimum is the median of the data:</p>
+<p><span class="math display">\[ \hat{\theta} = \text{median}(y) \]</span></p>

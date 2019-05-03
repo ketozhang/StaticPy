@@ -1,0 +1,14 @@
+<h2 id="shared-nothing">Shared Nothing</h2>
+<p>A parallelism of shared nothing is a scheme where commodity hardware has dedicated CPU, RAM, and disk. Between machines is only a network connection.</p>
+<h2 id="types-of-query-parallelism">Types of Query Parallelism</h2>
+<ol style="list-style-type: decimal">
+<li><p><strong>Inter-query Parallelism</strong></p>
+<ul>
+<li>Each query runs on a separate processor</li>
+</ul></li>
+<li><p><strong>Intra-query Parallelism</strong></p>
+<ul>
+<li>Each operator can be parallelized (inter-operator)</li>
+<li>Within each operator, we can parallelize its components (intra-operator)</li>
+</ul></li>
+</ol>

@@ -1,0 +1,66 @@
+<h2 id="coherent-electromagnetic-waves">Coherent Electromagnetic Waves</h2>
+<p>The interaction of an electron with a photon can be described by the atomic interaction with an electromagnetic wave.</p>
+<p>Consider the simple case that we shine a light polarized light source along the <span class="math inline">\(z\)</span> direction such that the wavelength is greater than the atomic size <span class="math inline">\(\lambda \gg \lambda_{dB}\)</span>. We can them simplify this electromagnetic wave as,</p>
+<p><span class="math display">\[ \begin{gather}
+    \boldsymbol{E} = E_0\cos(\omega t)\hat z\\
+    V = \int{\boldsymbol{E}\; d\boldsymbol{r}} = -qE_0z\cos(\omega t)
+\end{gather} \]</span></p>
+<p>The perturbed Hamiltonian is then,</p>
+<p><span class="math display">\[
+\begin{gather}
+    H&#39; = -qE_0 z \cos(\omega t)\\
+    H&#39;_{ba} = -qE_0\cos(\omega t)z_{ab}\\
+    z_{ab} \equiv \bra{\psi_a}z\ket{\psi_b}
+\end{gather}
+\]</span></p>
+<p>Notice that <span class="math inline">\(z_{ab}\)</span> is always integrate to zero since <span class="math inline">\(z|\psi|^2\)</span> is always odd. Of course, this only applies to wavefunctions that can be considered even or odd with <span class="math inline">\(z\)</span>.</p>
+<p>The probability of transition between <span class="math inline">\(a\)</span> to <span class="math inline">\(b\)</span> for the case that <span class="math inline">\(\omega \gg \omega_0\)</span> (true for our light source) is,</p>
+<p><span class="math display">\[ \begin{gather}
+    P_{a\rightarrow b}(t) = \left(\frac{qE_0}{\hbar}|z_{ab}|\right)^2\frac{\sin^2\left(\frac{\Delta \omega t}{2}\right)}{\Delta \omega^2}\\
+    \Delta \omega \equiv \omega - \omega_0
+\end{gather} \]</span></p>
+<p>Now for an astonishing fact, the probability going the other way <span class="math inline">\(P_{b\rightarrow a}(t)\)</span> is the exact same! Notice all you need to do is flip the sign of <span class="math inline">\(\omega_0\)</span> to get the opposite transition.</p>
+<p><span class="math display">\[ \begin{equation}
+    \boxed{P_{a\rightarrow b}(t) = P_{b\rightarrow a}(t)}
+\end{equation} \]</span></p>
+<p>If <span class="math inline">\(E_a &lt; E_b\)</span> then <span class="math inline">\(a \rightarrow b\)</span> is called <strong>absorption</strong> and <span class="math inline">\(b\rightarrow a\)</span> is called <strong>stimulated emission</strong>. This is amazing because you wouldn't expect <span class="math inline">\(\psi_b\)</span> to go to a lower energy level if an electromagnetic is contributed. Naturally you may have heard of an atom emitting light without any perturbation. This is called instead <strong>spontaneous emission</strong>.</p>
+<h2 id="incoherent-electromagnetic-waves">Incoherent Electromagnetic Waves</h2>
+<p>The incoherent perturbation is best described by its energy density <span class="math inline">\(\mu\)</span> which is composed of all frequencies. Recall that the energy density of the electromagnetic wave is,</p>
+<p><span class="math display">\[ \mu = \frac{\epsilon_0}{2}E_0^2 \]</span></p>
+<ul>
+<li><span class="math inline">\(E_0\)</span> : electrical field amplitude</li>
+</ul>
+<p>We may rewrite the monochromic stimualted emission as</p>
+<p><span class="math display">\[
+\begin{equation}
+    P_{b\rightarrow a}(t) = \frac{2q\mu}{\epsilon_0 \hbar^2}\abs{z_{ba}}^2\frac{\sin^2\left(\frac{\Delta \omega t}{2}\right)}{\Delta \omega^2}
+\end{equation}
+\]</span></p>
+<p>To consider the full range of frequency we integrate over <span class="math inline">\(\omega\)</span>. Recall,</p>
+<p><span class="math display">\[ d\mu = \rho(\omega)\; d\omega \]</span></p>
+<p><span class="math display">\[\begin{equation}
+\boxed{P_{b\rightarrow a}(t) = \frac{2q}{\epsilon_0 \hbar^2}\abs{z_{ba}}^2\int_{-\infty}^{\infty}{\rho(\omega)\frac{\sin^2\left(\frac{(\Delta \omega) t}{2}\right)}{(\Delta \omega)^2}\; d\omega}}
+\end{equation}\]</span></p>
+<p>We may assume that energy density dominates at resonant frequency <span class="math inline">\(\omega = \omega_0\)</span> so <span class="math inline">\(\rho(\omega) = \rho(\omega_0)\)</span>. Substituting <span class="math inline">\(x \equiv (\Delta \omega)t/2\)</span> we can extend the integral to <span class="math inline">\(x=\pm\infty\)</span> and find that,</p>
+<p><span class="math display">\[\begin{equation}
+    \boxed{P_{b\rightarrow a}(t) \simeq \frac{\pi q \abs{z_{ba}}^2}{\epsilon_0\hbar^2} \rho(\omega_0)t}
+\end{equation}\]</span></p>
+<h2 id="isotropic-electromagnetic-waves">Isotropic Electromagnetic Waves</h2>
+<p>Let's now introduced unpolarized light, actually light coming from every direction isotropically. The equation no long has the electromagnetic wave coming from the <span class="math inline">\(\hat z\)</span> direction but now everywhere <span class="math inline">\(\abs{z_{ba}} \rightarrow \abs{r_{ba}}\)</span>.</p>
+<p>The isotropic light will be polarized along <span class="math inline">\(\hat n\)</span> thus we project <span class="math inline">\(\abs{r_{ba}}\)</span> to <span class="math inline">\(\hat n\)</span> and take the average value as the factor of the effective electric field.,</p>
+<p><span class="math display">\[ \abs{r_{ba} \cdot \hat n}^2 = \int{\frac{1}{4\pi} \cos^2\theta\sin\theta \; d\theta\; d\phi} = \frac{1}{3}\abs{r_{ba}}^2 \]</span></p>
+<p><span class="math display">\[\begin{equation}
+    \boxed{P_{b\rightarrow a}(t) \simeq \frac{\pi q \abs{r_{ba}}^2}{3\epsilon_0\hbar^2} \rho(\omega_0)t}
+\end{equation}\]</span></p>
+<h2 id="transition-rate">Transition Rate</h2>
+<p>The transition rate has a good approximation considering statistically large numbers of photons (attempts to transition). In this approximation the transition rate is the rate of success,</p>
+<p><span class="math display">\[
+\begin{equation}
+R_{b\rightarrow a} \equiv \frac{dP_{b\rightarrow a}}{dt}
+\end{equation}
+\]</span></p>
+<h2 id="fermis-golden-rule">Fermi's Golden Rule</h2>
+<p>The most simplest way to memorize all of these is <strong>Fermi's golden rule</strong>. The rule states that the transitional probability given the energy density of state <span class="math inline">\(\rho\)</span> given by such integral,</p>
+<p><span class="math display">\[ R_{i \rightarrow f} = \frac{2\rho}{\hbar}\abs{H&#39;_{fi}}^2\int_{-\infty}^{\infty} \frac{\sin \omega t}{\omega} \d \omega\]</span></p>
+<p>This is simply equal to,</p>
+<p><span class="math display">\[\boxed{ R_{i \rightarrow f}  = \frac{2\pi}{\hbar}\abs{H_{fi}}^2\rho}\]</span></p>

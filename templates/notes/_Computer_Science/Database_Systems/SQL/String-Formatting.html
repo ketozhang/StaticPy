@@ -1,0 +1,28 @@
+<h2 id="old-style">Old Style</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Syntax</th>
+<th>Description</th>
+<th>Regex Equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>%</code></td>
+<td>Match zero or one wildcard</td>
+<td><code>.?</code></td>
+</tr>
+<tr class="even">
+<td><code>_</code></td>
+<td>Repeat previous character</td>
+<td><code>*</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="predicate">Predicate</h2>
+<p>A predicate either in the <code>WHERE</code> or <code>HAVING</code> clause can use strings.</p>
+<p><strong>Old Style</strong></p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql">&lt;WHERE|HAVING&gt; &lt;column&gt; <span class="kw">LIKE</span> <span class="st">&#39;&lt;like clause&gt;&#39;</span></code></pre></div>
+<p><strong>Standard Regular Expression</strong></p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql">&lt;WHERE|HAVING&gt; &lt;column&gt; ~ <span class="st">&#39;&lt;regex&gt;&#39;</span></code></pre></div>

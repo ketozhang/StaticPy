@@ -1,0 +1,77 @@
+<h1 id="lecture-notes-15">Lecture Notes 15</h1>
+<h2 id="modeling-and-estimation">Modeling and Estimation</h2>
+<p>The steps of modeling is summarized to:</p>
+<ol style="list-style-type: decimal">
+<li>Define the Model
+<ul>
+<li>Simplified representation of the world</li>
+</ul></li>
+<li>Define the Loss Function
+<ul>
+<li>Measures how well a particular instance of the model &quot;fits&quot; the data.</li>
+</ul></li>
+<li>Minimize the Loss Function
+<ul>
+<li>Analytically using calculus</li>
+<li>Numerically using gradient descent</li>
+</ul></li>
+</ol>
+<h3 id="loss-function">Loss Function</h3>
+<ul>
+<li>Absolute Loss <span class="math inline">\(\mathbb{L}^1\)</span>
+<ul>
+<li>Not Sensitive to outliers</li>
+<li>Difficult to differentiate</li>
+<li>Minimizes at the <strong>median</strong> <span class="math display">\[ \mathbb{L}^1(\theta) = \frac{1}{n}\sum_{i=1}^{n}\abs{y_i - \theta}\]</span></li>
+</ul></li>
+<li>Square Loss <span class="math inline">\(\mathbb{L}^2\)</span>
+<ul>
+<li>Sensitive to outliers</li>
+<li>Easily differentiable</li>
+<li>Average square loss minimizes at the <strong>mean</strong> <span class="math display">\[ \mathbb{L}^2(\theta) = \frac{1}{n}\sum_{i=1}^{n}(y_i - \theta)^2 \]</span></li>
+</ul></li>
+<li>Huber Loss
+<ul>
+<li>Not Sensitive to outliers</li>
+<li>Numerically differentiable</li>
+</ul></li>
+</ul>
+<h3 id="gradient-descent">Gradient Descent</h3>
+<p><span class="math display">\[\boxed{ \theta^{(t+1)} = \theta^{(t)} - \alpha\nabla \ell(\theta^{(t)}) }\]</span></p>
+<p><span class="math display">\[\boxed{ \mathbf x^{(n)} =  \mathbf x^{(0)} - a_1 \nabla f(\mathbf x^{(0)}) - a_2 \nabla f(\mathbf x^{(1)}) - \ldots - a_n\nabla f(\mathbf x^{(n-1)})}\]</span></p>
+<h2 id="coding">Coding</h2>
+<ul>
+<li>Python (basics)</li>
+<li>Matplotlib (<code>plt.plot</code>, <code>plt.xlabel</code>, <code>plt.ylabel</code>)</li>
+<li>Numpy</li>
+<li>Pandas (Dataframe, Series)
+<ul>
+<li>Indexing</li>
+<li>Groupby</li>
+<li>Joins, Merge</li>
+</ul></li>
+<li>SQL</li>
+<li>Regex</li>
+</ul>
+<h2 id="data-visualization">Data Visualization</h2>
+<ul>
+<li>Differentiate quantitative, nominal, ordinal</li>
+<li>Histogram, rug/scatter plot, smoothed density estimator</li>
+<li>Example of bad plots
+<ul>
+<li>Pie charts</li>
+<li>stacking (placing data on top of data)</li>
+<li>jiggling (data's y-value is consistent across each data plot)</li>
+<li>overplotting</li>
+</ul></li>
+</ul>
+<h2 id="web-technology">Web Technology</h2>
+<ul>
+<li>GET - get information</li>
+<li>POST - send information</li>
+<li>Languages
+<ul>
+<li>XML, HTML, JSON</li>
+</ul></li>
+</ul>
+<h2 id="string-manipulation-and-regular-expression">String Manipulation and Regular Expression</h2>

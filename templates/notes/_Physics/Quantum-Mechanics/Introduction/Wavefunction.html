@@ -1,0 +1,30 @@
+<p>Throughout quantum mechanics we use the wavefunction which is comparably used to describe &quot;where a particle is&quot;. There are many interpretation of the wavefunction, however, the one most accepted is the <a href="#statistical-interpretation">statistical interpretation</a>. Unfortunately we can't get much further without agreeing that the statistical interpretation is sufficient.</p>
+<h2 id="statistical-and-copenhagen-interpretation">Statistical and Copenhagen Interpretation</h2>
+<p>The wavefunction does not actually tell you where a particle is for some given time; instead the <strong>wavefunction</strong> <span class="math inline">\(\Psi(x,t)\)</span> correlates to the probability of the particle being in some position <span class="math inline">\(x\)</span> for some given time <span class="math inline">\(t\)</span>. The definition above is definitely abstract and it is considered the <strong>statistical interpretation</strong> of the wavefunction.</p>
+<ul>
+<li>The most accepted explanation of why we must describe quantum system with probability is that any attempt to observe where the particle is will drastically change the actual position of the particle. In other words, physicist has accepted that it is impossible to measure the exactly position knowing its exact momentum (which is used in the Schrodinger equation). The acceptance of this limitation is called the <strong>Copenhagen interpretation</strong>.</li>
+</ul>
+<p>The full mathemateical description of the wavefunction can be written as the probability of the particle being between two points <span class="math inline">\((a,b)\)</span> is given by,</p>
+<p><span class="math display">\[
+\begin{equation}
+    \boxed{P_{ab} = \int_a^b{|\Psi(x,t)|^2 \;dx}} \label{eq: probability}
+\end{equation}
+\]</span></p>
+<h2 id="probability-density-function">Probability Density Function</h2>
+<p>By the Equation <span class="math inline">\(\eqref{eq: probability}\)</span> we see that <span class="math inline">\(|\Psi(x,t)|^2\)</span> is the <strong>probability density function</strong>,</p>
+<p><span class="math display">\[
+\begin{align}
+    \boxed{|\Psi(x,t)|^2 = \frac{dP}{dx}}\label{eq: probability-density}
+\end{align}
+\]</span></p>
+<h2 id="expectation-value">Expectation Value</h2>
+<p>A useful quantity is the mean, average, or expectation value of the wavefunction. The expectation value is the average of some quantity <span class="math inline">\(x\)</span> determined by some probability curve <span class="math inline">\(P(x)\)</span>,</p>
+<p><span class="math display">\[ \langle x \rangle \equiv \int_{-\infty}^\infty{x\frac{dP}{dx}\; dx}\]</span> <span class="math display">\[ \langle x \rangle \equiv \int_{-\infty}^\infty{x|\Psi|^2\; dx}\]</span></p>
+<p>The definition above is not so general and only applies to parameters and functions. What about operators? When dealing with wavefunctions (which is complex) we often use the Dirac notation. In general let's have an arbitrary hermitian operator<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> <span class="math inline">\(\hat Q\)</span> in the <span class="math inline">\(x\)</span> basis,</p>
+<p><span class="math display">\[ \langle \hat Q \rangle \equiv \langle \Psi | \hat Q \Psi \rangle \]</span> <span class="math display">\[ \langle \hat Q \rangle \equiv \int_0^\infty{\Psi^* \hat Q \Psi\; dx} \]</span></p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>the expectation value of hermitian operators are always real. <a href="Operators.md/#hermitian-operators">Proof</a><a href="#fnref1">↩</a></p></li>
+</ol>
+</div>

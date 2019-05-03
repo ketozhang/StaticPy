@@ -1,0 +1,83 @@
+<h1 id="lecture-notes-3">Lecture Notes 3</h1>
+<h2 id="conditional-probability">Conditional Probability</h2>
+<p>A conditional probability can be generalized by the phrase.</p>
+<center>
+<strong>&quot;What is the probability of B given A&quot;</strong>
+</center>
+<p>Which is notated as,</p>
+<p><span class="math display">\[ \begin{align}
+    \boxed{P(B | A) \equiv \frac{P(A\cap B )}{P(A)}}
+    \label{eq:b-given-a}
+\end{align} \]</span></p>
+<h2 id="bayes-rule">Bayes' Rule</h2>
+<p>Bayes rule changes Equation  with the identity,</p>
+<p><span class="math display">\[ P(A\cap B ) \equiv P(B)\cdot P(B|A) \]</span></p>
+<p><span class="math display">\[
+\begin{align}
+    \boxed{P(B | A) = \frac{P(B)}{P(A)}\cdot P(A|B)}\\
+\end{align}
+\]</span></p>
+<p>It is often useful as a way to invert <span class="math inline">\(P(A|B)\)</span> to <span class="math inline">\(P(B|A)\)</span> by the ratio of their probability as the inversion factor,</p>
+<h2 id="bias-data-vs-srs">Bias Data vs SRS</h2>
+<ul>
+<li>Big data is not enough to compare to the accuracy of an SRS.</li>
+<li>We see that an SRS of 100 samples out perform an administrative data by a accuracy difference of 90%.</li>
+</ul>
+<h2 id="getting-started-with-pandas">Getting Started with Pandas</h2>
+<p>We will use many packages along with Pandas:</p>
+<ul>
+<li><p>Python essential packages for data science:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">%</span>mathplotlib inline <span class="co">#this is only for jupyter</span>
+<span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt <span class="co"># for plotting</span>
+<span class="im">import</span> seaborn <span class="im">as</span> sns <span class="co"># for fancy plots</span>
+<span class="im">import</span> numpy <span class="im">as</span> np <span class="co"># math matrix or vector tools</span>
+<span class="im">import</span> pandas <span class="im">as</span> pd <span class="co"># table tools</span></code></pre></div></li>
+<li><p>Packages listed below are recommended:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> pathlib <span class="im">import</span> Path <span class="co"># replaces os.path which deals with file management</span>
+<span class="im">import</span> zipfile <span class="co"># useful for previewing, extracting, and zipping zip files</span></code></pre></div></li>
+</ul>
+<p>The following is a typical method to import a data file like a properly delimited text file and create a Pandas data table called a <code>DataFrame</code>:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">&quot;&quot;&quot;</span>
+<span class="co">The line below about datafile is psuedocode, just assume datafile is a pointer to some file on your desktop. </span>
+<span class="co">There are many ways to do this such as the zipfile method shown in the lecture.</span>
+<span class="co">&quot;&quot;&quot;</span>
+datafile <span class="op">=</span> import_file(<span class="st">&#39;data.txt&#39;</span>)  <span class="co">#psuedo code</span>
+column_names <span class="op">=</span> [<span class="st">&#39;colA&#39;</span>, <span class="st">&#39;colB&#39;</span>, <span class="st">&#39;colC&#39;</span>]
+df <span class="op">=</span> pd.read_csv(datafile, header<span class="op">=</span><span class="va">None</span>, names<span class="op">=</span>column_names)</code></pre></div>
+<p>Once your data is imported into a <code>DataFrame</code> which is stored in the variable <code>df</code>. You may now use the following methods of a <code>DataFrame</code></p>
+<table>
+<colgroup>
+<col width="17%" />
+<col width="45%" />
+<col width="37%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Description</th>
+<th>Code</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Get Column</td>
+<td>Get a column by column name returned as a Pandas series</td>
+<td><code>df['colname']</code></td>
+</tr>
+<tr class="even">
+<td>Get Rows</td>
+<td>Get a column by range of row indices</td>
+<td><code>df[row1:row2]</code></td>
+</tr>
+<tr class="odd">
+<td>Get Rows and Columns</td>
+<td>Get a column by range of row indices and column names</td>
+<td><code>df.loc(row1:row2, colname1:colname2)</code></td>
+</tr>
+<tr class="even">
+<td>Get Rows and Columns</td>
+<td>Get a column by range of row and column indices</td>
+<td><code>df.iloc(row1:row2, col1:col2)</code></td>
+</tr>
+</tbody>
+</table>

@@ -1,0 +1,12 @@
+<p>A view is a namespace for sql query similar to how functions are namespaces for code. This is syntaxed as,</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">CREATE</span> <span class="kw">VIEW</span> &lt;view_name&gt;(&lt;columns&gt;)
+<span class="kw">AS</span>
+    &lt;query&gt;;</code></pre></div>
+<h2 id="temporary-view">Temporary View</h2>
+<p>A temporary view can be made inside a <code>FROM</code> clause.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql">...
+<span class="kw">FROM</span> (&lt;query&gt;) <span class="kw">as</span> &lt;view_name&gt;;</code></pre></div>
+<p>Another way is with the <code>WITH</code> clause</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">WITH</span> &lt;view_name&gt;(&lt;columns&gt;) <span class="kw">AS</span>
+    &lt;query_for_view&gt;
+&lt;query&gt;;</code></pre></div>

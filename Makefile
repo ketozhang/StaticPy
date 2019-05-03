@@ -1,9 +1,9 @@
 local:
 	python app.py
 build:
+	python app.py build
+static:
 	python freeze.py
-debug:
-	python freeze.py debug
 push:
 	make build
 	git add -A

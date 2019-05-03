@@ -1,0 +1,25 @@
+<h1 id="landau-theory-of-phase-transitions">Landau Theory of Phase Transitions</h1>
+<p>The Landau theory gives a systemic formulation of the mean field theory of phase transition applicable to various systems. The basis is to consider a system at constant volume and temperature such that the free energy <span class="math inline">\(F = U - \tau\sigma\)</span> is minimum at equilibrium.</p>
+<p>We consider a parameter that causes the the free energy to minimum <span class="math inline">\(\xi_0\)</span>. This parameter is the quantity relating to the properties of the system.</p>
+<p><span class="math display">\[
+\begin{aligned}
+    F_L(\xi,\tau) \equiv U(\xi,\tau) - \tau\sigma(\xi,\tau)\\
+    F_L(\xi_0,\tau)  = F_{L,\text{min}}, \quad \tau = \text{const.}
+\end{aligned}
+\]</span></p>
+<p>We assume a great approximation that <span class="math inline">\(F_L(\xi,\tau)\)</span> can be a even power series:</p>
+<p><span class="math display">\[\boxed{F_L(\xi,\tau) = g_0(\tau) + \frac{1}{2}g_2(\tau)\xi^2 + ... }\]</span></p>
+<ul>
+<li><span class="math inline">\(g_i(\tau)\)</span> : Power series coefficients</li>
+<li>Phase transition occurs if <span class="math inline">\(g_2\)</span> flips its sign at some <span class="math inline">\(\tau_0\)</span> and <span class="math inline">\(g_4&gt;0\)</span>.</li>
+</ul>
+<p><strong>Case</strong>: <span class="math inline">\(g_2(\tau)=(\tau-\tau_0)\alpha\)</span> and <span class="math inline">\(g_4 = \text{const}\)</span></p>
+<p>Consider only the terms up to <span class="math inline">\(g_4\)</span>:</p>
+<p><span class="math display">\[ F_L(\xi,\tau) = g_0(\tau) + \frac{1}{2}\alpha(\tau-\tau_0)\xi^2 + \frac{1}{4}g_4\xi^4 \]</span> <span class="math display">\[ \left(\frac{dF_L}{d\xi}\right)_\tau = \alpha(\tau-\tau_0)\xi + \frac{1}{4}g_4\xi^3 = 0\]</span></p>
+<p>The second line has the roots <span class="math inline">\(\xi_1 = 0\)</span> corresponding to <span class="math inline">\(F_{L,min}(\tau&gt;\tau_0)\)</span> and <span class="math inline">\(\xi_2^2 = (\tau_0 - \tau)(\alpha/g_4)\)</span> corresponding to <span class="math inline">\(F_{L,min}(\tau &lt; \tau_0)\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+    F(\xi_1) &amp;= g_0(\tau)\\
+    F(\xi_2) &amp;= g_0(\tau) - \frac{\alpha^2}{4g_4}(\tau-\tau_0)^2 
+\end{aligned}
+\]</span></p>

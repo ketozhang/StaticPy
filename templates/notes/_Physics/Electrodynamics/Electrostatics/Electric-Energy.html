@@ -1,0 +1,20 @@
+<h2 id="work">Work</h2>
+<p>As usual, to speak of the amount of energy an object has you must define what work is. For the electric force work is simple in terms of the electric potential for a single charge being sent from <span class="math inline">\(\boldsymbol r&#39; = \infty\)</span> to <span class="math inline">\(\boldsymbol r&#39; = \boldsymbol r\)</span>,</p>
+<p><span class="math display">\[
+W(\boldsymbol{r}) = \int_\infty^\boldsymbol{r} q\boldsymbol E \cdot \ \mathrm d \boldsymbol r&#39;\\
+\boxed{W(\boldsymbol{r}) = qV(\boldsymbol{r})}
+\]</span></p>
+<p>Where we set the origin <span class="math inline">\(V(\infty) = 0\)</span></p>
+<p>For a continuous collection of charges one can see that as you add each charge to the collection, the following charge must overcome the potential of all previous charges. This is quite an iterative process which looks like,</p>
+<p><span class="math display">\[
+W = \frac{1}{4\pi\epsilon_0} \sum_{i}^n\sum_{j &gt; i}^n{\frac{q_iq_j}{|\boldsymbol r_i| - |\boldsymbol r_j|}} = \frac{1}{2}\frac{1}{4\pi\epsilon_0} \sum_{i}^n\sum_{j \ne i}^n{\frac{q_iq_j}{|\boldsymbol r_i| - |\boldsymbol r_j|}}\\
+W = \frac{1}{2}\sum_{i}^{n}{q_iV(\boldsymbol{r}_i)}
+\]</span></p>
+<p>We can easily convert this to continuous form</p>
+<p><span class="math display">\[
+\boxed{W = \frac{1}{2}\int{V(\boldsymbol{r})\ \mathrm dq}}
+\]</span></p>
+<p>In terms of the electric field,</p>
+<p><span class="math display">\[
+\boxed{W = \frac{\epsilon_0}{2}\int\limits_\mathrm{all}{|\boldsymbol{E}|^2\ \mathrm d\mathcal{V}}}
+\]</span></p>

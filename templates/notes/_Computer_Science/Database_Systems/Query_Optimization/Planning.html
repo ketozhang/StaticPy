@@ -1,0 +1,10 @@
+<h1 id="left-join">Left Join</h1>
+<p>The following optimizes a left join.</p>
+<ul>
+<li>Pushing selection down on the left</li>
+<li>Choosing the selection that reduce the left the most to be pushed down.</li>
+<li>Pushing any cartesian operator up.</li>
+<li>Create temporary tables from result of selection instead of doing things iteratively.</li>
+<li>Switch join algorithm (SNLJ, PNLJ, BNLJ)</li>
+<li>Cascade and push down projections.</li>
+</ul>

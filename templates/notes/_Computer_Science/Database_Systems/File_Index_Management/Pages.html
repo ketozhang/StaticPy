@@ -1,0 +1,41 @@
+<h2 id="fixed-length-records">Fixed Length Records</h2>
+<p>Pages will pack records (i.e., there is empty spaces between records)</p>
+<ul>
+<li>Record ID as a byte offset
+<ul>
+<li>Deletion requires repacking if deleted from the middle.</li>
+</ul></li>
+<li>Reocrd ID in a bitmap can be used to store free space in header of each record and the record ID is the number in page
+<ul>
+<li>Deletion is done by changing full to free space.</li>
+</ul></li>
+</ul>
+<h2 id="variable-length-records">Variable Length Records</h2>
+<p>Metadata is placed on the footer (hence no longer called the header).</p>
+<ul>
+<li>Slotted Page as Record ID
+<ul>
+<li>The first pointer (index 0) of Record ID starts from the right of the footer</li>
+<li>Each pointer in the footer carries the length of the reference record</li>
+<li>One pointer points to the free space immediately after the last record</li>
+<li>Record ID = Length + Pointer</li>
+<li>Deletion changes length to null</li>
+<li>Insertions are appended after the last record, the footer then changes a null pointer to point to the record recording its size.</li>
+<li>Fragmentation can occur since deletion may be made in the middle while insertions are always after the last record
+<ul>
+<li>Solution, defragmentation by reorganizing and update pointers back to sequential order</li>
+<li>Defragmentation can be done either every deletion (eager) or when the page is full (lazy)</li>
+</ul></li>
+<li>Footer size is also variable which grows right to left</li>
+<li>Once a footer and a record meet, the page is considered full</li>
+<li>May be used for fixed length records but its costly</li>
+<li><p><strong>Size</strong> is computed knowing the number of records <span class="math inline">\(n\)</span>, the footer size (with pointer size, size to store offset, and a free space pointer), and the record size (with size of a single record)</p>
+<p><span class="math display">\[
+\begin{gather*}
+    P = F + R\\
+    F = (\texttt{pointer} + \texttt{offset}) \cdot (n + 1)\\
+    R = \texttt{record_size} \cdot n
+\end{gather*}
+\]</span></p></li>
+</ul></li>
+</ul>

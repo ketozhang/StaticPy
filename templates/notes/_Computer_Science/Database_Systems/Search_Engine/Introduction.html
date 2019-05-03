@@ -1,0 +1,50 @@
+<p>Text search is done with a search engine (aka informational retrieval system).</p>
+<dl>
+<dt>Document</dt>
+<dd>A file, website, or generally a collection of unstructured data that can be text searched.
+</dd>
+</dl>
+<h2 id="architecture">Architecture</h2>
+<p>Informational retrieval system (IR) are structured similar to a DBMS however differs in such ways:</p>
+<ul>
+<li>No relational operations</li>
+<li>Ranks top result with no need to finish finding all that satisfy the query</li>
+<li>A crawler used to import data as it updates</li>
+</ul>
+<div class="figure">
+<img src="2018-10-28-15-17-24.png" />
+
+</div>
+<h2 id="bag-of-words-model">Bag of Words Model</h2>
+<p>The bag of words model treats a document collection of searchable terms by its words. The bag of words model would implement the following methods:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Ignore Stop Words</strong>: Filter useless non-informative words.
+<ul>
+<li>Common english articles (e.g., the, a, an)</li>
+<li>HTML tags</li>
+</ul></li>
+<li><strong>Stemming</strong>: Converting word to its basic form.
+<ul>
+<li>Tenses to base/present tense (e.g., <code>walked -&gt; walk</code>).</li>
+</ul></li>
+</ol>
+<h2 id="boolean-text-search">Boolean Text Search</h2>
+<p>A simple search algorithm that made up of simple boolean statements.</p>
+<p>For example, <em>find a document with &quot;California&quot; and &quot;school&quot;</em>.</p>
+<h2 id="postings-list">Postings List</h2>
+<p>For each documents, its words will be extracted and placed into the file system as a postings list. A postings list is a schema of <code>(text term, text docID)</code>. We will call this &quot;table&quot; the <code>InvertedFile</code></p>
+<h2 id="search-index">Search Index</h2>
+<p>The search engine will have a search index of the <code>InvertedFile</code> ordered by <code>docID</code>.</p>
+<p><strong>Important:</strong> From here on, queries we made must use a single table per keyword.</p>
+<ul>
+<li><strong>Positional data:</strong> We may add the position of the term that would benefit nearby word search.</li>
+</ul>
+<h2 id="boolean-text-search-1">Boolean Text Search</h2>
+<p>A simple text operation using boolean that slices the document to match the boolean query.</p>
+<p>For example this query is equivalent of an intersection between the three keywords <code>Berkeley, Database, Research</code>,</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> IB.docID
+<span class="kw">FROM</span> InvertedFile IB, InvertedFile <span class="kw">ID</span>, InvertedFile IR
+<span class="kw">WHERE</span> IB.term = <span class="ot">&quot;Berkeley&quot;</span>
+<span class="kw">AND</span> ID.term = <span class="ot">&quot;Database&quot;</span>
+<span class="kw">AND</span> IR.term = <span class="ot">&quot;Research&quot;</span>
+<span class="kw">AND</span> IB.docID = ID.docID <span class="kw">AND</span> ID.docID = IR.docID</code></pre></div>

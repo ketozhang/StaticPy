@@ -1,0 +1,264 @@
+<h2 id="parallel-processing">Parallel Processing</h2>
+<h3 id="loop-unrolling">Loop Unrolling</h3>
+<p>Loop unrolling decreases the number of branch instructions and comparators which are the bottlenecks of datapath.</p>
+<h6 id="rolled">Rolled</h6>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">    <span class="dt">int</span> x;
+    <span class="cf">for</span> (x = <span class="dv">0</span>; x &lt; <span class="dv">100</span>; x++)
+    {
+        delete(x);
+    }</code></pre></div>
+<p>There is 100 sets of branch instrucitons.</p>
+<h6 id="unrolled">Unrolled</h6>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">    <span class="dt">int</span> x; 
+    <span class="cf">for</span> (x = <span class="dv">0</span>; x &lt; <span class="dv">20</span>; x += <span class="dv">5</span> )
+    {
+        delete(x); <span class="co">// For loop here?</span>
+        delete(x + <span class="dv">1</span>);
+        delete(x + <span class="dv">2</span>);
+        delete(x + <span class="dv">3</span>);
+        delete(x + <span class="dv">4</span>);
+    }</code></pre></div>
+<p>There is now only 20 sets of branch instrucitons.</p>
+<ul>
+<li>One may make a for loop to do the unrolled statements. Many compilers are able to recognize these kinds of for loops.</li>
+</ul>
+<h3 id="simd---intel-sse-intrinsics">SIMD - Intel SSE Intrinsics</h3>
+<p>Single instrucitons multiple data (<strong>SIMD</strong>) is a <strong>data-level parallelism</strong> design that operates a single instruction onto multiple data. Let's use the Intel SSE Intrinsics as an example.</p>
+<ul>
+<li>Implemented by using larger registers called scalar registers.</li>
+<li>SSE scalar registers are named <code>xxm0, xxm1,...xxmN</code> and are <code>128-bit</code> each.</li>
+<li>Often used for <code>int</code> and <code>float</code> thus holding four <code>32 bit</code> elements</li>
+</ul>
+<h4 id="syntax">Syntax</h4>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Syntax</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Datatype</td>
+<td><code>__m[size][type]</code></td>
+<td><code>__m256epi</code> <br> <code>__m256ps</code></td>
+</tr>
+<tr class="even">
+<td>Functions</td>
+<td><code>_mm_[func]_[type]</code></td>
+<td><code>_m256i_add()</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="functions">Functions</h4>
+<table>
+<colgroup>
+<col width="10%" />
+<col width="21%" />
+<col width="34%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Syntax</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Load</td>
+<td><code>_mm_loadu_[type](address)</code></td>
+<td>Load the next vector from <code>address</code></td>
+<td><code>v1 = _mm_loadu_ps(ptr) // ptr points to some data</code></td>
+</tr>
+<tr class="even">
+<td>Arithmetic</td>
+<td><code>_mm_[arithmetic]_[type](v1, v2)</code></td>
+<td>Apply <code>arithmetic</code> to two vectors</td>
+<td><code>_mm_add_ps(v1, v2)</code></td>
+</tr>
+<tr class="odd">
+<td>Initialize / Set</td>
+<td><code>_mm_set1_[type](arg)</code></td>
+<td>Create a vector with all values equal to <code>arg</code></td>
+<td><code>_mm_set1_ps(0) // &lt;0, 0, 0, 0&gt;</code></td>
+</tr>
+<tr class="even">
+<td>Store</td>
+<td><code>_mm_storeu_[type](arr, v)</code></td>
+<td>Store the elements of vector <code>v</code> to some array <code>arr</code></td>
+<td><code>_mm_storeu_ps(arr, v1)</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="example-of-sse-code">Example of SSE Code</h4>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">    <span class="dt">float</span> eval_lagrange_fast(<span class="dt">float</span> *X, <span class="dt">float</span> *Y, <span class="dt">float</span> c, <span class="dt">size_t</span> n, <span class="dt">size_t</span> k) {
+        <span class="dt">float</span> retval = <span class="dv">1</span>, m[<span class="dv">4</span>];
+        <span class="dt">size_t</span> i;
+        __m128 ret_vec = _mm_set1_ps(<span class="dv">1</span>); <span class="co">// single precision (sp) floating point vector vector &lt;1, 1, 1, 1&gt; </span>
+        <span class="cf">for</span> (i = <span class="dv">0</span>; i &lt; n/<span class="dv">4</span>; i += <span class="dv">1</span>) {
+            <span class="cf">if</span> (i == k/<span class="dv">4</span>)
+                <span class="cf">continue</span>;
+            ret_vec = _mm_mul_ps(ret_vec, _mm_sub_ps(_mm_set1_ps(c),
+            _mm_loadu_ps(X + i*<span class="dv">4</span>)));
+            ret_vec = _mm_div_ps(ret_vec, _mm_sub_ps(_mm_load1_ps(X + k),
+            _mm_loadu_ps(X + i*<span class="dv">4</span>)));
+        }
+        <span class="cf">for</span> (i = k/<span class="dv">4</span>*<span class="dv">4</span>; i &lt; k/<span class="dv">4</span>*<span class="dv">4</span> + <span class="dv">4</span>; i += <span class="dv">1</span>) {
+            <span class="cf">if</span> (i == k)
+                <span class="cf">continue</span>;
+            retval *= c - X[i];
+            retval /= X[k] - X[i];
+        }
+        _mm_storeu_ps(m, ret_vec);
+        <span class="cf">return</span> Y[k] * retval * m[<span class="dv">0</span>] * m[<span class="dv">1</span>] * m[<span class="dv">2</span>] * m[<span class="dv">3</span>];
+    }</code></pre></div>
+<h3 id="mimd---openmp">MIMD - OpenMP</h3>
+<p>Multiple instruction multiple data (<strong>MIMD</strong>) is a thread-level paralellism design.</p>
+<ul>
+<li>Multithread in a single core allows the illusion of simultaneous multiprocessing. This is done by smart task managing by the operating system.</li>
+<li>Each thread has separate registers and PC but the memory is shared.</li>
+</ul>
+<p>Let's use OpenMP as an example.</p>
+<h4 id="openmp-directives">OpenMP Directives</h4>
+<p>Directives are placed in the code to signify which block of code are to be in distributed and what type of multithread process is to be done with those blocks.</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="er">##pragma omp [options]</span>
+{
+    [body]
+}</code></pre></div>
+<h6 id="parallel">Parallel</h6>
+<p>The <code>parallel</code> option is used when specific parts of the memory can be assigned to each thread.</p>
+<p>The example below uses 2 threads to compute <span class="math inline">\(2^{100}\)</span>. Logically this should be 2x faster than a single thread (not really since its implementation dependent).</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">    NUM_THREADS = <span class="dv">2</span>
+    <span class="dt">double</span> prod[<span class="dv">0</span>] = <span class="dv">2</span>
+    <span class="dt">double</span> prod[<span class="dv">1</span>] = <span class="dv">2</span>
+    <span class="dt">double</span> result = <span class="dv">1</span>
+
+    <span class="er">##pragma parallel {</span>
+        id = omp_get_thread_num()
+        <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">100</span>; i += NUM_THREADS) {
+            prod[id] *= <span class="dv">2</span>
+        }
+    }
+    result *= prod[<span class="dv">0</span>] * prod[<span class="dv">1</span>]</code></pre></div>
+<h6 id="critical">Critical</h6>
+<p>The <code>critical</code> option creates a critical section for threads required to access shared memory.</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">    NUM_THREADS = <span class="dv">2</span>
+    <span class="dt">double</span> prod[<span class="dv">0</span>] = <span class="dv">2</span>
+    <span class="dt">double</span> prod[<span class="dv">1</span>] = <span class="dv">2</span>
+    <span class="dt">double</span> result = <span class="dv">1</span>
+
+    <span class="er">##pragma omp parallel {</span>
+        id = omp_get_thread_num()
+        <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">50</span>; i += NUM_THREADS) {
+            prod[id] *= <span class="dv">2</span>
+        }
+    <span class="er">##pragma omp critical</span>
+        result *= prod[id]
+    }</code></pre></div>
+<h6 id="parallel-for">Parallel For</h6>
+<p>The <code>parallel for</code> option can be assigned to each thread by consecutive chunks.</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="er">##pragma omp parallel for{</span>
+    <span class="dt">int</span> a = [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>];
+    <span class="dt">int</span> i;
+    <span class="cf">for</span> (i = <span class="dv">0</span>; i &lt; len(a); i++) {
+        print(a[i])
+    }
+}
+<span class="co">// prints 1 2 3 4 in any order depending on which threads finishes first.</span>
+
+<span class="dt">int</span> NUM_THREADS = <span class="dv">0</span>;
+<span class="dt">int</span> result;
+<span class="dt">int</span> prod[NUM_THREADS]
+<span class="er">##pragma omp parallel for{</span>
+    <span class="dt">int</span> id = omp_get_thread_num()
+    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">100</span>; i++) {
+        prod[id] *= <span class="dv">2</span>
+    }
+}</code></pre></div>
+<h4 id="shared-memory">Shared Memory</h4>
+<p>Because memory between are shared we can get a bug called a <strong>race condition</strong>. A race condition is caused due to the threads accessing the same memory (often when writing).</p>
+<ul>
+<li>If all threads write to a memory then only the latest write is saved.</li>
+</ul>
+<p>The solution to this issue is to allow a thread to <strong>lock</strong> the data needed through the process called <strong>atomic memory operatons (AMO)</strong> .</p>
+<ul>
+<li>The AMO is implemented onto the ISA with specific opcodes</li>
+<li>See <a href="#critical">critical section</a> for an example of OpenMP using AMO.</li>
+</ul>
+<p>A typical AMO does the following:</p>
+<ol style="list-style-type: decimal">
+<li>Checks to see if data queried is locked.
+<ul>
+<li>If locked, wait until it's unlocked.</li>
+<li>If unlocked, lock it and continue to step 2.</li>
+</ul></li>
+<li>Perform the instructions needed (called <strong>critical section</strong>)</li>
+<li>Unlock the data if finished.</li>
+</ol>
+<h2 id="cache-coherency">Cache Coherency</h2>
+<ul>
+<li><strong>Bus</strong> : Connection between each cores.</li>
+<li><strong>Snoop</strong> : A signal asking the bus if anything changes.</li>
+</ul>
+<h3 id="moesi-protocol">MOESI Protocol</h3>
+<p><strong>Reminder:</strong> Dirty means memory is not up to date.</p>
+<ul>
+<li><strong>M</strong>odified
+<ul>
+<li>Only this cache has a copy</li>
+<li>Dirty</li>
+</ul></li>
+<li><strong>O</strong>wned
+<ul>
+<li>More than one cache has a copy</li>
+<li>Dirty</li>
+<li>This cache responsible to write to memory</li>
+</ul></li>
+<li><strong>E</strong>xclusive
+<ul>
+<li>Only this cache has a copy</li>
+<li>Clean</li>
+</ul></li>
+<li><strong>S</strong>hared
+<ul>
+<li>More than one cache has a copy</li>
+<li>Either dirty or clean</li>
+<li>This cache is not responsible for writing to memory</li>
+</ul></li>
+<li><strong>I</strong>nvalid
+<ul>
+<li>Unusable since the block is not updated</li>
+</ul></li>
+</ul>
+<pre class="mermaid"><code>graph RL;
+    M --R/W--&gt; M
+    M --Bus R--&gt; O
+    M --Bus W--&gt; I
+
+    O --R / Bus R--&gt; O
+    O --Bus W--&gt; I
+    O --W--&gt; M
+
+    E --R--&gt; E
+    E --W--&gt; M
+    E --Bus W--&gt; I
+    E --Bus R--&gt; S
+
+    S --R / Bus R--&gt; S
+    S --W--&gt; M
+    S --Bus W--&gt; I
+
+    I --Reset--&gt; I
+    I --R Miss, Shared--&gt; S
+    I --W Miss--&gt; M
+    I --R Miss, Exclusive--&gt; E</code></pre>
+<h2 id="cache">Cache</h2>
+<h3 id="cache-policy">Cache Policy</h3>
+<h4 id="write-through">Write Through</h4>
+<ul>
+<li>All changes are written to the memory8 #### Write Back</li>
+</ul>

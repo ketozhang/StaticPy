@@ -1,0 +1,57 @@
+<h1 id="lecture-18---the-bias-variane-tradeoff-and-regularization">Lecture 18 - The Bias Variane Tradeoff and Regularization</h1>
+<h2 id="linear-model-for-non-linear-data">Linear Model for Non-Linear Data</h2>
+<p>Say we wish to model a general function <span class="math inline">\(f(x)\)</span> which is not always linear, a linear fit to <span class="math inline">\(f(x)\)</span> can be generally approximated like so:</p>
+<p><span class="math display">\[ f_\theta(\phi(x)) = \phi(x)^T \theta = \sum_{j=1}^{k}{\phi(x)_j \theta_j}  \]</span></p>
+<ul>
+<li><span class="math inline">\(\phi(x)\)</span> : A vector of functions.
+<ul>
+<li>If you're familiar with linear algebra, this is similar to a set of basis vectors but not the same.</li>
+</ul></li>
+<li><span class="math inline">\(\theta\)</span> : The model's parameter that weighs each vector hence it's common to call this the weight coefficient.</li>
+</ul>
+<dl>
+<dt>Bias</dt>
+<dd><p>The <strong>bias</strong> is the expected deviation between the predicted value and the true value.</p>
+<p>Depends on:</p>
+<ul>
+<li>choice of model function <span class="math inline">\(f(\theta)\)</span></li>
+<li>learning procedure</li>
+</ul>
+</dd>
+<dt>Observation Variance</dt>
+<dd><p>Observation variance is the variability of the random noise in the process we are trying to model. It is usually impossible to get rid of all observation variance. Sources of observation variance comes from:</p>
+<ul>
+<li>measurement variability</li>
+<li>stochasticity</li>
+<li>missing information</li>
+</ul>
+</dd>
+<dt>Estimated Model Variance</dt>
+<dd><p><strong>Estimated model variance</strong> is the variability in the predicted value accros different training datasets</p>
+<ul>
+<li>Sensitive to variation in the training data</li>
+<li>Poor generalization</li>
+<li>Overfitting</li>
+</ul>
+</dd>
+</dl>
+<h2 id="example-analysis-of-squared-error">Example: Analysis of Squared Error</h2>
+<p>Let's say we wish to model our data <span class="math inline">\(y\)</span> that has some noise. We will absorb this noise into an error value <span class="math inline">\(\epsilon\)</span> such that the true function that describe the system is denoted as <span class="math inline">\(h(x)\)</span> therefore the data is,</p>
+<p><span class="math display">\[ y =h(x) + \epsilon \]</span></p>
+<dl>
+<dt>Expected Loss</dt>
+<dd>Before we compute the expected loss notice that the <span class="math inline">\(\Expected{y} = \Expected{h(x)}\)</span> since <span class="math inline">\(\Expected{\epsilon} = 0\)</span> due to the error being a random variable.
+</dd>
+</dl>
+<p><span class="math display">\[
+\begin{align*}
+\Expected{(y-f_{\hat\theta})^2} &amp;= \Expected{(y- h(x) + h(x) - f_{\hat\theta})^2}\\
+&amp;= \Expected{(y-h(x))^2} + \Expected{(h(x)-f_{\hat\theta})^2} +  2\Expected{(y-h(x))(h(x)-f_{\hat\theta})}\\
+\Expected{(y-f_{\hat\theta})^2} &amp;= \underbrace{\Expected{(h(x)-f_{\hat\theta})^2}}_\text{Obs. Variance} + (\underbrace{h(x)-\Expected{f_{\hat\theta}^2}}_\text{Bias})^2 + \underbrace{\Expected{(\Expected{f_{\hat\theta}} - f_{\hat\theta})^2}}_\text{Model Variance}
+\end{align*}
+\]</span></p>
+<h2 id="regularization">Regularization</h2>
+<p>Regularization is to add a parameter <span class="math inline">\(\lambda\)</span> to control them modeling complexity through the regularization function <span class="math inline">\(R(\theta)\)</span>. This is used in determining the model parameter.</p>
+<p><span class="math display">\[\hat \theta \equiv \arg \min \frac{1}{n}\sum_i^n{\ell(y_i,f_\theta(x_i))} + \lambda \mathbf{R}(\theta)\]</span></p>
+<p>Example of regularization include the same exact function as the loss functions <span class="math inline">\(\Bbb{L^1}\)</span> (Ridge regularization) and <span class="math inline">\(\Bbb{L^2}\)</span> (LASSO regularization).</p>
+<p>The point is to simply introduce another function that further optimizes the model parameter.</p>

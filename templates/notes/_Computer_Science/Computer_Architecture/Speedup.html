@@ -1,0 +1,20 @@
+<h1 id="speedup">Speedup</h1>
+<ul>
+<li><a href="#speedup">Speedup</a></li>
+<li><a href="#unrolling">Unrolling</a></li>
+<li><a href="#cache-blocking">Cache Blocking</a></li>
+</ul>
+<p>There are many ways to speedup a program. We'll use matrix operations as the classical example. This section will not cover parallel processing.</p>
+<h1 id="unrolling">Unrolling</h1>
+<p>Optimize the use of independent instruction to accumulate as much binary size (registers) as possible.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">result <span class="op">=</span> <span class="dv">0</span>
+<span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(arr), <span class="dv">4</span>):
+    result <span class="op">+=</span> arr[i]  
+    result <span class="op">+=</span> arr[i<span class="op">+</span><span class="dv">1</span>]
+    result <span class="op">+=</span> arr[i<span class="op">+</span><span class="dv">2</span>]
+    result <span class="op">+=</span> arr[i<span class="op">+</span><span class="dv">3</span>]</code></pre></div>
+<h1 id="cache-blocking">Cache Blocking</h1>
+<p>Optimize temporal locality of cache by changing the way we access data.</p>
+<ul>
+<li>For NxN matrix operations one method is to split the matrices into sub-matrix</li>
+</ul>

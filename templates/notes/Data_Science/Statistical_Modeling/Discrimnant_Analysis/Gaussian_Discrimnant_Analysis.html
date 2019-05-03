@@ -1,0 +1,64 @@
+<h2 id="multivariate-gaussian">Multivariate Gaussian</h2>
+<p>Recall the multivariate gaussian can be represented as in terms of a quadratic function quadratic function <span class="math inline">\(q(x)\)</span> which is called the <strong>quadratic form</strong>,</p>
+<p><span class="math display">\[
+\begin{gather*}
+P(x) = (2 \pi \det \Sigma)^{-1/2}\exp\left[-\frac{1}{2} Q(v)\right]\\
+Q(x) = v^\top\Sigma^{-1} v
+\end{gather*}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(v​\)</span> : Deviation vector <span class="math inline">\(X_i-\mu​\)</span></li>
+<li><span class="math inline">\(X_i​\)</span> : A row of data</li>
+<li><span class="math inline">\(\mu\)</span> : A vector with each entry as the mean of the feature column.</li>
+</ul>
+<p>The quadratic form <span class="math inline">\(q(x)\)</span> describes the shape of the isocontours <span class="math inline">\(q(x) = c\)</span> (for some real scalar <span class="math inline">\(c\)</span>). For the Gaussian, the shape is a <span class="math inline">\(\dim(v)\)</span> ellipsoid due to the mapping of a semi-circle function to parabolic function specified by,</p>
+<p><span class="math display">\[
+|v| \longrightarrow \left\lvert\Sigma^{-1/2} v\right\rvert
+\]</span></p>
+<h3 id="quadratic-discrimnant-analysis">Quadratic Discrimnant Analysis</h3>
+<p>For each class in <span class="math inline">\(c : \{1,2,3,\ldots,C\}\)</span> there exists a <strong>sample covariance matrix</strong> <span class="math inline">\(\hat\Sigma\)</span>,</p>
+<p><span class="math display">\[
+\hat \Sigma_c = \frac{1}{n_c}\sum_{y_i=c} (X_i - \hat \mu_c)(X_i - \hat \mu_c)^\top
+\]</span></p>
+<p>The Bayes optimal rule maximizes <span class="math inline">\(P\)</span> or rather <span class="math inline">\(\log P\)</span> over the class <span class="math inline">\(c\)</span> as its parameter. An equivalent description is to maximize the logistic function,</p>
+<p><span class="math display">\[
+\hat y = \mathop{\arg\max}_c \bigg[Q_c(x) - Q_d(x)\bigg]
+\]</span></p>
+<h3 id="linear-discrimnant-analysis">Linear Discrimnant Analysis</h3>
+<p>Every class has the same sample covariance matrix which is calculated by the mean of each class's covariance matrix. This is called the <strong>pooled within-class covariance matrix</strong>,</p>
+<p><span class="math display">\[
+\hat\Sigma = \frac{1}{n}\sum_c\sum_{y_i = c} (X_i - \hat\mu_c)(X_i - \hat\mu_c)^\top
+\]</span></p>
+<p>The Bayes optimal rule is equivalently a linear function,</p>
+<p><span class="math display">\[
+\hat y = \mathop{\arg\max}_c \bigg[(\mu_c-\mu_d)^\top \Sigma^{-1} x - + \log \frac{\pi_c}{\pi_d}\bigg]
+\]</span></p>
+<h2 id="transformations">Transformations</h2>
+<ul>
+<li>Decorrelating: <span class="math inline">\(XU\)</span></li>
+<li>Sphering: <span class="math inline">\(X\hat\Sigma^{-1/2}​\)</span></li>
+<li>Whitening: Decorrelating + Sphering</li>
+</ul>
+<h2 id="relations-to-principal-component-analysis">Relations to Principal Component Analysis</h2>
+<p><span class="math display">\[
+P(x) = (2 \pi \det \Sigma)^{-1/2}\exp\left[-\frac{1}{2} v^\top\Sigma^{-1} v\right]~; \qquad v := x-\mu\\
+\]</span></p>
+<p><span class="math display">\[
+\begin{align*}
+q(v) &amp;= v^\top \Sigma^{-1} v \\
+&amp;= \underbrace{v^\top Q}_{u^\top} \Lambda^{-1}\underbrace{Q^\top v}_u\\
+&amp;= u^\top \Lambda^{-1} u\\
+&amp;= \sum_{j=1}^{d} \lambda^{-1} u_j^2\\
+&amp;= \sum_{j=1}^{d} \frac{1}{\sigma^2} u_j^2
+\end{align*}
+\]</span></p>
+<p><span class="math display">\[
+\det \Sigma = \prod_{j=1}^d \lambda_j = \prod_{j=1}^d \sigma_j^2 \nonumber
+\]</span></p>
+<p><span class="math display">\[
+\begin{align*}
+P(x) &amp;= \left(2 \pi \prod \sigma_j^2 \right)^{-1/2}\exp\left[-\frac{1}{2} \sum_{j=1}^{d} \frac{1}{\sigma^2} u_j^2\right]\\
+&amp;= \prod_{j=1}^d (2\pi \sigma_j^2)^{-1/2}\exp\left[-\frac{u_j^2}{2\sigma^2_j}\right]
+\end{align*}\\
+u = Q^\top(x-\mu)
+\]</span></p>

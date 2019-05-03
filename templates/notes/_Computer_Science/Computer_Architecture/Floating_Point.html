@@ -1,0 +1,67 @@
+<h1 id="floating-point">Floating Point</h1>
+<p>A floating point is a binary representation to include non-integer numbers along with <span class="math inline">\(\pm \infty\)</span> and <code>NaN</code>.</p>
+<p>The format of the floating point in binary is always,</p>
+<div style="white-space: pre-line;">Sign | Exponent | Manitssa |</div>
+<h2 id="floating-point-single-precision">Floating Point Single Precision</h2>
+<p>The single precision floating point is a 32-bit representation of the floating point.</p>
+<p>Where we have,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="center">Symbol</th>
+<th align="center">Size (bits)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Sign</strong></td>
+<td align="center"><span class="math inline">\(S\)</span></td>
+<td align="center">1</td>
+<td>the sign where <code>0</code> is positive and <code>1</code> is negative</td>
+</tr>
+<tr class="even">
+<td><strong>Exponent</strong></td>
+<td align="center"><span class="math inline">\(E\)</span></td>
+<td align="center">8</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>Mantissa</strong></td>
+<td align="center"><span class="math inline">\(M\)</span></td>
+<td align="center">23</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="floating-point-to-decimal">Floating Point to Decimal</h3>
+<p>Giving the floating point <span class="math inline">\(F_2\)</span> one may disect it from the definition that <span class="math inline">\(F_2 \equiv S_2||E_2||M_2\)</span>. The following equation is used to construct the decimal representation <span class="math inline">\(D\)</span> given the floating point.</p>
+<p><span class="math display">\[D = (-1)^S \cdot (1.M) \cdot 2^{E-127}\]</span></p>
+<ul>
+<li><span class="math inline">\(\{S, E, M\}\)</span> is the decimal form of <span class="math inline">\(\{S_2, E_2, M_2\}\)</span>.</li>
+<li><strong>Note:</strong> any number without a subscript is represented in decimal form.</li>
+</ul>
+<h3 id="decimal-to-floating-point">Decimal to Floating Point</h3>
+<p>Given a decimal representation <span class="math inline">\(D\)</span> we may convert the floating point by determining each part of the floating point (sign, exponent and mantissa).</p>
+<p>Three useful equations is given as so,</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Sign</strong></td>
+<td><span class="math display">\[(-1)^S = \frac{D}{\|D\|}\]</span></td>
+</tr>
+<tr class="even">
+<td><strong>Exponent</strong></td>
+<td><span class="math display">\[E = \lfloor{\log_2{D} + 127}\rfloor\]</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Mantissa</strong></td>
+<td><span class="math display">\[M = 0.M \cdot 2^{23} = \frac{D-2^{E-127}}{2^{E-127}}\cdot 2^{23}\]</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The first line is redundant math; just take the sign of <span class="math inline">\(D\)</span> and consider what <span class="math inline">\(S\)</span> is</li>
+<li><span class="math inline">\(\lfloor x \rfloor\)</span> is the floor (round down) of <span class="math inline">\(x\)</span></li>
+</ul>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang='en'>
+<head>
+    <meta charset="UTF-8">
+    <title>PyStatic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- yep Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://ketozhang.github.io/notebook/static/base.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
+    <link rel="shortcut icon" href="https://ketozhang.github.io/notebook/static/favicon.ico">
+</head>
+<body>
+    
+<div class="container-fluid" id="note">
+    <div class="row">
+        <div class="col-3 d-none d-lg-block"></div>
+        <div class="col-sm-10 col-lg-7">
+            <h1 class="title">Ridge Regression</h1>
+            <p>The ridge regression is regression with the <span class="math inline">\(L_2\)</span> regularization, <span class="math display">\[
+\mathcal{L} = \sum_{i=1}^n L(y,\hat y) + \lambda|\theta|^2
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\theta\)</span> : The parameter vector with the bias parameter as zero instead of one <span class="math inline">\(\begin{bmatrix} 0 &amp; \theta_1 &amp; \ldots &amp; \theta_d\end{bmatrix}\)</span> to prevent penalizing the bias term.</li>
+</ul>
+<p>For simplicity, here one out we will ignore the bias term.</p>
+<p>There are very strong properties of ridge regression that makes this regularization favorable:</p>
+<ol style="list-style-type: decimal">
+<li>Guarantees a unique solution because <span class="math inline">\(\mathcal L(\theta)\)</span> is always convex even if <span class="math inline">\(L(\theta)\)</span> is not (for least-square it is).</li>
+<li>Reduces overfitting by penalizing large parameters.</li>
+</ol>
+<h2 id="positive-definite-normal-equation">Positive Definite Normal Equation</h2>
+<p>The addition of the <span class="math inline">\(L_2\)</span> regularization guarantees that <span class="math inline">\(\mathcal L(\theta)\)</span> is convex simply because the matrices in the normal equation are guaranteed to be positive definite.</p>
+<p>Let's take for example the least-squares loss, <span class="math display">\[
+\mathcal L(\theta) = \sum_{i=1}^n{|y - X\theta|^2  +\lambda|\theta|^2}
+\]</span> The normal equation is given by, <span class="math display">\[
+\begin{gather}
+(X^\top X + \lambda I)\theta = X^\top y\\
+\theta^* = \frac{2|y-X\theta^*|^2}{\lambda} X^\top \left({X\theta^* - y}\right)
+\end{gather}
+\]</span></p>
+<h2 id="relationship-to-map">Relationship to MAP</h2>
+<p>The addition of the <span class="math inline">\(L_2\)</span> regularization is equivalent of turning an MLE problem to an MAP problem (i.e., by adding a prior).</p>
+<p>Once again we use the least-squares loss as an example. The least-squares loss is the log-likelihood function for the Gaussian likelihood. We simply attempt to write the log-posterior problem with this likelihood, <span class="math display">\[
+\begin{align}
+\theta^* &amp;= \mathop{\arg\min}_\theta \sum_{i=1}^n|y + X\theta|^2 - \lambda |\theta|^2\\
+\theta^* &amp;= \mathop{\arg\max}_\theta \left[-\sum_{i=1}^n|y - X\theta|^2 - \lambda |\theta|^2\right]
+\end{align}
+\]</span> Thus the prior <span class="math inline">\(P(\theta) \propto \lambda |\theta|^2\)</span>.</p>
+        </div>
+        <div class="col-2 d-none d-md-block">
+        </div>
+    </div>
+</div>
+
+
+    <!-- Scripts -->
+
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
+    <footer class="mt-auto py-2 ">
+    <hr>
+    <div class="container">
+        <span class="text-muted">
+            <p class="text-right"> Generated by <a href="https://github.com/ketozhang/PyStatic">PyStatic</a> | Designed
+                by <a href="https://github.com/ketozhang">Keto Z.</a></p>
+        </span>
+    </div>
+</footer>
+</body>
+</html>

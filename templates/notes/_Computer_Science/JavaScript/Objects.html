@@ -1,0 +1,26 @@
+<p>JavaScript objects comprised of the remaining datatypes built like Python dictionaries but implemented with hashes. The syntax for Java object can either be its legacy/original syntax or the more popular JSON (JavaScript Object Notation) syntax.</p>
+<ul>
+<li><dl>
+<dt>Instantiation</dt>
+<dd><p>Once a gain there are two syntax to instantiate</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> obj <span class="op">=</span> <span class="kw">new</span> <span class="at">Object</span>()<span class="op">;</span> <span class="co">// legacy</span>
+<span class="kw">var</span> obj <span class="op">=</span> <span class="op">{}</span> <span class="co">// JSON</span></code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Get</dt>
+<dd>To get an attribute you may use the dot-notation or Python-like getter <code>obj[&lt;key&gt;]</code> notation,
+</dd>
+</dl>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> obj <span class="op">=</span> <span class="op">{</span>
+    <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Carrot&#39;</span><span class="op">,</span>
+    <span class="dt">for</span><span class="op">:</span> <span class="st">&#39;Max&#39;</span><span class="op">,</span> <span class="co">// &#39;for&#39; is a reserved word, use &#39;_for&#39; instead.</span>
+    <span class="dt">details</span><span class="op">:</span> <span class="op">{</span>
+        <span class="dt">color</span><span class="op">:</span> <span class="st">&#39;orange&#39;</span><span class="op">,</span>
+        <span class="dt">size</span><span class="op">:</span> <span class="dv">12</span>
+    <span class="op">}</span>
+<span class="op">};</span>
+
+<span class="va">obj</span>.<span class="va">details</span>.<span class="at">color</span><span class="op">;</span> <span class="co">// orange</span>
+obj[<span class="st">&#39;details&#39;</span>][<span class="st">&#39;size&#39;</span>]<span class="op">;</span> <span class="co">// 12</span></code></pre></div></li>
+</ul>

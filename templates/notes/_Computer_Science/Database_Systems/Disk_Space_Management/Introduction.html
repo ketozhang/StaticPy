@@ -1,0 +1,51 @@
+<p>We will focus only on hard disk drives when speaking of disks.</p>
+<p>The disk space management is the lowest layer of DBMS which manages space on disk.</p>
+<ul>
+<li>Map pages to locations on disk</li>
+<li>Load pages from disk to memroy</li>
+<li>Save pages back to disk &amp; ensuring writes</li>
+</ul>
+<p>Higher level can call the following API</p>
+<ul>
+<li>Read/write a page</li>
+<li>Allocate/de-allocate logical pages</li>
+</ul>
+<h2 id="block-level-storage">Block Level Storage</h2>
+<ul>
+<li>Read and Write large chunks of sequential bytes</li>
+<li><strong>Sequential</strong>: Access of a neighboring disk block. Access of sequential blocks are fastest</li>
+<li>Prediction increases performance
+<ul>
+<li>Cache popular blocks</li>
+<li>Buffer writes to sequential blocks</li>
+</ul></li>
+</ul>
+<dl>
+<dt>Block</dt>
+<dd><p>A unit of transfer for disk read/write</p>
+<ul>
+<li>Typically 64KB or 128KB</li>
+</ul>
+</dd>
+<dt>Page</dt>
+<dd><p>A synonym for block</p>
+<ul>
+<li>Sometimes used for block-size chunk in RAM</li>
+</ul>
+</dd>
+</dl>
+<ul>
+<li>The <strong>next</strong> or <strong>neighboring block</strong> is any of the following:
+<ul>
+<li>Same track but the block immediately after</li>
+<li>Same cylinder but different disk</li>
+<li>Adjacent cylinder</li>
+</ul></li>
+</ul>
+<h2 id="implementation">Implementation</h2>
+<p>DPM are implemented with the OS' file system.</p>
+<ul>
+<li>Allocate single large &quot;contiguous&quot; file on a nice empty disk, and assume sequential/nearby byte access are fast</li>
+<li>Most FS optimize disk layout for sequential access</li>
+<li>&quot;DBMS file&quot; may span multiple FS files on multiple disks/machines</li>
+</ul>

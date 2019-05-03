@@ -1,0 +1,50 @@
+<h2 id="streaming">Streaming</h2>
+<p>Streaming is a strategy to have a function that maps input data from the database into the buffer and outputs it to the RAM and then loads it into the disk.</p>
+<ul>
+<li><strong>Single-pass:</strong> Simply a single stream of input to output.</li>
+<li><strong>Double Buffering:</strong> With two threads, one manages computation and the other manages loading and unloading the buffer.</li>
+</ul>
+<h2 id="divide-and-conquer">Divide and Conquer</h2>
+<h3 id="way-strawman-merge-sort">2-Way Strawman Merge Sort</h3>
+<ol style="list-style-type: decimal">
+<li>For each page, sort them in the buffer and write to disk</li>
+<li>Now we will read from the disk which now has sorted pages and write this to another disk. We will allocate two input buffers to read two pages and merge them into one. Now the last buffer has two pages.</li>
+<li>We continue this with four input buffers, merge then write. Then double up every step.</li>
+</ol>
+<h2 id="full-external-merge-sort">Full External Merge Sort</h2>
+<p>We will now use the strawman sort much more efficiently. Instead of going back and forth we can fully sort <span class="math inline">\(N\)</span> pages with <span class="math inline">\(B &lt; N\)</span> sized buffer.</p>
+<ol style="list-style-type: decimal">
+<li>Use <span class="math inline">\(B\)</span> size buffer to read <span class="math inline">\(B\)</span> pages. Continue to do so until <span class="math inline">\(N\)</span> pages are read. Read pages are placed in the allocated to an intermediate disk of <span class="math inline">\(\lceil{N/B}\rceil\)</span> buffers of size <span class="math inline">\(B\)</span>.</li>
+<li>In parallel for <span class="math inline">\(B-1\)</span> buffers, are merged and written to the final disk. The amount of block written is <span class="math inline">\(B(B-1)\)</span>.</li>
+<li>We continue another pass thru once all <span class="math inline">\(\lceil N/B \rceil\)</span> finish sorting.</li>
+</ol>
+<ul>
+<li><p><strong>Number of passes</strong>: <span class="math display">\[ 1 + \left\lceil \log_{B-1}\left\lceil \frac{N}{B}\right\rceil \right\rceil \]</span></p></li>
+<li><p><strong>Cost</strong>: <span class="math display">\[ 2N \cdot \#\text{passes} \]</span></p></li>
+<li><p><strong>Two-pass Buffer Required</strong>:</p>
+<p><span class="math display">\[ N = B(B-1) \]</span> <span class="math display">\[B \approx \sqrt{N}  \]</span></p></li>
+</ul>
+<h3 id="problems">Problems</h3>
+<ol style="list-style-type: decimal">
+<li><p><strong>Number and Size of Partition</strong></p>
+<p>This question is easy when we have to preserve <span class="math inline">\(N\)</span> the number of pages we're sorting.</p></li>
+</ol>
+<p><span class="math display">\[
+\begin{gather*}
+    N = (\#\text{partition})(\text{size of partition})\\
+    N = P_i \cdot |P_i|\\\\
+    P_i = \begin{cases}
+        \lceil N/B \rceil &amp; i = 0\\
+        \frac{\lceil N/B \rceil}{(B-1)^i} &amp; i &gt; 0
+    \end{cases}\\\\
+    |P_i| = \begin{cases}
+        B &amp; i = 0\\
+        B(B-1)^i &amp; i &gt; 0
+    \end{cases}
+\end{gather*}
+\]</span></p>
+<h2 id="parallel-sorting">Parallel Sorting</h2>
+<p>For <span class="math inline">\(n\)</span> machines we will have <span class="math inline">\(n\)</span> buffers with each buffer dedicated to a range of the data.</p>
+<ul>
+<li>We'd like each range to have the same amount of values from the data. However if the data is skewed, then this is a problem since one machine has more to do than the others.</li>
+</ul>

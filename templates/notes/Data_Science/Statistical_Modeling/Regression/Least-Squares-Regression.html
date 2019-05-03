@@ -1,0 +1,53 @@
+<p>The <strong>linear least squares</strong> is a linear model with <span class="math inline">\(L_2\)</span> lost function and mean error cost function <span class="math inline">\(\mathcal L = \langle L_2(X) \rangle\)</span>. The linear model is given by,</p>
+<p><span class="math display">\[
+\hat y(X) = X \theta
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\hat y\)</span> : Length <span class="math inline">\(n\)</span> vector of dependent values</li>
+<li><span class="math inline">\(X\)</span> : The feature or design matrix of dimension <span class="math inline">\(d+1\)</span> where <span class="math inline">\(d\)</span> is the number of features.</li>
+</ul>
+<p>The optimization problem is then given by</p>
+<p><span class="math display">\[
+\begin{align}
+\theta &amp;= \mathop{\arg\min}_{\theta} \frac{1}{n} \sum_{i=1}^n \left[y_i - X_i^\top\theta\right]^2\\
+&amp;= \mathop{\arg\min}_{\theta} \frac{1}{n} |y-X\theta|^2
+\end{align}
+\]</span></p>
+<h2 id="invertible-solution">Invertible Solution</h2>
+<p>Given the square of the feature matrix <span class="math inline">\(X^\top X\)</span> is invertible,</p>
+<p><span class="math display">\[
+\theta = (X^\top X)^{-1}X^\top y
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\((X^\top X)^{-1}X^\top\)</span> : This is called the <strong>pseudoinverse</strong> of <span class="math inline">\(X\)</span> often notated as <span class="math inline">\(X^+\)</span>. Notice that,</p>
+<p><span class="math display">\[ X^+X = I \]</span></p>
+<p>Hence <span class="math inline">\(X^+\)</span> is also known as the <strong>left inverse</strong></p>
+<p>Additionally also observe that,</p>
+<p><span class="math display">\[ \hat y = X\theta = XX^+ y \]</span></p>
+<p>Where <span class="math inline">\(XX^+\)</span> is called the <strong>hat matrix</strong> often notated as <span class="math inline">\(H\)</span>.</p></li>
+</ul>
+<h3 id="normal-equation">Normal Equation</h3>
+<p>An alternative way for the solution without using optimization is to note that the linear model spans a <span class="math inline">\(n\)</span>-dimensional hyperplane which is also the span of <span class="math inline">\(\hat y\)</span>,</p>
+<p><span class="math display">\[
+\hat y = X \theta
+\]</span></p>
+<p>To minimize the square distance between <span class="math inline">\(y\)</span> and <span class="math inline">\(\hat y\)</span> we wish the hyperplane to be perpendcular to the vector <span class="math inline">\(y\)</span>,</p>
+<p><span class="math display">\[
+X^\top (\hat y - y) = 0
+\]</span></p>
+<p>This is then the <strong>normal equation</strong>.</p>
+<h2 id="polynomial-least-squares">Polynomial Least Squares</h2>
+<p>Let the design matrix be denoted as <span class="math inline">\(\Phi(X)\)</span> that transform add polynomials features to the feature matrix.</p>
+<p>For example, we can do a degree <span class="math inline">\(k\)</span> polynomial transformation with no cross terms. It's easier to write this consider every row of <span class="math inline">\(X\)</span> as <span class="math inline">\(X_i\)</span>.</p>
+<p><span class="math display">\[
+\Phi(X_i^\top) = \begin{bmatrix}
+    X_{i1} &amp; X_{i1}^2 &amp; \ldots &amp; X_{i1}^k &amp; \ldots &amp; X_{id} &amp; X_{id}^2 &amp; \ldots &amp; X_{id}^k
+\end{bmatrix}
+\]</span></p>
+<h2 id="weighted-least-squares">Weighted Least Squares</h2>
+<p>Sometimes you may want to weigh your data by some sort of importance or confidence metric (e.g., inverse of the data's error).</p>
+<p>For simplicity we are only going to weigh each row. In this case, the weight can be represented as a diagonal weight matrix <span class="math inline">\(\Omega\)</span> such that <span class="math inline">\(\omega_i\)</span> is the weight the row <span class="math inline">\(X_i\)</span>.</p>
+<p>The optimization becomes,</p>
+<p><span class="math display">\[
+\mathop{\arg\min}_{\theta} \sum_{i=1}^n \omega_i(X_i^\top \theta - y_i)^2 = \mathop{\arg\min}_{\theta} (X\theta - y)^\top \Omega (X\theta - y)
+\]</span></p>

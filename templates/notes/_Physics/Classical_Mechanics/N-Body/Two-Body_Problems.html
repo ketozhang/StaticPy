@@ -1,0 +1,108 @@
+<h2 id="two-body-problem">Two Body Problem</h2>
+<p>The two body problem is one at which two particles interacting at vector position <span class="math inline">\(\boldsymbol{r_1}\)</span> and <span class="math inline">\(\boldsymbol{r_2}\)</span> away from some arbitrary origin. The insignificance of this origin is what makes this problem difficult. The interaction of the two particle is some potential energy (e.g., gravitational potential, electrical potential) that has a distance dependent. The distance between the two particle is <span class="math inline">\(r = \abs{\boldsymbol{r_1}-\boldsymbol{r_2}}\)</span> thus their Lagrangian is,</p>
+<p><span class="math display">\[
+\begin{align}
+    \mathcal{L} = \frac{1}{2}m_1\boldsymbol{\dot r_1}^2 + \frac{1}{2}m_2\boldsymbol{\dot r_2}^2 - U(r)
+\end{align}
+\]</span></p>
+<p>With the natural choice of <span class="math inline">\(\boldsymbol{r_1}\)</span> and <span class="math inline">\(\boldsymbol{r_2}\)</span> as generalized coordinates.</p>
+<h3 id="center-of-mass---generalized-coordinates">Center of Mass - Generalized Coordinates</h3>
+<p>Often times we use the the <strong>center of mass (CM)</strong> as the frame of reference. The CM is at vector position <span class="math inline">\(\boldsymbol{R}\)</span> you may recall the formula,</p>
+<p><span class="math display">\[
+\begin{gather}
+    \boldsymbol{R} = \frac{m_1\boldsymbol{r_2}+m_2\boldsymbol{r_2}}{M}\\
+    \boldsymbol{r_1} = \boldsymbol{R} + \frac{m_2}{M}\boldsymbol{r}\qquad \boldsymbol{r_2} = \boldsymbol{R} - \frac{m_1}{M}\boldsymbol{r}
+\end{gather}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(M\)</span> : Total mass <span class="math inline">\(M \equiv m_1 + m_2\)</span></li>
+<li><span class="math inline">\(\boldsymbol{r}\)</span> : Particle's distance vector of length <span class="math inline">\(r\)</span> as discussed before.</li>
+</ul>
+<p>Why we do so is because if the system is isolated then <span class="math inline">\(\dot R\)</span> is constant, then CM does not accelerate thus it's a rest frame. Let's rewrite the Lagrangian with these generalized coordinate,</p>
+<p><span class="math display">\[
+\begin{gather}
+    T = \frac{1}{2}M\dot R^2 + \frac{1}{2}\mu\dot r^2\\
+    \mu = \frac{m_1m_2}{M}
+\end{gather}
+\]</span></p>
+<p><span class="math display">\[
+\begin{gather}
+    \boxed{\mathcal{L} = \frac{1}{2}M\dot R^2 + \left[\frac{1}{2}\mu\boldsymbol{\dot r}^2 - U(\boldsymbol{r})\right]}\\
+    \mathcal{L} = \mathcal{L_{cm}} + \mathcal{L_{rel}}
+\end{gather}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\mu\)</span> : Reduced mass</li>
+<li><span class="math inline">\(\mathcal{L_{cm}}\)</span> : Lagrangian of the CM</li>
+<li><span class="math inline">\(\mathcal{L_{rel}}\)</span> : Lagrangian of the relative distance.</li>
+</ul>
+<p>The Lagrange equation gives the equation of motion for <span class="math inline">\(R\)</span> and <span class="math inline">\(\boldsymbol{r}\)</span>.</p>
+<p><span class="math display">\[
+\begin{gather}
+    M\ddot R = 0\\
+    \boxed{\dot R = \text{const}}\\
+\end{gather}
+\]</span></p>
+<p><span class="math display">\[
+\begin{gather}
+    \boxed{\mu\ddot r = -\nabla U(\boldsymbol{r})}
+\end{gather}
+\]</span></p>
+<p>The last line infers what we expect <span class="math inline">\(F_r = -\nabla U(\boldsymbol{r})\)</span></p>
+<h3 id="center-of-mass---rest-frame">Center of Mass - Rest Frame</h3>
+<p>We never actually used the center of mass as a frame yet since we didn't set <span class="math inline">\(\dot R = 0\)</span>, doing so and rewriting everything relative to the CM frame. In this frame, we imagine two masses <span class="math inline">\(m_1\)</span> and <span class="math inline">\(m_2\)</span> orbitting a central rest mass <span class="math inline">\(\mu\)</span> from their respective distances <span class="math inline">\(\boldsymbol{r_1}\)</span> and <span class="math inline">\(\boldsymbol{r}_2\)</span>.</p>
+<p><span class="math display">\[
+\begin{gather}
+    \boldsymbol{r_1} = \frac{m_2}{M}\boldsymbol{r} = \frac{\mu}{m_1}\boldsymbol{r} \\ \boldsymbol{r_2} = -\frac{m_1}{M}\boldsymbol{r} = -\frac{\mu}{m_2}\boldsymbol{r}\\
+    \frac{\boldsymbol{ r_1}}{\boldsymbol{ r_2}} = \frac{m_2}{m_1}
+\end{gather}
+\]</span> The main purpose for this center of mass frame is to separately find the relationship between <span class="math inline">\(r_1\)</span> to <span class="math inline">\(\mu\)</span> and <span class="math inline">\(r_2\)</span> to <span class="math inline">\(\mu\)</span> separately.</p>
+<h2 id="center-of-mass---single-mass-frame">Center of Mass - Single Mass Frame</h2>
+<p>What is amazing about this problem is that we can further simplify the problem to be a mass <span class="math inline">\(\mu\)</span> rotating around the CM at length <span class="math inline">\(\boldsymbol{r}\)</span>. The reason so is because the angular momentum is the same for system of two orbiting masses of <span class="math inline">\(m_1\)</span> and <span class="math inline">\(m_2\)</span> than with one orbiting mass of <span class="math inline">\(\mu\)</span>,</p>
+<p><span class="math display">\[ L = \boldsymbol{r}_1 \times \boldsymbol{p}_1 + \boldsymbol{r}_2 \times \boldsymbol{p}_2 = \boldsymbol{r} \times \mu \boldsymbol{\dot r}\]</span></p>
+<p>The Lagrangian for the one orbiting mass <span class="math inline">\(\mu\)</span> is now done in polar coordiantes since the <span class="math inline">\(r\)</span> is the distance from origin where <span class="math inline">\(\boldsymbol{r} = \boldsymbol{r}(r,\phi)\)</span>,</p>
+<p><span class="math display">\[
+\begin{equation}
+    \mathcal{L} = \frac{1}{2}\mu(\dot r^2 + r^2\dot{\phi^2}) - U(r)
+\end{equation}
+\]</span></p>
+<p>The Lagrangian is independent of <span class="math inline">\(\phi\)</span> so angular momentum along <span class="math inline">\(\phi\)</span> is conserve. We can represent this by applying the Lagrange equation to get a <span class="math inline">\(\phi\)</span> equation,</p>
+<p><span class="math display">\[
+\begin{align}
+    \mu r^2 \dot \phi = L_z\\
+    \phi(r,t) = \frac{L_z}{\mu r^2}t + \phi_0 
+\end{align}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(L_z\)</span> : A constant angular momentum along <span class="math inline">\(z\)</span> which is equivalent to the angular momentum along <span class="math inline">\(\phi\)</span></li>
+<li>It's important to notice that <span class="math inline">\(\phi\)</span> is dependent on <span class="math inline">\(r\)</span> not only <span class="math inline">\(t\)</span>. We definitely wish to find <span class="math inline">\(\phi(t)\)</span> or <span class="math inline">\(\phi(r)\)</span> but first we need the radial equation.</li>
+</ul>
+<p>The <span class="math inline">\(r\)</span> equation (<strong>radial equation</strong>) is then,</p>
+<p><span class="math display">\[
+\begin{gather}
+    \boxed{\mu \ddot r = \mu r\dot \phi - \frac{dU}{dr}}
+\end{gather}
+\]</span></p>
+<h3 id="one-dimensional-reduction">One-Dimensional Reduction</h3>
+<p>Notice that the radial equation is a sum of two potentials where <span class="math inline">\(F_r = \mu \ddot r\)</span></p>
+<p><span class="math display">\[
+\begin{gather}
+    F_r = -\frac{d}{dr}\left[U_\text{cf}(r) + U(r)\right]\\
+    U_\text{cf}(r) = \int {\mu r\dot\phi\; dr}\\
+\end{gather}
+\]</span></p>
+<p>For <span class="math inline">\(U_\text{cf}(r)\)</span>, we may replace <span class="math inline">\(\dot \phi\)</span> with <span class="math inline">\(\dot \phi= \frac{L_z}{\mu r^2}\)</span></p>
+<p><span class="math display">\[
+\begin{gather}
+    F_\text{cf} = \mu r \left(\frac{L_z}{\mu r^2}\right)^2 = \frac{L_z^2}{\mu r^3}\\
+    U_\text{cf}(r) = -\int{F_\text{cf}\; dr} = \frac{L_z^2}{2\mu r^2}
+\end{gather}
+\]</span></p>
+<p>The new radial equation is then,</p>
+<p><span class="math display">\[
+\begin{gather}
+    F_r = -\frac{d}{dr}\left[U(r) + U_\text{cf}(r)\right] = -\frac{d}{dr}U_\text{eff}(r)\\
+    U_\text{eff}(r) = U(r) + U_\text{cf}(r)
+\end{gather}
+\]</span></p>
+<p>This is what we meant by the problem can be simplified to a single dimension of a single parameter <span class="math inline">\(r\)</span> (distance away from CM). Initially the only potential was gravitational potential (for the orbital problem) but because we are in the rotating frame, there exist a fictitious force <span class="math inline">\(F_\text{cf}\)</span> which the subscript really means the <strong>centrifugal force</strong>.</p>

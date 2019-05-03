@@ -1,0 +1,30 @@
+<h2 id="performance">Performance</h2>
+<ul>
+<li>Stochastic gradient descent.</li>
+<li>Standardization</li>
+<li>Centering the hidden units. For example replacing sigmoid with tanh function.</li>
+<li>Differing learning rate for each layer of weights.</li>
+<li>Emphasize rare classes by using it more often.</li>
+<li>Second-order optimization
+<ul>
+<li>Nonlinear conjugate gradient</li>
+<li>Stochastic Levenberg Marquardt</li>
+</ul></li>
+<li>Acceleration schemes:
+<ul>
+<li>RMSprop</li>
+<li>Adam</li>
+<li>AMSGrad</li>
+</ul></li>
+</ul>
+<h2 id="avoid-bad-local-minima">Avoid Bad Local Minima</h2>
+<ul>
+<li>Stochastic gradient descent.</li>
+<li>Momentum</li>
+</ul>
+<h2 id="avoid-overfitting">Avoid Overfitting</h2>
+<ul>
+<li>Ensembles of neural nets with random intnial weights and bagging.</li>
+<li>L2 regularization (aka weight decay)</li>
+<li>Dropout, randomly disable a set of nodes of some hidden layers every epoch. When a node is disabled its weight is stored however it's just not participating in changing its weight on the epoch. This simulates an ensemble.</li>
+</ul>

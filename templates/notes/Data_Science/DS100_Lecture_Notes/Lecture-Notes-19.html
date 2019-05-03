@@ -1,0 +1,63 @@
+<h1 id="lecture-notes-19">Lecture Notes 19</h1>
+<p>Recall the expectation of the squared loss of some sample <span class="math inline">\((X,Y)\)</span> with some error <span class="math inline">\(Y \equiv h(x) + \varepsilon\)</span>,</p>
+<p><span class="math display">\[ 
+\Expected{\left( Y - f_{\hat \theta}(x) \right)^2} = \text{Observational Variance} + (\text{Bias})^2 + \text{Model Variance}
+\]</span></p>
+<h2 id="model-complexity">Model Complexity</h2>
+<p>Model complexity can be thought of as the &quot;capcity of the model to fit the data&quot;</p>
+<h2 id="least-square-linear-regression">Least Square Linear Regression</h2>
+<p>The least square linear regression is a model (denoted as either <span class="math inline">\(\hat y\)</span> or <span class="math inline">\(f_\theta(x)\)</span>) with the form,</p>
+<p><span class="math display">\[ \hat y = \sum_{j=1}^{d}{\theta_j\phi_j(x)}\]</span></p>
+<ul>
+<li><span class="math inline">\(\theta_j\)</span> : The parameter which must be linear by definiton
+<ul>
+<li>When we say linear we simply mean that each term must look like <span class="math inline">\(f(\theta,\phi) = \theta\phi(x)\)</span> where <span class="math inline">\(\theta\)</span> must be a constant for <span class="math inline">\(f(\theta, \phi)\)</span> to be linear.</li>
+<li>To be honest, it's a convoluted way of saying the weight/parameter must be constant.</li>
+</ul></li>
+<li><span class="math inline">\(\phi_j(x)\)</span> : The feature function</li>
+</ul>
+<p>The &quot;least square&quot; part of course means we're attempting to find the parameter <span class="math inline">\(\hat \theta\)</span> that minimizes the squared loss function</p>
+<p><span class="math display">\[ \hat \theta \equiv \arg\min{\frac{1}{n}\sum_i\left(y_i - \hat y(\theta, x_i)\right)^2} \]</span></p>
+<ul>
+<li><span class="math inline">\(\hat \theta\)</span> : Note that the optimal paramter <span class="math inline">\(\hat theta\)</span> can be a vector of length/dimension <span class="math inline">\(d\)</span>, where <span class="math inline">\(\theta = [\theta_1, \theta_2, ..., \theta_d]\)</span></li>
+</ul>
+<h2 id="feature-engineering">Feature Engineering</h2>
+<p>The process of transforming the inputs to a model to improve prediction accuracy</p>
+<p>Allows you to: * capture domain knowledge * encode non-numeric features * express non-linear relationships</p>
+<p>Basic transformations:</p>
+<ul>
+<li>Remove uninformative data (e.g., UID)</li>
+<li>Quantitative features (e.g., age)
+<ul>
+<li>Non-linear transformation (e.g., log)</li>
+<li>Normalize/standardize (e.g., (x-mean)/stdev)</li>
+</ul></li>
+<li>Categorical features (e.g, state)
+<ul>
+<li>One-hot-Encode transformation</li>
+</ul></li>
+</ul>
+<h3 id="one-hot-encoding">One-Hot Encoding</h3>
+<p>One-hot encoding is simply transform a categorical data into a representation of states.</p>
+<p>If you're not familiar with states it goes somewhat like this. Say there are 3 states labled 'A', 'B', 'C'. Each data can either be part of state 'A', 'B', and/or 'C' denoted by either <code>1</code> (yes) or <code>0</code> (no). For example, if data 1 is in state 'A' it will be:</p>
+<pre><code>Data    A   B   C
+   1    1   0   0</code></pre>
+<h3 id="encoding-missing-values">Encoding Missing Values</h3>
+<p>For either quantitative or categorical data missing values can be encoded as:</p>
+<ul>
+<li>infer what the missing value should be (mean, median, infer from other columns)</li>
+<li>add this missing value's name to a column called &quot;missing_col_name</li>
+</ul>
+<p>Never delete the whole just because there exist a missing value. There might be a reason why it is missing.</p>
+<h3 id="bag-of-words-encoding-encoding-text">Bag-of-Words Encoding (Encoding Text)</h3>
+<p>The bag-of-words encoding literally means there is a list of words (e.g., common words in the English alphabet) that carries the count of the words in the data you're encoding.</p>
+<p>Cons * Does not preserver sentence order</p>
+<h3 id="n-gram-encoding">N-Gram Encoding</h3>
+<p>To solve the problem of word order instead of mapping counting a single word we count a group of size <span class="math inline">\(N\)</span>-words.</p>
+<p>Cons * Extremely complex</p>
+<h3 id="feature-matrix">Feature Matrix</h3>
+<p>All of the transformations above is to attempt to create a quantitative matrix of features called the <strong>feature matrix</strong>. Given <span class="math inline">\(n\)</span> datasets and <span class="math inline">\(d\)</span> features the feature matrix is <span class="math inline">\(\Phi\)</span> which is a <span class="math inline">\(n \times d\)</span> matrix.</p>
+<p>In our model, this is quite simply to transform to a matrix if you consider two indices <span class="math inline">\(j\)</span> is the row index for which data it's referring to and <span class="math inline">\(\phi\)</span> by definition is the feature column index</p>
+<p><span class="math display">\[ \hat y = \sum_{j=1}^{d}{\theta_j\phi_j(x)} = \Phi\hat\theta\]</span></p>
+<p>We will not prove this (requires matrix calculus) but <span class="math inline">\(\hat \theta\)</span> that minimizes the squared loss function is given by the <strong>normal equation</strong></p>
+<p><span class="math display">\[ \hat \theta = (\Phi^T\Phi)^{-1}\Phi^TY \]</span></p>

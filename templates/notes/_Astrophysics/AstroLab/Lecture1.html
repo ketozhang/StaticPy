@@ -1,0 +1,46 @@
+<h2 id="lab-1">Lab 1</h2>
+<ul>
+<li>RR Lyrae (measure distance with luminosity variations)</li>
+</ul>
+<h2 id="magnitudes-extinction">Magnitudes &amp; Extinction</h2>
+<p>The relationship between apparent magnitude and absolute magnitude.</p>
+<p><span class="math display">\[
+m_\lambda = M_\lambda + 5\log_{10}(d) - 5
+\]</span></p>
+<p>If the source goes through some material such as a dust cloud, extinction would happen which may reduce its magnitude and redden the spectra.</p>
+<p><span class="math display">\[
+m_\lambda = M_\lambda + 5\log_{10}(d) - 5 + A_\lambda
+\]</span></p>
+<p>The extinction affects the radiation modeled by an exponential decay.</p>
+<p><span class="math display">\[
+F_\lambda = F_{\lambda,0} e^{-\tau_\lambda}
+\]</span></p>
+<p><span class="math display">\[
+\tau_\lambda = \int n\sigma_\lambda\ \mathrm{d}s
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\tau\)</span> : optical depth</li>
+<li><span class="math inline">\(n\)</span> : number density</li>
+<li><span class="math inline">\(\sigma_\lambda\)</span> : wavelength-dependent particle size</li>
+</ul>
+<p>We solve for <span class="math inline">\(A_\lambda\)</span> by the difference of the apparent magnitudes (initial then extincted),</p>
+<p><span class="math display">\[
+\Delta m = -2.5 \log_{10}\left(\frac{F_\lambda}{F_{\lambda,0}}\right) \approx 1.086\tau_\lambda
+\]</span></p>
+<p><span class="math display">\[
+A_\lambda \equiv \Delta m
+\]</span></p>
+<p>The <strong>color excess</strong> or <strong>selective extinction</strong> is the amount of color change (traditionally reddening) due to the extinction which are given by,</p>
+<p><span class="math display">\[
+E(B-V) = (B-V) - (B-V)_0
+\]</span></p>
+<p>The total extinciton is then the extinciton measured in the V-band (<span class="math inline">\(A_V\)</span>). This is a normalization value for <span class="math inline">\(R_V\)</span>,</p>
+<p><span class="math display">\[
+R_V = \frac{A_V}{E(B-V)}
+\]</span></p>
+<h2 id="rr-lyrae">RR Lyrae</h2>
+<p>RR Lyrae is a variable cepheid that are hydrogen-burning low-mass dying stars.</p>
+<p>It is observed that the luminosity and period are positively proportioned <span class="math inline">\(L \approx P\)</span>.</p>
+<p><span class="math display">\[
+\langle{M_V}\rangle = a\log P + b
+\]</span></p>

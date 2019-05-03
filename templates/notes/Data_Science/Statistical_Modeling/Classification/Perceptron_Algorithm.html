@@ -1,0 +1,40 @@
+<p>The perceptron algorithm is the most simplest form of what now called the neural network. The algorithm can be used to classify a binary class. The goal is to find some weights <span class="math inline">\(\theta\)</span> that satisfies the following: <span class="math display">\[
+y = \begin{cases} 1 &amp; X_i^\top \theta \ge 0\\ -1 &amp; X_i^\top \theta \le 0 \end{cases}
+\]</span> This is equivalent to finding a hyperplane that linearly separates the data points. However a strict constraint is that the hyperplane is centered at the origin<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<p>We define a loss function as,</p>
+<p><span class="math display">\[
+L(y_i, \theta) = \begin{cases}
+0, &amp; \text{sign}(X_i^\top \theta) = y_i\\
+|X_i^\top \theta|, &amp;\text{otherwise}
+\end{cases}
+\]</span></p>
+<p>The risk function (expectation value of <span class="math inline">\(L\)</span> on <span class="math inline">\(X\)</span> parameterized over <span class="math inline">\(\theta\)</span>) is given by,</p>
+<p><span class="math display">\[
+R(X,\theta) = \sum_{i=1}^{n} L(\theta_i, y_i) = \sum_{i \in W} |X_i^\top \theta|
+\]</span></p>
+<ul>
+<li><span class="math inline">\(W\)</span>: A set indices where <span class="math inline">\(\hat y_i\)</span> is wrong.</li>
+</ul>
+<h2 id="feature-parameter-space-symmetry">Feature &amp; Parameter Space Symmetry</h2>
+<p>The percepton algorithm's constrain allows for a nice symmetry between feature <span class="math inline">\(X_i\)</span> and parameter space <span class="math inline">\(\theta\)</span> which may be stated as:</p>
+<ul>
+<li>In <span class="math inline">\(x\)</span> feature space, the feature are points while the parameters are vectors that draws a hyperplane at the origin.</li>
+<li>In <span class="math inline">\(\theta\)</span> parameter space, the parameters are points while the features are vectors that draws a hyperplane at the origin.</li>
+</ul>
+<p>It is very useful to look at the parameter space because there may exist a region bounded by the feature hyperplanes that determines the values of <span class="math inline">\(\theta\)</span> which correctly classifies any linearly separable set of training data <span class="math inline">\(X\)</span>.</p>
+<h2 id="perceptron-convergence-theorem">Perceptron Convergence Theorem</h2>
+<p>For the modified perceptron classifier,</p>
+<p><span class="math display">\[
+\hat y(x) = x \cdot \theta + \theta_0
+\]</span></p>
+<p>If the data is linearly separable then there always exist a solution that perfectly classifies the data in at most <span class="math inline">\(\mathcal P(R^2/M^2)\)</span> iterations</p>
+<ul>
+<li><span class="math inline">\(R\)</span> : <span class="math inline">\(\max\lvert X_i \rvert\)</span></li>
+<li><span class="math inline">\(M\)</span> : Maximal margin.</li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>This constraint can be removed by adding a bias term <span class="math inline">\(\theta_0\)</span> along with transforming the design matrix with ones.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>

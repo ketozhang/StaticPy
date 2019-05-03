@@ -1,0 +1,26 @@
+<p><code>NULL</code> follows many specific rules:</p>
+<h2 id="null-operators">1. Null Operators</h2>
+<dl>
+<dt><code>IS</code> (<code>IS NOT</code>)</dt>
+<dd>Equality operator
+</dd>
+</dl>
+<h2 id="logic-and-null">2. Logic and Null</h2>
+<ul>
+<li><code>NULL</code> operated with <code>False</code></li>
+</ul>
+<pre><code>F &amp; N == F
+F | N == N</code></pre>
+<ul>
+<li><code>NULL</code> operated with <code>True</code></li>
+</ul>
+<pre><code>T &amp; N == N
+T | N == T</code></pre>
+<ul>
+<li><code>NOT NULL</code></li>
+</ul>
+<pre><code>!N = N</code></pre>
+<h2 id="traditonal-operators-with-null">3. Traditonal Operators with Null</h2>
+<p>Any operators outside the context of <code>NULL</code> applied to <code>NULL</code> will always return <code>NULL</code> or equivalently false (doesn't output)</p>
+<h2 id="aggregating-null">4. Aggregating Null</h2>
+<p>Aggregation with <code>NULL</code> ignores all <code>NULL</code> values.</p>

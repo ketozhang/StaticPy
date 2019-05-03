@@ -1,0 +1,20 @@
+<h1 id="lecture-note-14">Lecture Note 14</h1>
+<ul>
+<li>Notation for optimizing the loss function <span class="math inline">\(\ell(\theta)\)</span> is,</li>
+</ul>
+<p><span class="math display">\[ \min_\theta{\ell(\theta)} \]</span></p>
+<h2 id="gradient-descent">Gradient Descent</h2>
+<p>If <span class="math inline">\(\theta\)</span> is a vector (if you loss function has multiple parameters) then we must use the gradient to optimize rather than the derivative of a single coordinate.</p>
+<p><span class="math display">\[ \nabla \ell(\boldsymbol\theta) =  \frac{\partial \ell}{\partial \theta_1} + \frac{\partial \ell}{\partial \theta_2} + \ldots \frac{\partial \ell}{\partial \theta_n}\]</span></p>
+<p>In numerical analysis, the <strong>gradient descent</strong> method is:</p>
+<ol style="list-style-type: decimal">
+<li>Take the gradient at some point along your curve <span class="math inline">\(\ell(\theta)\)</span>. This point is denoted as <span class="math inline">\(\theta^{(0)}\)</span></li>
+<li>The new point is taken to be the current point <span class="math inline">\(\theta^{(0)}\)</span> minus a constant factor of <span class="math inline">\(\nabla \ell(\theta^{(t)})\)</span></li>
+</ol>
+<p><span class="math display">\[\boxed{ \theta^{(t+1)} = \theta^{(t)} - \alpha\nabla \ell(\theta^{(t)}) }\]</span></p>
+<p>Another way of writing this is by the order of approximation notation. I will write this for a general mutlivariable function <span class="math inline">\(f(\mathbf x)\)</span>. We say that the <span class="math inline">\(n\)</span>-th order approximation for the vector <span class="math inline">\(\mathbf x\)</span> that minimizes <span class="math inline">\(f(\mathbf x)\)</span> is <span class="math inline">\(\mathbf x^{(n)}\)</span> where,</p>
+<p><span class="math display">\[\boxed{ \mathbf x^{(n)} =  \mathbf x^{(0)} - a_1 \nabla f(\mathbf x^{(0)}) - a_2 \nabla f(\mathbf x^{(1)}) - \ldots - a_n\nabla f(\mathbf x^{(n-1)})}\]</span></p>
+<ul>
+<li><span class="math inline">\(x^{0}\)</span> : Initial guess minimum</li>
+<li><span class="math inline">\(a_1 \ldots a_n\)</span> : A constant positive optimization parameter that you choose to say how sensitive should the next order approximation be. Often times <span class="math inline">\(a_1 = \ldots a_n\)</span> and this works well numerically sufficiently small value.</li>
+</ul>

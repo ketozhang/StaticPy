@@ -1,0 +1,197 @@
+<!-- TOC -->
+<ul>
+<li><a href="#derivation">Derivation</a></li>
+<li><a href="#empty-universe---curvature-only">Empty Universe - Curvature Only</a></li>
+<li><a href="#flat-universe---no-curvature">Flat Universe - No Curvature</a></li>
+<li><a href="#single-component-universe">Single Component Universe</a>
+<ul>
+<li><a href="#matter-or-radiation-dominated-universe">Matter or Radiation Dominated Universe</a></li>
+<li><a href="#cosmological-constant-dominated-universe">Cosmological Constant Dominated Universe</a></li>
+</ul></li>
+<li><a href="#multiple-component-universe">Multiple Component Universe</a>
+<ul>
+<li><a href="#two-component-equilibrium">Two-Component Equilibrium</a></li>
+<li><a href="#matter--curvature">Matter + Curvature</a></li>
+<li><a href="#matter--cosmological-constant">Matter + Cosmological Constant</a></li>
+<li><a href="#matter--curvature--cosmological-constant">Matter + Curvature + Cosmological Constant</a></li>
+<li><a href="#radiation--matter">Radiation + Matter</a></li>
+</ul></li>
+</ul>
+<!-- /TOC -->
+<p>With the Friedmann equation, one can play around with the different types of universe by playing around with the either the energy density parameters or the curvature constant. The Friedmann equation that is easiest to deal with is to write the Friedmann equation in terms of density parameter:</p>
+<p><span class="math display">\[
+\begin{equation}
+    H^2 = H_0^2\Omega\\
+    \boxed{\left(\frac{\dot a}{a}\right)^2 = H_0^2\left[\frac{\Omega_{r,0}}{a^4} + \frac{\Omega_{m,0}}{a^3} + \Omega_{\Lambda,0} + \frac{(1-\Omega_0)}{a}\right]}
+\end{equation}
+\]</span></p>
+<h2 id="derivation">Derivation</h2>
+<p>We define the total density parameter to be <span class="math inline">\(\Omega\)</span>,</p>
+<p><span class="math display">\[
+\begin{gather}
+    \mu = \sum_i{\frac{\mu_{i,0}}{a^{3(1+w)}}}\\
+    \boxed{\Omega \equiv \frac{\mu}{\mu_c}}\\
+    \mu_c = \frac{3}{8\pi G}H(t)^2
+\end{gather}
+\]</span></p>
+<p>The Friedmann equation can be isolated from the curvature term,</p>
+<p><span class="math display">\[ 
+\begin{gather}
+    H^2(t) - \frac{8\pi G}{3}\mu = -\frac{k}{a^2}\\
+    \boxed{H^2(t) \left[1 - \Omega(t) \right]= -\frac{k}{a^2}}
+\end{gather}
+\]</span></p>
+<p>Let's introduce the Hubble's constant by setting <span class="math inline">\(t = t_0\)</span> and <span class="math inline">\(a(t_0)=1\)</span>,</p>
+<p><span class="math display">\[
+\begin{gather}
+    H_0^2 \left[1 - \Omega_0 \right]= -k\\
+    \boxed{k = H_0^2 \left[\Omega_0 - 1\right]}
+\end{gather}
+\]</span></p>
+<p>Plugging in <span class="math inline">\(k\)</span> to the Friedmann equation would give,</p>
+<p><span class="math display">\[
+\begin{gather}
+    \boxed{\left(\frac{\dot a}{a}\right)^2 = H_0^2\left[\frac{\mu}{\mu_{c,0}} + \frac{(1-\Omega_0)}{a}\right]}\\
+    \boxed{\left(\frac{\dot a}{a}\right)^2 = H_0^2\left[\frac{\Omega_{r,0}}{a^4} + \frac{\Omega_{m,0}}{a^3} + \Omega_{\Lambda,0} + \frac{(1-\Omega_0)}{a}\right]}
+\end{gather}
+\]</span></p>
+<h2 id="empty-universe---curvature-only">Empty Universe - Curvature Only</h2>
+<p>In the empty universe, all energy densities are set to zero <span class="math inline">\(\Omega = 0\)</span> and the curvature constant only exist. This is one of the rare times we will use the full definition of <span class="math inline">\(k = \kappa c^2/R_0^2\)</span>. The Friedmann equation goes as (remember to set <span class="math inline">\(c = 1\)</span>),</p>
+<p><span class="math display">\[ H^2 = \frac{k}{a^2} = \frac{\kappa}{R_0^2a^2} \]</span></p>
+<p><span class="math display">\[ \begin{equation}
+    \dot a = \sqrt{- \frac{\kappa}{R_0^2}}
+\end{equation} \]</span></p>
+<p>There exist only two solutions, when <span class="math inline">\(\kappa = 0\)</span> or <span class="math inline">\(\kappa = -1\)</span> (<span class="math inline">\(\kappa = 1\)</span> gives an imaginary solution so let's ignore this.).</p>
+<p><span class="math display">\[ \begin{gather}
+    \boxed{a = \begin{cases}
+        1 &amp; k=0\\
+        t/t_0 &amp; k=-1
+    \end{cases}}\\
+    \boxed{t_0 \equiv \frac{1}{R_0} = \frac{1}{H_0}}
+\end{gather} \]</span></p>
+<p>This is the case where <strong>Hubble's time</strong> <span class="math inline">\(H_0^{-1}\)</span> is the age of the universe <span class="math inline">\(t_0\)</span>!</p>
+<h2 id="flat-universe---no-curvature">Flat Universe - No Curvature</h2>
+<p>A flat universe is one at which the curvature constant <span class="math inline">\(k = 0\)</span>. The Friedmann equation is then:</p>
+<p><span class="math display">\[ \begin{equation}
+    H^2 = \frac{8\pi G}{3}\mu
+\end{equation} \]</span></p>
+<p>This is a fun universe to play around with because we can get all the extreme cases and outcomes many exciting theories such as the Big Bang, Big Crunch, Big Freeze, etc. However to make this easier it is easier to write the Friedmann equation in terms of the density parameters:</p>
+<p><span class="math display">\[ \Omega \equiv \sum_i{\Omega_i} = \sum_i{\frac{\Omega_{i,0}}{a^{3\left(1 + w_i\right)}}}\]</span></p>
+<p>In the flat universe, we define <span class="math inline">\(\Omega_0 = 1\)</span> such that the curvature is <span class="math inline">\(1 - \Omega_0 = 0\)</span> (not necesarrily at all time but some period where <span class="math inline">\(t_0\)</span> is part of).</p>
+<p><span class="math display">\[
+\begin{gather}
+    H^2 = H_0^2\Omega\\
+    \left(\frac{\dot a}{a}\right)^2 = H_0^2\left[\frac{\Omega_{r,0}}{a^4} + \frac{\Omega_{m,0}}{a^3} + \Omega_{\Lambda,0}\right]
+\end{gather}
+\]</span></p>
+<ul>
+<li>Remaining energy density parameter of unknown particles. We set this to zero for the benchmark model.</li>
+</ul>
+<p>Before we begin dwelling into this universe, we begin with the next few sections seeing how each individual components and subsets of these components affect the universe.</p>
+<h2 id="single-component-universe">Single Component Universe</h2>
+<p>The single component universe is a flat universe (we've already covered empty universe universe in the previous section which is a curvature-only) with either matter, radiation, or cosmological constant.</p>
+<p>The Friedmann equation for the single component universe is,</p>
+<p><span class="math display">\[ 
+H(t) = H_0 \sqrt{\frac{\Omega}{a^{3(w+1)}}} \qquad \Omega = 1\\
+\dot a = H_0a^{-(1+3w)/2}
+\]</span></p>
+<h3 id="matter-or-radiation-dominated-universe">Matter or Radiation Dominated Universe</h3>
+<p>In the matter or radiation dominated universe, the <span class="math inline">\(w \ne 1\)</span> therefore the differential equation goes as the power law.</p>
+<p><span class="math display">\[ H_0 t =  \int{a^{b/2} \d a} \qquad b = 1+3w\]</span></p>
+<p>The scale factor and redshift is then,</p>
+<p><span class="math display">\[ 
+\boxed{a(t) = \left(\frac{t}{t_0}\right)^{2/3(w+1)}}\\
+\boxed{1 + z = \left(\frac{t_0}{t_e}\right)^{2/3(w+1)}}\\
+\boxed{t_0 \equiv \frac{2}{3(1+w)}H_0^{-1}}\\
+\]</span></p>
+<ul>
+<li><span class="math inline">\(t_0\)</span> : This can be interpretted as the age of the universe when the universe was single component dominated</li>
+<li><p><span class="math inline">\(t_e\)</span> : The age of the universe when the observed light was emitted. Of course <span class="math inline">\(t_e = t_0\)</span> when <span class="math inline">\(z=0\)</span> by definition.</p>
+<p><span class="math display">\[\boxed{ t_e = t_0\left(1 + z\right)^{-3(w+1)/2} }\]</span></p></li>
+</ul>
+<h3 id="cosmological-constant-dominated-universe">Cosmological Constant Dominated Universe</h3>
+<!-- TODO: -->
+<h2 id="multiple-component-universe">Multiple Component Universe</h2>
+<h3 id="two-component-equilibrium">Two-Component Equilibrium</h3>
+<p><span class="math display">\[
+\frac{\Omega_{i,0}}{\Omega_{j,0}} = a^{(w_i+1)/(w_j+1)}\\
+\boxed{a_{ij} = \left(\frac{\Omega_{i,0}}{\Omega_{j,0}}\right)^{(w_j+1)/(w_i+1)}}
+\]</span></p>
+<h3 id="matter-curvature">Matter + Curvature</h3>
+<p>The Friedmann equation for matter and curvature dominated universe is,</p>
+<p><span class="math display">\[\boxed{ H(t)^2 = H_0^2\left[\frac{\Omega_0}{a^3} + \frac{1-\Omega_0}{a^2} \right] }\]</span></p>
+<ul>
+<li><p><span class="math inline">\(\Omega_0\)</span> : Energy density at <span class="math inline">\(t_0\)</span>, in this universe <span class="math inline">\(\Omega_0 = \Omega_{m,0}\)</span>.</p></li>
+<li><p>There exist a scale factor when the univere is stationary <span class="math inline">\(H(t)=0\)</span>,</p>
+<p><span class="math display">\[
+a_\max = \frac{\Omega_0}{\Omega_0 - 1}, \qquad H_0 &gt; 0\\
+a_\min = \frac{\Omega_0}{\Omega_0 - 1}, \qquad H_0 &lt; 0
+\]</span></p></li>
+</ul>
+<p>Let's take a look at what happen when <span class="math inline">\(\Omega_0\)</span> is great, less than, or equal to <span class="math inline">\(1\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Density</th>
+<th>Curvature</th>
+<th>Fate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\Omega_0 &lt; 1\)</span></td>
+<td><span class="math inline">\(\kappa =-1\)</span></td>
+<td>Big Chill (<span class="math inline">\(\alpha \propto t\)</span>)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\Omega_0 = 1\)</span></td>
+<td><span class="math inline">\(\kappa = 0\)</span></td>
+<td>Big Chill (<span class="math inline">\(\alpha \propto t^{2/3}\)</span>)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\Omega_0 &gt; 1\)</span></td>
+<td><span class="math inline">\(\kappa = +1\)</span></td>
+<td>Big Crunch</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>If <span class="math inline">\(\Omega_0 &gt; 1\)</span>
+<ul>
+<li>then <span class="math inline">\(k = 1\)</span> and the extrema scale factor is positive <span class="math inline">\(a&gt;0\)</span>.</li>
+<li>that means there exist an extrema for both cases of initially expanding or contracting universe.</li>
+<li>for the initially expanding universe <span class="math inline">\(H_0 &gt; 0\)</span> an extrema will be reached at some time where <span class="math inline">\(a(t_\max) = a_\max\)</span> and then begin to contract <span class="math inline">\(H(t) &lt; 0\)</span> for <span class="math inline">\(t &gt; t_\max\)</span>.</li>
+<li>so say a universe that began with a Big Bang will eventually contract itself into its hot dense &quot;ball&quot; of matter. This contraction is known as the <strong>Big Crunch</strong></li>
+</ul></li>
+<li>If <span class="math inline">\(\Omega_0 = 1\)</span>
+<ul>
+<li>this is the matter dominated universe</li>
+<li>then <span class="math inline">\(k = 0\)</span> and the extrema scale factor goes to infinity <span class="math inline">\(a \rightarrow \infty\)</span> at the rate <span class="math inline">\(\alpha \propto t^{2/3}\)</span></li>
+<li>this means that the universe will continue to expand or contract infinitely</li>
+<li>for the initially expading universe, it will keep expanding and eventually freeze (space between matter is much greater than interaction lengthscale) thus expansion is known as the <strong>Big Chill</strong>.</li>
+</ul></li>
+<li>If <span class="math inline">\(\Omega_0 &lt; 1\)</span>
+<ul>
+<li>then <span class="math inline">\(k = -1\)</span> and the extrema scale factor goes to infinity <span class="math inline">\(a \rightarrow \infty\)</span> at the rate <span class="math inline">\(\alpha \propto t^{2/3}\)</span></li>
+<li>The extrema does not exist except at <span class="math inline">\(\Omega_0 = 0\)</span> since we do not allow <span class="math inline">\(a &lt; 0\)</span></li>
+<li>This is another case of the big chill since <span class="math inline">\(H(t)\)</span> is always positive thus the universe expands at a rate of <span class="math inline">\(a \propto t\)</span></li>
+</ul></li>
+</ul>
+<p>Let's solve for <span class="math inline">\(a(t)\)</span>,</p>
+<dl>
+<dt>Case <span class="math inline">\(\Omega_0 \ne 1\)</span></dt>
+<dd>
+</dd>
+</dl>
+<p><span class="math display">\[ H_0 t = \int{ \frac{da}{\sqrt{\Omega_0/a + (1-\Omega_0)}} } \]</span></p>
+<p>The solution to this is the cycloid,</p>
+<p><span class="math display">\[ 
+a(\theta) \equiv \frac{1}{2}\frac{\Omega_0}{\Omega_0 - 1}\left(1 - \cos\theta\right)\\
+\boxed{t(\theta) = \frac{1}{2H_0}\frac{\Omega_0}{\left(\Omega_0 - 1\right)^{3/2}}(\theta - \sin\theta)}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\theta\)</span> : Ranges from the beginning of the universe <span class="math inline">\(\theta=0\)</span> to the Big Crunch <span class="math inline">\(\theta = 2\pi\)</span></li>
+</ul>
+<h3 id="matter-cosmological-constant">Matter + Cosmological Constant</h3>
+<h3 id="matter-curvature-cosmological-constant">Matter + Curvature + Cosmological Constant</h3>
+<h3 id="radiation-matter">Radiation + Matter</h3>

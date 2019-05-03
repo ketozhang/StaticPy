@@ -1,0 +1,46 @@
+<h1 id="lecture-notes-8">Lecture Notes 8</h1>
+<h2 id="multiple-plots-in-matplotlib">Multiple Plots in Matplotlib</h2>
+<p>We will be using a different convention in using Matplotlib. Matplotlib was a object-orientated program based on a single class invoked by <code>plt.plot()</code> which plots things into a figure object called <code>matplotlib.pyplot.figure</code> (see <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.figure.html">docs</a>). However plotting more than one plot in the same figure or even different figure can be very confusing if you were to use <code>plt.plot</code> like you were taught at the beginning.</p>
+<p>Instead we will splits the plot into two objects the figure and axes object,</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">fig2, ax1 <span class="op">=</span> plt.subplots()
+ax1.plot(x1, y1) <span class="co"># for some x1 and y1</span>
+ax1.plot(x2,y2) <span class="co"># for some other x2 and y2 on the same figure</span>
+ax1.legend()
+ax1.set_title(`Title`)
+ax1.set_ylabel(`Title`)
+ax1.set_xlabel(`Title`)
+
+
+<span class="co"># Second figure (plotted on second figure)</span>
+fig2, ax2 <span class="op">=</span> plt.subplots()</code></pre></div>
+<center>
+<img src="2018-02-08-22-45-46.png" width='400'>
+</center>
+<hr />
+<h2 id="guidelines-of-a-good-plot">Guidelines of a Good Plot</h2>
+<ol style="list-style-type: decimal">
+<li>Scale
+<ul>
+<li>Numerical spacing of data</li>
+</ul></li>
+<li>Conditioning
+<ul>
+<li>Orientation of data</li>
+</ul></li>
+<li>Perception
+<ul>
+<li>Data type</li>
+<li>Color</li>
+</ul></li>
+<li>Transformation
+<ul>
+<li>Mathematically transform a data (e.g., log-log plots)</li>
+</ul></li>
+<li>Context
+<ul>
+<li>Labels</li>
+<li>Reference lines</li>
+</ul></li>
+<li>Smoothing</li>
+<li>Philosophy</li>
+</ol>

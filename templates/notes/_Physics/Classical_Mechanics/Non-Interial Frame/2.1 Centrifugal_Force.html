@@ -1,0 +1,36 @@
+<!-- TOC -->
+<ul>
+<li><a href="#example---earths-gravitational-acceleration">Example - Earth's Gravitational Acceleration</a></li>
+</ul>
+<!-- /TOC -->
+<p>The centrifugal force is the force perpendicular to the direction of motion and points radially outwards along the direction of the rotating arm (perpendicular to the axis of rotation). The <strong>centrifugal force</strong> is defined as,</p>
+<p><span class="math display">\[ \boxed{\mathbf F_\text{cf} = m(\mathbf \Omega \times \mathbf r) \times \mathbf \Omega} \]</span></p>
+<ul>
+<li><span class="math inline">\(m\)</span> : Mass of the object</li>
+<li><span class="math inline">\(\mathbf r\)</span> : radial vector away from the origin of the rotating frame</li>
+<li><span class="math inline">\(\mathbf \Omega\)</span> : Angular frequency of the rotating frame</li>
+</ul>
+<p>We may simplify this with cylindrical coordinates for any single-axis rotating frame. Let's <span class="math inline">\(\boldsymbol \rho\)</span> be the projection of the <span class="math inline">\(\mathbf r\)</span> vector onto the axis of rotation <span class="math inline">\(\hat \Omega\)</span></p>
+<p><span class="math display">\[ \boldsymbol \rho = \rho \hat\rho \\
+\rho \equiv \mathbf r \cdot \hat \Omega = r\sin\theta\]</span></p>
+<ul>
+<li><span class="math inline">\(\theta\)</span> : Angle between <span class="math inline">\(\mathbf r\)</span> and <span class="math inline">\(\mathbf \Omega\)</span></li>
+</ul>
+<p>By the cross product,</p>
+<p><span class="math display">\[\boxed{ F_\text{cf} = m\Omega^2 \rho \hat \rho }\]</span></p>
+<h2 id="example---earths-gravitational-acceleration">Example - Earth's Gravitational Acceleration</h2>
+<p>The gravitational acceleration of Earth is affected by the centrifugal force such that the angle away from the radial gravitational force (perpendicular to Earth's surface) is observable (however not the actual magnitude). Recall that the effective gravitational acceleration is,</p>
+<p><span class="math display">\[ \mathbf g = \frac{\mathbf F_g}{m} + \frac{ m\Omega^2 \rho \hat \rho}{m} \\
+= \mathbf g_0 +  \Omega^2 \rho \hat \rho \\
+= \mathbf g_0 +  \Omega^2 R\sin\theta \hat \rho 
+\]</span></p>
+<ul>
+<li><span class="math inline">\(R\)</span> : radius of the Earth</li>
+</ul>
+<p>The angle between <span class="math inline">\(\mathbf g\)</span> and $ g_0 $ can be calculated by using the components</p>
+<p><span class="math display">\[ 
+\boxed{\alpha \approx \frac{g_r}{g_\perp}}\\
+g_\perp = \Omega^2 R \sin \theta \cos\theta\\
+g_r = \Omega^2 R \sin^2 \theta
+\]</span></p>
+<p>The maximum angle occurs at <span class="math inline">\(\theta = 45^\circ\)</span> where <span class="math inline">\(\alpha \approx 0.1^\circ\)</span></p>

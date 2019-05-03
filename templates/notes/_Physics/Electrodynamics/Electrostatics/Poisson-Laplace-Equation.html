@@ -1,0 +1,22 @@
+<p>The motivation for using the Laplace's equation in electrostatics is to solve for the electric potential <span class="math inline">\(V(\boldsymbol r)\)</span>. Recall that from Gauss' law one may derive the Poisson equation,</p>
+<p><span class="math display">\[
+\nabla^2 V = -\frac{\rho}{\epsilon_0}
+\]</span></p>
+<p>The <strong>Laplace's equation</strong> applies to electrostatics is the cases that one attempts to determine the electric potential for a region of space with no electric charges (thus, <span class="math inline">\(\rho = 0\)</span>). With the RHS being zero we arrive at the Laplace's equation,</p>
+<p><span class="math display">\[
+\nabla^2 V = 0 \tag{Region of Zero Charge}
+\]</span></p>
+<h2 id="separation-of-variables">Separation of Variables</h2>
+<p>The direct approach to solve the Laplace's equation given that we are dealing with partial differential equation is to use the <strong>separation of variables</strong>.</p>
+<h2 id="uniqueness-theorem">Uniqueness Theorem</h2>
+<p>A tool for solving the Laplace's equation is the <strong>uniqueness theorem</strong>.</p>
+<dl>
+<dt>Theorem 1</dt>
+<dd><p>The solution to Laplace's equation in some volume <span class="math inline">\(\mathcal V\)</span> is uniquely determined if <span class="math inline">\(V\)</span> is specified in the boundary surface <span class="math inline">\(S\)</span>.</p>
+<p>In other words if the solution to the Laplace's equation <span class="math inline">\(V=V(\boldsymbol r)\)</span> satisfies the boundary surface <span class="math inline">\(\Big(V(\boldsymbol r&#39; \in S) = V(\boldsymbol r)\Big)\)</span> then this solution will uniquely satisfies the volume <span class="math inline">\(\Big(V(\boldsymbol r&#39; \in \mathcal V) = V(\boldsymbol r)\Big)\)</span>.</p>
+<p><strong>Usage: </strong> To solve a problem you may simplify the problem to one that also satisfies the boundary conditions at the boundary surface. You must also make sure that the equivalent problem stil satisfies that <span class="math inline">\(\rho=0\)</span> for <span class="math inline">\(V\)</span> within the region wanted.The solution <span class="math inline">\(V\)</span> to this simplified problem is also the solution to the original problem.</p>
+</dd>
+<dt>Theorem 2</dt>
+<dd>For a region of volume <span class="math inline">\(\mathcal V\)</span> surrounded by conductors of charge <span class="math inline">\(Q_i\)</span> and surrounded by a charge density <span class="math inline">\(\rho\)</span> where there are no conductors, the electric field is uniquely determined if all <span class="math inline">\(Q_i\)</span> and <span class="math inline">\(\rho\)</span> is known.
+</dd>
+</dl>

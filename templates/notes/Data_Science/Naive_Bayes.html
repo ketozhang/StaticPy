@@ -1,0 +1,12 @@
+<p>The Naive Bayes is an algorithm for classification. Let's first define Naive Bayes it for two categories. <span class="math inline">\(Y\)</span> is either in category <span class="math inline">\(A\)</span> or category <span class="math inline">\(B\)</span> where <span class="math inline">\(Y\)</span> has features notated as the random variable <span class="math inline">\(\Phi=\set{\phi_1,\phi_2,\ldots,\phi_n}\)</span></p>
+<p><span class="math display">\[ O = \frac{P(A|\Phi)}{P(B|\Phi)} = \frac{\prod{P(A|\phi_i)}}{\prod{P(B|\phi_i)}} \]</span></p>
+<ul>
+<li>This formula is interpreted as the odds that <span class="math inline">\(Y\)</span> is either <span class="math inline">\(A\)</span> vs <span class="math inline">\(B\)</span> given <span class="math inline">\(\Phi\)</span></li>
+<li>Naive Bayes is naive simply because we assume a commutative/independent relation between each feature (order does not matter).</li>
+</ul>
+<h2 id="python---sklearn">Python - sklearn</h2>
+<p>Naive bayes package: <code>sklearn.naive_bayes</code></p>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="im">from</span> sklearn.naive_bayes <span class="im">import</span> __NB
+clf <span class="op">=</span> __NB()
+clf.fit(X_train, Y_train)
+Y_pred <span class="op">=</span> clf.predict(X_test)</code></pre></div>

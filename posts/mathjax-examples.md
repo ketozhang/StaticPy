@@ -1,7 +1,7 @@
 ---
 title: MathJax Examples
 description: MathJax is a mathematics web display engine most popular for LaTeX. Here are some typical examples of MathJax support for LaTeX syntax.
-image: https://via.placeholder.com/320x240
+image: https://via.placeholder.com/1280x960
 ---
 
 ## Inline Math

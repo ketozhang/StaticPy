@@ -1,0 +1,33 @@
+<h1 id="lecture-notes-10">Lecture Notes 10</h1>
+<h2 id="python-string-methods">Python String Methods</h2>
+<p>All python string methods are called by <code>&quot;str&quot;.method</code> for some method. The following methods were cover in the lecture:</p>
+<ul>
+<li><code>str.strip</code>: Remove all white spaces</li>
+<li><code>str.lower</code>: Turn all lower case <code>az</code> characters to upper case <code>AZ</code></li>
+<li><code>str.replace(old, new)</code>: Replace some <code>old</code> string with a <code>new</code> string.</li>
+<li><code>str.split(delimiter)</code> : Return strings as a list delimited by some string</li>
+</ul>
+<h2 id="regular-expression">Regular Expression</h2>
+<p>Learning regular expression is not easy. I do not recommend reading these notes as no lecture notes can really help. Please see the webcast, live demonstration makes a lot of sense.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> re</code></pre></div>
+<p>A typical <strong>regular expression (regex)</strong> use in python is the <code>re.findall</code> method which takes in a regular expression <code>regex</code> to match with some string <code>string</code>,</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">re.findall(regex, string)</code></pre></div>
+<p>Here are a list of some regex operators:</p>
+<ul>
+<li><code>.</code>: Wildcard, match any character</li>
+<li><code>+</code>: Match 1 or more</li>
+<li><code>()</code>: Match and extract pattern inside parenthesis to list</li>
+<li><code>?</code> : Immediate character before is optional</li>
+<li><code>^</code> : Don't match the immediate character after</li>
+<li><code>$</code> : Match end of line</li>
+<li><code>\</code>: The immediate character after this is to be treated as a literal string not an operator</li>
+<li><code>[AB]</code>: Match <code>A</code> or <code>B</code> (however not both)</li>
+<li><code>AB|BC</code>: Match <code>AB</code> or <code>BC</code></li>
+<li><code>[0-9]</code>: Match numbers</li>
+<li><code>[a-z]</code>: Match any lower case alphabet</li>
+<li><code>[A-Z]</code>: Match any upper case alphabet</li>
+<li><code>[a-zA-Z]</code>: Match any alphabet</li>
+<li><code>\w</code>: Match Alphanumeric characters</li>
+<li><code>\d</code>: Match numbers (digits)</li>
+<li><code>[\t\n\f\r\p{Z}]</code> : Match these type of whitespace</li>
+</ul>

@@ -1,0 +1,36 @@
+<h2 id="gaussian">Gaussian</h2>
+<p>Let the multivariate gaussian be,</p>
+<p><span class="math display">\[
+P(x \mid \mu, \sigma) = \left(2 \pi \sigma^2 \right)^{d/2} \exp\left(-\frac{|x-\mu|^2}{2\sigma^2}\right)
+\]</span></p>
+<p>Let the <span class="math inline">\(N\)</span> classes be represented as <span class="math inline">\(c \in \{1,2,\ldots,N\}​\)</span> such that each class has the following statistics:</p>
+<ul>
+<li><span class="math inline">\(\mu_c\)</span> : Mean of the class</li>
+<li><span class="math inline">\(\sigma_c\)</span> : Standard deviation of the class</li>
+<li><span class="math inline">\(\pi_c\)</span> : Prior of the class</li>
+</ul>
+<p>The optimization problem can be simplified using logarithm to preserve maximization of the Bayes decision,</p>
+<p><span class="math display">\[
+\begin{align*}
+    \hat y(x) &amp;= \mathop{\arg\max}_c \log\left( (2\pi)^{d/2} P(x \mid \mu, \sigma) \pi_c \right) \\
+    &amp;= \mathop{\arg\max}_c \frac{|x-\mu_c|^2}{2\sigma_c^2} - d\log{\sigma_c} + \log{\pi_c}
+\end{align*}
+\]</span></p>
+<h2 id="general-quadratic-function">General Quadratic Function</h2>
+<p>For some quadratic function <span class="math inline">\(Q(x)\)</span>, the Bayes decision rule is given by,</p>
+<p><span class="math display">\[
+\hat y(x) = \mathop{\arg\max}_c Q_c(x)
+\]</span></p>
+<p>The Bayes decision rule for the quadratic discriminant always product a posterior distribution that is a <strong>logistic function</strong>. We can easily see this by considering only two classes <span class="math inline">\((A,B)\)</span>.</p>
+<p><span class="math display">\[
+\hat y(x) = \begin{cases}
+A &amp; Q_A(x) - Q_B(x) &gt; 0 \\
+B &amp; \text{otherwise}
+\end{cases}
+\]</span></p>
+<p><span class="math display">\[
+\begin{align*}
+    P(Y \mid X) &amp;= \frac{e^{Q_A(x)}}{e^{Q_A(x)} + e^{Q_B(x)}}\\
+    &amp;= \frac{1}{1 + e^{Q_A(x) - Q_B(x)}}
+\end{align*}
+\]</span></p>

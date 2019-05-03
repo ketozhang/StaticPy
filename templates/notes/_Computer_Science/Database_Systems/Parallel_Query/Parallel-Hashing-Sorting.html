@@ -1,0 +1,15 @@
+<h2 id="hash-join">Hash Join</h2>
+<p>We first distribute the workload with <span class="math inline">\(h_n\)</span> and apply the divide phase. Then we continue with the next phase locally.</p>
+<ul>
+<li>Two tuples that need to join always end up at the same machine</li>
+</ul>
+<h2 id="sort-merge-join">Sort-Merge Join</h2>
+<ul>
+<li>Partition data by range at pass 0
+<ul>
+<li>To prevent data skew, we must determine the distribution. This can be done efficiently with random sampling.</li>
+</ul></li>
+<li>Remaining pass are local.</li>
+</ul>
+<h2 id="symmetric-join">Symmetric Join</h2>
+<p>We can add symmetry to either hash or sort join to allow for a paralleled pipeline that's always streaming. We do this by doing a local merge on both <span class="math inline">\(R\)</span> and <span class="math inline">\(S\)</span> as the input comes.</p>

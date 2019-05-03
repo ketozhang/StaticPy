@@ -1,0 +1,35 @@
+<p>The probability of the first success given by <span class="math inline">\(p\)</span> to be at position <span class="math inline">\(n\)</span>.</p>
+<p><span class="math display">\[
+\begin{gather*}
+    X \sim \text{Geometric}(p)\\
+    P (X = n) = (1-p)^{n-1}p
+\end{gather*}
+\]</span></p>
+<ul>
+<li><p><strong>Expected Value</strong></p>
+<p><span class="math display">\[ E[X] =\sum_{n=1}^\infty n (1-p)^{n-1}p = \frac{1}{p} \]</span></p>
+<dl>
+<dt>Proof</dt>
+<dd><p>Use</p>
+<p><span class="math display">\[\frac{\mathrm d }{\mathrm d p}(1-p)^n = -n(1-p)^{n-1}\]</span></p>
+</dd>
+</dl></li>
+<li><p><strong>Variance</strong></p>
+<p><span class="math display">\[E[X^2] = \frac{1-p}{p^2} \]</span></p>
+<dl>
+<dt>Proof</dt>
+<dd><p>Use</p>
+<p><span class="math display">\[\frac{\mathrm d}{\mathrm d p}\left[(1-p)\frac{\mathrm d }{\mathrm d p}(1-p)^n\right] = n^2(1-p)^{n-1}\]</span></p>
+</dd>
+</dl></li>
+</ul>
+<h2 id="coupon-collection-problem">Coupon Collection Problem</h2>
+<p>Let's say there are <span class="math inline">\(n\)</span> types of coupons and you need all <span class="math inline">\(n\)</span> to win a prize. To get a coupon you must buy some product.</p>
+<ol style="list-style-type: decimal">
+<li><p>What is the expected number of buys to get all <span class="math inline">\(n\)</span> coupons given uniform probability of getting any coupon.</p>
+<p>Let <span class="math inline">\(X_i\)</span> be the random variable of the number of buys to get a unique coupon. You need <span class="math inline">\(n\)</span> unique coupons so the number of buys to win a prize is the sum of <span class="math inline">\(X_i\)</span>.</p>
+<p><span class="math display">\[
+\mathbb E[X_i] = \frac{1}{p_i} = \frac{n}{n-(i-1)}\\
+\mathbb E\left [\sum{X_i} \right] = n \sum_{k=1}^n \frac{1}{k}
+\]</span></p></li>
+</ol>

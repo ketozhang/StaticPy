@@ -1,0 +1,76 @@
+<h1 id="observation-of-exoplanets">Observation of Exoplanets</h1>
+<p>Exoplanets are rarely ever directly observed because they are so far. The two primary difficulties of direct observation are:</p>
+<ul>
+<li>Planets that are much fainter than the host star</li>
+<li>Planets that are much too close to the host star governed by the <a href="#rayleigh-criterion">Rayleigh Criterion</a></li>
+</ul>
+<p>The following properties of exoplanets are easier to detect: * More massive planet due to the increase of its host star's wobbling and radial velocity. * Shorter period planet where its radial velocity varies more. * Edge on for optimal transit and radial velocity observations. * Large radius to diminish the bad inclination effects during transit. * Low density stars (less massive and large radius) to increase wobbling and decrease the inclination effects.</p>
+<h2 id="pulsar-timing">Pulsar Timing</h2>
+<p>The first exoplanet to be discovered was discovered by pulsar timing.</p>
+<p>First a bit about pulsar. Pulsars are spinning neutron stars that emits radio waves with periodic strength. The period of these waves are very well known and very stable. While stable, any sort of gravitational effect onto the star may cause the superpositions in its waves. This is how the first two exoplanet was found on the same pulsar <strong>PSR 1257+12</strong></p>
+<h2 id="doppler-shift-and-radial-velocity">Doppler Shift and Radial Velocity</h2>
+<p>With the fundamentals of Kepler's laws and the Doppler shift, planets are found by measuring the star's radial velocity that has an amplitude of <span class="math inline">\(K\)</span>. Using this amplitude we may find the planet's mass (<span class="math inline">\(M_p\)</span>) with known host star's mass (<span class="math inline">\(M_\star\)</span>). The host star's mass (<span class="math inline">\(M_\star\)</span>) is guessed with an accuracy of ~10% using the spectral characteristic of the star.</p>
+<p>The planet's mass (<span class="math inline">\(M_p\)</span>) is then,</p>
+<p><span class="math display">\[
+\begin{gathered}
+    K = \left(\frac{2\pi G}{P}\right)^{\frac{1}{3}}\frac{M_p\sin i}{\left(M_\star + M_p \right)^{2/3}} \frac{1}{\sqrt{1-e^2}}\\
+    \frac{1}{\alpha}M_p + M_p^{1/3} = M_\star
+\end{gathered}
+\]</span></p>
+<p>The second line is a difficult polynomial with a solution of (<a href="https://www.wolframalpha.com/input/?i=x%2Fa-x%5E(3%2F2)+%3D+y+solve+for+x">Wolfram Alpha</a>).<br />
+However it is much easier to assume <span class="math inline">\(M_\star \gg M_p\)</span></p>
+<p><span class="math display">\[M_p = \frac{K{M_\star}^{\frac{2}{3}}\sqrt{1-e^2}}{\sin i}\left(\frac{P}{2\pi G}\right)^{\frac{1}{3}}, \quad M_\star \gg M_p\]</span></p>
+<p>Radial velocity detections are very successful however has two difficult parameters:</p>
+<ul>
+<li><strong>Eccentricity:</strong> Can be judged from the shape of the radial velocity wave (eccentric orbits has sinusoidal that leans)</li>
+<li><strong>Inclination:</strong> No information of the radial velocity can be found if the inclination is face-on (<span class="math inline">\(i=90^\circ\)</span>). Most of the time inclination are not available giving only a false mass (<span class="math inline">\(M_p\sin i\)</span>)</li>
+</ul>
+<h2 id="wobble-astrometry">Wobble Astrometry</h2>
+<p>While astrometry is a valid method, so far not a single exoplanet has been found using this method. Astrometry of planet detection looks at the wobble of the host star. We know that the star would wobble at an amount of,</p>
+<p><span class="math display">\[\Delta \theta \le \frac{M_p}{M_\star}\frac{a}{d}\]</span> <span class="math inline">\(a\)</span> - semi-major axis between planet and host star<br />
+<span class="math inline">\(d\)</span> - distance away from the Solar System<br />
+<span class="math inline">\(\Delta \theta\)</span> - Radians if <span class="math inline">\(a/d\)</span> are unitless and arcsecs if <span class="math inline">\(a/d\)</span> are in <span class="math inline">\(\rm{pc/AU}\)</span></p>
+<p>Note that astrometry is even more accurate than radial velocity because it does not need to worry about inclination therefore the mass measure is the true mass. Once again astrometry fails to discover any so far waiting to be changed in 2020 -- the launch of GAIA space telescope ### Wobble Accuracy - Rayleigh Criterion <strong>Not the same as the parallax limit</strong></p>
+<p>The Rayleigh criterion sets the limit for how accurate can we measure wobbles (i.e., angles). The angle <span class="math inline">\(\Delta \theta\)</span> one detects must be greater than or equal to,</p>
+<p><span class="math display">\[
+\begin{aligned}
+    \Delta\theta &amp;\ge \Delta\theta_c\\
+    \sin(\Delta \theta_c) &amp;= 1.22\frac{\Delta x}{d}\\
+    \Delta\theta_c &amp;= 1.22\frac{\Delta x}{d}, \quad \theta_c \ll 1 \text{ rad}
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(\Delta x\)</span> - the spacial length of the wobble. This is the same amount as <span class="math inline">\(\Delta x = \frac{M_p}{M_\star}a\)</span> ,<br />
+<span class="math inline">\(d\)</span> - distance away from the Solar System</p>
+<h2 id="transit-photometry">Transit Photometry</h2>
+<div style="text-align:center;height:400px">
+<img src="Transit-spectroscopy.png">
+</div>
+<p>As a planet transits the host star, a dip in the host star's flux is apparent that looks like a square well. Transits give information about the planet's radius and orbital period. Spectroscopic observations can determine the composition of the planet's atmosphere as well as its albedo indicating existence of cloud.</p>
+<h3 id="inclination-requirements">Inclination Requirements</h3>
+<p>The transit method works well if the inclination is quite edge on to line of sight such that</p>
+<p><span class="math display">\[\cos i &lt; \frac{R_\star + R_p}{r_\text{min}}\]</span></p>
+<p><span class="math inline">\(r_\text{min}\)</span> - distance between the host star and planet when the planet is closest to observer.</p>
+<p>The inclination can be measured from the asymmetry of the <a href="#rossiter-mclaughlin-effect">Rossiter-McLaughlin Effect</a> ### Radius from Transit</p>
+<ul>
+<li>Radius (<span class="math inline">\(R\)</span>) - obtained by the dip in the light curve governed by a ratio:</li>
+</ul>
+<p><span class="math display">\[\frac{\Delta L}{L} = \left(\frac{R_p}{R_\star}\right)^2\]</span></p>
+<p>While not perfect considering any variation of the host star luminosity (e.g., sunspots and limb darkening by the planet)</p>
+<h3 id="orbital-period-from-transit">Orbital Period from Transit</h3>
+<p>May be obtained either by Kepler's equation knowing the mass of the planet and star (via radial velocity measurements) or waiting long enough for the light curve to reach half-period.</p>
+<p>### Limb Darkening One would expect near the edges as the planet crosses the sun. If the planet has an atmosphere, the flux would not be perfectly boxy but curvy. This curvy nature is stronger at shorter wavelength due a greater flux from the Planck function (<span class="math inline">\(\nu \propto E_\gamma \propto F\)</span>).</p>
+<h3 id="occultation---secondary-eclipse">Occultation - Secondary Eclipse</h3>
+<p><strong>Occultation</strong> or <strong>secondary eclipse</strong> occurs when the planet transits behind the star.</p>
+<ul>
+<li>The secondary eclipse are always square-like and does not have limb darkening since no radiation is penetrating the planet's atmosphere.</li>
+<li>The planet's flux can be measured from the <span class="math inline">\(\Delta F\)</span>. If the spectra is measured we can see which wavelength does the planet emit more indicating it composition.</li>
+<li><span class="math inline">\(\Delta F\)</span> during the secondary eclipse is much less apparent than the primary eclipse since the planet is not as bright as the star</li>
+</ul>
+### Rossiter-McLaughlin Effect
+<div style="text-align:center;height:150px">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Rossiter-McLaughlin_effect.svg/726px-Rossiter-McLaughlin_effect.svg.png">
+</div>
+<p>As the star rotates, the star would emit gas towards the observer (blue-shifted) on side and away from the observer (red-shifted) on the other side. If the planet would to obscure emission, it would seem like the star only emits one side of its gas (either blue-shifted or red-shifted). It's easier to understand if you look at the image above.</p>
+<p>## Gravitational Microlensing While very rare, microlensing is a valid way to see planets that are way too far or too small for the other methods to detect. This section will not cover the mechanics but just planet finding. See <a href="Gravitational_Lensing.md">Gravitational Lensing</a> for more information.</p>
+<p># Exoplanet Statistics ## Star Metallicities Because terrestrial planets are made up of majority heavy elements. It makes sense that the greater metalicity a star has, the higher chance the star is to produce a terrestrial planet.</p>
+<p>The star's metallicities does not affect planets with the size greater than or equal to Neptune.</p>

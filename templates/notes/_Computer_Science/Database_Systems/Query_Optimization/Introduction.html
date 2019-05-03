@@ -1,0 +1,22 @@
+<h2 id="query-parser">Query Parser</h2>
+<p>The query first gets parsed:</p>
+<ul>
+<li>Check for correctness and authorization</li>
+<li>Generate a parse tree</li>
+</ul>
+<h2 id="query-rewriter">Query Rewriter</h2>
+<p>Rewrites query to its canonical form,</p>
+<ul>
+<li>Flatten views</li>
+<li>Subqueries into blocks</li>
+<li>The weak spot of many DBMS</li>
+</ul>
+<h2 id="query-optimizer">Query Optimizer</h2>
+<p>Creates the plan and estimates the cost.</p>
+<ul>
+<li>Per query block, the optimizer will use the least cost plan.</li>
+<li>Query block can be converted to relational algebra.</li>
+<li>Relational algebra to tree.</li>
+<li>Each operator has a choice of implementation.</li>
+<li>Operators can be applied in different orders.</li>
+</ul>

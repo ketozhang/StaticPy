@@ -1,0 +1,30 @@
+<p><a href="https://jekyllrb.com/docs/installation/">Official Instructions</a></p>
+<h2 id="prerequisite">Prerequisite</h2>
+<ul>
+<li><p>Ruby (&gt;= 2.2.5)</p>
+<pre><code>$ sudo apt install ruby ruby-dev
+$ sudo apt install build-essential # likely you&#39;ve installed this before</code></pre></li>
+<li><p>Set Gem to user not root (recommended)</p>
+<pre><code>$ echo &#39;# Install Ruby Gems to ~/gems&#39; &gt;&gt; ~/.bashrc
+$ echo &#39;export GEM_HOME=$HOME/gems&#39; &gt;&gt; ~/.bashrc
+$ echo &#39;export PATH=$HOME/gems/bin:$PATH&#39; &gt;&gt; ~/.bashrc
+$ source ~/.bashrc</code></pre></li>
+<li><p>Bundler (recommended)</p>
+<pre><code>$ gem install bundler</code></pre></li>
+</ul>
+<h2 id="installation">Installation</h2>
+<ol style="list-style-type: decimal">
+<li><p>Jekyll</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="fu">sudo</span> gem install jekyll
+$ <span class="ex">bundle</span> update jekyll</code></pre></div></li>
+<li><p>Jekyll Gems</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="ex">gem</span> install jekyll bundler</code></pre></div></li>
+</ol>
+<h2 id="errors">Errors</h2>
+<ul>
+<li>Nokogiri</li>
+</ul>
+<p>I've haven't been able to install Jekyll without a problem with Nokogiri. Most of the time it's fixed with installed the library <code>zlib</code>. Likely you may have seen the following error:</p>
+<pre><code>Error: zlib is missing; necessary for building libxml2</code></pre>
+<p>The simple fix is to install the <code>zlib</code> package (actually the dev one):</p>
+<pre><code>$ apt install zlib1g-dev</code></pre>

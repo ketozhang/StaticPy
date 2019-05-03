@@ -1,0 +1,86 @@
+<p>A single I/O in the operator model includes:</p>
+<ul>
+<li>Accessing the page or record (whichever highest)</li>
+</ul>
+<p>Exclude:</p>
+<ul>
+<li>Predicate comparison</li>
+</ul>
+<h2 id="syntax">Syntax</h2>
+<ul>
+<li><span class="math inline">\([L]\)</span>: Number of pages to store <span class="math inline">\(R\)</span></li>
+<li><span class="math inline">\(p_R\)</span>: Number of records per page of <span class="math inline">\(R\)</span></li>
+<li><p><span class="math inline">\(|R|\)</span>: The number of records in <span class="math inline">\(R\)</span></p>
+<p><span class="math inline">\(|R| = p_R [L]\)</span></p></li>
+</ul>
+<h2 id="theta-join">Theta Join</h2>
+<ul>
+<li><p><strong>Simple Nested Loops Join</strong></p>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="cf">for</span> r <span class="kw">in</span> R.records:
+    <span class="cf">for</span> s <span class="kw">in</span> S.records:
+        <span class="op">&lt;</span>pred<span class="op">&gt;</span></code></pre></div>
+<p>Consider joining two table with records labeled <span class="math inline">\(R\)</span> and <span class="math inline">\(S\)</span> respectively with an on clause. The cost is,</p>
+<p><span class="math display">\[ [L] + |R|[R] \]</span></p></li>
+<li><p><strong>Order of Join</strong></p>
+<p>Take note of the order you join. It may be cheaper doing <span class="math inline">\(S\)</span> join <span class="math inline">\(R\)</span> than <span class="math inline">\(R\)</span> join <span class="math inline">\(S\)</span>.</p></li>
+<li><p><strong>Page Nested Loop Join</strong></p>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="cf">for</span> r <span class="kw">in</span> R.pages:
+    <span class="cf">for</span> s <span class="kw">in</span> S.pages:
+        <span class="cf">for</span> records_r <span class="kw">in</span> r:
+            <span class="cf">for</span> records_s <span class="kw">in</span> s:
+                <span class="op">&lt;</span>pred<span class="op">&gt;</span>
+        <span class="op">&lt;</span>pred<span class="op">&gt;</span></code></pre></div>
+<p>Instead of scanning each record of <span class="math inline">\(R\)</span> to a page of <span class="math inline">\(S\)</span> we yse page of <span class="math inline">\(R\)</span></p>
+<p><span class="math display">\[ [L] + [L][R] \]</span></p></li>
+<li><p><strong>Chunk Nested Loop Join</strong></p>
+<p>We will chunk the records into <span class="math inline">\(B-2\)</span> pages.</p>
+<p><span class="math display">\[ [L] + \left\lceil{\frac{[L]}{B-2}}\right\rceil \cdot [R] \]</span></p></li>
+<li><p><strong>Index Nested Loop Join</strong></p>
+<ul>
+<li>Unclustered <span class="math display">\[ [L] + |R| * (\texttt{Search} + \texttt{HeapAccess}) \]</span></li>
+<li>Clustered <span class="math display">\[ [L] + |R| * \texttt{Search} + \texttt{HeapAccess} \cdot \texttt{distinct_vals(R)} \]</span></li>
+</ul></li>
+</ul>
+<h2 id="sort-merge-join">Sort-Merge Join</h2>
+<p>A sort-merge join is a join using lexographical ranges which has an equality join with less cost than purely doing a cartesian join.</p>
+<div class="sourceCode"><pre class="sourceCode py"><code class="sourceCode python"><span class="cf">if</span> (<span class="kw">not</span> mark):
+    <span class="cf">while</span> (r<span class="op">&lt;</span>s): r<span class="op">++</span>
+    <span class="cf">while</span> (r<span class="op">&gt;</span>s): s<span class="op">++</span>
+    mark <span class="op">=</span> s
+<span class="cf">if</span> (r<span class="op">==</span>s):
+    result <span class="op">=</span> (r,s)
+    s<span class="op">++</span>
+    <span class="cf">return</span> result
+<span class="cf">else</span>:
+    s <span class="op">=</span> mark
+    r<span class="op">++</span>
+    mark <span class="op">=</span> NULL</code></pre></div>
+<p>The cost using <span class="math inline">\(B = \sqrt{\max{[L],[R]}}\)</span> is,</p>
+<p><span class="math display">\[\texttt{Sort}(R) + \texttt{Sort}(S) + ([L] +[R])\]</span></p>
+<h3 id="improvement">Improvement</h3>
+<p>We can increase the buffer to <span class="math inline">\(B = \sqrt{[L]} + \sqrt{[R]}\)</span> and first sort both <span class="math inline">\(R\)</span> and <span class="math inline">\(S\)</span> simultaneously then at the last pass merge while finding pairs. The cost for this is,</p>
+<p><span class="math display">\[ (\#\text{passes} - 1)([L] + [R]) \]</span></p>
+<h2 id="hash-join">Hash Join</h2>
+<p>We wish to join two tables <span class="math inline">\(R\)</span> and <span class="math inline">\(S\)</span> by comparing their hash.</p>
+<h3 id="naive-hash-join">Naive Hash Join</h3>
+<p>Assuming <span class="math inline">\(B &lt; [L]\)</span>, we can create a big enough buffer to compare the hashes between <span class="math inline">\(R\)</span> and <span class="math inline">\(S\)</span> by creating a hash table of size <span class="math inline">\(B-2\)</span> (the remaining 2 is taken up by storing <span class="math inline">\(R\)</span> and <span class="math inline">\(S\)</span>).</p>
+<ul>
+<li><p><strong>Cost</strong></p>
+<p><span class="math display">\[[L] + [R]\]</span></p></li>
+<li><p><strong>Buffer Management</strong> <span class="math display">\[B\]</span></p></li>
+</ul>
+<h3 id="grace-hash-join">Grace Hash Join</h3>
+<p>Using external hashing, for every pass we can take the partition and do <strong>Build &amp; Probe</strong> which is a pass that uses naive hash join on the partition</p>
+<p>For each partiton:</p>
+<ol style="list-style-type: decimal">
+<li>Load pages of <span class="math inline">\(R\)</span> into the input buffer</li>
+<li>Store input buffer to hash table</li>
+<li>Repeat steps 1-2 until no more <span class="math inline">\(R\)</span> pages</li>
+<li>Store pages of <span class="math inline">\(S\)</span> into the input buffer</li>
+<li>Search the hash table for match. Write matches to output</li>
+<li>Continue until no more <span class="math inline">\(S\)</span>. Remember to flush out the output if full.</li>
+</ol>
+<ul>
+<li><strong>Cost</strong>: <span class="math display">\[ 3([L] + [R])\]</span></li>
+<li><strong>Buffer (2-Pass)</strong> <span class="math display">\[ [L] = (B-1)(B-2) \]</span></li>
+</ul>

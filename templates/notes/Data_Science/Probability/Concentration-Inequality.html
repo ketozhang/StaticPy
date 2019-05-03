@@ -1,0 +1,24 @@
+<p>Bound on random variable deviates from some value.</p>
+<p><span class="math display">\[
+P(\abs{Y} \ge c) \le \frac{\mathbb E[\abs{Y}^k]}{c^k}
+\]</span></p>
+<h2 id="chebyshevs-inequality">Chebyshev's Inequality</h2>
+<p>Suppose <span class="math inline">\(X\)</span> has a finite mean then its deviation from the mean follows,</p>
+<p><span class="math display">\[
+P(\abs{X-\mathbb E[X]} \ge c) \le \frac{\text{Var}[X]}{c^2}
+\]</span></p>
+<ul>
+<li>This inequality follows from Markov's inequality</li>
+</ul>
+<p>In terms of the number of standard deviations (<span class="math inline">\(\sigma\)</span>),</p>
+<p><span class="math display">\[
+P(X - \mathbb E[X] \ge n\sigma) = \frac{1}{n^2}
+\]</span></p>
+<h2 id="law-of-large-numbers">Law of Large Numbers</h2>
+<p>For a sequence of iid random variables <span class="math inline">\(X_1,\ldots,X_n\)</span> let the <strong>sample mean</strong> be defined as,</p>
+<p><span class="math display">\[ \bar{X} = \frac{1}{n}\sum{X_i} \]</span></p>
+<p>As <span class="math inline">\(n \rightarrow \infty\)</span>, the probability that the sample mean deviates from the population mean <span class="math inline">\(\mu\)</span> absolutely by some positive error <span class="math inline">\(\epsilon\)</span> tends to,</p>
+<p><span class="math display">\[ P\left[\abs{\bar{X}- \mu} &lt; \epsilon \right] \rightarrow 1 \]</span></p>
+<h2 id="tail-sum-formula">Tail Sum Formula</h2>
+<p>Let <span class="math inline">\(X\)</span> be with range of <span class="math inline">\(\mathbb N\)</span> then,</p>
+<p><span class="math display">\[ \mathbb E[X] = \sum_{a=1}^{\infty} P(X \ge a) \]</span></p>

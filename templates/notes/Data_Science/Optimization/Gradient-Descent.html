@@ -1,0 +1,33 @@
+<p>Gradient descent is a iteratative optimizer that attempts to minimize the problem with only the information of the gradient. Here we will use it to minimize some loss function over the parameter space given by <span class="math inline">\(\theta\)</span>. Recall that this gradient for this is,</p>
+<p><span class="math display">\[
+\nabla \mathcal{L}(\theta) =  \left(\frac{\partial \mathcal{L}}{\partial \theta_1}, \frac{\partial \mathcal{L}}{\partial \theta_2}, \ldots \frac{\partial \mathcal{L}}{\partial \theta_n} \right)
+\]</span></p>
+<p>In numerical analysis, the <strong>gradient descent</strong> method is:</p>
+<ol style="list-style-type: decimal">
+<li>Take the gradient at some point along your curve <span class="math inline">\(\mathcal{L}(\theta)\)</span>. This point is denoted as <span class="math inline">\(\theta^{(0)}\)</span></li>
+<li>The new point is taken to be the current point <span class="math inline">\(\theta^{(0)}\)</span> minus a constant factor of <span class="math inline">\(\nabla \mathcal{L}(\theta^{(t)})\)</span></li>
+</ol>
+<p><span class="math display">\[\boxed{ \theta^{(t+1)} = \theta^{(t)} - \alpha\nabla \mathcal{L}(\theta^{(t)}) }\]</span></p>
+<p>Another way of writing this is by the order of approximation notation. We say that the <span class="math inline">\(n\)</span>-th order approximation for the vector <span class="math inline">\(x\)</span> that minimizes <span class="math inline">\(\mathcal L(x)\)</span> is <span class="math inline">\(x^{(n)}\)</span> where,</p>
+<p><span class="math display">\[\boxed{ x^{(n)} =  x^{(0)} - \alpha_1 \nabla \mathcal L(x^{(0)}) - \alpha_2 \nabla \mathcal L(x^{(1)}) - \ldots - \alpha_n\nabla \mathcal L(x^{(n-1)})}\]</span></p>
+<ul>
+<li><span class="math inline">\(x^{0}\)</span> : Initial guess minimum</li>
+<li><span class="math inline">\(\alpha_1 \ldots \alpha_n\)</span> : A constant positive optimization parameter that you choose to say how sensitive should the next order approximation be. Often times <span class="math inline">\(\alpha_1 = \ldots \alpha_n\)</span> and this works well numerically sufficiently small value.</li>
+</ul>
+<hr />
+<ul>
+<li>Computation time: <span class="math display">\[\mathcal O(nd)\]</span>
+<ul>
+<li><span class="math inline">\(n\)</span> : Number of training points</li>
+<li><span class="math inline">\(d\)</span> : Dimensions of training points</li>
+</ul></li>
+</ul>
+<h2 id="stocastic-gradient-descent-sgd">Stocastic Gradient Descent (SGD)</h2>
+<p>The <strong>stocastic gradient descent (SGD)</strong> is a class of methods of using only a smaller sample of the training points chosen by a random process.</p>
+<ul>
+<li><p>Computation cost:</p>
+<p><span class="math display">\[ \mathcal O(n&#39;d) \]</span></p>
+<ul>
+<li><span class="math inline">\(n&#39;\)</span> : Number of sample points. This number is often an order or more magnitudes less than <span class="math inline">\(n\)</span>.</li>
+</ul></li>
+</ul>

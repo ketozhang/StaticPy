@@ -1,0 +1,31 @@
+<h2 id="table-creation">Table Creation</h2>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">CREATE</span> <span class="kw">TABLE</span> &lt;table_name&gt; (
+    &lt;column_name&gt; &lt;type&gt;,
+    ...
+    <span class="kw">PRIMARY</span> <span class="kw">KEY</span> (&lt;columns&gt;)
+    <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (&lt;column&gt;) <span class="kw">REFERENCES</span> &lt;table&gt;
+);</code></pre></div>
+<h2 id="update-delete">Update, Delete</h2>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql">&lt;UPDATE|DELETE FROM&gt; &lt;table&gt;
+<span class="kw">SET</span> &lt;column&gt; = &lt;value&gt;
+<span class="kw">WHERE</span> &lt;pred&gt;;</code></pre></div>
+<h2 id="retrieval-queries">Retrieval Queries</h2>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> [<span class="kw">DISTINCT</span>] &lt;column expr&gt;
+<span class="kw">FROM</span> &lt;table&gt;
+[<span class="kw">WHERE</span> &lt;pred&gt;]
+[<span class="kw">GROUP</span> <span class="kw">BY</span> &lt;columns&gt;]
+[<span class="kw">HAVING</span> &lt;pred&gt;]
+[<span class="kw">ORDER</span> <span class="kw">BY</span> &lt;column expr&gt; [DESC|ASC]]
+[<span class="kw">LIMIT</span> &lt;int&gt;];</code></pre></div>
+<h2 id="order-of-operation">Order of Operation</h2>
+<ol style="list-style-type: decimal">
+<li><code>FROM</code></li>
+<li><code>WHERE</code></li>
+<li><code>SELECT</code></li>
+<li><code>GROUP BY</code></li>
+<li><code>HAVING</code></li>
+<li><code>DISTINCT</code></li>
+<li><code>ORDER BY</code></li>
+<li><code>LIMIT</code></li>
+</ol>
+<h2 id="column-expression">Column Expression</h2>

@@ -1,0 +1,23 @@
+<dl>
+<dt>Bias</dt>
+<dd>Error due in the hypothesis or model to fit the data.
+</dd>
+<dt>Varaince</dt>
+<dd>Error due to fitting random noise in the data.
+</dd>
+</dl>
+<h2 id="bias-variance-decomposition">Bias Variance Decomposition</h2>
+<p><span class="math display">\[
+y = y^* + \epsilon
+\]</span></p>
+<p><span class="math display">\[
+\begin{align*}
+    E\big[ L(y, \hat y) \big] &amp;= E\big[ (y - \hat y)^2 \big]\\
+    &amp;= \left(E\big[ \hat y \big]  - y^*\right)^2 + \text{Var}\big[ \hat y  \big] + \text{Var}\big[ y \big]
+\end{align*}
+\]</span></p>
+<ul>
+<li>Bias</li>
+<li>Variance</li>
+<li>Irreducible Error</li>
+</ul>

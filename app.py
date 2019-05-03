@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
+import logging
 import os
 import sys
-import logging
+import time
+from datetime import datetime
 import frontmatter
 import pypandoc as pandoc
 from collections import OrderedDict
@@ -22,6 +24,8 @@ log = app.logger
 ########################
 # HELPER FUNCTIONS
 ########################
+
+
 def get_fpath(file_or_path):
     if isinstance(file_or_path, str):
         fpath = Path(file_or_path).resolve()
@@ -84,11 +88,13 @@ def build(context):
 
 
 def build_all():
+    start = time.time()
     for context in base_config['contexts'].values():
         build(context)
+    return time.time() - start
 
 
-def get_all_notes():
+def get_all_context_pages():
     """Retrieve notes path relative to specified argument."""
     notes = TEMPLATES_PATH.glob('*/**/*.html')
     notes = [str(note.relative_to(TEMPLATES_PATH).as_posix())
@@ -101,14 +107,14 @@ def get_frontmatter(file_or_path):
     Arguments
     ---------
     file_or_path : str or pathlib.Path
-        The path to the markdown file with frontmatter. 
+        The path to the markdown file with frontmatter.
         Because frontmatter is loaded on request, the argument should be relative to project path.
         If URL is given, the path is assumed relative to project path with ".md" extension.
 
     Returns
     -------
     frontmatter: dict
-        If `file_or_path` doesn't exist then return None. 
+        If `file_or_path` doesn't exist then return None.
         Otherwise, parse the frontmatter at `file_or_path` and return YAML data to dict.
     """
     if isinstance(file_or_path, str):
@@ -116,16 +122,30 @@ def get_frontmatter(file_or_path):
     else:
         fpath = file_or_path
 
+    # Parse path
     if fpath.suffix == '':
         fpath = fpath.with_suffix('.md')
     if not fpath.is_absolute():
         fpath = PROJECT_PATH / fpath
 
-    return frontmatter.load(fpath).metadata if fpath.exists() else None
+    # Check exist
+    if not fpath.exists():
+        return None
+
+    fm = frontmatter.load(fpath).metadata
+
+    # Add date to frontmatter if not specified
+    if not ('date' in fm):
+        last_updated = datetime.fromtimestamp(os.path.getctime(fpath))
+        fm['date'] = last_updated.strftime('%Y-%m-%d %I:%M:%S %p %Z')
+
+    return fm
 
 ########################
 # META
 ########################
+
+
 @app.context_processor
 def global_var():
     # TODO SITE_URL best handled by a base_config parser
@@ -136,7 +156,9 @@ def global_var():
     var = dict(
         site_url=site_url,
         site_brand=base_config['site_brand'],
-        links=base_config['links']
+        site_title=base_config['site_title'],
+        debug=app.debug,
+        social_links=base_config['social_links'],
     )
     return var
 
@@ -154,7 +176,7 @@ def favicon():
 def home():
     """Renders the home page."""
     config = get_config('home')
-    notes = get_all_notes()
+    notes = get_all_context_pages()
 
     posts = config['posts']
     posts_dict = {}
@@ -174,9 +196,15 @@ def home():
 
 
 @app.route('/<file>')
-def get_file_page(file):
-    """Renders root level file located in `TEMPLATES_PATH`/<file>.html ."""
-    return render_template(f'{file}.html')
+def get_root_page(file):
+    """
+    Renders root level pages located in `TEMPLATES_PATH`/<file>.html .
+    This is often useful for the pages "about" and "contacts".
+    """
+    fpath = Path(file) if isinstance(file, str) else file
+    if fpath.suffix == "":
+        fpath = fpath.with_suffix(".html")
+    return render_template(str(file))
 
 
 @app.route('/notes/')
@@ -209,11 +237,10 @@ def posts_home_page():
     modified_times = []
     for post in posts:
         post_md_path = (PROJECT_PATH / post).with_suffix('.md')
-        last_updated = os.path.getctime(post_md_path)
+        last_updated = datetime.fromtimestamp(os.path.getctime(post_md_path))
         modified_times.append(last_updated)
         fm = get_frontmatter(post_md_path)
         posts_dict[post] = fm
-        posts_dict[post]['last_updated'] = last_updated
     sort_idx = sorted(range(len(modified_times)),
                       key=modified_times.__getitem__)[::-1]
     posts_dict = OrderedDict((list(posts_dict.items())[i]) for i in sort_idx)
@@ -276,11 +303,12 @@ def get_page(context, page='index.html'):
 
 if __name__ == '__main__':
     args = sys.argv[1:]
-    logging.basicConfig(level=logging.DEBUG)
     if len(args) == 0:
+        logging.basicConfig(level=logging.DEBUG)
         SITE_URL = ''
         app.run(debug=True, port=8080)
     elif 'build' in args:
-        build_all()
+        elapsed_time = build_all()
+        print(f"Building templates finished in {elapsed_time:.2f}secs")
     else:
         raise ValueError("Invalid command. Use `python app.py ['build']`")

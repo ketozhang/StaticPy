@@ -1,0 +1,126 @@
+<h1 id="lecture-notes-17">Lecture Notes 17</h1>
+<p>Before we begin, some terms:</p>
+<dl>
+<dt>Sample</dt>
+<dd>The data we have
+</dd>
+<dt>Population</dt>
+<dd>The general group we study
+</dd>
+</dl>
+<h2 id="probability">Probability</h2>
+<p>We'll purely be working with discrete data, please take all math here to be discrete so there was be no integrals just summations.</p>
+<dl>
+<dt>Probability <span class="math inline">\(P\)</span></dt>
+<dd>The chance that an event occurs
+</dd>
+<dt>Random Variable <span class="math inline">\(X\)</span></dt>
+<dd>A variable whose value is determined by a chance event.
+</dd>
+</dl>
+<h2 id="expected-value">Expected Value</h2>
+<p>The expected value or expectation value of <span class="math inline">\(X\)</span> is the mean of <span class="math inline">\(X\)</span>. For the discrete case, the epected value is given by,</p>
+<p><span class="math display">\[\boxed{ \Expected{X} = \sum_{x}{x P(x)}}\]</span></p>
+<p>The expected value has the following properties:</p>
+<ul>
+<li>Expected value of a constant is constant:</li>
+</ul>
+<p><span class="math display">\[\Expected{c} = c\]</span></p>
+<ul>
+<li>The previous property is all you need to understand the following linearity property. For the following take lower case letter to be contant and upper case letter to be random variables.</li>
+</ul>
+<p><span class="math display">\[ \Expected{aX+Y+b} = a\Expected{X} + \Expected{Y} + b \]</span></p>
+<h2 id="joint-probability">Joint Probability</h2>
+<p>An important property of probability is the <strong>joint probability</strong>.</p>
+<h3 id="independent-joint-probability">Independent Joint Probability</h3>
+<p>For instance, in a sampling with replacement what is the probability that the first sample <span class="math inline">\(X_1 = x_1\)</span> and <span class="math inline">\(X_2 = x_1\)</span> where <span class="math inline">\(x_1\)</span> is some arbitrary event with probability <span class="math inline">\(P(x_1)\)</span> of being sampled. The answer is becuse the sample is replaced, the two samples are independent. Therefore the joint independent probability is given by,</p>
+<p><span class="math display">\[ P(X_1 = x_1, X_2 = x_2) = P(x_1)P(x_2) \]</span></p>
+<p>In general,</p>
+<p><span class="math display">\[\boxed{ P(X) = \prod_{x_i\in X}{P(x_i)} }\]</span></p>
+<ul>
+<li><span class="math inline">\(X\)</span> : A list of samples <span class="math inline">\(X = \{X_1, X_2,...\}\)</span> each <span class="math inline">\(X_i\)</span> can take the values <span class="math inline">\(\{x_1,x_2,...\}\)</span></li>
+</ul>
+<h3 id="expectation-value">Expectation Value</h3>
+<p>The expectation value of a joint probability follows linearity such that,</p>
+<p><span class="math display">\[ \Expected{aX+bY+c} = \sum_{x \in X}{\sum_{y \in Y}}{P(x,y)(ax+by+c)} \]</span></p>
+<h3 id="conditional-probability">Conditional Probability</h3>
+<p>The join property has an identity called the conditional probability which is the probability of an event given that the previous.</p>
+<p>It is easy to show this if we only do two samples. For two samples <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> respectively correspond to the index <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> so the probability is <span class="math inline">\(P(x,y)\)</span> which is also be represented as a <strong>conditional probability</strong>,</p>
+<p><span class="math display">\[\boxed{ P(x,y) = P(x \mid y)P(y)\\
+P(x,y) = P(y \mid x)P(x) }\]</span></p>
+<ul>
+<li>As you may have notice it doesn't matter if you swap the <span class="math inline">\(x\)</span> or <span class="math inline">\(y\)</span> for conditional probability.</li>
+<li><span class="math inline">\(P(x\mid y)\)</span> is phrased as &quot;the probability of x given y&quot;.</li>
+</ul>
+<h3 id="variance">Variance</h3>
+<p>The variance is defined as the average of the data's squared deviation from the mean, here deviation means <span class="math inline">\(\Delta X = X - \Expected{X}\)</span></p>
+<p><span class="math display">\[ 
+\Var{X} \equiv \Expected{(\Delta X)^2}\\
+\boxed{\Var{X} \equiv \Expected{(X - \Expected{X}^2)^2}}
+\]</span></p>
+<p>However a more useful identity is the squared term identity,</p>
+<p><span class="math display">\[ 
+\boxed{\Var{X} = \Expected{X^2} - \Expected{X}^2}
+\]</span></p>
+<p>Here are some more properties:</p>
+<ul>
+<li>Variance of a constant is zero <span class="math display">\[\Var{a} = 0\]</span></li>
+<li><p>Variance of a constant factor squares the constant factor <span class="math display">\[\Var{aX} = a^2\Var{X}\]</span></p></li>
+<li><p>Linearity if Independent <span class="math display">\[ \Var{X+Y} = \Var{X} + \Var{Y} \]</span></p></li>
+</ul>
+<p>Another useful quantity that is used a lot more than the variance is called the <strong>standard deviation</strong>, which is just the square root of variance:</p>
+<p><span class="math display">\[ \mathbf{SD}[X] = \sqrt{\Var{X}} \]</span></p>
+<h3 id="covariance">Covariance</h3>
+<p>The covariance describe how two variables vary jointly,</p>
+<p><span class="math display">\[
+ \Cov{X,Y} = \Expected{\Delta X \Delta Y} \\
+\boxed{\Cov{X,Y} \equiv \Expected{(X-\Expected{X})(Y-\Expected{Y})} }
+\]</span></p>
+<p>A useful identity is, <span class="math display">\[
+\Cov{X,y} = \Expected{XY} - \Expected{X}\Expected{Y}
+\]</span></p>
+<p>Some properties:</p>
+<ul>
+<li>By definition covariance of two independent sample is zero</li>
+</ul>
+<p><span class="math display">\[ \Cov{X,Y} = 0 \tag{X independent of Y} \]</span></p>
+<ul>
+<li><p>Covariance of constants are zero</p>
+<p><span class="math display">\[ \Cov{a, b} = 0 \]</span></p></li>
+<li><p>Covariance of a constant factorc can be factored out,</p>
+<p><span class="math display">\[ \Cov{aX,bY} = ab\Cov{X,Y} \]</span></p></li>
+</ul>
+<p>Like variance, there is another version of covariance that is used more called <strong>correlation</strong>,</p>
+<p><span class="math display">\[\boxed{ \Corr{X,Y} = \frac{\Cov{X,Y}}{\SD{X}\SD{Y}} }\]</span></p>
+<h2 id="two-value-example">Two Value Example</h2>
+<p>Let's do an example of a system of two values with probability <span class="math inline">\(p\)</span> and <span class="math inline">\(1-p\)</span>,</p>
+<p><span class="math display">\[ \Expected{X} = p \\
+\Var{X} = p(1-p)
+\]</span></p>
+<h2 id="statistics-with-multiple-samples">Statistics with Multiple Samples</h2>
+<p>This part will be a bit confusing, consider that we take multiple samples labeled <span class="math inline">\(X_i\)</span> indexed with <span class="math inline">\(i\)</span>'s. A useful quantity to get from these samples is the average value (<strong>not expected value</strong>) which is also called the <strong>sample mean</strong>,</p>
+<p><span class="math display">\[ 
+\boxed{\bar{X} \equiv \frac{1}{n}\sum_{i=1}^{n}{X_i}}
+\]</span></p>
+<p>For the unbiased and independent samples, we may get statistic quantities from the sample mean,</p>
+<p><span class="math display">\[ 
+\Expected{\bar X} = \mu\\
+\Var{\bar X} = \frac{\sigma^2}{n}\\
+\SD{\bar X} = \frac{\sigma^2}{\sqrt{n}}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\mu\)</span> : Population mean or the mean of all samples</li>
+<li><span class="math inline">\(\sigma\)</span> : Standard deviation of all samples</li>
+<li>$  $ : This is also known as the <strong>standard error</strong>, <span class="math inline">\(\SD{X} = \mathbf{SE}(X)\)</span></li>
+</ul>
+<h2 id="bootstrap-sampling">Bootstrap Sampling</h2>
+<p>A bootstrap sample is a method that samples the sample.</p>
+<h2 id="average-sample-loss">Average Sample Loss</h2>
+<p>We will now redefine our loss function to be even more general</p>
+<p><span class="math display">\[ \bar{L}(\theta) = \frac{1}{n}\sum_{i=1}^n{\ell(Y_i,f_\theta(X_i))}\]</span></p>
+<ul>
+<li><span class="math inline">\(\ell(Y_i,f(X_i))\)</span> : Loss function given some parametric model <span class="math inline">\(f\)</span></li>
+</ul>
+<h2 id="risk-and-expected-loss">Risk and Expected Loss</h2>
+<p>Risk is the expected value of the loss function,</p>
+<p><span class="math display">\[ R(\theta) =  \Expected{\ell(Y,f_\theta(X))}\]</span></p>

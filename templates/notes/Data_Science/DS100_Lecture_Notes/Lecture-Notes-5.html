@@ -1,0 +1,38 @@
+<h1 id="data-cleaning-and-eda">Data Cleaning and EDA</h1>
+<h2 id="exploratory-data-analysis">Exploratory Data Analysis</h2>
+<h3 id="key-data-properties-to-consider-in-eda">Key Data Properties to Consider in EDA</h3>
+<p>The first thing one does when they get data is to look at the key properties of the data:</p>
+<ul>
+<li>Structure: The shape of the data file
+<ul>
+<li>Rectangular structure</li>
+<li>Tabular data may be in the format: CSV (comma), TSV (tabbed), Excel, SQL</li>
+<li>Nested data are often formatted as JSON files or even XML</li>
+<li>How are data organized in records (how do you organize a data so there is a key-value relation)?</li>
+<li>What are the fields in each records (data types of say a column)</li>
+</ul></li>
+<li>Granularity: How fine/course is each datum</li>
+<li>Scope: How complete is the data</li>
+<li>Temporality: How is the data situated in time</li>
+<li>Faithfulness: How well does the data capture reality</li>
+</ul>
+<h3 id="fields-types">Fields Types</h3>
+<ul>
+<li>Quantitative Data: Meaningful data such as differences and ratios.</li>
+<li>Ordinal Data: Data where relative order matters
+<ul>
+<li>Cannot take differences between ordinal data</li>
+<li>Ex: Yelp Reviews</li>
+</ul></li>
+<li>Nominal Data: Data with no numerical meaning
+<ul>
+<li>Ex: Names, credit card numbers.</li>
+</ul></li>
+</ul>
+<h3 id="keys">Keys</h3>
+<ul>
+<li>Primary Key: A column that uniquely identifies the data on a particular row (e.g., student ID).</li>
+<li>Foreign Key: A column or sets of columns that reference primary keys in other tables.</li>
+</ul>
+<h2 id="granularity">Granularity</h2>
+<p>Granularity is how fine/course a data is. What this means is whether or not a data is a summarize version of what it can be (course) or is it very detailed to the most tediously recorded data.</p>

@@ -1,0 +1,31 @@
+<!-- TOC -->
+<ul>
+<li><a href="#angular-momentum">Angular Momentum</a></li>
+<li><a href="#kinetic-energy">Kinetic Energy</a></li>
+</ul>
+<!-- /TOC -->
+<p>We will observe the rotation of a system of rigid bodies on a fixed axis (<span class="math inline">\(\dot{\mathbf R} = 0\)</span>).</p>
+<h2 id="angular-momentum">Angular Momentum</h2>
+<p>The angular momentum of the system is only the spin angular momentum so let <span class="math inline">\(\mathbf L = \mathbf S\)</span></p>
+<p><span class="math display">\[ \mathbf L = \sum{\mathbf r_\alpha \times m_\alpha \mathbf v_\alpha} \]</span></p>
+<ul>
+<li><span class="math inline">\(\mathbf r_\alpha\)</span> : Position vector relative to the CM</li>
+<li><span class="math inline">\(\mathbf v_\alpha\)</span> : Velocity vector relative to the CM such that <span class="math inline">\(\mathbf v_\alpha \equiv \dot {\mathbf r_\alpha}\)</span></li>
+</ul>
+<p>Since the rigid bodies rotating it is best to use angular frequency in stead of velocity,</p>
+<p><span class="math display">\[ \mathbf v_\alpha = \boldsymbol{\omega}_\alpha \times \mathbf r_\alpha \\
+v_\alpha = \rho_\alpha \omega\\
+\rho_\alpha \equiv \sqrt{x_\alpha^2 + y_\alpha^2}\\
+\mathbf{L} = \sum{m_\alpha \mathbf r_\alpha \times \left(\boldsymbol{\omega}_\alpha \times \mathbf r_\alpha\right)} \\
+= \sum{m_\alpha \left[\boldsymbol{\mathbf \omega}_\alpha (\mathbf r_\alpha \cdot \mathbf r_\alpha) + \mathbf{r}_\alpha(\mathbf{r}_\alpha \cdot \boldsymbol \omega_\alpha)\right]}  \\
+\boxed{\mathbf{L} = \sum{m_\alpha \rho^2\boldsymbol{\mathbf \omega}_\alpha}  }\\
+\mathbf{L} = \sum{m_\alpha \left(-x_\alpha z_\alpha,  y_\alpha z_\alpha, x_\alpha^2 + y_\alpha^2 \right)}  \omega \\
+\boxed{\mathbf{L} = \sum{\left(-m_\alpha x_\alpha z_\alpha, m_\alpha y_\alpha z_\alpha,I_z\right)\omega}}\\
+\boxed{I_z = \sum{m_\alpha \rho_\alpha^2}}
+\]</span></p>
+<h2 id="kinetic-energy">Kinetic Energy</h2>
+<p>The kinetic energy is,comprised only of the rotational` kinetic energy so,</p>
+<p><span class="math display">\[
+T = \frac{1}{2}\sum{m_\alpha v_\alpha^2} = \frac{1}{2}\sum{m_\alpha^2\rho_\alpha^2 \omega^2}\\
+\boxed{T = \frac{1}{2}I_z\omega^2}
+\]</span></p>

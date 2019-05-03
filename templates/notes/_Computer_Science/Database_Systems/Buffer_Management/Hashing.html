@@ -1,0 +1,30 @@
+<h2 id="divide-and-conquer">Divide and Conquer</h2>
+<p>We assume <span class="math inline">\(N \le B\)</span></p>
+<p>First the divide step:</p>
+<ol style="list-style-type: decimal">
+<li>Read and store to an input buffer</li>
+<li>Apply hash function <span class="math inline">\(h_p\)</span></li>
+<li>Output to <span class="math inline">\(B-1\)</span> output buffers.</li>
+<li><span class="math inline">\(B-1\)</span> partition generated written to disk.</li>
+</ol>
+<p>Then conquer:</p>
+<ol style="list-style-type: decimal">
+<li>Read the hashed disk into buffer with another hashing function <span class="math inline">\(h_r\)</span></li>
+<li>Write to another disk.</li>
+</ol>
+<ul>
+<li><p><strong>Cost:</strong> <span class="math display">\[ 2N \cdot \# \text{passes} = 4N \]</span></p></li>
+<li><p><strong>Two-pass Memory Requirement:</strong> <span class="math display">\[ B = \sqrt{N} \]</span></p></li>
+</ul>
+<h2 id="recursive-partitioning.">Recursive Partitioning.</h2>
+<p>For partition that is <span class="math inline">\(&gt; B\)</span></p>
+<ol style="list-style-type: decimal">
+<li>Follow the same steps as divide</li>
+<li>Continue divide on the disk with a difference hash function <span class="math inline">\(h_p\)</span></li>
+<li>Once each partition is <span class="math inline">\(\le B-1\)</span> then we perform conquer with <span class="math inline">\(h_r\)</span></li>
+</ol>
+<ul>
+<li>If a partition is full of the same keys, then the division hash would be useless. We're required to identify these cases and stop dividing.</li>
+</ul>
+<h2 id="parallel-hashing">Parallel Hashing</h2>
+<p>For <span class="math inline">\(n\)</span> machines we can take the data of all its disk and partition them into <span class="math inline">\(n\)</span> buffers. Each data is hashed with <span class="math inline">\(h_n\)</span> and the value will decided which machine the data belongs to.</p>

@@ -1,0 +1,10 @@
+<h2 id="join-merge">Join (Merge)</h2>
+<p><a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.merge.html"><em>Documentation</em></a></p>
+<p>A <code>merge</code> is a join in Pandas.Two tables can be joined by appending records onto another.</p>
+<h3 id="inner-joins">Inner Joins</h3>
+<p>The inner join is similar to SQL intersection joins.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">df.merge(
+    how<span class="op">=</span><span class="st">&#39;inner&#39;</span>)</code></pre></div>
+<h3 id="left-joins">Left Joins</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">df.merge(
+    how<span class="op">=</span><span class="st">&#39;left&#39;</span>)</code></pre></div>

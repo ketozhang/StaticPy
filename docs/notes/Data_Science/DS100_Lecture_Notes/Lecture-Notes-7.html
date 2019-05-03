@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang='en'>
+<head>
+    <meta charset="UTF-8">
+    <title>PyStatic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- yep Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://ketozhang.github.io/notebook/static/base.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
+    <link rel="shortcut icon" href="https://ketozhang.github.io/notebook/static/favicon.ico">
+</head>
+<body>
+    
+<div class="container-fluid" id="note">
+    <div class="row">
+        <div class="col-3 d-none d-lg-block"></div>
+        <div class="col-sm-10 col-lg-7">
+            <h1 class="title">Lecture Notes7</h1>
+            <h1 id="lecture-notes-7---data-visualization">Lecture Notes 7 - Data Visualization</h1>
+<blockquote>
+<p><strong>Motivation:</strong> While looking at numerical data in a table may be useful, there are occasion where visualizing data can bring more information (even more accurate).</p>
+</blockquote>
+<h2 id="matplotlib">Matplotlib</h2>
+<p>Matplotlib (<code>matplotlib</code>) is a very popular Python package and is considered a essential tool for visualization.</p>
+<p>Specifically, the Pyplot of Matplotlib (<code>matplotlib.pyplot</code>) is used for plotting data points (not functions like in Mathematica).</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">%</span>matplotlib inline <span class="co"># only for Jupyter Notebook</span>
+<span class="op">%</span>matplotlib notebook <span class="co"># enable interactive plotting for Jupyter Notebook</span>
+<span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</code></pre></div>
+<p>Typical use of plotting (notice we do not use symbolic expression, everything must be numerical such that we require an array of points):</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Plotting sin(x)</span>
+x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span><span class="op">*</span>np.pi, <span class="dv">300</span>) <span class="co"># create 300 data points from 0 to 2*pi</span>
+y <span class="op">=</span> np.sin(x)
+
+<span class="co"># Create a plot</span>
+plt.plot(x, y, label<span class="op">=</span><span class="vs">r&#39;$\sin(x)$&#39;</span>)
+
+<span class="co"># Add some information to the plot</span>
+plt.xlabel(<span class="st">&#39;x&#39;</span>) <span class="co"># set x-axis label</span>
+plt.ylabel(<span class="st">&#39;y&#39;</span>) <span class="co"># set y-axis label</span>
+plt.title(<span class="st">&#39;Some Functions&#39;</span>) <span class="co"># set plot title</span>
+plt.grid() <span class="co"># turn on grids</span>
+plt.legend() <span class="co"># turn on legend otherwise label argument from plt.plot does not show</span>
+
+plot.show() <span class="co"># optional in Jupyter, required in Python to bring up a window for the plot.</span></code></pre></div>
+<h3 id="color-maps">Color Maps</h3>
+<p>A color map is one that is useful in drawing 3D data onto a 2D plane with color being the 3rd dimension. Think of some 3D distribution <span class="math inline">\(z(x,y)\)</span> where <span class="math inline">\(z\)</span> is the 3rd dimension.</p>
+<p><span class="math display">\[ \text{Color Value} = z(x,y) \]</span></p>
+<ul>
+<li>Do not use the full spectrum of RGB to convey a 2D array (3D plot)
+<ul>
+<li>Causes problems because the middle of the RGB spectrum is much brighter to humans than the edges (red and blue)</li>
+<li>Those who are color blind have a difficult time reading RGB colormaps.</li>
+<li>Viridis and many other colormaps were made to sovle this problem.</li>
+</ul></li>
+<li>Some color maps are best for certain data (<a href="https://matplotlib.org/cmocean/">see color maps for oceanography</a>; applicable to other fields of science as well)</li>
+</ul>
+<h3 id="pandas-and-matplotlib">Pandas and Matplotlib</h3>
+<p>There are some features from Matplotlib that interact with Pandas.</p>
+<p><strong>Example:</strong> For some dataframe <code>df</code> with columns <code>y-data</code> and <code>x-data</code>,</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x, y <span class="op">=</span> <span class="st">&#39;x-data&#39;</span>, <span class="st">&#39;y-data&#39;</span>
+plt.scatter(x<span class="op">=</span>x, y<span class="op">=</span>y, data<span class="op">=</span>df) <span class="co"># df is imported and the columns given by x and y are used.</span></code></pre></div>
+<h2 id="seaborn">Seaborn</h2>
+<p>An extension to Matplotlib is Seaborn (<code>seaborn</code>) that makes common task into defined functions.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> seaborn <span class="im">as</span> sns</code></pre></div>
+<p><strong>Example: </strong> Taking a data from dataframe <code>df</code> we wish to graph by <code>x-data</code> and <code>y-data</code> using column <code>color-data</code> as the color indicator</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">sns.lmplot(x<span class="op">=</span>x, y<span class="op">=</span>y, data<span class="op">=</span>df, hue<span class="op">=</span><span class="st">&#39;color-data&#39;</span>)</code></pre></div>
+<h2 id="plotly">Plotly</h2>
+<p>Interactive plotting rendered either server-based (<code>plotly</code>) or locally (<code>ploty.offline</code>).</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> plotly <span class="im">as</span> py
+<span class="im">import</span> plotly.offline <span class="im">as</span> py</code></pre></div>
+        </div>
+        <div class="col-2 d-none d-md-block">
+        </div>
+    </div>
+</div>
+
+
+    <!-- Scripts -->
+
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
+    <footer class="mt-auto py-2 ">
+    <hr>
+    <div class="container">
+        <span class="text-muted">
+            <p class="text-right"> Generated by <a href="https://github.com/ketozhang/PyStatic">PyStatic</a> | Designed
+                by <a href="https://github.com/ketozhang">Keto Z.</a></p>
+        </span>
+    </div>
+</footer>
+</body>
+</html>

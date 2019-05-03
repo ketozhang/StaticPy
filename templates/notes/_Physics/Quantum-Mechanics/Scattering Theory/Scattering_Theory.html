@@ -1,0 +1,92 @@
+<!-- TOC -->
+<ul>
+<li><a href="#partial-wave-analysis">Partial Wave Analysis</a></li>
+<li><a href="#phase-shifts">Phase Shifts</a></li>
+<li><a href="#cross-sections">Cross Sections</a></li>
+</ul>
+<!-- /TOC -->
+<p>You may want to review some scattering terms in the section <a href="#cross-sections">Cross Sections</a>.</p>
+<p>It is not a surprise that in quantum physics we will be using the wavefunction to describe the equivalent position in classical scattering. Afterall we want to know the probability distribution of the scattered particle.</p>
+<p>Let's begin by describing the incident particle which has some wavefunction <span class="math inline">\(\psi_{inc}\)</span>. We wish for our initial condition to be the same as a free particle moving towards the right so it must be that initially it doesn't see/feel the potential location at <span class="math inline">\(r = 0\)</span>. To do this we say that the free particle is moving towards the positive <span class="math inline">\(\hat z\)</span> direction intiially at <span class="math inline">\(r = -\infty\)</span>,</p>
+<p><span class="math display">\[ \psi_\text{inc}(z) \approx  e^{ikz}\]</span></p>
+<p>We predict that the outgoing particle is a spherical wave with a probability dependent on <span class="math inline">\(\theta\)</span> we define this probability-like function as <span class="math inline">\(f(\theta)\)</span>, this is called the <strong>scattering amplitude</strong>. <span class="math display">\[ \psi(r,\theta)_\text{out} \approx  f(\theta) \frac{e^{ikr}}{r}\]</span></p>
+<p>Therefore the wavefunction in the middle of our experiment should include both incoming and outgoing wavefunctions,</p>
+<p><span class="math display">\[ \psi \approx A\left(e^{ikz} + f(\theta) \frac{e^{ikr}}{r}\right)\]</span></p>
+<p>The scattering amplitude once again is related to the probability thus related to the number of particle going through the cross section <span class="math inline">\(d \sigma\)</span> it is only natural that the scattering amplitude ,</p>
+<p><span class="math display">\[
+\d \sigma = \abs{f}^2 d\Omega\\
+\boxed{D(\theta) = \frac{d\sigma}{d\Omega} = \abs{f(\theta)}^2}
+\]</span></p>
+<!-- Proof
+: 
+    $$ dP = \abs{\psi_\text{inc}}^2 \d V $$ -->
+<p>Now all we need to do is solve for <span class="math inline">\(f(\theta)\)</span>; this is not trivial and requires a good amount of assumptions. There are two prevailing methods which are the <strong>partial wave analysis</strong> and the <strong>Born approximation</strong>. I will only cover the first</p>
+<h2 id="partial-wave-analysis">Partial Wave Analysis</h2>
+<p>The partial wave analysis takes the wavefunction at every three separate regions <span class="math inline">\(r \gg 0\)</span>, <span class="math inline">\(r \not\gg 0\)</span>, and <span class="math inline">\(r = 0\)</span> respectively called the <strong>radiation zone</strong> (or <strong>asymptotic region</strong>), <strong>intermediate region</strong>, and <strong>scattering region</strong>. In every region we assume the following:</p>
+<ul>
+<li>The wavefunction is some form of the Hydrogen wavefunction</li>
+<li>The wavefunction is independent of <span class="math inline">\(\phi\)</span> because there does not exist any particle heading into or out of the page due to incoming wave being purely dependent on <span class="math inline">\(z\)</span></li>
+<li>Because there is no <span class="math inline">\(\phi\)</span> dependence <span class="math inline">\(m = 0\)</span>, <span class="math display">\[ \psi_\text{out}(r,\theta) = R(r)Y_l^0(\phi)\]</span></li>
+</ul>
+<dl>
+<dt>Radiation zone</dt>
+<dd><p>In the radiation zone the potential is simply the centrifugal term (not zero) which is apparrent only in the radial function. Like usually it is easier to deal with a substitution <span class="math inline">\(u(r) \equiv rR(r)\)</span>,</p>
+<p><span class="math display">\[ \frac{\d ^2 u}{\d r^2} - \frac{\ell(\ell + 1)}{r^2}u = -k^2u \]</span></p>
+<p>The solution is the Bessel functions,</p>
+<p><span class="math display">\[ u(r) = Arj_\ell(kr) + Brn_\ell(kr) \]</span></p>
+<p>However since we only want solution that's outgoing as a sinusoidal, these are a variant of the Bessel function called the <strong>spherical Hankel functions</strong>:</p>
+<p><span class="math display">\[ h_\ell^{(1)} = j_\ell(kr) + in_\ell(kr), \qquad h_\ell^{(1)} = j_\ell(kr) - in_\ell(kr) \]</span></p>
+<p>At large <span class="math inline">\(r\)</span>, only the <span class="math inline">\(h^{(1)}_\ell(kr)\)</span> exist as a outgoing wave <span class="math inline">\(e^{ikr}/r\)</span> so in conclusion the radial wavefunction is,</p>
+<p><span class="math display">\[ R(r) \sim h_\ell^{(1)}(kr) \]</span></p>
+<p>In this region, the wavefunction should be,</p>
+<p><span class="math display">\[
+\psi(r,\theta) = A\left(e^{ikz} + \sum_{\ell=0}{c_{l,m}h_\ell^{(1)}}(kr)Y^0_l(\theta)\right) \\
+Y_l^0(\theta) = \sqrt{\frac{2\ell + 1}{4\pi}}P_\ell(\cos \theta)\\
+c_{l,m} Y_l^0(\theta) = i^{\ell + 1}(2\ell + 1)a_\ell P_\ell(\cos\theta)\\
+c_{\ell,0} \equiv i^{\ell+1}k\sqrt{4\pi(2\ell + 1)}\\
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\psi(r,\theta) = A\left(e^{ikz} + \sum_{\ell=0}{i^{\ell + 1}(2 \ell + 1)a_\ell h_\ell^{(1)}}(kr)P_\ell(\cos\theta)\right)}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(a_\ell\)</span> : Partial wave amplitude which is literally the amplitude of the sinusoidal wave that has the angular momentum number <span class="math inline">\(\ell\)</span>.</li>
+<li><span class="math inline">\(h_\ell^{(1)} \approx (-i)^{\ell + 1}e^{ikr}/kr\)</span> for large <span class="math inline">\(r\)</span></li>
+</ul>
+</dd>
+</dl>
+<p>You can easily extract <span class="math inline">\(f(\theta)\)</span> given this,</p>
+<p><span class="math display">\[ f(\theta) = \sum_{\ell = 0}^{\infty}{(2\ell + 1)a_\ell P_\ell(\cos\theta)} \]</span></p>
+<p>Plugging this into <span class="math inline">\(D(\theta)\)</span> and then solving for the total cross section you get,</p>
+<p><span class="math display">\[
+\boxed{D(\theta) = \abs{\sum_{\ell = 0}^{\infty}{(2\ell + 1)a_\ell P_\ell(\cos\theta)} }^2}\\
+\boxed{ \sigma = 4\pi \sum_{\ell = 0}^{\infty}{(2\ell + \ell)\abs{a_\ell}^2} }
+\]</span></p>
+<p>Now we need only to solve for <span class="math inline">\(a_\ell\)</span> the partial wave amplitude.</p>
+<h2 id="phase-shifts">Phase Shifts</h2>
+<p>The answer to <span class="math inline">\(a_\ell\)</span> is a phase shift to see why we must rewrite the wavefunction expanding <span class="math inline">\(e^{ikz}\)</span> with <strong>Rayleigh's formula</strong> just so we can represent everything in spherical coordinates,</p>
+<p><span class="math display">\[ e^{ikz} = \sum_{\ell = 0}^\infty{i^{\ell}(2\ell + 1)j_\ell(kr)P_\ell(\cos \theta)}\]</span></p>
+<p><span class="math display">\[\psi(r,\theta) = A\sum_{\ell=0}i^{\ell}(2 \ell + 1)\left[j_\ell(kr) + ika_\ell h_\ell^{(1)}\right](kr)P_\ell(\cos\theta)
+\]</span></p>
+<p>Why we believe <span class="math inline">\(a_\ell\)</span> is to be purely a phase change is because this scattering (presumably inelastic) has no angular momentum in the <span class="math inline">\(\hat z\)</span> direction (hence <span class="math inline">\(\phi = 0\)</span>) therefore it must be that the wavefunction does not change in partial wave amplitude.</p>
+<p>For <span class="math inline">\(V=0\)</span> (<span class="math inline">\(\ell = 0\)</span>), the wavefunction <span class="math inline">\(\psi_\ell\)</span> is,</p>
+<p><span class="math display">\[ \psi_0 = A\frac{2\ell + 1}{2ikr}\left[e^{ikr} + (-1)^{\ell + 1}e^{ikr}\right]P_\ell(\cos\theta)\]</span></p>
+<p>For <span class="math inline">\(V \ne 0\)</span>, this is just a phase difference as <span class="math inline">\(r \rightarrow 0\)</span>,</p>
+<p><span class="math display">\[ \psi^{(\ell)}(r) = A\frac{2\ell + 1}{2ikr}\left[e^{i(kr + 2\delta _\ell)} + (-1)^{\ell + 1}e^{-ikr}\right]P_\ell(\cos\theta)\]</span></p>
+<p>You can match this equation with the previous wavefunction to get,</p>
+<p><span class="math display">\[\boxed{ a_\ell = \frac{1}{2ikr}\left(e^{2i\delta_\ell} - 1\right) = \frac{1}{k}e^{i\delta_\ell}\sin(\delta_\ell)}\\
+\boxed{D(\theta) = \abs{\sum_{\ell = 0}^{\infty}{\frac{2\ell + 1}{k}e^{i\delta_\ell}\sin(\delta_\ell) P_\ell(\cos\theta)} }^2}\\
+\boxed{\sigma = \frac{4\pi}{k^2}\sum_{\ell = 0}^\infty{(2\ell + 1) \sin^2{(\delta_\ell)}}}\]</span></p>
+<h2 id="cross-sections">Cross Sections</h2>
+<p>The <strong>differential scattering cross-section</strong> describes the ratio of the incident particle going through an infinitesimal <strong>cross-sectional area</strong> <span class="math inline">\(\d \sigma\)</span> to the outgoing solid angle <span class="math inline">\(\d \Omega\)</span> so,</p>
+<p><span class="math display">\[\boxed{ D(\theta) \equiv \frac{\d \sigma}{\d\Omega} }\]</span></p>
+<ul>
+<li><span class="math inline">\(\theta\)</span> : Azimuthal parameter interpreted as the angular position, we can easily see that a free particle has a maximum at <span class="math inline">\(\arg\max D(\theta) = 0\)</span> (where <span class="math inline">\(\theta = 0\)</span> is the direction the free particle is moving) not only that <span class="math inline">\(D(\theta) = 0\)</span> for <span class="math inline">\(\theta \ne 0\)</span>.</li>
+</ul>
+<p>The <strong>total cross-section</strong> is the total area of th incident particle scattered by the target.</p>
+<p><span class="math display">\[\boxed{ \sigma \equiv \int{D(\theta)\d \Omega} }\]</span></p>
+<p>Another useful identity is to write this in terms of the impact parameter <span class="math inline">\(b\)</span> (defined as the one-dimensional distance away from the center, often times vertical distance), we can do so because <span class="math inline">\(\d \sigma\)</span> can be written as,</p>
+<p><span class="math display">\[\boxed{ \d\sigma = b \d b \d\phi } \\ \downarrow \\ D(\theta) = \frac{b}{\sin\theta}\abs{\frac{\d b}{\d \theta}} \]</span></p>
+<p>In scattering theory, it is preferable to write this in terms of particle luminosity,</p>
+<p><span class="math display">\[ \mathcal{L} = \frac{\d N}{\d \sigma \d t} = \frac{\d N}{D(\theta) \d \Omega \d t}\]</span></p>
+<p>It is customary to ignore <span class="math inline">\(dt\)</span> such that <span class="math inline">\(\d N\)</span> may be interpreted as the number of particles per second so set <span class="math inline">\(\d N \rightarrow \d N / \d t\)</span></p>
+<p><span class="math display">\[\boxed{ D(\theta) = \frac{1}{\mathcal L} \frac{dN}{d\Omega} }\]</span></p>
