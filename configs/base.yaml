@@ -1,7 +1,7 @@
 # The full url to be hosted (e.g., http://example.com/notes)
 site_url: 'https://ketozhang.github.io/notebook'
-site_brand: 'PyStatic'
-site_title: 'PyStatic'
+site_brand: 'StaticPy'
+site_title: 'StaticPy'
 # # All paths are relative to project path
 # # Absolute path: `/dir`
 # # Relative path: `dir` or `dir/`
