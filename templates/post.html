@@ -2,16 +2,21 @@
 {% block content %}
 {% include 'header.html' %}
 <div class="container" id="post">
-    <!-- Content -->
+    <!-- Title Header -->
+    <div class="title-header">
     <h1 class="title">{{frontmatter['title']}}</h1>
+    <hr>
+    <p class="m-0">By {{author}} <span class="mx-1 align-middle" style="font-size: 30px">&#183</span> Last updated <time datetime="{{frontmatter['last_updated']}}"></time></p>
     {% if 'image' in frontmatter %}
+    <hr>
+    <p class="description">{{frontmatter['description']}}</p>
     <img id="post-img" class="mx-auto d-block" src={{frontmatter['image']}}>
     {% endif %}
-    <small>Last updated {{frontmatter['date']}}</small>
-    <p class="description">{{frontmatter['description']}}</p>
     <hr>
-    <hr>
+    </div>
+
     <div class="mb-3"></div>
+    <!-- Content -->
     {% include content_path %}
     <!-- On This Page -->
 </div>

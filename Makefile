@@ -6,8 +6,10 @@ build:
 .PHONY: static
 static:
 	python freeze.py
+freeze:
+	make static
 push:
-	make build
+	make static 
 	git add -A
 	git commit
 	git push origin master

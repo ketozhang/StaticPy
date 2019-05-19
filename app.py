@@ -137,7 +137,8 @@ def get_frontmatter(file_or_path):
     # Add date to frontmatter if not specified
     if not ('date' in fm):
         last_updated = datetime.fromtimestamp(os.path.getctime(fpath))
-        fm['date'] = last_updated.strftime('%Y-%m-%d %I:%M:%S %p %Z')
+        # fm['date'] = last_updated.strftime('%Y-%m-%d %I:%M %p %Z')
+        fm['last_updated'] = last_updated.isoformat()
 
     return fm
 
@@ -154,6 +155,7 @@ def global_var():
         site_url += '/'
 
     var = dict(
+        author=base_config['author'],
         site_url=site_url,
         site_brand=base_config['site_brand'],
         site_title=base_config['site_title'],

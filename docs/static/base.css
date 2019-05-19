@@ -50,6 +50,10 @@ body {
   font-family: 'Quicksand', 'Open Sans', sans-serif;
 }
 
+p {
+  font-family: 'Open Sans', sans-serif;
+}
+
 pre, code {
   font-family: 'Source Code Pro', 'Courier New', Courier, monospace;
 }
@@ -116,11 +120,6 @@ blockquote.blockquote {
   background: #f9f9f9;
   border-left: 3px solid #ccc;
   padding: 0.5em 10px
-}
-
-.description {
-  margin: 1em;
-  text-align: center;
 }
 
 /* Background */

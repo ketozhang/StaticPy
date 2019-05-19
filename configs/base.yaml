@@ -2,6 +2,7 @@
 site_url: 'https://ketozhang.github.io/StaticPy'
 site_brand: 'StaticPy'
 site_title: 'StaticPy'
+author: 'StaticPy'
 # # All paths are relative to project path
 # # Absolute path: `/dir`
 # # Relative path: `dir` or `dir/`
