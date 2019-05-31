@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang='en'>
+
 <head>
     <meta charset="UTF-8">
     <title>StaticPy</title>
@@ -56,20 +57,21 @@
 <div class="container" id="post">
     <!-- Title Header -->
     <div class="title-header">
-    <h1 class="title">Markdown Examples</h1>
-    <hr>
-    <p class="m-0">By StaticPy <span class="mx-1 align-middle" style="font-size: 30px">&#183</span> Last updated <time datetime="2019-05-02T15:26:08.428571"></time></p>
-    
-    <hr>
-    <p class="description">A quick showcaes for Markdown</p>
-    <img id="post-img" class="mx-auto d-block" src=https://via.placeholder.com/1920x1080>
-    
-    <hr>
+        <h1 class="title">Markdown Examples</h1>
+        <hr>
+        <p class="m-0">By StaticPy <span class="mx-1 align-middle" style="font-size: 30px">&#183</span> Last updated
+            <time datetime="2019-05-02T15:26:08.428571"></time></p>
+        
+        <hr>
+        <p class="description">A quick showcaes for Markdown</p>
+        <img id="post-img" class="mx-auto d-block" src=https://via.placeholder.com/1920x1080>
+        
+        <hr class="mb-0">
     </div>
 
-    <div class="mb-3"></div>
-    <!-- Content -->
-    <p>This page is a <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Github-flavored Markdown cheatsheet by Adam Pritchard</a>.</p>
+    <div class="row">
+        <div class="col-sm-12 col-lg-9">
+            <p>This page is a <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Github-flavored Markdown cheatsheet by Adam Pritchard</a>.</p>
 <p>This is intended as a quick reference and showcase. For more complete info, see <a href="http://daringfireball.net/projects/markdown/">John Gruber's original spec</a> and the <a href="http://github.github.com/github-flavored-markdown/">Github-flavored Markdown info page</a>.</p>
 <p>Note that there is also a <a href="./Markdown-Here-Cheatsheet">Cheatsheet specific to Markdown Here</a> if that's what you're looking for. You can also check out <a href="./Other-Markdown-Tools">more Markdown tools</a>.</p>
 <p><a name="headers"/></p>
@@ -375,7 +377,12 @@ alt=&quot;IMAGE ALT TEXT HERE&quot; width=&quot;240&quot; height=&quot;180&quot;
 <p>Referencing a bug by #bugID in your git commit links it to the slip. For example #1.</p>
 <hr />
 <p>License: <a href="https://creativecommons.org/licenses/by/3.0/">CC-BY</a></p>
-    <!-- On This Page -->
+        </div>
+        <!-- On This Page -->
+        <div class="col-3 d-none d-md-block">
+            <ul id="onthispage" class="nav flex-column">On This Page</ul>
+        </div>
+    </div>
 </div>
 
     <footer class="mt-auto py-2 ">
@@ -393,11 +400,11 @@ alt=&quot;IMAGE ALT TEXT HERE&quot; width=&quot;240&quot; height=&quot;180&quot;
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
 
-    <!-- Custom -->
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
-    <!-- Prism -->
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/onThisPage.js"></script>
 
     <!-- MathJax -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
@@ -416,5 +423,14 @@ alt=&quot;IMAGE ALT TEXT HERE&quot; width=&quot;240&quot; height=&quot;180&quot;
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
+
+
+    <script>
+        anchors.add();
+        $(document).ready(function () {
+            Prism.highlightAll();
+        })
+    </script>
 </body>
+
 </html>

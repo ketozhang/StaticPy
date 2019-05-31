@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang='en'>
+
 <head>
     <meta charset="UTF-8">
     <title>StaticPy</title>
@@ -56,23 +57,29 @@
 <div class="container" id="post">
     <!-- Title Header -->
     <div class="title-header">
-    <h1 class="title">The Jekyll Nokogiri Problem</h1>
-    <hr>
-    <p class="m-0">By StaticPy <span class="mx-1 align-middle" style="font-size: 30px">&#183</span> Last updated <time datetime="2019-05-02T17:33:35.886955"></time></p>
-    
-    <hr>
-    <p class="description"></p>
-    <img id="post-img" class="mx-auto d-block" src=https://via.placeholder.com/320x240>
-    
-    <hr>
+        <h1 class="title">The Jekyll Nokogiri Problem</h1>
+        <hr>
+        <p class="m-0">By StaticPy <span class="mx-1 align-middle" style="font-size: 30px">&#183</span> Last updated
+            <time datetime="2019-05-02T17:33:35.886955"></time></p>
+        
+        <hr>
+        <p class="description"></p>
+        <img id="post-img" class="mx-auto d-block" src=https://via.placeholder.com/320x240>
+        
+        <hr class="mb-0">
     </div>
 
-    <div class="mb-3"></div>
-    <!-- Content -->
-    <h3 id="missing-libraries">Missing Libraries</h3>
+    <div class="row">
+        <div class="col-sm-12 col-lg-9">
+            <h3 id="missing-libraries">Missing Libraries</h3>
 <pre><code>Error: zlib is missing; necessary for building libxml2
 Solution: apt install zlib1g-dev</code></pre>
-    <!-- On This Page -->
+        </div>
+        <!-- On This Page -->
+        <div class="col-3 d-none d-md-block">
+            <ul id="onthispage" class="nav flex-column">On This Page</ul>
+        </div>
+    </div>
 </div>
 
     <footer class="mt-auto py-2 ">
@@ -90,11 +97,11 @@ Solution: apt install zlib1g-dev</code></pre>
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
 
-    <!-- Custom -->
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
-    <!-- Prism -->
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/onThisPage.js"></script>
 
     <!-- MathJax -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
@@ -113,5 +120,14 @@ Solution: apt install zlib1g-dev</code></pre>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
+
+
+    <script>
+        anchors.add();
+        $(document).ready(function () {
+            Prism.highlightAll();
+        })
+    </script>
 </body>
+
 </html>

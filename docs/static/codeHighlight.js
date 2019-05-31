@@ -6,5 +6,4 @@ $('document').ready(function() {
             $(code).addClass("line-numbers");
         }
     });
-    Prism.highlightAll();
 });
