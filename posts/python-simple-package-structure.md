@@ -29,7 +29,7 @@ So a package exactly like a folder and module refers to the file that holds all 
 
 Let's create a folder for our project (I'll use `Project/`). I will be making a simple mystats program called `mystats` that takes some data and do some math to it. Let's create the following structure:
 
-```shell
+```bash
 Project
 ├── LICENSE
 ├── Makefile
@@ -143,7 +143,7 @@ else:
 
 Running this file anywhere you will get an error,
 
-```shell
+```bash
 [.../Project/]
 $ python test/test.py
 
@@ -203,7 +203,7 @@ Regardless which option you choose, you should now be able toconfirm that your p
 
 Since your program works, we will now make sure your users/clients can install them easily and understand the usage easily. Recall our project structure,
 
-```shell
+```bash
 Project
 ├── mystats
 │   ├── __init__.py
@@ -283,7 +283,7 @@ Your package folder (`mystats`) is usually installed into on of the default path
 
 [PyPI](https://pypi.org/) is the default Package Index where you can host your packages on their servers for free. This allows your users to simply install your packages simply by knowing the name of your package:
 
-```shell
+```bash
 pip install mystats
 ```
 
@@ -294,7 +294,7 @@ First, head to [https://pypi.org/](https://pypi.org/) and register an acccount i
 Next, we zip our distribution with some meta information. There are two methods:
 
 *  **Old way** : Source distribution which outputs two directories. Pay attention to the directory `dist/` that includes a tarball (`.tar.gz`) file with your distribution and meta information.
-```shell
+```bash
 python setup.py sdist
 ```
 * **New way**: [Wheel](https://pythonwheels.com/) is the new standard of distribution which outputs three directories. Pay attention to directory `dist/` which includes wheel file (`.whl`) and tarball.
@@ -304,7 +304,7 @@ python setup.py sdist bdist_wheel
 
 Finally we upload your package (everything inside `dist/`) to PyPI which will also check if your package name is taken (`python setup.py register` is deprecated):
 
-```shell
+```bash
 twine upload dist/*
 ```
 

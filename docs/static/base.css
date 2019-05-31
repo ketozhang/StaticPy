@@ -59,14 +59,15 @@ pre, code {
 }
 
 p>code, li>code {
+  color: #358ccb;
   border: 1px solid rgba(97, 97, 97, .4);
   border-radius: 3px;
-  padding: 0px 1px 0px 1px;
-  margin: 0px 1px 0px 1px;
-  box-shadow: 0.5px 0.5px 1px rgba(97, 97, 97, 0.5);
+  padding: 0px 2px 0px 2px;
+  margin: 0px 1px 0px 0px;
+  /* box-shadow: 0.5px 0.5px 1px rgba(97, 97, 97, 0.5); */
 }
 
-pre {
+/* pre {
   border: 1px solid rgba(97, 97, 97, .4);
   border-radius: 3px;
   box-shadow: 1px 1px 2px rgba(97, 97, 97, 0.5);
@@ -74,7 +75,7 @@ pre {
   margin: 3em 0 3em 0;
   padding: 1em;
   width: 75%;
-}
+} */
 
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   color: inherit;

@@ -9,8 +9,10 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://ketozhang.github.io/StaticPy/static/base.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
+    <link href="https://ketozhang.github.io/StaticPy/static/prism.css" rel="stylesheet">
     <link rel="shortcut icon" href="https://ketozhang.github.io/StaticPy/static/favicon.ico">
 </head>
+
 <body>
     
 <header class="flex-md-row flex-column">
@@ -56,7 +58,7 @@
     <div class="title-header">
     <h1 class="title">Python Simple Package Structure</h1>
     <hr>
-    <p class="m-0">By StaticPy <span class="mx-1 align-middle" style="font-size: 30px">&#183</span> Last updated <time datetime="2019-04-19T00:17:09.047774"></time></p>
+    <p class="m-0">By StaticPy <span class="mx-1 align-middle" style="font-size: 30px">&#183</span> Last updated <time datetime="2019-05-30T22:39:38.472897"></time></p>
     
     <hr>
     <p class="description">Let me show you a simple workflow for structuring your package.</p>
@@ -81,17 +83,17 @@
 <p>So a package exactly like a folder and module refers to the file that holds all of your functions, classes, variables, etc.</p>
 <h2 id="getting-started">Getting Started</h2>
 <p>Let's create a folder for our project (I'll use <code>Project/</code>). I will be making a simple mystats program called <code>mystats</code> that takes some data and do some math to it. Let's create the following structure:</p>
-<pre class="shell"><code>Project
-├── LICENSE
-├── Makefile
-├── README.md
-├── setup.py
-├── mystats
-│   ├── __init__.py
-│   ├── math.py
-│   └── stats.py
-└── test
-    └── test.py</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Project</span>
+├── <span class="ex">LICENSE</span>
+├── <span class="ex">Makefile</span>
+├── <span class="ex">README.md</span>
+├── <span class="ex">setup.py</span>
+├── <span class="ex">mystats</span>
+│   ├── <span class="ex">__init__.py</span>
+│   ├── <span class="ex">math.py</span>
+│   └── <span class="ex">stats.py</span>
+└── <span class="bu">test</span>
+    └── <span class="ex">test.py</span></code></pre></div>
 <ul>
 <li>Inside the <code>mystats</code> package:
 <ul>
@@ -159,22 +161,22 @@ actual <span class="op">=</span> st.avg(data)
 <span class="cf">else</span>:
     <span class="bu">print</span>(<span class="st">&quot;FAIL: Oh no, your average is </span><span class="sc">{}</span><span class="st"> but it should be </span><span class="sc">{}</span><span class="st">.&quot;</span>.<span class="bu">format</span>(actual, expected))</code></pre></div>
 <p>Running this file anywhere you will get an error,</p>
-<pre class="shell"><code>[.../Project/]
-$ python test/test.py
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">[<span class="ex">.../Project</span>/]
+$ <span class="ex">python</span> test/test.py
 
-Traceback (most recent call last):
-  File &quot;test/test.py&quot;, line 1, in &lt;module&gt;
-    import mystats as st
-ModuleNotFoundError: No module named &#39;mystats&#39;
+<span class="ex">Traceback</span> (most recent call last)<span class="bu">:</span>
+  <span class="ex">File</span> <span class="st">&quot;test/test.py&quot;</span>, line 1, in <span class="op">&lt;</span>module<span class="op">&gt;</span>
+    <span class="ex">import</span> mystats as st
+<span class="ex">ModuleNotFoundError</span>: No module named <span class="st">&#39;mystats&#39;</span>
 
 
-[.../Project/test]
-$ python test.py
+[<span class="ex">.../Project</span>/<span class="ex">test</span>]
+$ <span class="ex">python</span> test.py
 
-Traceback (most recent call last):
-  File &quot;test.py&quot;, line 1, in &lt;module&gt;
-    import mystats as st
-ModuleNotFoundError: No module named &#39;mystats&#39;</code></pre>
+<span class="ex">Traceback</span> (most recent call last)<span class="bu">:</span>
+  <span class="ex">File</span> <span class="st">&quot;test.py&quot;</span>, line 1, in <span class="op">&lt;</span>module<span class="op">&gt;</span>
+    <span class="ex">import</span> mystats as st
+<span class="ex">ModuleNotFoundError</span>: No module named <span class="st">&#39;mystats&#39;</span></code></pre></div>
 <p>This error occurs because Python cannot find <code>mystats</code> anywhere inside your terminal's environment variable <code>PYTHONPATH</code> or inside Python's environment <code>sys.path</code> (both variables are shared, Python imports <code>PYTHONPATH</code> and default paths to <code>sys.path</code> everytime you run Python). Open up Python and run. You'll see where Python are reading its packages:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> sys
 <span class="op">&gt;&gt;&gt;</span> sys.path
@@ -204,15 +206,15 @@ sys.path.append(<span class="bu">str</span>(PROJECT_PATH))</code></pre></div>
 </ul>
 <h2 id="setup-your-program-for-distribution">Setup your Program for Distribution</h2>
 <p>Since your program works, we will now make sure your users/clients can install them easily and understand the usage easily. Recall our project structure,</p>
-<pre class="shell"><code>Project
-├── mystats
-│   ├── __init__.py
-│   ├── math.py
-│   └── stats.py
-├── Makefile
-├── README.md
-├── LICENSE
-└── setup.py</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">Project</span>
+├── <span class="ex">mystats</span>
+│   ├── <span class="ex">__init__.py</span>
+│   ├── <span class="ex">math.py</span>
+│   └── <span class="ex">stats.py</span>
+├── <span class="ex">Makefile</span>
+├── <span class="ex">README.md</span>
+├── <span class="ex">LICENSE</span>
+└── <span class="ex">setup.py</span></code></pre></div>
 <p>To understand the other files I recommend taking a look at <a href="http://docs.python-guide.org/en/latest/writing/structure/">Hitchhiker's Guide on Structuring Your Project</a>. I will briefly summarize:</p>
 <ul>
 <li><code>README.md</code>(Optional): Description, instructions, informations for your user. Printed at the front page of your GitHub repository</li>
@@ -274,7 +276,7 @@ pip install . <span class="co"># popular package management system often install
 </ul>
 <h3 id="setup-anywhere---upload-your-package-to-pypi">Setup Anywhere - Upload Your Package to PyPI</h3>
 <p><a href="https://pypi.org/">PyPI</a> is the default Package Index where you can host your packages on their servers for free. This allows your users to simply install your packages simply by knowing the name of your package:</p>
-<pre class="shell"><code>pip install mystats</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pip</span> install mystats</code></pre></div>
 <blockquote>
 <p><strong>Note</strong>: Make sure to update and install pip and twine (<code>pip install --upgrade pip twine</code>). Pip is the package manager and twine controls secure upload to PyPI. <code>python setup.py upload</code> has been deprected from the old PyPI domain pypi.python.org.</p>
 </blockquote>
@@ -282,12 +284,12 @@ pip install . <span class="co"># popular package management system often install
 <p>Next, we zip our distribution with some meta information. There are two methods:</p>
 <ul>
 <li><p><strong>Old way</strong> : Source distribution which outputs two directories. Pay attention to the directory <code>dist/</code> that includes a tarball (<code>.tar.gz</code>) file with your distribution and meta information.</p>
-<pre class="shell"><code>python setup.py sdist</code></pre></li>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">python</span> setup.py sdist</code></pre></div></li>
 <li><p><strong>New way</strong>: <a href="https://pythonwheels.com/">Wheel</a> is the new standard of distribution which outputs three directories. Pay attention to directory <code>dist/</code> which includes wheel file (<code>.whl</code>) and tarball.</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">python setup.py sdist bdist_wheel</code></pre></div></li>
 </ul>
 <p>Finally we upload your package (everything inside <code>dist/</code>) to PyPI which will also check if your package name is taken (<code>python setup.py register</code> is deprecated):</p>
-<pre class="shell"><code>twine upload dist/*</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">twine</span> upload dist/*</code></pre></div>
 <p>If you get an error it's likely due to your package name being taken or you put your credential in wrong.</p>
     <!-- On This Page -->
 </div>
@@ -303,15 +305,21 @@ pip install . <span class="co"># popular package management system often install
 </footer>
 
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <!-- Custom -->
+    <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
+    <!-- Prism -->
+    <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
 
     <!-- MathJax -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 
     <!-- Bootstrap JS -->
     <!-- TODO: trim JS if not needed -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
@@ -324,8 +332,5 @@ pip install . <span class="co"># popular package management system often install
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
-
-    <!-- Custom -->
-    <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
 </body>
 </html>

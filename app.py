@@ -7,7 +7,8 @@ from datetime import datetime
 import frontmatter
 import pypandoc as pandoc
 from collections import OrderedDict
-from flask import Flask, render_template, url_for, send_from_directory, redirect
+from flask import (Flask, render_template, url_for, send_from_directory,
+        redirect)
 from pathlib import Path
 from shutil import rmtree, copyfile
 from src.config_handler import get_config
