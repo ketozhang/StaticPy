@@ -188,6 +188,19 @@ blockquote.blockquote {
   overflow: hidden;
 }
 
+.no-list-style {
+  list-style-type: none;
+}
+
+.onthispage ul {
+  padding-left: 1.5em;
+}
+
+.onthispage li {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
 /* Ids */
 
 #note h1, #note h2, #note h3, #note h4, #note h5, #note h6, #post h1, #post h2, #post h3, #post h4, #post h5, #post h6 {
@@ -200,7 +213,7 @@ blockquote.blockquote {
   object-fit: cover;
 }
 
-#onthispage {
+#onthispage-list {
   border-left: 1px solid rgba(97, 97, 97, .2);
   padding-top: 0.5em;
   padding-left: 0.5em;
