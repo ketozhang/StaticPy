@@ -17,10 +17,11 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <h1 class="title text-center">Parallel Hashing and Sorting</h1>
+    <hr>
     <div class="row">
         <div class="col-3 d-none d-lg-block"></div>
         <div class="col-sm-10 col-lg-7">
-            <h1 class="title">Parallel Hashing and Sorting</h1>
             <h2 id="hash-join">Hash Join</h2>
 <p>We first distribute the workload with <span class="math inline">\(h_n\)</span> and apply the divide phase. Then we continue with the next phase locally.</p>
 <ul>
@@ -38,6 +39,9 @@
 <p>We can add symmetry to either hash or sort join to allow for a paralleled pipeline that's always streaming. We do this by doing a local merge on both <span class="math inline">\(R\)</span> and <span class="math inline">\(S\)</span> as the input comes.</p>
         </div>
         <div class="col-2 d-none d-md-block">
+            <div class="sticky-top onthispage">
+                <ul id="onthispage-list" class="no-list-style">On This Page</ul>
+            </div>
         </div>
     </div>
 </div>

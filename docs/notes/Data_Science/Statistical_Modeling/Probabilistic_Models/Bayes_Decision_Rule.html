@@ -17,10 +17,11 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <h1 class="title text-center">Bayes Decision Rule</h1>
+    <hr>
     <div class="row">
         <div class="col-3 d-none d-lg-block"></div>
         <div class="col-sm-10 col-lg-7">
-            <h1 class="title">Bayes Decision Rule</h1>
             <p>For some loss function <span class="math inline">\(L\)</span> the <strong>Bayes Decision Rule</strong> simply chooses the class with the maximum posterior distribution scaled by the loss of misclassification. For the cases of two classes, the decision rule looks like,</p>
 <p><span class="math display">\[
 \hat y(x) = \mathop{\arg\max}_A L(\neg A,A)P(A\mid x)
@@ -34,6 +35,9 @@ R(\hat y) = P(\hat y(x)\text{ is wrong})
 <p>This suggest that the decision boundary is the set of all points where <span class="math inline">\(\set{x : P(A \mid x) = 0.5}\)</span></p>
         </div>
         <div class="col-2 d-none d-md-block">
+            <div class="sticky-top onthispage">
+                <ul id="onthispage-list" class="no-list-style">On This Page</ul>
+            </div>
         </div>
     </div>
 </div>

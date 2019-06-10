@@ -17,10 +17,11 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <h1 class="title text-center">Cryptography</h1>
+    <hr>
     <div class="row">
         <div class="col-3 d-none d-lg-block"></div>
         <div class="col-sm-10 col-lg-7">
-            <h1 class="title">Cryptography</h1>
             <p>The basics of cryptography begins with a story of Alice wanting to send a message <span class="math inline">\(x\)</span> to Bob. They both know Eve who is an eavesdropper thus they need a why to send their messages securily. Alice encrypts her message with an ecryption <span class="math inline">\(E\)</span> such that the message send to Bob is <span class="math inline">\(E(x)\)</span>. Bob on the other hand has a decryption <span class="math inline">\(D\)</span> such that <span class="math inline">\(D(E(x)) = x\)</span>.</p>
 <h2 id="rsa-public-key-schemes">RSA Public Key Schemes</h2>
 <p>Public key schemes are methods to allow Bob to recieve encrypted messages without ever meeting Alice. In other words, Bob never had a decryption sent from by Alice. How this work is that Bob creates a digital locker and sends the locker to Alice. Alice can now lock messages in the locker and sends that back to Bob where Bob only has the locker keys. The actual scheme works as so:</p>
@@ -63,6 +64,9 @@
 </ol>
         </div>
         <div class="col-2 d-none d-md-block">
+            <div class="sticky-top onthispage">
+                <ul id="onthispage-list" class="no-list-style">On This Page</ul>
+            </div>
         </div>
     </div>
 </div>

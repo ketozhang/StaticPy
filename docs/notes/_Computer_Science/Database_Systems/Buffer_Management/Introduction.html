@@ -17,10 +17,11 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <h1 class="title text-center">Introduction</h1>
+    <hr>
     <div class="row">
         <div class="col-3 d-none d-lg-block"></div>
         <div class="col-sm-10 col-lg-7">
-            <h1 class="title">Introduction</h1>
             <p>The buffer management handles interactions between the RAM and the disk. It creates the illusion that the file system is always working with the RAM. The buffer management handles read/write request passed to the RAM and in which decides if it needs to interact with the disk.</p>
 <p>From now on the faster storage right above the disk is called the buffer pool. The buffer pool is commonly the ram.</p>
 <h2 id="buffer-initialization">Buffer Initialization</h2>
@@ -33,6 +34,9 @@
 <p>A page in the buffer pool is considered dirty if any changes was made to the page in the buffer pool.</p>
         </div>
         <div class="col-2 d-none d-md-block">
+            <div class="sticky-top onthispage">
+                <ul id="onthispage-list" class="no-list-style">On This Page</ul>
+            </div>
         </div>
     </div>
 </div>
