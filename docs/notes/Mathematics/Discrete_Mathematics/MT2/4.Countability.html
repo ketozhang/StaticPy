@@ -5,23 +5,34 @@
     <meta charset="UTF-8">
     <title>StaticPy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- yep Bootstrap time -->
+
+    <!-- Bootstrap time -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://ketozhang.github.io/StaticPy/static/base.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
     <link href="https://ketozhang.github.io/StaticPy/static/prism.css" rel="stylesheet">
     <link rel="shortcut icon" href="https://ketozhang.github.io/StaticPy/static/favicon.ico">
+
+    <!-- LaTeX Stylesheet -->
+    
+    <div class="d-none">
+    $$
+        \newcommand{abs}[1]{\left | #1 \right |}
+        \newcommand{set}[1]{\left\{#1\right\}}
+    $$
+    </div>
+    
 </head>
 
 <body>
     
 <div class="container-fluid" id="note">
-    <h1 class="title text-center mt-3">Countability</h1>
+    <h1 class="title text-center pt-3">Countability</h1>
     <hr>
     <div class="row">
-        <div class="col-2 d-none d-lg-block"></div>
-        <div class="col-sm-10 col-lg-7">
+        <div class="col-lg-2 d-none d-lg-block"></div>
+        <div class="col-lg-7 col-md-10">
             <h2 id="bijection">Bijection</h2>
 <p>Two sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> have the same size if there exists a function <span class="math inline">\(f : A \rightarrow B\)</span> is a bijection. A function is bijection if and only if:</p>
 <ol style="list-style-type: decimal">
@@ -110,7 +121,7 @@ f(2) = 0.&amp;7 &amp;6    &amp;\boxed{5} &amp;\ldots\\
 <p>Flipping every bit along the diagonal we get the binary string <span class="math inline">\(b\)</span>. <span class="math inline">\(b\)</span> should be part of the power set however this isn't possible since every row should be different from <span class="math inline">\(b\)</span>. This contradiction shows that <span class="math inline">\(\mathscr P (\mathbb N)\)</span> is not countable.</p></li>
 </ul>
         </div>
-        <div class="col-2 d-none d-md-block">
+        <div class="col-md-2 d-none d-md-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -141,6 +152,13 @@ f(2) = 0.&amp;7 &amp;6    &amp;\boxed{5} &amp;\ldots\\
 
     <!-- MathJax -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } }
+        });
+    </script>
+    
 
     <!-- Bootstrap JS -->
     <!-- TODO: trim JS if not needed -->

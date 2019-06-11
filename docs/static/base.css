@@ -1,6 +1,10 @@
 /* Global */
 
-@media (max-width: 992px) {
+.container-fluid {
+  width: 90%;
+}
+
+@media (min-width: 992px) {
   .container-fluid {
     width: 80%;
   }

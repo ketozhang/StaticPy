@@ -6,7 +6,7 @@ $(document).ready(function() {
             let text = $(element).text();
             $(list).append(`<li><ul class="no-list-style" id=${id}><a href='#${id}'>${text}<a></ul></li>`);
 
-            while (elements[0].nodeName > element.nodeName) {
+            while (elements.length > 0 && elements[0].nodeName > element.nodeName && elements[0].nodeName < "H4") {
                 generateList($(`ul#${id}`), elements), list;
             }
             return;

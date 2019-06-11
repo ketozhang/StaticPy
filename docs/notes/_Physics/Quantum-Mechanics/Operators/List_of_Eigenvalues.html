@@ -5,23 +5,34 @@
     <meta charset="UTF-8">
     <title>StaticPy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- yep Bootstrap time -->
+
+    <!-- Bootstrap time -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://ketozhang.github.io/StaticPy/static/base.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
     <link href="https://ketozhang.github.io/StaticPy/static/prism.css" rel="stylesheet">
     <link rel="shortcut icon" href="https://ketozhang.github.io/StaticPy/static/favicon.ico">
+
+    <!-- LaTeX Stylesheet -->
+    
+    <div class="d-none">
+    $$
+        \newcommand{abs}[1]{\left | #1 \right |}
+        \newcommand{set}[1]{\left\{#1\right\}}
+    $$
+    </div>
+    
 </head>
 
 <body>
     
 <div class="container-fluid" id="note">
-    <h1 class="title text-center mt-3">List of Eigenvalues</h1>
+    <h1 class="title text-center pt-3">List of Eigenvalues</h1>
     <hr>
     <div class="row">
-        <div class="col-2 d-none d-lg-block"></div>
-        <div class="col-sm-10 col-lg-7">
+        <div class="col-lg-2 d-none d-lg-block"></div>
+        <div class="col-lg-7 col-md-10">
             <p>Quite commonly, without practice, you may forget the eigenvalues of some operator applied to your wavefunction.</p>
 <h2 id="hydrogen">Hydrogen</h2>
 <dl>
@@ -60,7 +71,7 @@ E_n &amp;= -\frac{m_e}{2\hbar^2}\left(\frac{e^2}{4\pi\epsilon_0}\right)^2\frac{1
     E_{(n_x, n_y, n_z, ...n_{x_N})} = \prod_{n}\hbar\omega\left(n + \frac{1}{2}\right)
 \end{equation} \]</span></p>
         </div>
-        <div class="col-2 d-none d-md-block">
+        <div class="col-md-2 d-none d-md-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -91,6 +102,13 @@ E_n &amp;= -\frac{m_e}{2\hbar^2}\left(\frac{e^2}{4\pi\epsilon_0}\right)^2\frac{1
 
     <!-- MathJax -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } }
+        });
+    </script>
+    
 
     <!-- Bootstrap JS -->
     <!-- TODO: trim JS if not needed -->

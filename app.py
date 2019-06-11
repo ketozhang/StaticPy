@@ -46,7 +46,11 @@ def md_to_html(file_or_path, outputfile):
 def build(context):
     """Converts the source directory (`source_path`) to a directory of html (`output_path`) outputted to the templates directory."""
     source_path = PROJECT_PATH / context['source_path']
-    output_path = TEMPLATES_PATH / context['source_path']
+
+    url = context['url']
+    if url[0] == '/':
+        url = url[1:]
+    output_path = TEMPLATES_PATH / url
 
     # Backup the build directory in templates
     backup = Path(TEMPLATES_PATH / f'{output_path.name}.bak')
@@ -209,11 +213,17 @@ def get_root_page(file):
         fpath = fpath.with_suffix(".html")
     return render_template(str(file))
 
+@app.route('/docs/')
+def docs_home_page():
+    """Renders the notes home page located in /documentations/index.html ."""
+    context = base_config['contexts']
+    return render_template(f"{context['docs']['url']}/index.html")
 
 @app.route('/notes/')
 def notes_home_page():
     """Renders the notes home page located in /notes/index.html ."""
-    return render_template('notes/index.html')
+    context = base_config['contexts']
+    return render_template(f"{context['notes']['url']}/index.html")
 
 
 @app.route('/posts/')

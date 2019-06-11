@@ -5,23 +5,34 @@
     <meta charset="UTF-8">
     <title>StaticPy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- yep Bootstrap time -->
+
+    <!-- Bootstrap time -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://ketozhang.github.io/StaticPy/static/base.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
     <link href="https://ketozhang.github.io/StaticPy/static/prism.css" rel="stylesheet">
     <link rel="shortcut icon" href="https://ketozhang.github.io/StaticPy/static/favicon.ico">
+
+    <!-- LaTeX Stylesheet -->
+    
+    <div class="d-none">
+    $$
+        \newcommand{abs}[1]{\left | #1 \right |}
+        \newcommand{set}[1]{\left\{#1\right\}}
+    $$
+    </div>
+    
 </head>
 
 <body>
     
 <div class="container-fluid" id="note">
-    <h1 class="title text-center mt-3">Lecture Notes8</h1>
+    <h1 class="title text-center pt-3">Lecture Notes8</h1>
     <hr>
     <div class="row">
-        <div class="col-2 d-none d-lg-block"></div>
-        <div class="col-sm-10 col-lg-7">
+        <div class="col-lg-2 d-none d-lg-block"></div>
+        <div class="col-lg-7 col-md-10">
             <h1 id="lecture-notes-8">Lecture Notes 8</h1>
 <h2 id="multiple-plots-in-matplotlib">Multiple Plots in Matplotlib</h2>
 <p>We will be using a different convention in using Matplotlib. Matplotlib was a object-orientated program based on a single class invoked by <code>plt.plot()</code> which plots things into a figure object called <code>matplotlib.pyplot.figure</code> (see <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.figure.html">docs</a>). However plotting more than one plot in the same figure or even different figure can be very confusing if you were to use <code>plt.plot</code> like you were taught at the beginning.</p>
@@ -69,7 +80,7 @@ fig2, ax2 <span class="op">=</span> plt.subplots()</code></pre></div>
 <li>Philosophy</li>
 </ol>
         </div>
-        <div class="col-2 d-none d-md-block">
+        <div class="col-md-2 d-none d-md-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -100,6 +111,13 @@ fig2, ax2 <span class="op">=</span> plt.subplots()</code></pre></div>
 
     <!-- MathJax -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } }
+        });
+    </script>
+    
 
     <!-- Bootstrap JS -->
     <!-- TODO: trim JS if not needed -->
