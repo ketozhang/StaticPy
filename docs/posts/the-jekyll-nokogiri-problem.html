@@ -54,35 +54,40 @@
         <hr class="gradient">
     </div>
 </header>
-<div class="container" id="post">
-    <!-- Title Header -->
-    <div class="title-header">
-        <h1 class="title">The Jekyll Nokogiri Problem</h1>
-        <hr>
-        <p class="m-0">By StaticPy <span class="mx-1 align-middle" style="font-size: 30px">&#183</span> Last updated
-            <time datetime="2019-05-02T17:33:35.886955"></time></p>
-        
-        <hr>
-        <p class="description"></p>
-        <img id="post-img" class="mx-auto d-block" src=https://via.placeholder.com/320x240>
-        
-        <hr class="mb-0">
-    </div>
-
+<div class="container-fluid" id="post">
     <div class="row">
-        <div class="col-sm-12 col-lg-9">
-            <h3 id="missing-libraries">Missing Libraries</h3>
+        <!-- Title Header -->
+        <div class="col-sm-12 col-lg-7 offset-lg-2">
+            <div class="title-header">
+                <h1 class="title">The Jekyll Nokogiri Problem</h1>
+                <div class="metadata">
+                    <p class="m-0">By StaticPy <span class="mx-1 align-middle" style="font-size: 30px">&#183</span>
+                        Last
+                        updated
+                        <time datetime="2019-05-02T17:33:35.886955"></time></p>
+                    
+                </div>
+                <p class="description"></p>
+                <img id="post-img" class="mx-auto d-block" src=https://via.placeholder.com/320x240>
+                
+                <hr class="mb-0">
+            </div>
+
+            <div class="content">
+                <h3 id="missing-libraries">Missing Libraries</h3>
 <pre><code>Error: zlib is missing; necessary for building libxml2
 Solution: apt install zlib1g-dev</code></pre>
+            </div>
         </div>
         <!-- On This Page -->
-        <div class="col-3 d-none d-md-block">
+        <div class="col-lg-2 d-none d-md-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
         </div>
     </div>
 </div>
+<!-- </div> -->
 
     <footer class="mt-auto py-2 ">
     <hr>

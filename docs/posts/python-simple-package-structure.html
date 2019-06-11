@@ -54,24 +54,27 @@
         <hr class="gradient">
     </div>
 </header>
-<div class="container" id="post">
-    <!-- Title Header -->
-    <div class="title-header">
-        <h1 class="title">Python Simple Package Structure</h1>
-        <hr>
-        <p class="m-0">By StaticPy <span class="mx-1 align-middle" style="font-size: 30px">&#183</span> Last updated
-            <time datetime="2019-05-30T22:39:38.472897"></time></p>
-        
-        <hr>
-        <p class="description">Let me show you a simple workflow for structuring your package.</p>
-        <img id="post-img" class="mx-auto d-block" src=https://via.placeholder.com/320x240>
-        
-        <hr class="mb-0">
-    </div>
-
+<div class="container-fluid" id="post">
     <div class="row">
-        <div class="col-sm-12 col-lg-9">
-            <h2 id="motivation">Motivation</h2>
+        <!-- Title Header -->
+        <div class="col-sm-12 col-lg-7 offset-lg-2">
+            <div class="title-header">
+                <h1 class="title">Python Simple Package Structure</h1>
+                <div class="metadata">
+                    <p class="m-0">By StaticPy <span class="mx-1 align-middle" style="font-size: 30px">&#183</span>
+                        Last
+                        updated
+                        <time datetime="2019-05-30T22:39:38.472897"></time></p>
+                    
+                </div>
+                <p class="description">Let me show you a simple workflow for structuring your package.</p>
+                <img id="post-img" class="mx-auto d-block" src=https://via.placeholder.com/320x240>
+                
+                <hr class="mb-0">
+            </div>
+
+            <div class="content">
+                <h2 id="motivation">Motivation</h2>
 <p>Before we start a bit of motivation why I needed to write this when great guides like <a href="http://docs.python-guide.org/en/latest/">The Hitchhiker's Guide to Python</a> and <a href="http://python-packaging.readthedocs.io/en/latest/minimal.html">Minimal Structure</a> exist.</p>
 <p>The Hitchhiker's guide is a long read but a good read especially if you're wondering how you should <a href="http://docs.python-guide.org/en/latest/writing/structure/">structure your project</a>. Unfortunately the guide does not dwell on how you should code the preamble of your code (e.g., <code>from package import module</code>, <code>sys.path.append(...)</code> ) which is my next step was to consult the Minimal Structure. Unfortunately the Minimal Structure is too minimal ignoring the general case that your package may often have more than just one python file (excluding <code>__init__.py</code>). The preamble for greater than one python file is surprisingly a bit more complex than minimal structure.</p>
 <h2 id="module-vs-package">Module vs Package</h2>
@@ -293,15 +296,17 @@ pip install . <span class="co"># popular package management system often install
 <p>Finally we upload your package (everything inside <code>dist/</code>) to PyPI which will also check if your package name is taken (<code>python setup.py register</code> is deprecated):</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">twine</span> upload dist/*</code></pre></div>
 <p>If you get an error it's likely due to your package name being taken or you put your credential in wrong.</p>
+            </div>
         </div>
         <!-- On This Page -->
-        <div class="col-3 d-none d-md-block">
+        <div class="col-lg-2 d-none d-md-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
         </div>
     </div>
 </div>
+<!-- </div> -->
 
     <footer class="mt-auto py-2 ">
     <hr>

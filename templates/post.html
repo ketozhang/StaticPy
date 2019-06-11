@@ -1,31 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
 {% include 'header.html' %}
-<div class="container" id="post">
-    <!-- Title Header -->
-    <div class="title-header">
-        <h1 class="title">{{frontmatter['title']}}</h1>
-        <hr>
-        <p class="m-0">By {{author}} <span class="mx-1 align-middle" style="font-size: 30px">&#183</span> Last updated
-            <time datetime="{{frontmatter['last_updated']}}"></time></p>
-        {% if 'image' in frontmatter %}
-        <hr>
-        <p class="description">{{frontmatter['description']}}</p>
-        <img id="post-img" class="mx-auto d-block" src={{frontmatter['image']}}>
-        {% endif %}
-        <hr class="mb-0">
-    </div>
-
+<div class="container-fluid" id="post">
     <div class="row">
-        <div class="col-sm-12 col-lg-9">
-            {% include content_path %}
+        <!-- Title Header -->
+        <div class="col-sm-12 col-lg-7 offset-lg-2">
+            <div class="title-header">
+                <h1 class="title">{{frontmatter['title']}}</h1>
+                <div class="metadata">
+                    <p class="m-0">By {{author}} <span class="mx-1 align-middle" style="font-size: 30px">&#183</span>
+                        Last
+                        updated
+                        <time datetime="{{frontmatter['last_updated']}}"></time></p>
+                    {% if 'image' in frontmatter %}
+                </div>
+                <p class="description">{{frontmatter['description']}}</p>
+                <img id="post-img" class="mx-auto d-block" src={{frontmatter['image']}}>
+                {% endif %}
+                <hr class="mb-0">
+            </div>
+
+            <div class="content">
+                {% include content_path %}
+            </div>
         </div>
         <!-- On This Page -->
-        <div class="col-3 d-none d-md-block">
+        <div class="col-lg-2 d-none d-md-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
         </div>
     </div>
 </div>
+<!-- </div> -->
 {% endblock %}

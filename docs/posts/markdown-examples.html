@@ -54,24 +54,27 @@
         <hr class="gradient">
     </div>
 </header>
-<div class="container" id="post">
-    <!-- Title Header -->
-    <div class="title-header">
-        <h1 class="title">Markdown Examples</h1>
-        <hr>
-        <p class="m-0">By StaticPy <span class="mx-1 align-middle" style="font-size: 30px">&#183</span> Last updated
-            <time datetime="2019-05-02T15:26:08.428571"></time></p>
-        
-        <hr>
-        <p class="description">A quick showcaes for Markdown</p>
-        <img id="post-img" class="mx-auto d-block" src=https://via.placeholder.com/1920x1080>
-        
-        <hr class="mb-0">
-    </div>
-
+<div class="container-fluid" id="post">
     <div class="row">
-        <div class="col-sm-12 col-lg-9">
-            <p>This page is a <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Github-flavored Markdown cheatsheet by Adam Pritchard</a>.</p>
+        <!-- Title Header -->
+        <div class="col-sm-12 col-lg-7 offset-lg-2">
+            <div class="title-header">
+                <h1 class="title">Markdown Examples</h1>
+                <div class="metadata">
+                    <p class="m-0">By StaticPy <span class="mx-1 align-middle" style="font-size: 30px">&#183</span>
+                        Last
+                        updated
+                        <time datetime="2019-05-02T15:26:08.428571"></time></p>
+                    
+                </div>
+                <p class="description">A quick showcaes for Markdown</p>
+                <img id="post-img" class="mx-auto d-block" src=https://via.placeholder.com/1920x1080>
+                
+                <hr class="mb-0">
+            </div>
+
+            <div class="content">
+                <p>This page is a <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Github-flavored Markdown cheatsheet by Adam Pritchard</a>.</p>
 <p>This is intended as a quick reference and showcase. For more complete info, see <a href="http://daringfireball.net/projects/markdown/">John Gruber's original spec</a> and the <a href="http://github.github.com/github-flavored-markdown/">Github-flavored Markdown info page</a>.</p>
 <p>Note that there is also a <a href="./Markdown-Here-Cheatsheet">Cheatsheet specific to Markdown Here</a> if that's what you're looking for. You can also check out <a href="./Other-Markdown-Tools">more Markdown tools</a>.</p>
 <p><a name="headers"/></p>
@@ -377,15 +380,17 @@ alt=&quot;IMAGE ALT TEXT HERE&quot; width=&quot;240&quot; height=&quot;180&quot;
 <p>Referencing a bug by #bugID in your git commit links it to the slip. For example #1.</p>
 <hr />
 <p>License: <a href="https://creativecommons.org/licenses/by/3.0/">CC-BY</a></p>
+            </div>
         </div>
         <!-- On This Page -->
-        <div class="col-3 d-none d-md-block">
+        <div class="col-lg-2 d-none d-md-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
         </div>
     </div>
 </div>
+<!-- </div> -->
 
     <footer class="mt-auto py-2 ">
     <hr>
