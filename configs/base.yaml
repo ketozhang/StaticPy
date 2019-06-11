@@ -30,7 +30,7 @@ contexts:
     template: 'post.html'
 
 social_links:
-  cv: 'static/KetoZhangCV.pdf'
+  cv: 'static/CV.html'
   linkedin: 'https://www.linkedin.com/in/ketozhang/'
   email: 'keto.zhang@gmail.com'
   github: 'https://www.github.com/ketozhang'
