@@ -288,7 +288,11 @@ def get_page(context, page='index.html'):
             str(e) + f', when attempting with args get_page({context}, {page}).')
 
     source_path = PROJECT_PATH / context['source_path']
-    output_path = TEMPLATES_PATH / context['source_path']
+
+    url = context['url']
+    if url[0] == '/':
+        url = url[1:]
+    output_path = TEMPLATES_PATH / url
 
     # If suffix is .html, then remove it with proper path
     if Path(page).suffix == '.html':
