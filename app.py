@@ -100,11 +100,11 @@ def build_all():
 
 
 def get_all_context_pages():
-    """Retrieve notes path relative to specified argument."""
-    notes = TEMPLATES_PATH.glob('*/**/*.html')
-    notes = [str(note.relative_to(TEMPLATES_PATH).as_posix())
-             for note in notes]  # Ignores files at first level
-    return notes
+    """Retrieve all pages accessible."""
+    pages = TEMPLATES_PATH.glob('*/**/*.html')
+    pages = [str(page.relative_to(TEMPLATES_PATH).as_posix())
+             for page in pages]  # Ignores files at first level
+    return pages
 
 
 def get_frontmatter(file_or_path):
@@ -147,6 +147,12 @@ def get_frontmatter(file_or_path):
 
     return fm
 
+def get_subpaths(path):
+    """Get a list of the path's subpaths (child paths)."""
+    if isinstance(path, str):
+        path = Path(path)
+    return [p.name + '/' for p in sorted(path.glob('*/'))]
+
 ########################
 # META
 ########################
@@ -183,7 +189,7 @@ def favicon():
 def home():
     """Renders the home page."""
     config = get_config('home')
-    notes = get_all_context_pages()
+    pages = get_all_context_pages()
 
     posts = config['posts']
     posts_dict = {}
@@ -194,7 +200,7 @@ def home():
     projects = config['projects']
 
     context = dict(
-        notes=notes,
+        pages=pages,
         posts=posts_dict,
         projects=projects
     )
@@ -216,14 +222,19 @@ def get_root_page(file):
 @app.route('/docs/')
 def docs_home_page():
     """Renders the notes home page located in /documentations/index.html ."""
-    context = base_config['contexts']
-    return render_template(f"{context['docs']['url']}/index.html")
+    context = base_config['contexts']['docs']
+    return render_template(f"{context['url']}/index.html")
 
 @app.route('/notes/')
 def notes_home_page():
     """Renders the notes home page located in /notes/index.html ."""
-    context = base_config['contexts']
-    return render_template(f"{context['notes']['url']}/index.html")
+    context = base_config['contexts']['notes']
+    source_path = PROJECT_PATH / context['source_path']
+    kwargs = dict(
+        notebooks = get_subpaths(source_path),
+        notebook_urls = get_subpaths(source_path)
+    )
+    return render_template(f"{context['url']}/index.html", **kwargs)
 
 
 @app.route('/posts/')

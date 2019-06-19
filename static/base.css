@@ -52,6 +52,7 @@ p .navbar-light .navbar-nav .nav-link.active::after {
 body {
   color: #616161;
   font-family: 'Quicksand', 'Open Sans', sans-serif;
+  padding-bottom: 80px;
 }
 
 p {
@@ -132,6 +133,13 @@ blockquote.blockquote {
   padding: 0.5em 10px
 }
 
+footer {
+  position: fixed;
+  height: 60px;
+  bottom: 0;
+  width: 100%;
+}
+
 /* Background */
 
 .bg-warning {
@@ -201,8 +209,8 @@ blockquote.blockquote {
 
 .onthispage {
   top: 1em;
-  /* font-size: 14px;
-  font-family: "Open Sans", sans-serif; */
+  overflow-y: scroll;
+  height: 500px;
   border-left: 1px solid rgba(97, 97, 97, .2);
 }
 
@@ -213,6 +221,10 @@ blockquote.blockquote {
 .onthispage li {
   padding-top: 0.5em;
   padding-bottom: 0.5em;
+}
+
+.sticky-top {
+  z-index: auto;
 }
 
 /* Ids */

@@ -2,7 +2,9 @@
 {% block content %}
 {% include 'header.html' %}
 <div class="container">
-<h1 class="title">Notes</h1>
-<h3 class="text-center"> In Construction </h3>
+    <h1 class="title">Notes</h1>
+    {% for url in notebook_urls %}
+    <a href={{url}}/>{{url}}</a>
+    {% endfor %}
 </div>
 {% endblock %}
