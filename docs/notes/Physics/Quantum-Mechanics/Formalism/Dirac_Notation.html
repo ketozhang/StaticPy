@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+    <meta charset="UTF-8">
+    <title>StaticPy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://ketozhang.github.io/StaticPy/static/base.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
+    <link href="https://ketozhang.github.io/StaticPy/static/prism.css" rel="stylesheet">
+    <link rel="shortcut icon" href="https://ketozhang.github.io/StaticPy/static/favicon.ico">
+
+    <!-- LaTeX Stylesheet -->
+    
+    <div class="d-none">
+    $$
+        \newcommand{abs}[1]{\left | #1 \right |}
+        \newcommand{set}[1]{\left\{#1\right\}}
+    $$
+    </div>
+    
+</head>
+
+<body>
+    
+<div class="container-fluid" id="note">
+    <h1 class="title text-center pt-3">Dirac Notation</h1>
+    <hr>
+    <div class="row">
+        <div class="col-lg-2 d-none d-lg-block"></div>
+        <div class="col-lg-7 col-md-10">
+            <p><em>alias: Bra-ket notation</em></p>
+<p>The dirac notation is widely used in quantum mechanics similar how vectors are widely used in electromagnetism. We use this because quantum mechanics is natural a linear algebra problem.</p>
+<p>A vector in Dirac notation is written as <span class="math inline">\(|\alpha\rangle\)</span> which is called a <strong>bra vector</strong> defined to be a general vector in <strong>any</strong> basis. For example we say that <span class="math inline">\(|\alpha\rangle\)</span> may be represented in a <span class="math inline">\(N\)</span>-dimension space using the cartesian basis,</p>
+<p><span class="math display">\[ |\alpha\rangle \rightarrow \boldsymbol{a} \equiv \begin{pmatrix} a_1 \\ a_2 \\ \vdots \\ a_N \end{pmatrix}\]</span></p>
+<ul>
+<li><span class="math inline">\(\boldsymbol{a}\)</span> : a vector in the cartesian basis.</li>
+<li><span class="math inline">\(a_1, a_2, ... a_N\)</span> : the weights of their corresponding basis.</li>
+<li>Recall in cartesian basis each row correspond to the basis vectors <span class="math inline">\((\hat x, \hat y, \hat z, ...)\)</span></li>
+</ul>
+<h2 id="conjugate-vector---ket">Conjugate Vector - Ket</h2>
+<p>The <strong>ket vector</strong> is the conjugate of the <strong>bra vector</strong> such that,</p>
+<p><span class="math display">\[\langle \alpha | \;\equiv\; |\alpha \rangle ^*\]</span></p>
+<h2 id="inner-product">Inner Product</h2>
+<p><em>alias: dot product, braket</em></p>
+<p>The inner product of two vectors is the product of a bra and ket vector.</p>
+<p><span class="math display">\[ \boxed{\langle \alpha | \beta \rangle \equiv  a_1^*b_1 + a_2^*b_2 + ... a_N^*b_N}\]</span></p>
+<h3 id="properties">Properties</h3>
+<ul>
+<li><span class="math inline">\(\langle \alpha | \beta \rangle^* = \langle \beta | \alpha \rangle\)</span></li>
+</ul>
+<h2 id="hilbert-space">Hilbert Space</h2>
+<p>Many times it is not very useful to think of inner product as of the definition above because it is not necessary that <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> is a easy vector to comprehend. In this case how do you represent a function like <span class="math inline">\(\Psi(x,t)\)</span> as a vector?</p>
+<p>The answer is you don't; we take a look at the fact that for a <strong>square-integrable function</strong> which is defined as a function who's conjugate square has a non-infinite area thus follows,</p>
+<p><span class="math display">\[ \langle f | f \rangle = \int_a^b{|f(x)|^2 \;dx} &lt; \infty \tag{square-integrable}\]</span></p>
+<p>Then, the inner product of square-integrable functions is,</p>
+<p><span class="math display">\[ \langle f | g \rangle \equiv \int_a^b{f(x)^*g(x)\;dx}  \]</span></p>
+<p>In quantum mechanics we deal with only wavefunctions that are normalizable. You may check that all normalizable functions are also square-integrable since the area is non-infinite. We may introduce such a space where the wavefunction and all square-integrable functions live. This is called the <strong>Hilbert space</strong> or the <strong>complete inner product space</strong>.</p>
+<h3 id="properties-1">Properties</h3>
+<ul>
+<li><p><strong>Self inner product:</strong> The self inner product is defined as,</p>
+<p><span class="math display">\[ \langle f | f \rangle \equiv \int_a^b{|f(x)|^2 \;dx} \]</span></p>
+<p>The self inner product is always non-negative and real,</p>
+<p><span class="math display">\[ \langle f | f \rangle &gt; 0, \qquad \langle f | f \rangle \in \mathbb{R} \]</span></p>
+<p>The self inner product is only zero for the zero function <span class="math inline">\(f(x)=0\)</span>,</p></li>
+<li><p><strong>Schwarz inequality:</strong></p>
+<p><span class="math display">\[ \left\lvert{\int_a^b{f(x)^*g(x)\;dx} }\right\rvert \le \sqrt{\int_a^b{|f(x)|^2\;dx}\int_a^b{|g(x)|^2\;dx}}\]</span></p></li>
+</ul>
+        </div>
+        <div class="col-md-2 d-none d-md-block">
+            <div class="sticky-top onthispage">
+                <ul id="onthispage-list" class="no-list-style">On This Page</ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <footer class="py-2 bg-white">
+    <div class="container">
+        <p class="text-right m-0"> Generated by <a href="https://github.com/ketozhang/StaticPy">StaticPy</a> |
+            Designed
+            by <a href="https://github.com/ketozhang">Keto Z.</a>
+        </p>
+    </div>
+</footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/onThisPage.js"></script>
+
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } }
+        });
+    </script>
+    
+
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
+
+
+    <script>
+        anchors.add();
+        $(document).ready(function () {
+            Prism.highlightAll();
+        })
+    </script>
+</body>
+
+</html>

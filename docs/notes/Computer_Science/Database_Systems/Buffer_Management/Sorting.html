@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+    <meta charset="UTF-8">
+    <title>StaticPy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://ketozhang.github.io/StaticPy/static/base.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
+    <link href="https://ketozhang.github.io/StaticPy/static/prism.css" rel="stylesheet">
+    <link rel="shortcut icon" href="https://ketozhang.github.io/StaticPy/static/favicon.ico">
+
+    <!-- LaTeX Stylesheet -->
+    
+    <div class="d-none">
+    $$
+        \newcommand{abs}[1]{\left | #1 \right |}
+        \newcommand{set}[1]{\left\{#1\right\}}
+    $$
+    </div>
+    
+</head>
+
+<body>
+    
+<div class="container-fluid" id="note">
+    <h1 class="title text-center pt-3">Sorting</h1>
+    <hr>
+    <div class="row">
+        <div class="col-lg-2 d-none d-lg-block"></div>
+        <div class="col-lg-7 col-md-10">
+            <h2 id="streaming">Streaming</h2>
+<p>Streaming is a strategy to have a function that maps input data from the database into the buffer and outputs it to the RAM and then loads it into the disk.</p>
+<ul>
+<li><strong>Single-pass:</strong> Simply a single stream of input to output.</li>
+<li><strong>Double Buffering:</strong> With two threads, one manages computation and the other manages loading and unloading the buffer.</li>
+</ul>
+<h2 id="divide-and-conquer">Divide and Conquer</h2>
+<h3 id="way-strawman-merge-sort">2-Way Strawman Merge Sort</h3>
+<ol style="list-style-type: decimal">
+<li>For each page, sort them in the buffer and write to disk</li>
+<li>Now we will read from the disk which now has sorted pages and write this to another disk. We will allocate two input buffers to read two pages and merge them into one. Now the last buffer has two pages.</li>
+<li>We continue this with four input buffers, merge then write. Then double up every step.</li>
+</ol>
+<h2 id="full-external-merge-sort">Full External Merge Sort</h2>
+<p>We will now use the strawman sort much more efficiently. Instead of going back and forth we can fully sort <span class="math inline">\(N\)</span> pages with <span class="math inline">\(B &lt; N\)</span> sized buffer.</p>
+<ol style="list-style-type: decimal">
+<li>Use <span class="math inline">\(B\)</span> size buffer to read <span class="math inline">\(B\)</span> pages. Continue to do so until <span class="math inline">\(N\)</span> pages are read. Read pages are placed in the allocated to an intermediate disk of <span class="math inline">\(\lceil{N/B}\rceil\)</span> buffers of size <span class="math inline">\(B\)</span>.</li>
+<li>In parallel for <span class="math inline">\(B-1\)</span> buffers, are merged and written to the final disk. The amount of block written is <span class="math inline">\(B(B-1)\)</span>.</li>
+<li>We continue another pass thru once all <span class="math inline">\(\lceil N/B \rceil\)</span> finish sorting.</li>
+</ol>
+<ul>
+<li><p><strong>Number of passes</strong>: <span class="math display">\[ 1 + \left\lceil \log_{B-1}\left\lceil \frac{N}{B}\right\rceil \right\rceil \]</span></p></li>
+<li><p><strong>Cost</strong>: <span class="math display">\[ 2N \cdot \#\text{passes} \]</span></p></li>
+<li><p><strong>Two-pass Buffer Required</strong>:</p>
+<p><span class="math display">\[ N = B(B-1) \]</span> <span class="math display">\[B \approx \sqrt{N}  \]</span></p></li>
+</ul>
+<h3 id="problems">Problems</h3>
+<ol style="list-style-type: decimal">
+<li><p><strong>Number and Size of Partition</strong></p>
+<p>This question is easy when we have to preserve <span class="math inline">\(N\)</span> the number of pages we're sorting.</p></li>
+</ol>
+<p><span class="math display">\[
+\begin{gather*}
+    N = (\#\text{partition})(\text{size of partition})\\
+    N = P_i \cdot |P_i|\\\\
+    P_i = \begin{cases}
+        \lceil N/B \rceil &amp; i = 0\\
+        \frac{\lceil N/B \rceil}{(B-1)^i} &amp; i &gt; 0
+    \end{cases}\\\\
+    |P_i| = \begin{cases}
+        B &amp; i = 0\\
+        B(B-1)^i &amp; i &gt; 0
+    \end{cases}
+\end{gather*}
+\]</span></p>
+<h2 id="parallel-sorting">Parallel Sorting</h2>
+<p>For <span class="math inline">\(n\)</span> machines we will have <span class="math inline">\(n\)</span> buffers with each buffer dedicated to a range of the data.</p>
+<ul>
+<li>We'd like each range to have the same amount of values from the data. However if the data is skewed, then this is a problem since one machine has more to do than the others.</li>
+</ul>
+        </div>
+        <div class="col-md-2 d-none d-md-block">
+            <div class="sticky-top onthispage">
+                <ul id="onthispage-list" class="no-list-style">On This Page</ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <footer class="py-2 bg-white">
+    <div class="container">
+        <p class="text-right m-0"> Generated by <a href="https://github.com/ketozhang/StaticPy">StaticPy</a> |
+            Designed
+            by <a href="https://github.com/ketozhang">Keto Z.</a>
+        </p>
+    </div>
+</footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/onThisPage.js"></script>
+
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } }
+        });
+    </script>
+    
+
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
+
+
+    <script>
+        anchors.add();
+        $(document).ready(function () {
+            Prism.highlightAll();
+        })
+    </script>
+</body>
+
+</html>

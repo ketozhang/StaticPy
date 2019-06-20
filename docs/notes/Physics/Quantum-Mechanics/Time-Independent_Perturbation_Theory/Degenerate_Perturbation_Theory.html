@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+    <meta charset="UTF-8">
+    <title>StaticPy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://ketozhang.github.io/StaticPy/static/base.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
+    <link href="https://ketozhang.github.io/StaticPy/static/prism.css" rel="stylesheet">
+    <link rel="shortcut icon" href="https://ketozhang.github.io/StaticPy/static/favicon.ico">
+
+    <!-- LaTeX Stylesheet -->
+    
+    <div class="d-none">
+    $$
+        \newcommand{abs}[1]{\left | #1 \right |}
+        \newcommand{set}[1]{\left\{#1\right\}}
+    $$
+    </div>
+    
+</head>
+
+<body>
+    
+<div class="container-fluid" id="note">
+    <h1 class="title text-center pt-3"></h1>
+    <hr>
+    <div class="row">
+        <div class="col-lg-2 d-none d-lg-block"></div>
+        <div class="col-lg-7 col-md-10">
+            <p>For the perturbed Hamiltonian <span class="math inline">\(H = H^0 + H&#39;\)</span>. If the eigenstates of <span class="math inline">\(H^0\)</span> are degenerate then there is a case where non-degenerate perturbation theory does not apply.</p>
+<p>Recall the definition of degenerate states which the eigenstate and its linear combination both share the same eigenvalue <span class="math inline">\(E^0\)</span>.</p>
+<p><span class="math display">\[ H^0\psi^0_n = E^0\psi_n^0 \]</span> <span class="math display">\[ H^0\sum_n{c_n\psi_n^0} = E^0\sum_n{c_n\psi_n^0} \]</span></p>
+<h2 id="two-fold-degenerate-state">Two-Fold Degenerate State</h2>
+<div class="figure">
+<img src="https://i.gyazo.com/633cd15b571e86168a702aa6ff8dbb70.png" alt="Figure:  As the strength of the perturbation increases, the more the eigenvalue diverges corresponding to \psi_a and \psi_b originally degenerate wavefunction." />
+<p class="caption"><strong>Figure: </strong> As the strength of the perturbation increases, the more the eigenvalue diverges corresponding to <span class="math inline">\(\psi_a\)</span> and <span class="math inline">\(\psi_b\)</span> originally degenerate wavefunction.</p>
+</div>
+<p>We begin first with <span class="math inline">\(2\)</span>-fold degeneracy and later expand onto <span class="math inline">\(N\)</span>-fold. In this <span class="math inline">\(2\)</span>-fold degeneracy there exist two degenerate wavefunctions <span class="math inline">\(\psi_a\)</span> and <span class="math inline">\(\psi_b\)</span> which shares the eigenvalue <span class="math inline">\(E^0 \equiv E_a^0 = E_b^0\)</span></p>
+<p>We claimed that there exist a case where non-degenerate perturbation theory does not apply. Let's first look at the non-applicable case which is of course called the degenerate perturbation theory.</p>
+<p>In the degenerate perturbation theory we have an issue that we do not know whether if the first order correction is either:</p>
+<p><span class="math display">\[
+\begin{gather}
+    \langle H&#39; \rangle_{aa} \quad\text{or}\quad \langle H&#39; \rangle_{bb}\\
+\end{gather}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(H&#39;_{aa}\)</span>, <span class="math inline">\(H&#39;_{bb}\)</span> : Where <span class="math inline">\(H&#39;_{ij} \equiv \langle{\psi_i|H&#39;|\psi_j}\rangle\)</span></li>
+</ul>
+<h3 id="proof">Proof</h3>
+<p>Let's first deal with two degenerate states <span class="math inline">\(\psi_a^0\)</span> and <span class="math inline">\(\psi_b^0\)</span> with energy <span class="math inline">\(E^0\)</span>. We wish to make corrections to the eigenvalue <span class="math inline">\(E\)</span> and eigenfunction <span class="math inline">\(\psi\)</span> where,</p>
+<p><span class="math display">\[\begin{align}
+    \psi^0 = \alpha\psi_a^0 + \beta\psi_b^0 \label{eq: wavefunction}
+\end{align}\]</span> <span class="math display">\[H^0\psi^0 = E^0\]</span></p>
+<p>Such that the perturbed TISE is the same as before,</p>
+<p><span class="math display">\[ \begin{gather*}
+    (H^0+H&#39;)\psi = E\psi
+\end{gather*} \]</span></p>
+<p><span class="math display">\[\begin{align*}
+    E \equiv E^0 + \lambda E^1 + ...,\qquad \psi \equiv \psi^0 + \lambda \psi^1 + ...
+\end{align*}\]</span></p>
+<h3 id="first-order-corrections">First Order Corrections</h3>
+<p>The first order equation is,</p>
+<p><span class="math display">\[ H^0\psi^1 + H&#39;\psi^0 = E^0\psi^1 + E^1 \psi^0 \]</span></p>
+<p>We will first correct the eigenvalue <span class="math inline">\(E^1\)</span> by applying <span class="math inline">\(\langle \psi^0_a |\)</span></p>
+<p><span class="math display">\[ \langle \psi^0_a |H^0\psi^1 \rangle + \langle \psi^0_a |H&#39;\psi^0\rangle = E^0\langle \psi^0_a |\psi^1\rangle + E^1 \langle \psi^0_a |\psi^0\rangle \]</span></p>
+<p>This simplifies noticing that the first term on each side cancels out <span class="math inline">\(E^0\langle \psi^0_a |\psi^1\rangle\)</span> and we may also introduce Equation ,</p>
+<p><span class="math display">\[\alpha\langle \psi^0_a |H&#39;\psi_a^0\rangle + \beta\langle \psi^0_a |H&#39;\psi_b^0\rangle = \alpha E^1\]</span></p>
+<p>To simplify, we'll change notation,</p>
+<p><span class="math display">\[ \langle H&#39; \rangle_{ij} \equiv  \langle \psi^0_i |H&#39;\psi_j^0\rangle \]</span></p>
+<p><span class="math display">\[ \begin{equation}
+    \boxed{\alpha \langle H&#39; \rangle _{aa} + \beta \langle H&#39; \rangle_{ab} = \alpha E^1}
+    \label{eq: e1}
+\end{equation} \]</span></p>
+<p>Equation  is an interesting equation because it is a linear combination we'll soon appreciate. What is really important is that if <span class="math inline">\(\avg{H&#39;}_{ab}=0\)</span> then we get the nondegenerate perturbation theory.</p>
+<ol style="list-style-type: decimal">
+<li>Take the inner product with <span class="math inline">\(\psi_b^0\)</span> to get another linear combination</li>
+</ol>
+<p><span class="math display">\[ \begin{equation}
+\boxed{\alpha \langle H&#39; \rangle _{ba} + \beta \langle H&#39; \rangle_{bb} = \beta E^1}
+\label{eq: e2}
+\end{equation} \]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Multiply by <span class="math inline">\(\langle H&#39;\rangle_{ab}\)</span></p></li>
+<li><p><mark> Eliminate <span class="math inline">\(\beta W_{ab}\)</span> </mark></p></li>
+</ol>
+<p><span class="math display">\[ \alpha \left[\langle H&#39;\rangle_{ab}\langle H&#39;\rangle_{ba} - (E^1 - \langle H&#39;\rangle_{aa})(E^1-\langle H&#39;\rangle_{bb})\right] = 0\]</span></p>
+<p>Given that <span class="math inline">\(\alpha \neq 0\)</span><a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>, this is a quadratic equation,</p>
+<p><span class="math display">\[ E^1_\pm = \frac{1}{2}\left[\langle H&#39;\rangle_{aa} + \langle H&#39;\rangle_{bb} \pm \sqrt{\left(\langle H&#39;\rangle_{aa} - \langle H&#39;\rangle_{bb}\right)^2 + 4 |\langle H&#39;\rangle_{ab}|^2} \right] \]</span></p>
+<p>What's interesting is when <span class="math inline">\(\langle H&#39; \rangle_{ab} = 0\)</span> then,</p>
+<p><span class="math display">\[ E^1_+ =  \langle H&#39; \rangle_{aa}, \qquad E^1_- = \langle H&#39; \rangle_{bb}\]</span></p>
+<p>This is the same result as the nondegenerate perturbation theory. The next subsection will show the cases where <span class="math inline">\(\avg{H&#39;}_{ab}=0\)</span>.</p>
+<h4 id="theorem---nondegenerate-and-degenerate-equivalence">Theorem - Nondegenerate and Degenerate Equivalence</h4>
+<p>Degenerate perturbation theory equates to the same corrections as nondegenerate perturbation theory if an operator <span class="math inline">\(A\)</span> such that it commutes with both <span class="math inline">\(H^0\)</span> and <span class="math inline">\(H&#39;\)</span> and also satisfies the following condition,</p>
+<p>If, <span class="math display">\[\begin{align*}
+    [A, H^0] &amp;= [A, H&#39;] = 0\\
+    A\psi_a^0 &amp;= \lambda_a\psi_a^0\\
+    A\psi_b^0 &amp;= \lambda_b\psi_b^0\\
+    \lambda_a &amp;\neq \lambda_b
+\end{align*} \]</span></p>
+<p>then nondegenerate applies to degenerate case or in other words,</p>
+<p><span class="math display">\[ \langle H&#39; \rangle_{ab} = 0\]</span></p>
+<h2 id="n-fold-degeneracy">N-Fold Degeneracy</h2>
+<p>The generalization of <span class="math inline">\(N\)</span>-fold degeneracy is to use an <span class="math inline">\(N\times N\)</span> matrix. Let's write Equation  and Equation  aligned,</p>
+<p><span class="math display">\[\begin{align*}
+    \alpha \langle H&#39; \rangle _{aa} + \beta \langle H&#39; \rangle_{ab} &amp;= \alpha E^1\\
+    \alpha \langle H&#39; \rangle _{ba} + \beta \langle H&#39; \rangle_{bb} &amp;= \beta E^1
+\end{align*}\]</span></p>
+<p><span class="math display">\[ \begin{pmatrix}
+    \langle H&#39; \rangle _{aa} &amp; \langle H&#39; \rangle _{ab}\\
+    \langle H&#39; \rangle _{ba} &amp; \langle H&#39; \rangle _{bb}
+\end{pmatrix} 
+\begin{pmatrix}
+    \alpha \\ \beta
+\end{pmatrix} = E^1 \begin{pmatrix}
+    \alpha \\ \beta
+\end{pmatrix}
+\]</span></p>
+<h3 id="example">Example</h3>
+<blockquote>
+<p>TODO: Provide 1 matrix example one for degenerate and one non-degenerate theory.</p>
+</blockquote>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>When <span class="math inline">\(\alpha = 0\)</span> that means the unperturbed wavefunction is <span class="math inline">\(\psi_b\)</span>.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+        </div>
+        <div class="col-md-2 d-none d-md-block">
+            <div class="sticky-top onthispage">
+                <ul id="onthispage-list" class="no-list-style">On This Page</ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <footer class="py-2 bg-white">
+    <div class="container">
+        <p class="text-right m-0"> Generated by <a href="https://github.com/ketozhang/StaticPy">StaticPy</a> |
+            Designed
+            by <a href="https://github.com/ketozhang">Keto Z.</a>
+        </p>
+    </div>
+</footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/onThisPage.js"></script>
+
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } }
+        });
+    </script>
+    
+
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
+
+
+    <script>
+        anchors.add();
+        $(document).ready(function () {
+            Prism.highlightAll();
+        })
+    </script>
+</body>
+
+</html>

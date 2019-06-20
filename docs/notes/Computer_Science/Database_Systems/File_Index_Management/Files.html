@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+    <meta charset="UTF-8">
+    <title>StaticPy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://ketozhang.github.io/StaticPy/static/base.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
+    <link href="https://ketozhang.github.io/StaticPy/static/prism.css" rel="stylesheet">
+    <link rel="shortcut icon" href="https://ketozhang.github.io/StaticPy/static/favicon.ico">
+
+    <!-- LaTeX Stylesheet -->
+    
+    <div class="d-none">
+    $$
+        \newcommand{abs}[1]{\left | #1 \right |}
+        \newcommand{set}[1]{\left\{#1\right\}}
+    $$
+    </div>
+    
+</head>
+
+<body>
+    
+<div class="container-fluid" id="note">
+    <h1 class="title text-center pt-3">Files</h1>
+    <hr>
+    <div class="row">
+        <div class="col-lg-2 d-none d-lg-block"></div>
+        <div class="col-lg-7 col-md-10">
+            <p>The memory architecture for storing data uses a file hierarchy.</p>
+<ul>
+<li><strong>Files</strong>: Stores a table</li>
+<li><strong>Pages</strong>: A collection of records</li>
+<li><strong>Records</strong>: The row of a table</li>
+</ul>
+<p>The file has a structure managing pages and structure:</p>
+<ul>
+<li>Unordered heap files</li>
+<li>Clustered heap files</li>
+<li>Sorted files</li>
+<li>Index files</li>
+</ul>
+<h2 id="unordered-heap-files">Unordered Heap Files</h2>
+<div class="figure">
+<img src="2018-09-11-13-54-37.png" />
+
+</div>
+<p>Collection of records in no particular order. Not the same as min heap structure.</p>
+<ul>
+<li>As file size changes, the pages are (de)allocated</li>
+</ul>
+<h3 id="implementation-doubly-linked-list">Implementation: Doubly Linked List</h3>
+<p>A header file is double linked to each page which indicates the data stored and the amount of free space.</p>
+<ul>
+<li>Implementation is slow when determining which page has free space</li>
+</ul>
+<h3 id="implementation-page-directory">Implementation: Page Directory</h3>
+<ul>
+<li>A header page consist a pointer to the page and how much free space the page has.</li>
+<li>Header page is likely cached.</li>
+</ul>
+<h2 id="sorted-files-ordered-heap-files">Sorted Files (Ordered Heap Files)</h2>
+<div class="figure">
+<img src="2018-09-11-13-59-40.png" />
+
+</div>
+<p>Let's take a look at the performance between a sorted file and heap file:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="center">Heap File</th>
+<th align="center">Sorted File</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Scan all Records</td>
+<td align="center">B*D</td>
+<td align="center">B*D</td>
+</tr>
+<tr class="even">
+<td>Equality Search</td>
+<td align="center">B*D/2</td>
+<td align="center">(lg B)*D</td>
+</tr>
+<tr class="odd">
+<td>Range Search</td>
+<td align="center">B*D</td>
+<td align="center">(lg B + matches)*D</td>
+</tr>
+<tr class="even">
+<td>Insert</td>
+<td align="center">2*D</td>
+<td align="center">(lg B + B)*D</td>
+</tr>
+<tr class="odd">
+<td>Delete</td>
+<td align="center">(B/2+1)*D</td>
+<td align="center">(lg B + B)*D</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>B</strong>: Number of data blocks in the file</li>
+<li><strong>R</strong>: Number of records per block</li>
+<li><strong>D</strong>: Average time to read/write disk to block <br><br></li>
+</ul>
+<h3 id="scan">Scan</h3>
+<p>Reading records from left to right does not matter whether or not the heap is sorted. So, the number of read is the number of pages <span class="math inline">\(B\)</span>.</p>
+<h3 id="equality-search-search-for-a-single-match.">Equality Search: Search for a single match.</h3>
+<p>For the heap file, since the order is random in nature we use probability. The probability that the key is on some page is</p>
+<p><span class="math display">\[P(i) = \frac{1}{B} \]</span></p>
+<p>The number of pages the search looked at is also <span class="math inline">\(i\)</span>. We are interested in the expected value,</p>
+<p><span class="math display">\[\Expected{i} = \sum_{i=1}^B i P(i) = \frac{B+1}{2} \approx \frac{B}{2}\]</span></p>
+<p>Now for the sorted file. You can see that it's best to start searching from the center then search halfway either to the left or right. Then repeat this process until found. This is binary search:</p>
+<div class="figure">
+<img src="2018-09-11-14-30-25.png" />
+
+</div>
+<p><span class="math display">\[ \Expected{i} = \sum_{i=1}^{\log_2{B}} i \frac{2^{i-1}}{B} = \log_2 B - \frac{B-1}{B}  \approx \log_2{B}\]</span></p>
+<p>From this binary tree, we see that from the center to the next midpoint cost two IO (i.e., edges traversed) and the sub-midpoints cost an extra IO each.</p>
+<h3 id="range-search-search-for-all-matches-within-a-range.">Range Search: Search for all matches within a range.</h3>
+<p>For the heap file, we must search through all pages.</p>
+<p><span class="math display">\[ \Expected{i} = B \]</span></p>
+<p>For the sorted file, we only have to go down a path in the binary tree, start collecting when within range and stop when out of range. Let <span class="math inline">\(i\)</span> be the page number and <span class="math inline">\(R\)</span> be the range then the expected reads is,</p>
+<p><span class="math display">\[ \Expected{i} \approx \log_2 B + |\set{i: i \in R}| \]</span></p>
+<h3 id="insertion">Insertion</h3>
+<p>For the heap file, we must read the page then append,</p>
+<p><span class="math display">\[\Expected{i} = 2D\]</span></p>
+<p>For the sorted file, first we find where the value goes which cost <span class="math inline">\(\log_2 B\)</span> and then shift the rest of the values to the right. On average the insertion is in the middle, so the rest of the values are half of <span class="math inline">\(B\)</span>. However we got to do this twice so shifting cost <span class="math inline">\(B\)</span>.</p>
+<p><span class="math display">\[\Expected{i} = \log_2 B + B\]</span></p>
+<h3 id="deletion">Deletion</h3>
+<p>For the heap file, we first search for the page then delete by writing so the pages read is,</p>
+<p><span class="math display">\[ \frac{B}{2} + 1\]</span></p>
+<p>For the sorted file, we first do a search then repack the whole heap by shifting left.</p>
+<p><span class="math display">\[ \log_2{B} + B \]</span></p>
+        </div>
+        <div class="col-md-2 d-none d-md-block">
+            <div class="sticky-top onthispage">
+                <ul id="onthispage-list" class="no-list-style">On This Page</ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <footer class="py-2 bg-white">
+    <div class="container">
+        <p class="text-right m-0"> Generated by <a href="https://github.com/ketozhang/StaticPy">StaticPy</a> |
+            Designed
+            by <a href="https://github.com/ketozhang">Keto Z.</a>
+        </p>
+    </div>
+</footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/onThisPage.js"></script>
+
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } }
+        });
+    </script>
+    
+
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
+
+
+    <script>
+        anchors.add();
+        $(document).ready(function () {
+            Prism.highlightAll();
+        })
+    </script>
+</body>
+
+</html>

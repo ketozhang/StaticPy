@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+    <meta charset="UTF-8">
+    <title>StaticPy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://ketozhang.github.io/StaticPy/static/base.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
+    <link href="https://ketozhang.github.io/StaticPy/static/prism.css" rel="stylesheet">
+    <link rel="shortcut icon" href="https://ketozhang.github.io/StaticPy/static/favicon.ico">
+
+    <!-- LaTeX Stylesheet -->
+    
+    <div class="d-none">
+    $$
+        \newcommand{abs}[1]{\left | #1 \right |}
+        \newcommand{set}[1]{\left\{#1\right\}}
+    $$
+    </div>
+    
+</head>
+
+<body>
+    
+<div class="container-fluid" id="note">
+    <h1 class="title text-center pt-3">Recovery</h1>
+    <hr>
+    <div class="row">
+        <div class="col-lg-2 d-none d-lg-block"></div>
+        <div class="col-lg-7 col-md-10">
+            <h2 id="disk-buffer-management">Disk &amp; Buffer Management</h2>
+<p>A naive policy implements the following:</p>
+<ul>
+<li><p><strong>No Steal Policy</strong></p>
+<p>Don't allow buffer-pool frames with uncommited updates to be replace (pin those pages)</p>
+<ul>
+<li>No need for UNDO logging</li>
+<li>Cause bad performance taking up buffer</li>
+</ul></li>
+<li><p><strong>Force Policy</strong></p>
+Force all updates onto the disk before commit.
+<ul>
+<li>No need for REDO logging</li>
+<li>Bad performance (random I/O writes for commits)</li>
+</ul></li>
+</ul>
+<p>What we actually want is the opposite.</p>
+<ul>
+<li><p><strong>No Force Policy</strong></p>
+<p>Flush as little as possible to a REDO log prior to commit. This enforces durability (if commited -&gt; REDO).</p></li>
+<li><p><strong>Steal Policy</strong></p>
+<p>Remember old values of flushed pages to an UNDO log. This enforaces atomicity (if abort -&gt; UNDO).</p></li>
+</ul>
+<h2 id="log-records">Log Records</h2>
+<p>An ordered list of records that allow REDO/UNDO</p>
+<ul>
+<li>Transaction ID</li>
+<li>Page ID</li>
+<li>Offset</li>
+<li>Length</li>
+<li>Old data</li>
+<li>New data</li>
+</ul>
+<h3 id="aries-protocol">ARIES Protocol</h3>
+<p>This log record follows the <strong>ARIES protocol</strong>.</p>
+<ul>
+<li><strong>prevLSN</strong>: LSN of the previous log record written by the specific transaction.</li>
+<li><strong>Transaction Table</strong> A table of active transactions</li>
+<li><p><strong>Dirty Page Table</strong> A table of dirty pages stores information for UNDO.</p>
+<ul>
+<li><strong>recLSN</strong>: LSN of the first action that dirtied the page.</li>
+</ul></li>
+<li><strong>Log record types</strong>:
+<ul>
+<li>Update, Commit, Abort</li>
+<li>Checkpoint (for log maintenance)</li>
+<li>Componensation Log Records (CLRs, for UNDO actions)</li>
+<li>End (end of commit or abort)</li>
+</ul></li>
+<li><strong>Abort and Checkpoint</strong> When abort and checkpointing we need to implement UNDO. Before we start the UNDO we need
+<ul>
+<li>get lastLSN</li>
+<li>write abort log</li>
+<li>follow the chain of log records using prevLSN</li>
+<li>Componensation Log Record (CLR): A log to insure crashes while undoing.
+<ul>
+<li>Contains REDO info</li>
+<li>UNDO persists.</li>
+</ul></li>
+<li>Write end log record.</li>
+</ul></li>
+</ul>
+<h3 id="aries-recovery-phases">ARIES Recovery Phases</h3>
+<p>During a crash the following is ran</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Analysis (Checkpoint)</strong></p>
+<p>If checkpoint exists, figure out which transaction was commited since checkpoint and which failed.</p>
+<ul>
+<li>End record
+<ul>
+<li>Remove transaction from table</li>
+</ul></li>
+<li>Update record
+<ul>
+<li>If the page is not in the dirty page table, add to it. Set <code>recLSN=LSN</code></li>
+</ul></li>
+<li>Else
+<ul>
+<li>Add transaction to table. Set <code>lastLSN=LSN</code></li>
+<li>change transaction status on commit.</li>
+</ul></li>
+</ul></li>
+<li><p><strong>REDO</strong></p>
+<p>Redo all actions since the smallest <code>recLSN</code> in the dirty page.</p>
+<ul>
+<li>Start at the smallest <code>recLSN</code> (oldest update log that dirtied the page).</li>
+<li>For each CLR, REDO the aciton unless either
+<ul>
+<li>Affected page isn't in the dirty page table</li>
+<li>Affected page is in the dirty page table but has <code>recLSN &gt; LSN</code></li>
+<li><code>pageLSN &gt;= LSN</code></li>
+</ul></li>
+<li>Apply REDO:
+<ul>
+<li>Reapply logged action</li>
+<li>Set <code>pageLSN=LSN</code></li>
+</ul></li>
+</ul></li>
+<li><p><strong>UNDO</strong> Undo the effects of the failed transaction.</p>
+<ul>
+<li>Start with the transaction with the largest <code>lastLSN</code>. For each transaction <code>lastLSN</code> (stored in a list of undo),
+<ul>
+<li>If the <code>lastLSN</code> log is a CLR
+<ul>
+<li>Add the <code>nextLSN</code> to the undo list if it isn't null.</li>
+<li>Otherwise write an end record.</li>
+</ul></li>
+<li>Otherwise the record is an update
+<ul>
+<li>Write a CLR for the undo in the log.</li>
+<li>Perform the undo.</li>
+<li>Add the <code>prevLSN</code> to the list of undo</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ol>
+<h2 id="sql-commands">SQL Commands</h2>
+<ul>
+<li><p><code>BEGIN</code></p>
+<p>Start a transaction that won't commit until the <code>COMMIT</code> is ran.</p></li>
+<li><p><code>COMMIT</code></p>
+Commit the transaction if all transactions above (until the <code>BEGIN</code>) suceeded.</li>
+<li><p><code>ROLLBACK</code></p>
+<p>Rollback the transaction.</p></li>
+<li><p><code>SAVEPOINT &lt;name&gt;</code></p>
+<p>Save the current.</p></li>
+<li><p><code>RELEASE SAVEPOINT &lt;name&gt;</code></p>
+<p>Delete the savepoint.</p></li>
+<li><p><code>ROLLBACK TO SAVEPOINT &lt;name&gt;</code></p>
+<p>Rollback to the savepoint.</p></li>
+</ul>
+<h2 id="why-database-crash">Why Database Crash?</h2>
+<p>From the most common to least:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Operation Error</strong></p>
+<p>The user caused the error.</p></li>
+<li><p><strong>Configuration Error</strong></p>
+<p>Error on requirements (e.g., disk space, file permission, etc).</p></li>
+<li><p><strong>Software Failure</strong></p>
+<p>Bugs (DBMS bugs, security flaws, OS bugs, etc).</p></li>
+<li><p><strong>Hardware Failure</strong></p></li>
+</ol>
+        </div>
+        <div class="col-md-2 d-none d-md-block">
+            <div class="sticky-top onthispage">
+                <ul id="onthispage-list" class="no-list-style">On This Page</ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <footer class="py-2 bg-white">
+    <div class="container">
+        <p class="text-right m-0"> Generated by <a href="https://github.com/ketozhang/StaticPy">StaticPy</a> |
+            Designed
+            by <a href="https://github.com/ketozhang">Keto Z.</a>
+        </p>
+    </div>
+</footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/onThisPage.js"></script>
+
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } }
+        });
+    </script>
+    
+
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
+
+
+    <script>
+        anchors.add();
+        $(document).ready(function () {
+            Prism.highlightAll();
+        })
+    </script>
+</body>
+
+</html>

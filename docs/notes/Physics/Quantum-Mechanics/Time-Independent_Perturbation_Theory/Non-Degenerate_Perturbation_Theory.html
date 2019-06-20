@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+    <meta charset="UTF-8">
+    <title>StaticPy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://ketozhang.github.io/StaticPy/static/base.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
+    <link href="https://ketozhang.github.io/StaticPy/static/prism.css" rel="stylesheet">
+    <link rel="shortcut icon" href="https://ketozhang.github.io/StaticPy/static/favicon.ico">
+
+    <!-- LaTeX Stylesheet -->
+    
+    <div class="d-none">
+    $$
+        \newcommand{abs}[1]{\left | #1 \right |}
+        \newcommand{set}[1]{\left\{#1\right\}}
+    $$
+    </div>
+    
+</head>
+
+<body>
+    
+<div class="container-fluid" id="note">
+    <h1 class="title text-center pt-3">Non-Degenerate Perturbation Theory</h1>
+    <hr>
+    <div class="row">
+        <div class="col-lg-2 d-none d-lg-block"></div>
+        <div class="col-lg-7 col-md-10">
+            <p>Given a easily solvable solution to the Schrodinger equation denoted as,</p>
+<p><span class="math display">\[ H^0 \psi_n^0 = E_n^0 \psi_n^0\]</span></p>
+<ul>
+<li><span class="math inline">\(H^0\)</span> : simple solvable Hamiltonian</li>
+<li><span class="math inline">\(\psi_n^0\)</span> : general solution to the simple Hamiltonian assuming there are <span class="math inline">\(n\)</span> solutions.</li>
+<li><span class="math inline">\(E_n^0\)</span> : general energy eigenvalue to the simple Hamiltonian assuming there are <span class="math inline">\(n\)</span> energy eigenvalues.</li>
+</ul>
+<p>We would like to perturb the Hamiltonian very slightly transforming the Hamiltonian into,</p>
+<p><span class="math display">\[ H = H^0 + \lambda H&#39; \tag{Perturbed Hamiltonian} \]</span></p>
+<ul>
+<li><span class="math inline">\(H&#39;\)</span> : perturbation that contributes to the Hamiltonian</li>
+<li><span class="math inline">\(\lambda\)</span> : strength of the perturbation, it's arbitrary and assume to be very small.</li>
+</ul>
+<p><strong>Perturbation theory</strong> states that the solution to the perturbed hamiltonian is in the form of a geometric series,</p>
+<p><span class="math display">\[ 
+\begin{align}
+    \psi_n &amp;= \psi_n^0 + \lambda\psi_n^1 + ...\lambda^k\psi_n^j\\
+    E_n &amp;= E_n^0 + \lambda E_n^1 + ... \lambda^k E_n^j
+\end{align} 
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\psi_n^j\)</span> : the <span class="math inline">\(j\)</span>-th order correction to the eigenfunction</li>
+<li><span class="math inline">\(E_n^j\)</span> : the <span class="math inline">\(j\)</span>-th order correction to the eigenvalue</li>
+<li><span class="math inline">\(\lambda_n^k\)</span> : The <span class="math inline">\(k\)</span>-th power</li>
+</ul>
+<p>While it is a confusing notation, <span class="math inline">\(j\)</span>-th <strong>index does not mean power</strong> only <span class="math inline">\(k\)</span>-th does.</p>
+<p>We may now rewrite the TISE for the perturbed hamiltonian. This simplifies to,</p>
+<p><span class="math display">\[ \begin{align}
+    \boxed{
+    H^0\psi_n^0 + \lambda(H^0\psi_n^1+H&#39;\psi_n^0) + \lambda^2(H^0\psi_n^2 + H&#39;\psi_n^1) + ... \\
+    = E_n^0\psi_n^0 + \lambda(E_n^0\psi_n^1 + E_n^1\psi_n^0) + \lambda^2(E_n^0\psi_n^2 + E_n^1\psi_n^1 + E_n^2\psi_n^0 )}
+    \label{eq: perturbed-tise}
+\end{align}\]</span></p>
+<h2 id="first-order-perturbation">First Order Perturbation</h2>
+<p>For very small perturbations where <span class="math inline">\(\lambda \ll 1\)</span> we may approximate first order by considering terms in the Equation  with <span class="math inline">\(\lambda^1\)</span>,</p>
+<p><span class="math display">\[
+\begin{align}
+    \boxed{H^0\psi_n^1+H&#39;\psi_n^0 = E_n^0\psi_n^1 + E_n^1\psi_n^0}
+    \label{eq: first-order}
+\end{align}
+\]</span></p>
+<p>The first order correction to the eigenvalue and eigenfunction are the following,</p>
+<p><span class="math display">\[
+\begin{align}
+     \boxed{E_n^1 = \langle H&#39; \rangle }
+     \label{eq: first-order-eigenvalue}
+\end{align}
+\]</span></p>
+<p><span class="math display">\[
+\begin{equation}
+    \boxed{\psi_n^1 = \sum_{m \neq n}{\frac{\langle \psi_m^0 |H&#39;|\psi_n^0\rangle}{E^0_n - E_m^0} \psi_m^0}} 
+    \label{eq: first-order-eigenfunction}
+\end{equation}
+\]</span></p>
+<p>Equation  is valid only if the system is non-degenerate hence the name of the theory.</p>
+<h3 id="correction-to-eigenvalue">Correction to Eigenvalue</h3>
+<p>We wish to find <span class="math inline">\(E_n^1\)</span> by applying <span class="math inline">\(\langle \psi_n^0 |\)</span>,</p>
+<p><span class="math display">\[ 
+\begin{align}
+    \langle \psi^0_n| H^0\psi_n^1 \rangle+ \langle \psi^0_n | H&#39;\psi_n^0 \rangle &amp;= E_n^0\langle \psi^0_n  |\psi_n^1 \rangle + E_n^1\langle \psi^0_n  |\psi_n^0\rangle\\
+    E_n^0 \langle \psi_n^0 | \psi_n^1 \rangle + \langle \psi^0_n | H&#39;\psi_n^0 \rangle &amp;= E_n^0\langle \psi^0_n  |\psi_n^1 \rangle + E_n^1  \\
+\end{align}
+\]</span></p>
+<p><span class="math display">\[ E_n^1 = \langle \psi_n^0 | H&#39; | \psi_n^0 \rangle \]</span></p>
+<p>We find that the first order correction of the eigenvalue <span class="math inline">\(E_n^1\)</span> is the expectation value of <span class="math inline">\(H&#39;\)</span> for the unperturbed eigenfunction <span class="math inline">\(\psi_n^0\)</span>,</p>
+<p><span class="math display">\[
+\begin{align}
+     \boxed{E_n^1 = \langle H&#39; \rangle }
+     \tag{1st Order Eigenfunction Correction}
+\end{align}
+\]</span></p>
+<h3 id="correction-to-eigenfunction">Correction to Eigenfunction</h3>
+<p>We wish to find the first order correction to the wavefunction <span class="math inline">\(\psi_n^1\)</span>. To do so let's rewrite Equation  as an inhomogeneous differential equation,</p>
+<p><span class="math display">\[
+\begin{align}
+    (H^0 - E^0_n)\psi_n^1 = -(H&#39;-E_n^1)\psi_n^0
+    \label{eq: first-order-2}
+\end{align}
+\]</span></p>
+<p>Recall that the <span class="math inline">\(\psi_n^1\)</span> is a wavefunction that can definitely be built by a linear combination of the complete set of the unperturbed wavefunctions <span class="math inline">\(\psi_n^0\)</span>. We will use the subscript <span class="math inline">\(m\)</span> to preventing you from assuming <span class="math inline">\(n=m\)</span>,</p>
+<p><span class="math display">\[ \psi_n^1 = \sum_{m}{c_m^{(n)}\psi_m^0} \]</span></p>
+<p>The solution to finding <span class="math inline">\(\psi_n^1\)</span> is to find what each weight <span class="math inline">\(c_m^{(n)}\)</span> corresponds to,</p>
+<p>Let's plug this back into Equation ,</p>
+<p><span class="math display">\[
+\begin{equation}
+    (H^0 - E^0_n)\sum_{m}{c_m^{(n)}\psi_m^0} = -(H&#39;-E_n^1)\psi_n^0
+\end{equation}
+\]</span></p>
+<p>Notice that the term in the sum where <span class="math inline">\(n=m\)</span> goes to zero since <span class="math inline">\((H^0 - E_n^0)\psi_n^0 = 0\)</span> so we can ignore the term <span class="math inline">\(m=n\)</span>. Also notice that we do know the eigenvalue for every application of the hamiltonian on <span class="math inline">\(\psi_m^0\)</span> to be <span class="math inline">\(E_m^0\)</span>.,</p>
+<p><span class="math display">\[
+\begin{equation}
+    \sum_{m\neq n}{c_m^{(n)}(E_m^0 - E^0_n)\psi_m^0} = -(H&#39;-E_n^1)\psi_n^0
+\end{equation}
+\]</span></p>
+<p>You're able to isolate <span class="math inline">\(c_m^{(n)}\)</span> if we were to apply <span class="math inline">\(\langle \psi_l^0 |\)</span> where <span class="math inline">\(l\neq n\)</span>, and notice that <span class="math inline">\(\langle \psi_l^0 | \psi_m^0\rangle\)</span> only exist if <span class="math inline">\(m=l\)</span></p>
+<p><span class="math display">\[
+\begin{align*}
+    \sum_{m\neq n}{c_m^{(n)}(E_m^0 - E^0_n)\langle \psi_l^0 |\psi_m^0}\rangle &amp;= -\langle \psi_m^0 |(H&#39;-E_n^1)|\psi_n^0\rangle\\
+    c_l^{(n)}(E_l^0 - E^0_n) &amp;= -\langle \psi_l^0 |H&#39;|\psi_n^0\rangle\\
+\end{align*}
+\]</span></p>
+<p><span class="math display">\[c_l^{(n)} = \frac{\langle \psi_l^0 |H&#39;|\psi_n^0\rangle}{E^0_n - E_l^0}\]</span></p>
+<p>Let's switch the index <span class="math inline">\(l\)</span> back to <span class="math inline">\(m\)</span> since we won't be needing anymore confusion,</p>
+<p><span class="math display">\[
+\begin{equation}
+    c_m^{(n)} = \frac{\langle \psi_m^0 |H&#39;|\psi_n^0\rangle}{E^0_n - E_m^0}
+    \label{eq: weight}
+\end{equation}
+\]</span></p>
+<p>Thus the first order correction to the eigenfunction <span class="math inline">\(\psi_n^1\)</span> is ,</p>
+<p><span class="math display">\[
+\begin{equation}
+    \boxed{\psi_n^1 = \sum_{m \neq m}{\frac{\langle \psi_m^0 |H&#39;|\psi_n^0\rangle}{E^0_n - E_m^0} \psi_m^0}}
+    \tag{1st Order Eigenfunction Correction}
+\end{equation}
+\]</span></p>
+<h2 id="second-order-perturbation">Second Order Perturbation</h2>
+<p>Similar to first order, we will only consider terms with <span class="math inline">\(\lambda^2\)</span> in the Equation ,</p>
+<p><span class="math display">\[ 
+\begin{align}
+    \boxed{H^0\psi_n^2 + H&#39;\psi_n^1 = E_n^0\psi_n^2 + E_n^1\psi_n^1 + E_n^2\psi_n^0}
+\end{align} 
+\]</span></p>
+<h3 id="correction-to-eigenvalue-1">Correction to Eigenvalue</h3>
+<h3 id="correction-to-eigenfunction-1">Correction to Eigenfunction</h3>
+        </div>
+        <div class="col-md-2 d-none d-md-block">
+            <div class="sticky-top onthispage">
+                <ul id="onthispage-list" class="no-list-style">On This Page</ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <footer class="py-2 bg-white">
+    <div class="container">
+        <p class="text-right m-0"> Generated by <a href="https://github.com/ketozhang/StaticPy">StaticPy</a> |
+            Designed
+            by <a href="https://github.com/ketozhang">Keto Z.</a>
+        </p>
+    </div>
+</footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/onThisPage.js"></script>
+
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } }
+        });
+    </script>
+    
+
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
+
+
+    <script>
+        anchors.add();
+        $(document).ready(function () {
+            Prism.highlightAll();
+        })
+    </script>
+</body>
+
+</html>

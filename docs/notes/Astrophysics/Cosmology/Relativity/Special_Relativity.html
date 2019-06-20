@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+    <meta charset="UTF-8">
+    <title>StaticPy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://ketozhang.github.io/StaticPy/static/base.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
+    <link href="https://ketozhang.github.io/StaticPy/static/prism.css" rel="stylesheet">
+    <link rel="shortcut icon" href="https://ketozhang.github.io/StaticPy/static/favicon.ico">
+
+    <!-- LaTeX Stylesheet -->
+    
+    <div class="d-none">
+    $$
+        \newcommand{abs}[1]{\left | #1 \right |}
+        \newcommand{set}[1]{\left\{#1\right\}}
+    $$
+    </div>
+    
+</head>
+
+<body>
+    
+<div class="container-fluid" id="note">
+    <h1 class="title text-center pt-3">Special Relativity</h1>
+    <hr>
+    <div class="row">
+        <div class="col-lg-2 d-none d-lg-block"></div>
+        <div class="col-lg-7 col-md-10">
+            <blockquote>
+<p><strong>IMPORTANT: </strong> From here on out, I will be using natural units where <span class="math inline">\(c=1\)</span>. This means that it's important to know that time <span class="math inline">\(t\)</span> has the units of length in <a href="#spacetime">Minkowski space</a>. Please take this moment for a deep breath because you're ready to learn natural units (if you haven't).</p>
+</blockquote>
+<h2 id="spacetime">Spacetime</h2>
+<blockquote>
+<p><em>Alias: Minkowski Space</em></p>
+</blockquote>
+<p>Naturally, one would think that a certain event happen at some fixed time for example an object at time <span class="math inline">\(t_0\)</span> can be at some position <span class="math inline">\(x(t_0)=x_0\)</span> but, it's impossible for the object to be in another position at the same time. In math, one can say that <span class="math inline">\(x(t)\)</span> is a well-defined function such that the vertical line passes for a time vs position graph.</p>
+<blockquote>
+<p>We ignore the world of quantum mechanics where the position of an object may be in multiple places at the same time determined by some wavefunction.</p>
+</blockquote>
+<p>This axiom (assumption of our universe) is not true! <span class="math inline">\(x(t)\)</span> is not a well-defined function where we do allow an object to be in two different places at the same time <span class="math inline">\(t_0\)</span>. We need to include <span class="math inline">\(t\)</span> in our function such that we define a new concept of position which is a position in <strong>spacetime</strong>. In 3D Euclidean space, this would now be a 4D Euclidean spacetime called the <strong>Minkowski</strong> space. To preserve a position unit the 4th dimension is <span class="math inline">\(ct\)</span> such that,</p>
+<p><span class="math display">\[\begin{align}
+    x^\mu &amp;= \mathcal{x}^\mu(-ct,x,y,z)\\
+    x^\mu &amp;= \begin{pmatrix} t \\ x \\ y \\ z \end{pmatrix}
+\end{align}\]</span></p>
+<ul>
+<li><span class="math inline">\(x^\mu\)</span> : Minkowski Space function or less confusing the 4-positional vector.</li>
+<li><span class="math inline">\(t \rightarrow \text{SI} \rightarrow ct\)</span></li>
+</ul>
+<p>In a general <span class="math inline">\(N\)</span>-space the positional vector <span class="math inline">\(x^\mu\)</span> becomes a <span class="math inline">\(N\)</span>-positional vector,</p>
+<p><span class="math display">\[
+\begin{equation}
+    x^\mu = \begin{pmatrix}
+        x^0\\ x^1 \\ \vdots \\ x^\mu
+    \end{pmatrix}
+\end{equation}
+\]</span></p>
+<blockquote>
+<p>The superscript is not a power but denotes which axis/basis such that say <span class="math inline">\(x^1 = x,\; x^2 = y,\; x^3 = z, \ldots\;\)</span>.</p>
+</blockquote>
+<p>The <span class="math inline">\(x^0\)</span> may be confusing for some so one may define cannonical position as <span class="math inline">\(x^i = \{x,y,z,...\}\)</span> such that,</p>
+<p><span class="math display">\[
+\begin{equation}
+    x^\mu \equiv x^\mu(t, x^i)
+\end{equation}
+\]</span></p>
+<h2 id="metric">Metric</h2>
+<p>A bit about metric. Metric is defined to deal with measuring length <span class="math inline">\(S\)</span> (differential: <span class="math inline">\(ds\)</span>) given some coordinate system. You should be familiar with the metric for Euclidean surface (flat surface) say for a 2D Euclidean surface in cartesian coordinate should be,</p>
+<p><span class="math display">\[
+\begin{align}
+    S^2 &amp;= x^2 + y^2 \qquad \tag{Pythagorean Theorem}\\
+    ds^2 &amp;= dx^2 + dy^2
+\end{align}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(S = \int{ds}\)</span></li>
+<li>Let's use the differential form to be very general.</li>
+</ul>
+<p>The value of <span class="math inline">\(S\)</span> should not be any different in polar coordinate. To preserve <span class="math inline">\(S\)</span> we modify the equation</p>
+<p><span class="math display">\[
+\begin{equation}
+    ds^2 = dr^2 + r^2d\theta^2
+\end{equation}
+\]</span></p>
+<p>For any general coordinate we may write it as a summation</p>
+<p><span class="math display">\[
+\begin{align*}
+    ds^2 = \sum_{\mu,\nu=1}^{\dim}{g_{\mu\nu}dx^\mu dx^\nu}
+\end{align*}
+\]</span></p>
+<p>This is often written using Einstein's summation notation which just get rid of the <span class="math inline">\(\sum\)</span>. This is useful because it's realizable in matrix form such that <span class="math inline">\(g_{\mu\nu}\)</span> and <span class="math inline">\(dx^\mu dx^\nu\)</span> are matrices,</p>
+<p><span class="math display">\[
+\begin{gather}
+    \boxed{ds^2 = g_{\mu\nu}dx^\mu dx^\nu}\\
+    dx^\mu dx^\nu = \begin{pmatrix}
+        dx_1^2 &amp; dx_1dx_2 &amp; \ldots\\ dx_2dx_1 &amp; dx_2^2 &amp;\ldots \\ \vdots &amp; \vdots &amp; \ddots
+    \end{pmatrix}
+\end{gather}
+\]</span></p>
+<p><span class="math display">\[
+\begin{align}
+g_{\mu\nu} = \begin{pmatrix}
+    1 &amp; 0\\ 0 &amp; 1
+\end{pmatrix} \tag{Cartesian}\\
+g_{\mu\nu} = \begin{pmatrix}
+    1 &amp; 0\\ 0 &amp; r^2
+\end{pmatrix} \tag{Polar}
+\end{align}
+\]</span> ### Spacetime Interval</p>
+<p>The spacetime interval is the length of the 4-positional vector which of course by Pythagorean law 4-dimensional space,</p>
+<p><span class="math display">\[\begin{equation}
+    ds^2 = -cdt^2 + dx^2 + dy^2 +dz^2
+\end{equation}\]</span></p>
+<ul>
+<li><span class="math inline">\(ds^2\)</span> : Differential form of the spacetime interval. The square power is part of its definition.</li>
+</ul>
+<p>The most important property of the spacetime interval is that length is invariant between any reference frames where <span class="math inline">\(ds&#39; = ds\)</span>.</p>
+<p>In general in Einstein's notation where <span class="math inline">\(g_{\mu\nu} = \eta_{\mu\nu}\)</span> called the <strong>Minkowski metric</strong>,</p>
+<p><span class="math display">\[\begin{gather}
+    ds^2 = \eta_{\mu\nu}dx^\mu dx^\nu\\ \nonumber \\
+    \eta_{\mu\nu} \equiv \begin{pmatrix} -1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{pmatrix}\\
+\end{gather}\]</span></p>
+<h3 id="proper-time">Proper Time</h3>
+<p>A convention to consider the length or spacetime interval to increase with time is to define the term <span class="math inline">\(\tau\)</span> to be the <strong>proper time</strong>. All it is, is the negative of length in spacetime,</p>
+<p><span class="math display">\[
+\begin{gather}
+    d\tau^2 = -ds^2 \nonumber \\
+    \boxed{d\tau^2 = -\eta_{\mu\nu}dx^\mu dx^\nu}
+\end{gather}
+\]</span></p>
+<p><strong>Proper time</strong> is implied as the time interval one sees between two events if they were be at rest at their own reference frame (not necessary that the events must be an event of objects at rest). We can easily see this in the definition that if one is at rest then <span class="math inline">\(dx^i = 0\)</span> so,</p>
+<p><span class="math display">\[
+\begin{align*}
+    d\tau^2 &amp;\equiv dt^2 - dx^i\\
+    \qquad dx^i &amp;= 0\\
+    d\tau &amp;= dt\\
+\end{align*}
+\]</span></p>
+<p>Notice that if <span class="math inline">\(d\tau\)</span> is maximum when <span class="math inline">\(dx^i=0\)</span>. That would mean if the observer was moving then its proper time interval must be shorter than another observer at rest.</p>
+<h2 id="lorentz-transformation">Lorentz Transformation</h2>
+<p>The Lorentz transformation describes how one can shift from one reference frame to another such that the spacetime interval is invariant. This means there exist a matrix transformation <span class="math inline">\(\Lambda\)</span> that,</p>
+<p><span class="math display">\[
+\begin{gather}
+    dx^\mu \cdot \eta dx^\nu = dx^{\mu&#39;}\cdot \eta dx^{\nu&#39;} = (dx^\mu \Lambda^\mu) \eta (\Lambda^\nu dx^\nu)\\
+    \boxed{\eta = \Lambda^\mu \eta \Lambda^\nu}
+\end{gather}
+\]</span></p>
+        </div>
+        <div class="col-md-2 d-none d-md-block">
+            <div class="sticky-top onthispage">
+                <ul id="onthispage-list" class="no-list-style">On This Page</ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <footer class="py-2 bg-white">
+    <div class="container">
+        <p class="text-right m-0"> Generated by <a href="https://github.com/ketozhang/StaticPy">StaticPy</a> |
+            Designed
+            by <a href="https://github.com/ketozhang">Keto Z.</a>
+        </p>
+    </div>
+</footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/onThisPage.js"></script>
+
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } }
+        });
+    </script>
+    
+
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
+
+
+    <script>
+        anchors.add();
+        $(document).ready(function () {
+            Prism.highlightAll();
+        })
+    </script>
+</body>
+
+</html>

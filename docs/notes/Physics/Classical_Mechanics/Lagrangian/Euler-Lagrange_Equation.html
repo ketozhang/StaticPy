@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+    <meta charset="UTF-8">
+    <title>StaticPy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://ketozhang.github.io/StaticPy/static/base.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
+    <link href="https://ketozhang.github.io/StaticPy/static/prism.css" rel="stylesheet">
+    <link rel="shortcut icon" href="https://ketozhang.github.io/StaticPy/static/favicon.ico">
+
+    <!-- LaTeX Stylesheet -->
+    
+    <div class="d-none">
+    $$
+        \newcommand{abs}[1]{\left | #1 \right |}
+        \newcommand{set}[1]{\left\{#1\right\}}
+    $$
+    </div>
+    
+</head>
+
+<body>
+    
+<div class="container-fluid" id="note">
+    <h1 class="title text-center pt-3">Euler-Lagrange Equation</h1>
+    <hr>
+    <div class="row">
+        <div class="col-lg-2 d-none d-lg-block"></div>
+        <div class="col-lg-7 col-md-10">
+            <p>Calculus of variations attempts to solve the shortest path problem problem in a form of the following integral,</p>
+<p><span class="math display">\[
+\begin{equation}
+    S = \int_{x_1}^{x_2}{f\left[y(x),y&#39;(x),x\right] dx}
+\end{equation}
+\]</span></p>
+<p>Generally,</p>
+<p><span class="math display">\[
+\begin{align}
+    S &amp;= \int_{x_1}^{x_2}{f\left[u_1(v),u_1&#39;(v),u_2(v),u_2&#39;(v)...,v\right] dx}\\
+    S &amp;= \int_{x_1}^{x_2}{f\left[\boldsymbol{u}(v),\boldsymbol{u}&#39;(v),v\right] dx}
+\end{align}
+\]</span></p>
+<p>What we wish to find is <span class="math inline">\(y(x)\)</span> which is a curve that minimizes <span class="math inline">\(S\)</span>.</p>
+<p>Any function that satisfies the <strong>Euler-Lagrange equation</strong> (or shortly <strong>Lagrange equations</strong>) can construct the proper <span class="math inline">\(y(x)\)</span>. The Lagrange equation is written as,</p>
+<p><span class="math display">\[\begin{align}
+    \boxed{\frac{\partial f}{\partial y} - \frac{d}{dx}\frac{\partial f}{\partial y&#39;} = 0}
+\end{align}\]</span></p>
+<h2 id="proof">Proof</h2>
+<p>The method to find <span class="math inline">\(y(x)\)</span> is weird because we are going to find the wrong answer/curve first. The wrong curve is in some form</p>
+<p><span class="math display">\[\begin{align}
+    Y&#39;(x) = y(x) + \alpha\eta(x)
+\end{align}\]</span></p>
+<ul>
+<li><span class="math inline">\(\eta(x)\)</span> : some deviation from the correct curve <span class="math inline">\(y(x)\)</span></li>
+<li><span class="math inline">\(\alpha\)</span> : a coefficient of the deviation</li>
+</ul>
+<p>You can see that the correct answer occurs when <span class="math inline">\(\alpha = 0\)</span>. We may also write <span class="math inline">\(S\)</span> as a function with parameter <span class="math inline">\(\alpha\)</span> such that <span class="math inline">\(S(\alpha)\)</span> is minimum at <span class="math inline">\(S(0)\)</span>. The condition for a minimum, (more correct, an extrema) is <span class="math inline">\(dS/d\alpha=0\)</span>,</p>
+<p><span class="math display">\[
+\begin{align}
+    S(\alpha) &amp;= \int_{x_1}^{x_2}{f(y+\alpha\eta, y&#39;+\alpha\eta&#39;,x) \ dx} \\
+    \frac{dS}{d\alpha} &amp;= \int_{x_1}^{x_2}{\frac{\partial f}{\partial \alpha} \ dx} \\
+    \frac{df}{d\alpha} &amp;= \eta\frac{\partial f}{\partial y} + n&#39;\frac{\partial f}{\partial y&#39;}\nonumber\\
+    \frac{dS}{d\alpha} &amp;= \int_{x_1}^{x_2}{\left(\eta\frac{\partial f}{\partial y} + n&#39;\frac{\partial f}{\partial y&#39;}\right) \ dx} = 0\\
+\end{align}
+\]</span></p>
+<p>For the last line to be true, this must be true by integration by parts,</p>
+<p><span class="math display">\[
+\begin{align*}
+\int_{x_1}^{x_2}{\eta(x)\left(\frac{\partial f}{\partial y} - \frac{d}{dx}\frac{\partial f}{\partial y&#39;}\right) \ dx} = 0
+\end{align*}
+\]</span></p>
+<p>Thus it is necessary for any arbitrary <span class="math inline">\(\eta(x) \ne 0\)</span>,</p>
+<p><span class="math display">\[
+\begin{equation}
+    \boxed{\frac{\partial f}{\partial y} - \frac{d}{dx}\frac{\partial f}{\partial y&#39;} = 0}
+\end{equation}\]</span></p>
+<h2 id="properties">Properties</h2>
+<p>The two properties of the Lagrange equation are theorems that makes solving for the Lagrange equation much simpler,</p>
+<dl>
+<dt><strong>Theorem 1: </strong></dt>
+<dd><p>If <span class="math inline">\(f[x(t),x&#39;(t),t]\)</span> is independent on any of its zeroth order derivative parameters <span class="math inline">\(x\)</span> such that,</p>
+<p><span class="math display">\[ \frac{\partial f}{\partial x} = 0\]</span></p>
+</dd>
+<dd><p>then its derivative along say <span class="math inline">\(x&#39;\)</span> is a constant <span class="math inline">\(C\)</span>,</p>
+<p><span class="math display">\[ \boxed{\frac{\partial f}{\partial x&#39;} = C} \]</span></p>
+</dd>
+<dd>This theorem applies to all functions that satisfies the Lagrange equations.
+</dd>
+<dt><strong>Theorem 2: </strong></dt>
+<dd><p>If <span class="math inline">\(f[x(t),x&#39;(t),t]\)</span> is independent on it's free parameter <span class="math inline">\(t\)</span> such that,</p>
+<p><span class="math display">\[ \frac{df}{dt} = 0 \]</span></p>
+</dd>
+<dd><p>then the rest of the Lagrange equation follow for some constant <span class="math inline">\(C\)</span>,</p>
+<p><span class="math display">\[ \boxed{f - x&#39;\frac{\partial f}{\partial x&#39;} = C} \]</span></p>
+</dd>
+</dl>
+<h2 id="example-shortest-path">Example: Shortest Path</h2>
+<p>The shortest path between two points is,</p>
+<p><span class="math display">\[ \begin{align}
+    S &amp;= \int_{x_1}^{x_2}{\sqrt{1+(y&#39;)^2}\ dx}
+\end{align} \]</span>,</p>
+<p>Where <span class="math inline">\(f \left(y, y&#39;, x\right) = \sqrt{1+(y&#39;)^2}\)</span>. Let's solve for the Lagrange equation,</p>
+<p><span class="math display">\[
+\begin{gather}
+    \frac{\partial f}{\partial y} = 0, \quad \frac{\partial f}{\partial y&#39;} = \frac{y&#39;}{(1+y&#39;^2)^{1/2}} \nonumber\\
+    \frac{y&#39;}{(1+y&#39;^2)^{1/2}} = C\\
+\end{gather}
+\]</span> For some constant <span class="math inline">\(C\)</span>.</p>
+<p><span class="math display">\[
+\begin{align}
+    y&#39;^2 &amp;= C^2(1+(y&#39;)^2) \nonumber\\
+    y&#39; &amp;= \text{const}
+\end{align}
+\]</span></p>
+<p>Let's set the constant to be <span class="math inline">\(m\)</span> such that <span class="math inline">\(y&#39; = m\)</span>. We can integrate <span class="math inline">\(y&#39;(x)\)</span> to get <span class="math inline">\(y(x)\)</span></p>
+<p>{} hello</p>
+<p><span class="math display">\[
+\begin{equation}
+    \boxed{y(x) = mx + y_0}
+\end{equation}
+\]</span></p>
+<p>Now you see that the shortest path is a straight line!</p>
+<h2 id="multivariable">Multivariable</h2>
+<p>The Lagrange equation solves the integral,</p>
+<p><span class="math display">\[
+\begin{gather}
+    S = \int_{u_1}^{u_2}{f\left[x_1, x_2,...,x_1&#39;(u), x_2&#39;(u),... u\right] \ du} \\
+    \frac{\partial f}{\partial x_i} - \frac{d}{du}\frac{\partial f}{\partial x_i&#39;} = 0 \\
+\end{gather}
+\]</span></p>
+        </div>
+        <div class="col-md-2 d-none d-md-block">
+            <div class="sticky-top onthispage">
+                <ul id="onthispage-list" class="no-list-style">On This Page</ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <footer class="py-2 bg-white">
+    <div class="container">
+        <p class="text-right m-0"> Generated by <a href="https://github.com/ketozhang/StaticPy">StaticPy</a> |
+            Designed
+            by <a href="https://github.com/ketozhang">Keto Z.</a>
+        </p>
+    </div>
+</footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/onThisPage.js"></script>
+
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } }
+        });
+    </script>
+    
+
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
+
+
+    <script>
+        anchors.add();
+        $(document).ready(function () {
+            Prism.highlightAll();
+        })
+    </script>
+</body>
+
+</html>

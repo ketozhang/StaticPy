@@ -10,6 +10,11 @@
   }
 }
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 /* Header */
 
 header .nav-item {
@@ -134,10 +139,14 @@ blockquote.blockquote {
 }
 
 footer {
-  position: fixed;
-  height: 60px;
+  /* position: fixed; */
+  position: absolute;
   bottom: 0;
   width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgba(0, 0, 0, .1);
 }
 
 /* Background */

@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+    <meta charset="UTF-8">
+    <title>StaticPy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://ketozhang.github.io/StaticPy/static/base.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
+    <link href="https://ketozhang.github.io/StaticPy/static/prism.css" rel="stylesheet">
+    <link rel="shortcut icon" href="https://ketozhang.github.io/StaticPy/static/favicon.ico">
+
+    <!-- LaTeX Stylesheet -->
+    
+    <div class="d-none">
+    $$
+        \newcommand{abs}[1]{\left | #1 \right |}
+        \newcommand{set}[1]{\left\{#1\right\}}
+    $$
+    </div>
+    
+</head>
+
+<body>
+    
+<div class="container-fluid" id="note">
+    <h1 class="title text-center pt-3">Probability of an Energy State</h1>
+    <hr>
+    <div class="row">
+        <div class="col-lg-2 d-none d-lg-block"></div>
+        <div class="col-lg-7 col-md-10">
+            <h1 id="probability-of-an-energy-state">Probability of an Energy State</h1>
+<p>Often times the energy of the system becomes very useful to characterize the state of the system (basis for Quantum physics).</p>
+<h2 id="boltzmann-factor">Boltzmann Factor</h2>
+<p>The boltzmann factor is the un-normalized probability (aka weight) of a the energy state of a system next to a very large resevoir.</p>
+<p><span class="math display">\[\frac{P(\varepsilon_1)}{P(\varepsilon_2)} = \frac{e^{-\varepsilon_1/\tau}}{e^{-\varepsilon_2/\tau}} \]</span></p>
+<p>This makes more sense if we consider normalization function as <span class="math inline">\(Z\)</span></p>
+<p><span class="math display">\[P(\varepsilon) = \frac{e^{-\varepsilon/\tau}}{Z}\]</span> <span class="math display">\[P(\varepsilon) \propto e^{-\varepsilon/\tau}\]</span></p>
+<ul>
+<li>The boltzman factor is the RHS of the second line above.</li>
+<li>To determine the probability of whether a system is in a energy state given all energy states requires the partition function.</li>
+</ul>
+<h2 id="partition-function">Partition Function</h2>
+<p>The <strong>partition function</strong> is the normalization function of the <a href="boltzmann-factor">boltzmann factor</a>.</p>
+<p><span class="math display">\[\boxed{Z(\tau, \varepsilon)) \equiv \sum_s{e^{-\varepsilon_s/\tau}}}\]</span></p>
+<p>The subscript <span class="math inline">\(s\)</span> may be confusing and is used to account for degenerate states for instance <span class="math inline">\(\varepsilon_{1/2} = \varepsilon_{-1/2}\)</span> (if spin is considered a state). We will implore the use of the multiplicity function <span class="math inline">\(g(\varepsilon)\)</span> to account for multiplicity and remove <span class="math inline">\(\varepsilon_s\)</span> in favor of <span class="math inline">\(\varepsilon\)</span></p>
+<p><span class="math display">\[\boxed{Z(\tau, \varepsilon)) \equiv \sum_\varepsilon{g(\varepsilon)e^{-\varepsilon/\tau}}}\]</span></p>
+<h2 id="usage">Usage</h2>
+<h3 id="thermal-average-energy">Thermal Average Energy</h3>
+<p>Because we have the probability of an energy state we can get the average energy state.</p>
+<p><span class="math display">\[
+\begin{gathered}
+    \langle{U}\rangle \equiv \sum_s{\varepsilon_s P(\epsilon_s)}\\
+    \boxed{\langle{U}\rangle = \frac{\sum \varepsilon_s e^{-\varepsilon_s/\tau}}{Z} = \tau^2 \frac{\partial}{\partial \tau}\left[\log Z\right]}
+\end{gathered}
+\]</span></p>
+<h1 id="probability-of-energy-and-number-state">Probability of Energy and Number State</h1>
+<p>Now let's consider the system able to transfer particles between another system. We would like to know the probability of finding the system in some energy and number state <span class="math inline">\(P(N,\varepsilon)\)</span></p>
+<h2 id="gibbs-factor">Gibbs Factor</h2>
+<p>Like the Boltzmann factor we need to determine how such system is weighted. The system of energy and number state is weighted as,</p>
+<p><span class="math display">\[
+\begin{gathered}
+    P(N,\varepsilon) = \frac{\exp \left(\frac{N\mu - \varepsilon}{\tau}\right)}{Z} \\
+    P(N,\varepsilon) \propto \exp \left(\frac{N\mu - \varepsilon}{\tau}\right)
+\end{gathered}
+\]</span></p>
+<p><span class="math inline">\(Z\)</span> : Normalization function later to be known as the <strong>Gibbs sum</strong></p>
+<p>Let's write this with a much simpler subsitution</p>
+<p><span class="math display">\[\boxed{\lambda = \exp{(\mu/\tau)}} \]</span></p>
+<p>which is called the <strong>absolute activity</strong></p>
+<p><span class="math display">\[\boxed{P(N,\varepsilon) \propto \lambda^Ne^{-\varepsilon/\tau}}\]</span></p>
+<h2 id="gibbs-sum">Gibbs Sum</h2>
+<p><em>Alias: Grand sum</em></p>
+<p>The Gibbs sum is the normalization function consider all possible energy states and all possible number states.</p>
+<p><span class="math display">\[
+\begin{gathered}
+    Z(\mu,\tau) \equiv \sum_N^\infty{\sum_s{\lambda^Ne^{-\varepsilon_s/\tau}}}\\
+    \boxed{Z(\mu,\tau) \equiv \sum_\text{ASN}{\lambda^Ne^{-\varepsilon_s/\tau}}}
+\end{gathered}
+\]</span></p>
+<p>Like the partition function we may use the multiplicity function to better account for degeneracy.</p>
+<p><span class="math display">\[
+Z(\tau, \mu) \equiv \sum_{\{N,\;\varepsilon\}}g(\varepsilon)\lambda^Ne^{-\varepsilon/\tau}
+\]</span></p>
+<h2 id="usage-1">Usage</h2>
+<h3 id="average-number-of-particles">Average Number of Particles</h3>
+<p>Like for the Boltzmann factor <span class="math inline">\(Z(\tau, \varepsilon))\)</span> we have the thermal average energy, the Gibbs sum <span class="math inline">\(Z(\tau, \varepsilon), N)\)</span> we have the average number of particles,</p>
+<p><span class="math display">\[ 
+\begin{gathered}
+    \langle N \rangle = \frac{\sum\limits_\text{ASN}{N\lambda^Ne^{-\varepsilon/\tau}}}{Z(\tau, \varepsilon),N)}\\
+    \boxed{\langle N \rangle = \tau \frac{\partial}{\partial \mu} [\log{Z(\tau, \varepsilon),N)}]}\\
+    \boxed{\langle N \rangle = \lambda \frac{\partial}{\partial \lambda} [\log{Z(\tau, \varepsilon),N)}]}
+\end{gathered}
+\]</span></p>
+        </div>
+        <div class="col-md-2 d-none d-md-block">
+            <div class="sticky-top onthispage">
+                <ul id="onthispage-list" class="no-list-style">On This Page</ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <footer class="py-2 bg-white">
+    <div class="container">
+        <p class="text-right m-0"> Generated by <a href="https://github.com/ketozhang/StaticPy">StaticPy</a> |
+            Designed
+            by <a href="https://github.com/ketozhang">Keto Z.</a>
+        </p>
+    </div>
+</footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/onThisPage.js"></script>
+
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } }
+        });
+    </script>
+    
+
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
+
+
+    <script>
+        anchors.add();
+        $(document).ready(function () {
+            Prism.highlightAll();
+        })
+    </script>
+</body>
+
+</html>

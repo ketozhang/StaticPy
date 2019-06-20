@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+    <meta charset="UTF-8">
+    <title>StaticPy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://ketozhang.github.io/StaticPy/static/base.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
+    <link href="https://ketozhang.github.io/StaticPy/static/prism.css" rel="stylesheet">
+    <link rel="shortcut icon" href="https://ketozhang.github.io/StaticPy/static/favicon.ico">
+
+    <!-- LaTeX Stylesheet -->
+    
+    <div class="d-none">
+    $$
+        \newcommand{abs}[1]{\left | #1 \right |}
+        \newcommand{set}[1]{\left\{#1\right\}}
+    $$
+    </div>
+    
+</head>
+
+<body>
+    
+<div class="container-fluid" id="note">
+    <h1 class="title text-center pt-3">Harmonic Oscillator</h1>
+    <hr>
+    <div class="row">
+        <div class="col-lg-2 d-none d-lg-block"></div>
+        <div class="col-lg-7 col-md-10">
+            <p>The Hamiltonian for the harmonic oscillator follows the potential energy of Hooke's law (recall it is negative in magntiude). We consider the system to be similar to a mass <span class="math inline">\(m\)</span> attached to a spring of constant <span class="math inline">\(k\)</span> where we define the natural frequency as <span class="math inline">\(\omega \equiv \sqrt{k/m}\)</span>:</p>
+<p><span class="math display">\[\begin{equation}
+    \boxed{H = \frac{\hat p^2}{2m} + \frac{1}{2}m\omega^2 x^2}
+\end{equation}
+\]</span> The eigenstate is the normalized Hermite polynomials. This is rarely used and written out (you'll see why in the ladder operator method) but it is:</p>
+<p><span class="math display">\[\begin{gather}
+    \boxed{\psi_n(x) = \left(\frac{m\omega}{\pi\hbar}\right)^{1/4}\frac{1}{\sqrt{2^nn!}}H_n\left(\sqrt{\frac{m\omega}{\hbar}}x \right)}\\
+    H_n(r) \equiv (-1)^ne^{r^2}\left(\frac{d}{dr}\right)^n e^{-r^2}
+\end{gather}\]</span></p>
+<p>Much easier is to write the eigenstates in terms of the <a href="#ladder_operators">ladder operators</a>:</p>
+<p><span class="math display">\[
+\begin{gather}
+    \boxed{\psi_0(x) = \left(\frac{m\omega}{\pi\hbar}\right)^{1/4}e^{-\frac{m\omega}{2\hbar}x^2}}\\
+    \boxed{\psi_n(x) = \frac{1}{n!}(a_+)^n\psi_0(x)}
+\end{gather}
+\]</span></p>
+<p>The eigenvalues are then,</p>
+<p><span class="math display">\[
+\begin{equation}
+    E_n = \hbar \omega\left(n + \frac{1}{2}\right)
+\end{equation}
+\]</span></p>
+<p>There are two ways to solve the harmonic oscillator one clever (called the ladder operators) and one brute force. We will only use the clever way in this article becuase it's clever and very useful later on.</p>
+<h2 id="ladder-operators">Ladder Operators</h2>
+<p>The clever way of the harmonic oscillator is a method that will be used almost everywhere to describe not only the harmonic oscillator but also any Hamiltonian that requires the angular momentum operators <span class="math inline">\(J,L,S\)</span>. Therefore learning the clever way is most crucial.</p>
+<p>We define an operator called the <strong>ladder operator</strong> as:</p>
+<span class="math display">\[\begin{equation}
+    a_\pm = \frac{1}{\sqrt{2\hbar m \omega}}\left(\mp ip + m \omega x\right)
+\end{equation}\]</span>
+<p>We divide <span class="math inline">\(a_\pm\)</span> where <span class="math inline">\(a_+\)</span> is to be called the <strong>raising operator</strong> and <span class="math inline">\(a_-\)</span> is to be called the <strong>lowering operator</strong>. They have a special property that raises and lowers the eigenstate where:</p>
+<span class="math display">\[\begin{gather}
+    \boxed{a_+\psi_n = \sqrt{n+1}\;\psi_{n+1} \qquad a_-\psi_n = \sqrt{n}\;\psi_{n-1}}\\
+\end{gather}\]</span>
+<p>With some work, the Hamiltonian can be written in terms of the ladder operators:</p>
+<p><span class="math display">\[\begin{equation}
+    H = \hbar\omega(a_\pm a_\mp \pm \frac{1}{2})
+\end{equation}\]</span></p>
+<p>The eigenstate to this Hamiltonian is (in terms of the raising operator <span class="math inline">\(a_+\)</span>)</p>
+<p><span class="math display">\[\begin{gather}
+    \boxed{\psi_0(x) = \left(\frac{m\omega}{\pi\hbar}\right)^{1/4}e^{-\frac{m\omega}{2\hbar}x^2}}\\
+    \boxed{\psi_n(x) = \frac{1}{n!}(a_+)^n\psi_0(x)}
+\end{gather}\]</span></p>
+<p>The eigenstate above are equivalent to the Hermite polynomials.</p>
+<h3 id="properties">Properties</h3>
+<dl>
+<dt>Conjugates</dt>
+<dd>The ladder operators are hermitian conjugates of one another:
+</dd>
+</dl>
+<p>begin{equation} a_^= a_\end{equation}</p>
+<dl>
+<dt>Position</dt>
+<dd>The position operator can be written in terms of the ladder operators:
+</dd>
+</dl>
+<p><span class="math display">\[\begin{equation}
+    \boxed{x = \sqrt{\frac{\hbar}{2m\omega}}\left(a_+ + a_-\right)}
+\end{equation}\]</span></p>
+<dl>
+<dt>Momentum</dt>
+<dd>The momentum operator can be written in terms of the ladder operators:
+</dd>
+</dl>
+<p><span class="math display">\[\begin{equation}
+    \boxed{p = i\sqrt{\frac{\hbar m \omega}{2}}\left(a_+ - a_-\right)}
+\end{equation}\]</span></p>
+<h3 id="motivation">Motivation</h3>
+<p>Here we will motivate you why the ladder operators are defined the way it is:</p>
+<!-- TODO: Motivate ladder operators Griffiths P.42 -->
+        </div>
+        <div class="col-md-2 d-none d-md-block">
+            <div class="sticky-top onthispage">
+                <ul id="onthispage-list" class="no-list-style">On This Page</ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <footer class="py-2 bg-white">
+    <div class="container">
+        <p class="text-right m-0"> Generated by <a href="https://github.com/ketozhang/StaticPy">StaticPy</a> |
+            Designed
+            by <a href="https://github.com/ketozhang">Keto Z.</a>
+        </p>
+    </div>
+</footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/onThisPage.js"></script>
+
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } }
+        });
+    </script>
+    
+
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
+
+
+    <script>
+        anchors.add();
+        $(document).ready(function () {
+            Prism.highlightAll();
+        })
+    </script>
+</body>
+
+</html>

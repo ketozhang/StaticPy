@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+    <meta charset="UTF-8">
+    <title>StaticPy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://ketozhang.github.io/StaticPy/static/base.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
+    <link href="https://ketozhang.github.io/StaticPy/static/prism.css" rel="stylesheet">
+    <link rel="shortcut icon" href="https://ketozhang.github.io/StaticPy/static/favicon.ico">
+
+    <!-- LaTeX Stylesheet -->
+    
+    <div class="d-none">
+    $$
+        \newcommand{abs}[1]{\left | #1 \right |}
+        \newcommand{set}[1]{\left\{#1\right\}}
+    $$
+    </div>
+    
+</head>
+
+<body>
+    
+<div class="container-fluid" id="note">
+    <h1 class="title text-center pt-3">Windows Subsystem for Linux</h1>
+    <hr>
+    <div class="row">
+        <div class="col-lg-2 d-none d-lg-block"></div>
+        <div class="col-lg-7 col-md-10">
+            <p>The sections on these instructions are ordered by importance.</p>
+<!-- TOC -->
+<ul>
+<li><a href="#prerequisite">Prerequisite</a></li>
+<li><a href="#installation">Installation</a>
+<ul>
+<li><a href="#enable-windows-subsystem-for-linux-wsl">Enable Windows Subsystem for Linux (WSL)</a></li>
+<li><a href="#install-ubuntu">Install Ubuntu</a></li>
+<li><a href="#setup-ubuntu-account">Setup Ubuntu Account</a></li>
+</ul></li>
+<li><a href="#update-ubuntus-software">Update Ubuntu's Software</a></li>
+<li><a href="#optional">Optional</a>
+<ul>
+<li><a href="#upgrade-ubuntu-os">Upgrade Ubuntu OS</a></li>
+<li><a href="#build-essential-recommended">Build Essential (Recommended)</a></li>
+<li><a href="#reinstall-ssh-recommended">Reinstall SSH (Recommended)</a></li>
+<li><a href="#fix-console-color-scheme-recommended">Fix Console Color Scheme (Recommended)</a></li>
+<li><a href="#turn-off-bell">Turn off Bell</a></li>
+<li><a href="#python-environment---anaconda">Python Environment - Anaconda</a></li>
+</ul></li>
+</ul>
+<!-- /TOC -->
+<p>The following instructions are how I setup my Windows Subsystem Linux. It is an exhaustive list of all essential tweaks and environments I need. Coincidentally, this may be very useful to you to set up your own Linux environment as instructions are not always all in one place or even trivial to Google.</p>
+<h2 id="prerequisite">Prerequisite</h2>
+<ul>
+<li>Windows 10 v1709 Fall Creator's Update or higher.</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> It is possible to use WSL if you have Windows 10 v1607 Creator's Update or higher. I do not recommend this as the original WSL will be deprecated.</p>
+</blockquote>
+<h2 id="installation">Installation</h2>
+<p>The official installation instructions by Microsoft are listed <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">here</a>. Sometimes the official instructions are not updated or difficult to find so I hope these instructions are more hands on and useful to you.</p>
+<h3 id="enable-windows-subsystem-for-linux-wsl">Enable Windows Subsystem for Linux (WSL)</h3>
+<ol style="list-style-type: decimal">
+<li>Windows search &quot;Windows Features&quot;</li>
+<li>Enable &quot;Windows Subsystem for Linux&quot; (located all the way down) &gt; <em>A restart may be necessary</em></li>
+</ol>
+<h3 id="install-ubuntu">Install Ubuntu</h3>
+<ol style="list-style-type: decimal">
+<li>Go to the &quot;Windows Store&quot;</li>
+<li>Find and install &quot;Ubuntu&quot; by &quot;Canonical Group Limited&quot;</li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> You may wish to install the other Linux distro if you like. I will not cover them so I recommend Ubuntu for beginners. <strong>Note:</strong> The term WSL often refers to Ubuntu distro of WSL.</p>
+</blockquote>
+<h3 id="setup-ubuntu-account">Setup Ubuntu Account</h3>
+<ol style="list-style-type: decimal">
+<li>Open Ubuntu shell terminal either by:
+<ul>
+<li>Windows search &quot;Ubuntu&quot;</li>
+<li>Win+R either <code>ubuntu</code>, <code>wsl</code>, or <code>bash</code></li>
+</ul></li>
+<li>Follow the prompt to enter your desired username and password.</li>
+</ol>
+<p>Congratulations, you now have a working Ubuntu/Linux shell terminal! You are now all powerful to install/run any Linux program (almost). From now on, I will refer to the shell terminal as WSL. We will now always be working in a terminal instance. When I say &quot;run this&quot;, I will always mean open up a WSL terminal and run the following code.</p>
+<h2 id="update-ubuntus-software">Update Ubuntu's Software</h2>
+<p>Initially Ubuntu requires a manual update of the list of available updates. To do so run,</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="fu">sudo</span> apt-get update</code></pre></div>
+<blockquote>
+<p><strong>Note:</strong> <code>sudo</code> is not necesarrily needed but since it's a good practice to us when installing I provided it as a code example. If you run into an error, often a permission error, it is very likely you're required to use <code>sudo</code> before all <code>apt-get</code> command like <code>$ sudo apt-get update</code>. <code>sudo</code> is a superuser command that only the root account and sudoers are allowed to use. You are very likely a sudoer since you're the only account activate user account (except root).</p>
+</blockquote>
+<p>Using the new update list, we will now upgrade any outdated software installed,</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="fu">sudo</span> apt-get upgrade</code></pre></div>
+<h2 id="optional">Optional</h2>
+<p>The following sections are optional. Those marked recommended in section title are those you're most likely going to install and need in the future.</p>
+<h3 id="upgrade-ubuntu-os">Upgrade Ubuntu OS</h3>
+<p>Initially you're likely to have an older release of Ubuntu; you can check your version by,</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="ex">lsb_release</span> -a</code></pre></div>
+<p>The latest releases of Ubuntu are listed <a href="https://www.ubuntu.com/download/desktop">here</a>. You may prefer to use the most recent release rather than the LTS (long-term support) version. If so run,</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="fu">sudo</span> apt-get dist-upgrade</code></pre></div>
+<h3 id="build-essential-recommended">Build Essential (Recommended)</h3>
+<p>Ubuntu does not come with very important compilers like GNU C/C++ compiler which is often required for many programs (e.g., gcc, makefile, particular Python libraries). Either way many programmers recommend build-essentials because it is essential to build a program (hence the name). To do so run,</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="fu">sudo</span> apt-get install build-essential</code></pre></div>
+<h3 id="reinstall-ssh-recommended">Reinstall SSH (Recommended)</h3>
+<p>This step is crucial if you want to use SSH. There are many issues with using the SSH that WSL came with. Many of these issues are found to be fixed if you just reinstall SSH. To do so:</p>
+<ol style="list-style-type: decimal">
+<li><p>Uninstall SSH</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="fu">sudo</span> apt-get purge openssh-server</code></pre></div></li>
+<li><p>Install SSH</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="fu">sudo</span> apt-get install openssh-server</code></pre></div></li>
+</ol>
+<blockquote>
+<p>It may be necessary to restart your SSH process especially if you change <code>/etc/ssh/sshd_config</code>. You can do so by: <code>$ sudo service ssh --full-restart</code></p>
+</blockquote>
+<h3 id="fix-console-color-scheme-recommended">Fix Console Color Scheme (Recommended)</h3>
+<p>Surprisingly and unprofessionally, the color scheme Windows defaulted for Ubuntu is not only ugly but sometimes unreadable especially when using <code>ls</code>. This time we will not be using WSL but Windows PowerShell itself to install this. Note that this is not needed if you plan on using zsh (aka Z shell or bash on steroids) anytime soon.</p>
+<ol style="list-style-type: decimal">
+<li><p>Download the latest colortool officially from <a href="https://github.com/Microsoft/console/releases">Microsoft GitHub repository</a>.</p></li>
+<li><p>Unzip the file and open powershell at the directory where <code>colortool.exe</code> is located.</p></li>
+<li><p>Run <code>colortool.exe</code> in powershell like so,</p>
+<pre class="powershell"><code>.\colortool.exe -d [color-scheme]</code></pre>
+<p>You may choose from the following color schemes to replace <code>[color-scheme]</code>:</p>
+<ul>
+<li><code>cmd-legacy</code>: The current default which is highly not recommended.</li>
+<li><code>campbell</code>: The Windows official console color-scheme which is my choice.</li>
+<li><code>campbell-legacy</code></li>
+<li><code>deuteranopia</code>: For those who are color blind.</li>
+<li><code>OneHalfDark</code></li>
+<li><code>OneHalfLight</code></li>
+<li><code>solarized_light</code></li>
+<li><code>solarized_dark</code></li>
+</ul></li>
+</ol>
+<p>After the command, opening a new WSL terminal should have its color scheme updated. Try to see if <code>ls</code> is readable.</p>
+<h3 id="turn-off-bell">Turn off Bell</h3>
+<p>You've probably alread heard a bell sound everytime you make press a key that's not allowed in the terminal. If you're like me and hate the bell sound the good news is you can turn it off (of course, almost everything is customizeable). To do so,</p>
+<ol style="list-style-type: decimal">
+<li>Using your favorite text editor open <code>/etc/inputrc</code></li>
+</ol>
+<pre class="shell"><code>$ sudo nano /etc/inputrc</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Uncomment or add <code>set bell-style none</code> to your settings.</li>
+</ol>
+<p>That's it! Now the only other place you may hear this is if you use vim. If you do see where I got this solution <a href="https://stackoverflow.com/questions/36724209/disable-beep-of-linux-bash-on-windows-10">here</a>.</p>
+<h3 id="python-environment---anaconda">Python Environment - Anaconda</h3>
+<p>I've written the instructions in a separate page <a href="/Anaconda.md">here</a></p>
+<!-- ### Install a Browser - Google Chrome
+Sometimes you may want to install a browser. It's usually not to be used for browsing (since you have a browser already installed on Windows) but for some programs that outputs onto one of your local ports (e.g., Jupyter outputs a display to port `localhost:8888`).
+
+I've chosen Chrome due to popularity:
+
+1. Download Google Chrome debian package (similar to an install like `.exe`) to a temporary folder (either `~`, `/tmp`, or anywhere).
+
+```sh
+cd /tmp
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+```
+
+2. Run the installer
+
+```sh
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+``` -->
+        </div>
+        <div class="col-md-2 d-none d-md-block">
+            <div class="sticky-top onthispage">
+                <ul id="onthispage-list" class="no-list-style">On This Page</ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <footer class="py-2 bg-white">
+    <div class="container">
+        <p class="text-right m-0"> Generated by <a href="https://github.com/ketozhang/StaticPy">StaticPy</a> |
+            Designed
+            by <a href="https://github.com/ketozhang">Keto Z.</a>
+        </p>
+    </div>
+</footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/onThisPage.js"></script>
+
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } }
+        });
+    </script>
+    
+
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
+
+
+    <script>
+        anchors.add();
+        $(document).ready(function () {
+            Prism.highlightAll();
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+    <meta charset="UTF-8">
+    <title>StaticPy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap time -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://ketozhang.github.io/StaticPy/static/base.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro|Quicksand" rel="stylesheet">
+    <link href="https://ketozhang.github.io/StaticPy/static/prism.css" rel="stylesheet">
+    <link rel="shortcut icon" href="https://ketozhang.github.io/StaticPy/static/favicon.ico">
+
+    <!-- LaTeX Stylesheet -->
+    
+    <div class="d-none">
+    $$
+        \newcommand{abs}[1]{\left | #1 \right |}
+        \newcommand{set}[1]{\left\{#1\right\}}
+    $$
+    </div>
+    
+</head>
+
+<body>
+    
+<div class="container-fluid" id="note">
+    <h1 class="title text-center pt-3">Locking</h1>
+    <hr>
+    <div class="row">
+        <div class="col-lg-2 d-none d-lg-block"></div>
+        <div class="col-lg-7 col-md-10">
+            <p>The locking scheme we will be using is called the <strong>Two Phase Lock (2PL)</strong> to guarantee conflict serializable schedule. The two phases refer to the phases of individual transactions. Those are:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Aquisition Phase</strong></p>
+<p>Transaction begins by attempting to gather all the locks it can will need. Afterso, we have entered the <strong>lockpoint</strong></p></li>
+<li><p><strong>Release Phase</strong></p>
+<p>Transaction will begin releasing (all at once if Strict 2PL). Transaction can get no more lock after releasing at least one.</p></li>
+</ol>
+<h2 id="types-of-locks">Types of Locks</h2>
+<ul>
+<li><strong>Shared Lock (S or R)</strong>: A lock for reading.
+<ul>
+<li>More than one transaction can have a shared lock.</li>
+<li>Cannot use the shared lock unless the exlusive lock is unlocked</li>
+</ul></li>
+<li><strong>Exclusive Lock (X or W)</strong>: A lock for writing
+<ul>
+<li>Only one transaction can have a write lock.</li>
+<li>Can only get a exclusive lock if both shared and exclusive are unlocked.</li>
+</ul></li>
+</ul>
+<h2 id="stirct-2pl-and-cascade-abort">Stirct 2PL and Cascade Abort</h2>
+<ul>
+<li><p><strong>Cascade abort</strong></p>
+<p>When transaction abort causes other transaction to abort and undo. This occurs because when a transaction release its lock to another transaction, that transaction will continue its actions regarldess if there's an abort ahead.</p></li>
+</ul>
+<p>The fix for cascade abort is to make sure all transaction:</p>
+<pre><code>1. Release all locks together.
+2. Only release during a commit or abort.</code></pre>
+<p>This is the the policy <strong>Strict 2PL</strong></p>
+<h2 id="lock-manager">Lock Manager</h2>
+<p>The lock manager (LM) maintains a table (often hash table) called the that stores the following columns:</p>
+<ul>
+<li>Object name</li>
+<li>Set of transactions ids currently with that lock</li>
+<li>Lock type</li>
+<li>A priority waiting queue of transactions needing the lock.</li>
+</ul>
+<h2 id="deadlock">Deadlock</h2>
+<p>A deadlock occurs when the wait-for diagram is cyclic. A <strong>waits-for</strong> diagram is the directed graph representing the lock manager. The nodes are transactions and the edges are the relations where a transaction waits for (points to) another transaction to release.</p>
+<h3 id="deadline-avoidance">Deadline Avoidance</h3>
+<p><strong>Deadlock avoidance</strong> determines the action if some transaction wants a lock that's taken from another.</p>
+<ul>
+<li><strong>Wait-Die</strong>
+<ul>
+<li>Higher priority: wait</li>
+<li>Lower priority: die</li>
+</ul></li>
+<li><strong>Wound-Wait</strong>
+<ul>
+<li>Higher priority: take over</li>
+<li>Lower priroity: wait</li>
+</ul></li>
+</ul>
+<h3 id="deadlock-detection">Deadlock Detection</h3>
+<p>The lock manager can detect deadlocks by creating a waits-for graph. Upon finding a cycle, we can abort one of the transaction.</p>
+<h2 id="multi-granularity-locking">Multi-Granularity Locking</h2>
+<p>We have the issue on how granular should we be locking (e.g., tables, pages, records). To solve this we introduce new locks called the <strong>intent locks</strong>:</p>
+<p>There are 3 intent locks <strong>IS, IX, SIX</strong>.</p>
+<ul>
+<li>To get an S or IS lock you need an IS or IX lock on the parent node.</li>
+<li>To get an X, IX, or SIX you need a IX or SIX on the parent node.</li>
+<li>Any node getting an <span class="math inline">\(S\)</span> or <span class="math inline">\(X\)</span> lock implies that the lower level also has the same lock.</li>
+</ul>
+<h3 id="lock-compatibility">Lock Compatibility</h3>
+<p>The following tables reperesents combination of locks that do not conflict given two different transactions on the locking the same object.</p>
+<div class="figure">
+<img src="2018-11-13-18-58-46.png" style="width:50.0%" />
+
+</div>
+        </div>
+        <div class="col-md-2 d-none d-md-block">
+            <div class="sticky-top onthispage">
+                <ul id="onthispage-list" class="no-list-style">On This Page</ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <footer class="py-2 bg-white">
+    <div class="container">
+        <p class="text-right m-0"> Generated by <a href="https://github.com/ketozhang/StaticPy">StaticPy</a> |
+            Designed
+            by <a href="https://github.com/ketozhang">Keto Z.</a>
+        </p>
+    </div>
+</footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/onThisPage.js"></script>
+
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } }
+        });
+    </script>
+    
+
+    <!-- Bootstrap JS -->
+    <!-- TODO: trim JS if not needed -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- React -->
+    <!-- TODO: do we need React? -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>-->
+
+
+    <script>
+        anchors.add();
+        $(document).ready(function () {
+            Prism.highlightAll();
+        })
+    </script>
+</body>
+
+</html>
