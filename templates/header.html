@@ -7,7 +7,7 @@
                     <li class="nav-item"><a class="nav-link active" href="{{site_url}}">Home</a>
                     </li>
                     {% for nav in navbar.values() %}
-                    <li class="nav-item"><a class="nav-link" href="{{nav['url']}}">{{ nav['text'] }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{site_url}}{{nav['url']}}">{{ nav['text'] }}</a></li>
                     {% endfor %}
                     <!-- <li class="nav-item"><a class="nav-link" href="{{site_url}}posts">Posts</a></li> -->
                     <!-- <li class="nav-item"><a class="nav-link" href="{{site_url}}notes">Notes</a></li> -->

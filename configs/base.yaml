@@ -37,13 +37,13 @@ contexts:
 navbar:
   notes:
     text: 'Notes'
-    url: '/notes'
+    url: 'notes'
   posts:
     text: 'Posts'
-    url: '/posts'
-  about:
-    text: 'About'
-    url: '/about'
+    url: 'posts'
+  docs:
+    text: 'Docs'
+    url: 'docs'
 
 social_links:
   cv: 'static/CV.html'
