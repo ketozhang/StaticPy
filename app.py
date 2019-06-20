@@ -172,6 +172,7 @@ def global_var():
         site_title=base_config['site_title'],
         debug=app.debug,
         social_links=base_config['social_links'],
+        navbar=base_config['navbar']
     )
     return var
 

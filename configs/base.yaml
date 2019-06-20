@@ -34,6 +34,17 @@ contexts:
     url: '/docs'
     template: 'note.html'
 
+navbar:
+  notes:
+    text: 'Notes'
+    url: '/notes'
+  posts:
+    text: 'Posts'
+    url: '/posts'
+  about:
+    text: 'About'
+    url: '/about'
+
 social_links:
   cv: 'static/CV.html'
   linkedin: 'https://www.linkedin.com/in/ketozhang/'
