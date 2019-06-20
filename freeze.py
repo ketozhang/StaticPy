@@ -56,6 +56,7 @@ def freeze():
         log.info("Building files...")
         freezer.freeze()
 
+        # Rename default build path to actual build path (e.g., build/ -> dev/)
         log.info(f"{default_build_path.name} -> {build_path.name}")
         default_build_path.rename(build_path)
 
