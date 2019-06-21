@@ -207,11 +207,6 @@ footer {
   background: linear-gradient(transparent 150px, white);
 }
 
-.project-description {
-  height: 9em;
-  overflow: hidden;
-}
-
 .no-list-style {
   list-style-type: none;
 }
