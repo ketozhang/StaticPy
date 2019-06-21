@@ -16,7 +16,7 @@ from src.config_handler import get_config
 # Load base_configurations
 base_config = get_config()
 PROJECT_PATH = Path(__file__).resolve().parents[0]
-SITE_URL = base_config['site_url']
+SITE_URL = base_config['site_url']  # never ends in /
 TEMPLATES_PATH = Path(base_config['templates_path']).resolve()
 
 app = Flask(__name__)
@@ -25,7 +25,6 @@ log = app.logger
 ########################
 # HELPER FUNCTIONS
 ########################
-
 
 def get_fpath(file_or_path):
     if isinstance(file_or_path, str):
@@ -157,7 +156,6 @@ def get_subpaths(path):
 # META
 ########################
 
-
 @app.context_processor
 def global_var():
     # TODO SITE_URL best handled by a base_config parser
@@ -165,14 +163,20 @@ def global_var():
     if site_url[-1] != '/':
         site_url += '/'
 
+    def parse_url(url):
+        if url[0] == '/':
+            url = SITE_URL + url
+        return url
+
     var = dict(
         author=base_config['author'],
+        debug=app.debug,
+        navbar=base_config['navbar'],
+        parse_url=parse_url,
         site_url=site_url,
         site_brand=base_config['site_brand'],
         site_title=base_config['site_title'],
-        debug=app.debug,
         social_links=base_config['social_links'],
-        navbar=base_config['navbar']
     )
     return var
 

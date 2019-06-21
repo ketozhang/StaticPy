@@ -128,7 +128,7 @@ hr.gradient {
   background-image: linear-gradient(to right, rgba(253, 181, 21, 0), rgb(253, 181, 21), rgba(253, 181, 21, 0));
 }
 
-img.social-link:hover {
+.social-link img:hover {
   opacity: 0.7;
 }
 

@@ -1,7 +1,7 @@
 ---
 title: Markdown Examples
 description: A quick showcaes for Markdown
-image: https://via.placeholder.com/1920x1080
+image: /static/images/1920x1080.png
 ---
 This page is a [Github-flavored Markdown cheatsheet by Adam Pritchard](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
 

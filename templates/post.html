@@ -15,7 +15,7 @@
                     {% if 'image' in frontmatter %}
                 </div>
                 <p class="description">{{frontmatter['description']}}</p>
-                <img id="post-img" class="mx-auto d-block" src={{frontmatter['image']}}>
+                <img id="post-img" class="mx-auto d-block" src={{parse_url(frontmatter['image'])}}>
                 {% endif %}
                 <hr class="mb-0">
             </div>

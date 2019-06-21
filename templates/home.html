@@ -22,7 +22,7 @@
     <div class="card mb-3 box-shadow">
       <div class="row no-gutter">
         <div class="col-md-5 col-lg-4">
-          <a href={{site_url}}{{post_url}}><img class="card-img" src={{post['image']}}></a>
+          <a href={{site_url}}{{post_url}}><img class="card-img" src={{parse_url(post['image'])}}></a>
         </div>
         <div class="col-md-7 col-lg-8">
           <div class="card-body">

@@ -46,7 +46,19 @@ navbar:
     url: 'docs'
 
 social_links:
-  cv: 'static/CV.html'
-  linkedin: 'https://www.linkedin.com/in/ketozhang/'
-  email: 'keto.zhang@gmail.com'
-  github: 'https://www.github.com/ketozhang'
+  cv:
+    text: 'CV'
+    url: 'static/CV.html'
+    icon: "https://img.icons8.com/material/24/0000 00/parse-resume.png"
+  linkedin:
+    text: 'LinkedIn'
+    url: 'https://www.linkedin.com/in/ketozhang/'
+    icon: "https://img.icons8.com/material/24/000000/filled-message.png"
+  email:
+    text: "Email"
+    url: 'mailto:keto.zhang@gmail.com'
+    icon: "https://img.icons8.com/ios-glyphs/24/000000/linkedin.png"
+  github:
+    text: "GitHub"
+    url: 'https://www.github.com/ketozhang'
+    icon: "https://img.icons8.com/ios-glyphs/24/000000/github.png"
