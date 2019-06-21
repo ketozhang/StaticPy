@@ -3,17 +3,19 @@
 {% include "header.html" %}
 <main>
   <div class="container">
+
     <!-- Main Showcase  -->
-    <div class="row my-5">
+    <div id="showcase" class="row d-flex align-items-stretch">
       {% for project in projects %}
-      <div class="col-md-4">
+      <div class="col-md-4 d-flex flex-column">
         <h2 class="title">{{project['header']}}</h2>
         <!-- TODO: Find a better way for equal height -->
         <p class="project-description">{{project['description']}}</p>
-        <p><a class="btn btn-warning" href="{{project['view_details']}}" role="button">View details »</a></p>
+        <p class="mt-auto"><a class="btn btn-warning" href="{{project['view_details']}}" role="button">View details »</a></p>
       </div>
       {% endfor %}
     </div>
+    <hr>
 
     <!-- Blogpost Cards -->
     {% for post_url, post in posts.items() %}

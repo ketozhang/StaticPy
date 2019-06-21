@@ -1,0 +1,262 @@
+/* Global */
+
+.container-fluid {
+  width: 90%;
+}
+
+@media (min-width: 992px) {
+  .container-fluid {
+    width: 80%;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+/* Header */
+
+header .nav-item {
+  font-weight: bold;
+}
+
+p .navbar-light .navbar-nav .nav-link.active::after {
+  content: "";
+  display: block;
+  margin: 0 auto;
+  padding-top: 5px;
+  border-bottom: 2px solid #FDB515;
+  width: 90%;
+  color: black;
+}
+
+/* Add some height for the border on hover */
+
+.navbar-light .navbar-nav .nav-link::after {
+  content: "";
+  display: block;
+  padding-top: 5px;
+  border-bottom: 2px solid transparent;
+}
+
+/* border on hover */
+
+.navbar-light .navbar-nav .nav-link:hover::after {
+  content: "";
+  display: block;
+  margin: 0 auto;
+  padding-top: 5px;
+  border-bottom: 2px solid rgba(253, 181, 21, 0.7);
+  width: 90%;
+  color: black;
+}
+
+/* Body */
+
+body {
+  color: #616161;
+  font-family: 'Quicksand', 'Open Sans', sans-serif;
+  padding-bottom: 80px;
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
+}
+
+pre, code {
+  font-family: 'Source Code Pro', 'Courier New', Courier, monospace;
+}
+
+p>code, li>code {
+  color: #358ccb;
+  border: 1px solid rgba(97, 97, 97, .4);
+  border-radius: 3px;
+  padding: 0px 2px 0px 2px;
+  margin: 0px 1px 0px 0px;
+  /* box-shadow: 0.5px 0.5px 1px rgba(97, 97, 97, 0.5); */
+}
+
+/* pre {
+  border: 1px solid rgba(97, 97, 97, .4);
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px rgba(97, 97, 97, 0.5);
+  background: rgba(97, 97, 97, 0.15);
+  margin: 3em 0 3em 0;
+  padding: 1em;
+  width: 75%;
+} */
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
+  text-decoration: none;
+}
+
+.title {
+  color: black;
+  white-space: nowrap;
+  text-decoration: none;
+  margin-bottom: 0.5em;
+}
+
+.metadata {
+  margin-top: -0.5em;
+  margin-bottom: 0.5em;
+}
+
+.card-title {
+  color: black;
+}
+
+a.brand {
+  font-size: 36px;
+  text-decoration: none;
+  color: black;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: black;
+}
+
+hr.gradient {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(253, 181, 21, 0), rgb(253, 181, 21), rgba(253, 181, 21, 0));
+}
+
+img.social-link:hover {
+  opacity: 0.7;
+}
+
+blockquote.blockquote {
+  background: #f9f9f9;
+  border-left: 3px solid #ccc;
+  padding: 0.5em 10px
+}
+
+footer {
+  /* position: fixed; */
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgba(0, 0, 0, .1);
+}
+
+/* Background */
+
+.bg-warning {
+  background-color: #fdb515;
+}
+
+/* Buttons */
+
+.btn-link {
+  text-decoration: none;
+  font-weight: inherit;
+  color: inherit;
+}
+
+.btn-link:hover {
+  text-decoration: none;
+}
+
+.btn-warning {
+  background-color: #FDB515;
+}
+
+/* Card */
+
+.card-img {
+  border-right: 1px solid rgba(0, 0, 0, .125);
+  border-radius: 1px;
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+
+/* Context */
+
+/* .note {} */
+
+/* Icon */
+
+.icon {
+  height: 1em;
+}
+
+.limit-2-lines {
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  max-height: 3em;
+}
+
+.limit-2-lines::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: linear-gradient(transparent 150px, white);
+}
+
+.project-description {
+  overflow: hidden;
+}
+
+.no-list-style {
+  list-style-type: none;
+}
+
+.onthispage {
+  top: 1em;
+  overflow-y: scroll;
+  height: 500px;
+  border-left: 1px solid rgba(97, 97, 97, .2);
+}
+
+.onthispage ul {
+  padding-left: 1.5em;
+}
+
+.onthispage li {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.sticky-top {
+  z-index: auto;
+}
+
+/* Ids */
+
+/* #note h1, #note h2, #note h3, #note h4, #note h5, #note h6, #post h1, #post h2, #post h3, #post h4, #post h5, #post h6 {
+  line-height: 2.5;
+} */
+
+.content h2, .content h3 {
+  line-height: 2;
+  margin-top: 1em;
+}
+
+#post-img {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+}
+
+#onthispage-list {
+  padding-top: 0.5em;
+  padding-left: 0.5em;
+}
+
+#showcase {
+  height: 50%
+}
