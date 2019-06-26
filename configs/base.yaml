@@ -37,18 +37,18 @@ contexts:
 navbar:
   notes:
     text: 'Notes'
-    url: 'notes'
+    url: '/notes'
   posts:
     text: 'Posts'
-    url: 'posts'
+    url: '/posts'
   docs:
     text: 'Docs'
-    url: 'docs'
+    url: '/docs'
 
 social_links:
   cv:
     text: 'CV'
-    url: 'static/CV.html'
+    url: '/static/CV.html'
     icon: "https://img.icons8.com/material/24/0000 00/parse-resume.png"
   linkedin:
     text: 'LinkedIn'

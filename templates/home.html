@@ -11,7 +11,7 @@
         <h2 class="title">{{project['header']}}</h2>
         <!-- TODO: Find a better way for equal height -->
         <p>{{project['description']}}</p>
-        <p class="mt-auto"><a class="btn btn-warning" href="{{project['view_details']}}" role="button">View details »</a></p>
+        <p class="mt-auto"><a class="btn btn-warning" href="{{parse_url(project['view_details'])}}" role="button">View details »</a></p>
       </div>
       {% endfor %}
     </div>
