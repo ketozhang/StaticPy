@@ -31,7 +31,12 @@
     <h1 class="title text-center pt-3">ARIES</h1>
     <hr>
     <div class="row">
-        <div class="col-lg-2 d-none d-lg-block"></div>
+        <!-- Notebook Navigation -->
+        <div class="col-lg-2 d-none d-lg-block">
+
+        </div>
+
+        <!-- Content -->
         <div class="col-lg-7 col-md-10">
             <p>The <strong>Algorithms for Recovery and Isolation Exploiting Semantics (ARIES)</strong> is a recovery algorithm began by preparing the logs using <strong>Write Ahead Logging</strong>. During recovery we perform the following phases:</p>
 <ol style="list-style-type: decimal">
@@ -124,6 +129,8 @@ For each redoLSN <span class="kw">in</span> toREDO:
         Undo the update <span class="kw">in</span> the database
         Add logRecord.prevLSN to toUndo</code></pre></div>
         </div>
+
+        <!-- On This Page -->
         <div class="col-md-2 d-none d-md-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>

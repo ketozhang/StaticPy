@@ -31,7 +31,12 @@
     <h1 class="title text-center pt-3">Training</h1>
     <hr>
     <div class="row">
-        <div class="col-lg-2 d-none d-lg-block"></div>
+        <!-- Notebook Navigation -->
+        <div class="col-lg-2 d-none d-lg-block">
+
+        </div>
+
+        <!-- Content -->
         <div class="col-lg-7 col-md-10">
             <p>From here on, we will deal with only single layer NN for simplicity.</p>
 <p>The final loss function is given as <span class="math inline">\(\mathcal L (z,y)\)</span> where <span class="math inline">\(z = h(X_i)\)</span> and is a vector of size <span class="math inline">\(k\)</span>. <span class="math inline">\(h(X_i)\)</span> is treated as <span class="math inline">\(k\)</span> predictions of the label vector <span class="math inline">\(y\)</span> hence the loss function actually takes in <span class="math inline">\(Y \in \mathbb R^{n \times k}\)</span></p>
@@ -56,6 +61,8 @@
 \nabla_{T_i^{(1)}}L = \underbrace{\frac{\partial L}{\partial h_i}}_\text{back pass} \overbrace{\nabla_{T_i^{(1)}} h_i}^\text{foward pass}
 \]</span></p>
         </div>
+
+        <!-- On This Page -->
         <div class="col-md-2 d-none d-md-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>

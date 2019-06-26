@@ -3,8 +3,12 @@
 {% include 'header.html' %}
 <div class="container">
     <h1 class="title">Notes</h1>
-    {% for url in notebook_urls %}
-    <p><a href={{url}}>{{url}}</a></p>
+    <!-- page can either be a notebook or a note -->
+    {% for page_url, page in pages.items() %}
+    <p><a href={{parse_url(page_url)}}>{{page['title']}}</a></p>
     {% endfor %}
+    <!-- {% for url in notebook_urls %}
+    <p><a href={{url}}>{{url}}</a></p>
+    {% endfor %} -->
 </div>
 {% endblock %}

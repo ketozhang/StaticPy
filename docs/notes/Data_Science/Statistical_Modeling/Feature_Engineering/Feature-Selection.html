@@ -31,7 +31,12 @@
     <h1 class="title text-center pt-3">Feature Selection</h1>
     <hr>
     <div class="row">
-        <div class="col-lg-2 d-none d-lg-block"></div>
+        <!-- Notebook Navigation -->
+        <div class="col-lg-2 d-none d-lg-block">
+
+        </div>
+
+        <!-- Content -->
         <div class="col-lg-7 col-md-10">
             <h2 id="forward-stepwise-selection">Forward Stepwise Selection</h2>
 <p><span class="math inline">\(\mathcal O(d^2)\)</span> algorithm that builds a model by adding features iteratively:</p>
@@ -55,6 +60,8 @@ z_j = \frac{\theta_j}{\sigma \sqrt{(X^\top X)_{jj}}}
 <h3 id="lasso">LASSO</h3>
 <p>Naturally adding the LASSO regularization would set some of the features to zero. Using this these features may as well be removed from the dataset.</p>
         </div>
+
+        <!-- On This Page -->
         <div class="col-md-2 d-none d-md-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>

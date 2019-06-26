@@ -4,7 +4,6 @@ import os
 import sys
 import time
 from datetime import datetime
-import frontmatter
 import pypandoc as pandoc
 from collections import OrderedDict
 from flask import (Flask, render_template, url_for, send_from_directory,
@@ -12,12 +11,11 @@ from flask import (Flask, render_template, url_for, send_from_directory,
 from pathlib import Path
 from shutil import rmtree, copyfile
 from src.config_handler import get_config
+from src.source_handler import PROJECT_PATH, TEMPLATES_PATH, get_frontmatter, get_fpath, get_subpages
 
 # Load base_configurations
 base_config = get_config()
-PROJECT_PATH = Path(__file__).resolve().parents[0]
 SITE_URL = base_config['site_url']  # never ends in /
-TEMPLATES_PATH = Path(base_config['templates_path']).resolve()
 
 app = Flask(__name__)
 log = app.logger
@@ -25,14 +23,6 @@ log = app.logger
 ########################
 # HELPER FUNCTIONS
 ########################
-
-def get_fpath(file_or_path):
-    if isinstance(file_or_path, str):
-        fpath = Path(file_or_path).resolve()
-    else:
-        fpath = file_or_path.resolve()
-    return fpath
-
 
 def md_to_html(file_or_path, outputfile):
     fpath = get_fpath(file_or_path)
@@ -105,52 +95,6 @@ def get_all_context_pages():
              for page in pages]  # Ignores files at first level
     return pages
 
-
-def get_frontmatter(file_or_path):
-    """
-    Arguments
-    ---------
-    file_or_path : str or pathlib.Path
-        The path to the markdown file with frontmatter.
-        Because frontmatter is loaded on request, the argument should be relative to project path.
-        If URL is given, the path is assumed relative to project path with ".md" extension.
-
-    Returns
-    -------
-    frontmatter: dict
-        If `file_or_path` doesn't exist then return None.
-        Otherwise, parse the frontmatter at `file_or_path` and return YAML data to dict.
-    """
-    if isinstance(file_or_path, str):
-        fpath = Path(file_or_path)
-    else:
-        fpath = file_or_path
-
-    # Parse path
-    if fpath.suffix == '':
-        fpath = fpath.with_suffix('.md')
-    if not fpath.is_absolute():
-        fpath = PROJECT_PATH / fpath
-
-    # Check exist
-    if not fpath.exists():
-        return None
-
-    fm = frontmatter.load(fpath).metadata
-
-    # Add date to frontmatter if not specified
-    if not ('date' in fm):
-        last_updated = datetime.fromtimestamp(os.path.getctime(fpath))
-        # fm['date'] = last_updated.strftime('%Y-%m-%d %I:%M %p %Z')
-        fm['last_updated'] = last_updated.isoformat()
-
-    return fm
-
-def get_subpaths(path):
-    """Get a list of the path's subpaths (child paths)."""
-    if isinstance(path, str):
-        path = Path(path)
-    return [p.name + '/' for p in sorted(path.glob('*/'))]
 
 ########################
 # META
@@ -226,7 +170,7 @@ def get_root_page(file):
 
 @app.route('/docs/')
 def docs_home_page():
-    """Renders the notes home page located in /documentations/index.html ."""
+    """Renders the notes home page of URL /documentations/index.html ."""
     context = base_config['contexts']['docs']
     return render_template(f"{context['url']}/index.html")
 
@@ -236,15 +180,14 @@ def notes_home_page():
     context = base_config['contexts']['notes']
     source_path = PROJECT_PATH / context['source_path']
     kwargs = dict(
-        notebooks = get_subpaths(source_path),
-        notebook_urls = get_subpaths(source_path)
+        pages=get_subpages(source_path),
     )
     return render_template(f"{context['url']}/index.html", **kwargs)
 
 
 @app.route('/posts/')
 def posts_home_page():
-    """Renders the posts home page located in /notes/index.html ."""
+    """Renders the posts home page of URL /posts/index.html ."""
     def get_all_posts():
         """
         Get post urls (path relative to `TEMPLATES_PATH`).
@@ -261,21 +204,17 @@ def posts_home_page():
 
         return posts
 
-    posts = get_all_posts()
-    posts_dict = OrderedDict()
+    posts = OrderedDict(get_subpages(PROJECT_PATH / 'posts'))
+
     modified_times = []
-    for post in posts:
-        post_md_path = (PROJECT_PATH / post).with_suffix('.md')
-        last_updated = datetime.fromtimestamp(os.path.getctime(post_md_path))
-        modified_times.append(last_updated)
-        fm = get_frontmatter(post_md_path)
-        posts_dict[post] = fm
+    for post in posts.values():
+        modified_times.append(post['last_updated'])
     sort_idx = sorted(range(len(modified_times)),
                       key=modified_times.__getitem__)[::-1]
-    posts_dict = OrderedDict((list(posts_dict.items())[i]) for i in sort_idx)
+    posts = OrderedDict((list(posts.items())[i]) for i in sort_idx)
 
     context = dict(
-        posts=posts_dict
+        posts=posts
     )
 
     return render_template('posts/index.html', **context)
