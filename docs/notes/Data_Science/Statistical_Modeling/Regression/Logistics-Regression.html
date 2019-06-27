@@ -31,13 +31,30 @@
     <h1 class="title text-center pt-3">Logistics Regression</h1>
     <hr>
     <div class="row">
-        <!-- Notebook Navigation -->
+        <!-- Notebook Sidenav -->
         <div class="col-lg-2 d-none d-lg-block">
+            <nav class="sidenav">
+                
+                <div class="row no-gutters">
+                    <div class="col-9">
+                        <p>Logistics Regression</p>
+                        <ul class="no-list-style pl-2">
+                            
+                        </ul>
+                    </div>
+                    <div class="col-2 offset-1">
+                        <a href="/notes/Data_Science/Statistical_Modeling/Regression" role="button">
+                            <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
+                        </a>
+                    </div>
+                </div>
 
+            </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-7 col-md-10">
+        <div class="col-lg-8 col-10">
+            
             <p>The <strong>logistic regression</strong> transforms the linear regression problem with the <strong>logistic</strong> or <strong>sigmoid function</strong> <span class="math inline">\(s(z)\)</span> used for posterior distribution estimation and classification<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
 <p>We will motivate this with a binary problem where <span class="math inline">\(Y: \{0,1\}\)</span> notice that the logistic function transforms the linear regression to the interval <span class="math inline">\([0,1]\)</span>. <span class="math display">\[
 \begin{gather}
@@ -124,10 +141,11 @@ P(X \mid \hat y) = \sum_{i=1}^n  \bigg[ \log P(y_i \mid X_i) + \log\Big(1-P(y_i 
 <li id="fn1"><p>It's unfortunate that it's called logistics regression, but the fact that logistic regression does estimate a posterior distribution is why it's justifiable.<a href="#fnref1">↩</a></p></li>
 </ol>
 </div>
+            
         </div>
 
         <!-- On This Page -->
-        <div class="col-md-2 d-none d-md-block">
+        <div class="col-2 d-none d-md-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>

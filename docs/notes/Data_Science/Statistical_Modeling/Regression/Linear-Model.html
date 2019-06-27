@@ -31,13 +31,30 @@
     <h1 class="title text-center pt-3">Linear Model</h1>
     <hr>
     <div class="row">
-        <!-- Notebook Navigation -->
+        <!-- Notebook Sidenav -->
         <div class="col-lg-2 d-none d-lg-block">
+            <nav class="sidenav">
+                
+                <div class="row no-gutters">
+                    <div class="col-9">
+                        <p>Linear Model</p>
+                        <ul class="no-list-style pl-2">
+                            
+                        </ul>
+                    </div>
+                    <div class="col-2 offset-1">
+                        <a href="/notes/Data_Science/Statistical_Modeling/Regression" role="button">
+                            <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
+                        </a>
+                    </div>
+                </div>
 
+            </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-7 col-md-10">
+        <div class="col-lg-8 col-10">
+            
             <p>Consider a dataset as a matrix of <span class="math inline">\(X \in \mathbb{R}^{m\times n}\)</span> where we've extracted <span class="math inline">\(m\)</span> numbers of data records/rows and <span class="math inline">\(n\)</span> numbers of feature columns. We may map the dataset <span class="math inline">\(X_0\)</span> to a feature function which outputs the design matrix <span class="math inline">\(X = f(X_0)\)</span>. Our linear model can easily be written in the form of a dot product,</p>
 <p><span class="math display">\[ \hat y = X \beta \]</span></p>
 <ul>
@@ -57,10 +74,11 @@
 <p><span class="math display">\[ \beta = (X^TX)^{-1} X^T\hat y \]</span></p></li>
 <li><p>Gaussian Elimination (traditional way of solving linear algebra equations)</p></li>
 </ol>
+            
         </div>
 
         <!-- On This Page -->
-        <div class="col-md-2 d-none d-md-block">
+        <div class="col-2 d-none d-md-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>

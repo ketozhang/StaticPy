@@ -28,6 +28,9 @@ def get_fpath(file_or_path, resolve=True):
         fpath = fpath.resolve()
     return fpath
 
+def infer_title(fname):
+    return fname.title().replace('_', ' ')
+
 
 def get_frontmatter(file_or_path, last_updated=True, title=True):
     """
@@ -75,18 +78,27 @@ def get_frontmatter(file_or_path, last_updated=True, title=True):
         # Title ignores underscores and converts to title case.
         if not ('title' in fm):
             if fpath.stem == 'index':
-                title = fpath.parent.stem
+                fm['title'] = infer_title(fpath.parent.stem)
             else:
-                title = fpath.stem
-            fm['title'] = title.title().replace('_', ' ')
+                fm['title'] = infer_title(fpath.stem)
 
         return fm
     else:
-        return None
+        # Allow dir to not have index file
+        # TODO: Deal with if fpath really do not exist,
+        #       should we give fake frontmatter as well?
+        fm = {}
+
+        if fpath.stem == 'index':
+            fm['title'] = infer_title(fpath.parent.stem)
+        else:
+            fm['title'] = infer_title(fpath.stem)
+
+        return fm
 
 def get_subpages(path):
     """
-    Get immediate subpages of a path
+    Get immediate subpages of a path ignoring "index.*" pages
 
     Parameters
     ----------
@@ -98,11 +110,27 @@ def get_subpages(path):
     pages : list
         a list of dictionaries containing metadata of a page including the URL and frontmatter.
     """
+    if isinstance(path, str) and path[0] == '/':
+        path = path[1:]
+
     path = get_fpath(path)
 
+    if not path.is_dir():
+        return {}
+
     pages = {}
-    for subpath in sorted(path.glob('*/')):
-        print('WHAT', subpath)
+    subpaths = []
+
+    # Glob files
+    extensions = ['md', 'html']
+    for ext in extensions:
+        subpaths.extend(path.glob(f'*.{ext}'))
+
+    # Glob dirs
+    # Unfortunately, Path.glob('*/) includes all files
+    subpaths.extend([p for p in path.glob(f'*/') if p.is_dir() and p.name[0] != '.'])
+
+    for subpath in sorted(subpaths):
         if subpath.stem == 'index':
             continue
         subpath = subpath.resolve().relative_to(PROJECT_PATH)

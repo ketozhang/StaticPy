@@ -7,7 +7,7 @@ from datetime import datetime
 import pypandoc as pandoc
 from collections import OrderedDict
 from flask import (Flask, render_template, url_for, send_from_directory,
-        redirect)
+                   redirect)
 from pathlib import Path
 from shutil import rmtree, copyfile
 from src.config_handler import get_config
@@ -23,6 +23,7 @@ log = app.logger
 ########################
 # HELPER FUNCTIONS
 ########################
+
 
 def md_to_html(file_or_path, outputfile):
     fpath = get_fpath(file_or_path)
@@ -112,12 +113,19 @@ def global_var():
             url = SITE_URL + url
         return url
 
+    def exists(file_or_path):
+        """Check if the path exists in templates path."""
+        fpath = TEMPLATES_PATH / get_fpath(file_or_path, resolve=False)
+        return fpath.exists()
+
     var = dict(
         author=base_config['author'],
         debug=app.debug,
         navbar=base_config['navbar'],
         parse_url=parse_url,
         site_url=site_url,
+        exists=exists,
+        get_subpages=get_subpages,
         site_brand=base_config['site_brand'],
         site_title=base_config['site_title'],
         social_links=base_config['social_links'],
@@ -168,19 +176,26 @@ def get_root_page(file):
         fpath = fpath.with_suffix(".html")
     return render_template(str(file))
 
+
 @app.route('/docs/')
 def docs_home_page():
     """Renders the notes home page of URL /documentations/index.html ."""
     context = base_config['contexts']['docs']
     return render_template(f"{context['url']}/index.html")
 
+
 @app.route('/notes/')
 def notes_home_page():
     """Renders the notes home page located in /notes/index.html ."""
     context = base_config['contexts']['notes']
     source_path = PROJECT_PATH / context['source_path']
+    pages = get_subpages(source_path)
+
+    # for category_url in categories.keys():
+    #     notebooks = get_subpages(category_url)
+
     kwargs = dict(
-        pages=get_subpages(source_path),
+        pages=pages,
     )
     return render_template(f"{context['url']}/index.html", **kwargs)
 
@@ -222,10 +237,10 @@ def posts_home_page():
 
 @app.route(f'/<context>/<path:page>')
 def get_page(context, page='index.html'):
-    log.info(f"Parsing /{context}/{page}")
+    log.info(f"Parsing context: {context}\tpage: {page}")
 
     if page[-1] == '/':
-        page = page[:-1] + '/index.html'
+        return redirect(f'/{context}/{page[:-1]}')
 
     # Attempt to find Flask route
     if page == 'index.html':

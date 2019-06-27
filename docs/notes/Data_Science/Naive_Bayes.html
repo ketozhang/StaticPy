@@ -31,13 +31,30 @@
     <h1 class="title text-center pt-3">Naive Bayes</h1>
     <hr>
     <div class="row">
-        <!-- Notebook Navigation -->
+        <!-- Notebook Sidenav -->
         <div class="col-lg-2 d-none d-lg-block">
+            <nav class="sidenav">
+                
+                <div class="row no-gutters">
+                    <div class="col-9">
+                        <p>Naive Bayes</p>
+                        <ul class="no-list-style pl-2">
+                            
+                        </ul>
+                    </div>
+                    <div class="col-2 offset-1">
+                        <a href="/notes/Data_Science" role="button">
+                            <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
+                        </a>
+                    </div>
+                </div>
 
+            </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-7 col-md-10">
+        <div class="col-lg-8 col-10">
+            
             <p>The Naive Bayes is an algorithm for classification. Let's first define Naive Bayes it for two categories. <span class="math inline">\(Y\)</span> is either in category <span class="math inline">\(A\)</span> or category <span class="math inline">\(B\)</span> where <span class="math inline">\(Y\)</span> has features notated as the random variable <span class="math inline">\(\Phi=\set{\phi_1,\phi_2,\ldots,\phi_n}\)</span></p>
 <p><span class="math display">\[ O = \frac{P(A|\Phi)}{P(B|\Phi)} = \frac{\prod{P(A|\phi_i)}}{\prod{P(B|\phi_i)}} \]</span></p>
 <ul>
@@ -50,10 +67,11 @@
 clf <span class="op">=</span> __NB()
 clf.fit(X_train, Y_train)
 Y_pred <span class="op">=</span> clf.predict(X_test)</code></pre></div>
+            
         </div>
 
         <!-- On This Page -->
-        <div class="col-md-2 d-none d-md-block">
+        <div class="col-2 d-none d-md-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>

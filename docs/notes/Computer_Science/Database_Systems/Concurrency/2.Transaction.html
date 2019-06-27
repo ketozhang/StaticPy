@@ -31,13 +31,30 @@
     <h1 class="title text-center pt-3">Transactions</h1>
     <hr>
     <div class="row">
-        <!-- Notebook Navigation -->
+        <!-- Notebook Sidenav -->
         <div class="col-lg-2 d-none d-lg-block">
+            <nav class="sidenav">
+                
+                <div class="row no-gutters">
+                    <div class="col-9">
+                        <p>Transactions</p>
+                        <ul class="no-list-style pl-2">
+                            
+                        </ul>
+                    </div>
+                    <div class="col-2 offset-1">
+                        <a href="/notes/Computer_Science/Database_Systems/Concurrency" role="button">
+                            <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
+                        </a>
+                    </div>
+                </div>
 
+            </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-7 col-md-10">
+        <div class="col-lg-8 col-10">
+            
             <p>The solution to concurrency control is to treat the user's queries as a single transaction. A <strong>transaction</strong> (or Xact) is a batch of queries that are extracted to line by line instructions.</p>
 <ul>
 <li>A sequence of read and writes to the DBMS</li>
@@ -68,10 +85,11 @@
 <li>Transactions are logged, if the transaction is not commited then use the log to undo. If the transaction is commited then use the log to redo.</li>
 </ul></li>
 </ul>
+            
         </div>
 
         <!-- On This Page -->
-        <div class="col-md-2 d-none d-md-block">
+        <div class="col-2 d-none d-md-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>

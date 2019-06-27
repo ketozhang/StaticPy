@@ -31,13 +31,30 @@
     <h1 class="title text-center pt-3">Lecture Notes18</h1>
     <hr>
     <div class="row">
-        <!-- Notebook Navigation -->
+        <!-- Notebook Sidenav -->
         <div class="col-lg-2 d-none d-lg-block">
+            <nav class="sidenav">
+                
+                <div class="row no-gutters">
+                    <div class="col-9">
+                        <p>Lecture Notes18</p>
+                        <ul class="no-list-style pl-2">
+                            
+                        </ul>
+                    </div>
+                    <div class="col-2 offset-1">
+                        <a href="/notes/Data_Science/DS100_Lecture_Notes" role="button">
+                            <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
+                        </a>
+                    </div>
+                </div>
 
+            </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-7 col-md-10">
+        <div class="col-lg-8 col-10">
+            
             <h1 id="lecture-18---the-bias-variane-tradeoff-and-regularization">Lecture 18 - The Bias Variane Tradeoff and Regularization</h1>
 <h2 id="linear-model-for-non-linear-data">Linear Model for Non-Linear Data</h2>
 <p>Say we wish to model a general function <span class="math inline">\(f(x)\)</span> which is not always linear, a linear fit to <span class="math inline">\(f(x)\)</span> can be generally approximated like so:</p>
@@ -95,10 +112,11 @@
 <p><span class="math display">\[\hat \theta \equiv \arg \min \frac{1}{n}\sum_i^n{\ell(y_i,f_\theta(x_i))} + \lambda \mathbf{R}(\theta)\]</span></p>
 <p>Example of regularization include the same exact function as the loss functions <span class="math inline">\(\Bbb{L^1}\)</span> (Ridge regularization) and <span class="math inline">\(\Bbb{L^2}\)</span> (LASSO regularization).</p>
 <p>The point is to simply introduce another function that further optimizes the model parameter.</p>
+            
         </div>
 
         <!-- On This Page -->
-        <div class="col-md-2 d-none d-md-block">
+        <div class="col-2 d-none d-md-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>

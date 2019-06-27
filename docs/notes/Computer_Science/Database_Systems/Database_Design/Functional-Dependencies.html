@@ -31,13 +31,30 @@
     <h1 class="title text-center pt-3">Functional Dependencies</h1>
     <hr>
     <div class="row">
-        <!-- Notebook Navigation -->
+        <!-- Notebook Sidenav -->
         <div class="col-lg-2 d-none d-lg-block">
+            <nav class="sidenav">
+                
+                <div class="row no-gutters">
+                    <div class="col-9">
+                        <p>Functional Dependencies</p>
+                        <ul class="no-list-style pl-2">
+                            
+                        </ul>
+                    </div>
+                    <div class="col-2 offset-1">
+                        <a href="/notes/Computer_Science/Database_Systems/Database_Design" role="button">
+                            <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
+                        </a>
+                    </div>
+                </div>
 
+            </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-7 col-md-10">
+        <div class="col-lg-8 col-10">
+            
             <p>A functional dependence betweeen two attributes <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are notated as <span class="math inline">\(X \rightarrow Y\)</span>. This implies for any two rows <span class="math inline">\(r_1\)</span> and <span class="math inline">\(r_2\)</span> in the table,</p>
 <p><span class="math display">\[ \pi_X(r_1) = \pi_X(r_2) \implies \pi_Y(r_1) = \pi_Y(r_2) \]</span></p>
 <h2 id="keys">Keys</h2>
@@ -63,10 +80,11 @@
 <ul>
 <li>Union and Decomposition: <span class="math inline">\(X \rightarrow Y \land X \rightarrow Z \iff X \rightarrow YZ\)</span></li>
 </ul>
+            
         </div>
 
         <!-- On This Page -->
-        <div class="col-md-2 d-none d-md-block">
+        <div class="col-2 d-none d-md-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>

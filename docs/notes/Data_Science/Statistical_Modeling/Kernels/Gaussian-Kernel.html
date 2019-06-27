@@ -31,13 +31,30 @@
     <h1 class="title text-center pt-3">Gaussian Kernel</h1>
     <hr>
     <div class="row">
-        <!-- Notebook Navigation -->
+        <!-- Notebook Sidenav -->
         <div class="col-lg-2 d-none d-lg-block">
+            <nav class="sidenav">
+                
+                <div class="row no-gutters">
+                    <div class="col-9">
+                        <p>Gaussian Kernel</p>
+                        <ul class="no-list-style pl-2">
+                            
+                        </ul>
+                    </div>
+                    <div class="col-2 offset-1">
+                        <a href="/notes/Data_Science/Statistical_Modeling/Kernels" role="button">
+                            <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
+                        </a>
+                    </div>
+                </div>
 
+            </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-7 col-md-10">
+        <div class="col-lg-8 col-10">
+            
             <p>The <strong>gaussian kernel</strong> or the <strong>radial basis function kernel</strong> is,</p>
 <p><span class="math display">\[
 k(x,z) = \exp\left(-\frac{|x-z|^2}{2\sigma^2}\right)
@@ -55,10 +72,11 @@ k(x,z) = \exp\left(-\frac{|x-z|^2}{2\sigma^2}\right)
 <li>Can be interpreted as similarity measure which votes how on similar a point <span class="math inline">\(z\)</span> is to a point <span class="math inline">\(x\)</span>.</li>
 <li>Sample points vote for the value at <span class="math inline">\(z\)</span> weighted by closeness to the kernel center.</li>
 </ul>
+            
         </div>
 
         <!-- On This Page -->
-        <div class="col-md-2 d-none d-md-block">
+        <div class="col-2 d-none d-md-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>

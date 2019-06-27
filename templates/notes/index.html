@@ -5,7 +5,7 @@
     <h1 class="title">Notes</h1>
     <!-- page can either be a notebook or a note -->
     {% for page_url, page in pages.items() %}
-    <p><a href={{parse_url(page_url)}}>{{page['title']}}</a></p>
+    <ul class="no-list-style p-0"><li class="pb-1"><a href={{parse_url(page_url)}}>{{page['title']}}</a></li></ul>
     {% endfor %}
     <!-- {% for url in notebook_urls %}
     <p><a href={{url}}>{{url}}</a></p>

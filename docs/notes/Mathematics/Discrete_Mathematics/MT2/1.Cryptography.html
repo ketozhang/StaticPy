@@ -31,13 +31,30 @@
     <h1 class="title text-center pt-3">Cryptography</h1>
     <hr>
     <div class="row">
-        <!-- Notebook Navigation -->
+        <!-- Notebook Sidenav -->
         <div class="col-lg-2 d-none d-lg-block">
+            <nav class="sidenav">
+                
+                <div class="row no-gutters">
+                    <div class="col-9">
+                        <p>Cryptography</p>
+                        <ul class="no-list-style pl-2">
+                            
+                        </ul>
+                    </div>
+                    <div class="col-2 offset-1">
+                        <a href="/notes/Mathematics/Discrete_Mathematics/MT2" role="button">
+                            <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
+                        </a>
+                    </div>
+                </div>
 
+            </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-7 col-md-10">
+        <div class="col-lg-8 col-10">
+            
             <p>The basics of cryptography begins with a story of Alice wanting to send a message <span class="math inline">\(x\)</span> to Bob. They both know Eve who is an eavesdropper thus they need a why to send their messages securily. Alice encrypts her message with an ecryption <span class="math inline">\(E\)</span> such that the message send to Bob is <span class="math inline">\(E(x)\)</span>. Bob on the other hand has a decryption <span class="math inline">\(D\)</span> such that <span class="math inline">\(D(E(x)) = x\)</span>.</p>
 <h2 id="rsa-public-key-schemes">RSA Public Key Schemes</h2>
 <p>Public key schemes are methods to allow Bob to recieve encrypted messages without ever meeting Alice. In other words, Bob never had a decryption sent from by Alice. How this work is that Bob creates a digital locker and sends the locker to Alice. Alice can now lock messages in the locker and sends that back to Bob where Bob only has the locker keys. The actual scheme works as so:</p>
@@ -78,10 +95,11 @@
 <li><p><strong>Prime Factorization</strong></p>
 <p>Another way is to find all the prime factors of <span class="math inline">\(N = pq\)</span> and use <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> to determine the private key <span class="math inline">\(d\)</span>.</p></li>
 </ol>
+            
         </div>
 
         <!-- On This Page -->
-        <div class="col-md-2 d-none d-md-block">
+        <div class="col-2 d-none d-md-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>

@@ -4,9 +4,13 @@
   width: 90%;
 }
 
+.container {
+  width: 80%;
+}
+
 @media (min-width: 992px) {
-  .container-fluid {
-    width: 80%;
+  .container {
+    width: 75%;
   }
 }
 
@@ -181,10 +185,6 @@ footer {
   object-fit: cover;
 }
 
-/* Context */
-
-/* .note {} */
-
 /* Icon */
 
 .icon {
@@ -213,7 +213,7 @@ footer {
 
 .onthispage {
   top: 1em;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 500px;
   border-left: 1px solid rgba(97, 97, 97, .2);
 }
@@ -251,4 +251,16 @@ footer {
 #onthispage-list {
   padding-top: 0.5em;
   padding-left: 0.5em;
+}
+
+/* Context */
+
+#note .sidenav {
+  height: 500px;
+  overflow-x: auto;
+  border-right: 1px solid rgba(97, 97, 97, .2);
+}
+
+#note .sidenav>* {
+  padding-right: 0.5em;
 }

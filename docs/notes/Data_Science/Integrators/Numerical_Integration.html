@@ -31,13 +31,30 @@
     <h1 class="title text-center pt-3">Numerical Integration</h1>
     <hr>
     <div class="row">
-        <!-- Notebook Navigation -->
+        <!-- Notebook Sidenav -->
         <div class="col-lg-2 d-none d-lg-block">
+            <nav class="sidenav">
+                
+                <div class="row no-gutters">
+                    <div class="col-9">
+                        <p>Numerical Integration</p>
+                        <ul class="no-list-style pl-2">
+                            
+                        </ul>
+                    </div>
+                    <div class="col-2 offset-1">
+                        <a href="/notes/Data_Science/Integrators" role="button">
+                            <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
+                        </a>
+                    </div>
+                </div>
 
+            </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-7 col-md-10">
+        <div class="col-lg-8 col-10">
+            
             <h2 id="trapezoidal-rule">Trapezoidal Rule</h2>
 <p>Recall that the area of a trapezoid is the average length of the two sides multiplied by the width <span class="math inline">\(\Delta x\)</span>:</p>
 <p><span class="math display">\[ A_\text{trapezoid} = \frac{f(x_1) + f(x_2)}{2}\Delta x\]</span></p>
@@ -69,10 +86,11 @@
     \int_{a}^{\infty} f(x)\ \mathrm dx = \int_{0}^{e^{-a}} \frac{f(-\log u)}{u}\ du
 \]</span></p></li>
 </ol>
+            
         </div>
 
         <!-- On This Page -->
-        <div class="col-md-2 d-none d-md-block">
+        <div class="col-2 d-none d-md-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
