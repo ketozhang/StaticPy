@@ -13,12 +13,12 @@
                         <p>{{frontmatter['title']}}</p>
                         <ul class="no-list-style pl-2">
                             {% for sibling_url, sibling in get_subpages(request.path).items() %}
-                            <li class='pb-3'><a href="{{sibling_url}}">{{sibling['title']}}</a></li>
+                            <li class='pb-3'><a href="{{parse_url(sibling_url)}}">{{sibling['title']}}</a></li>
                             {% endfor %}
                         </ul>
                     </div>
                     <div class="col-2 offset-1">
-                        <a href="{{parent}}" role="button">
+                        <a href="{{parse_url(parent)}}" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
