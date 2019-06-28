@@ -28,13 +28,18 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <!-- <nav class="navbar navbar-expand-lg">
+        <button id="sidenavCollapse" class="btn btn-info" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </nav> -->
     <h1 class="title text-center pt-3">Variables</h1>
     <hr>
     <div class="row">
         <!-- Notebook Sidenav -->
-        <div class="col-lg-2 d-none d-lg-block">
+        <div class="col-lg-2 col-3 d-none d-md-block">
             <nav class="sidenav">
-                
                 <div class="row no-gutters">
                     <div class="col-9">
                         <p>Variables</p>
@@ -43,19 +48,19 @@
                         </ul>
                     </div>
                     <div class="col-2 offset-1">
-                        <a href="https://ketozhang.github.io/StaticPy/notes/Computer_Science/JavaScript" role="button">
+                        <a href="https://ketozhang.github.io/StaticPy/notes/Computer_Science/JavaScript/" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
                 </div>
-
             </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-8 col-10">
-            
-            <p>There are three keywords of variables which are <code>let</code>, <code>const</code>, and <code>var</code>.</p>
+        <div class="col-lg-8 col-9">
+            <div class="markdown-content">
+                
+                <p>There are three keywords of variables which are <code>let</code>, <code>const</code>, and <code>var</code>.</p>
 <h2 id="let">Let</h2>
 <p><code>let</code> is similar to Python's <code>with</code> statements which is a variable that is only valid within a block-level (e.g., loop).</p>
 <h2 id="constants">Constants</h2>
@@ -66,11 +71,12 @@
 <p>Like Java, it is not necessary to instantiate a variable. By default declared variable that are not instantiated are <code>undefined</code> type,</p>
 <div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> a<span class="op">;</span> <span class="co">// undefined type</span>
 <span class="kw">var</span> a <span class="op">=</span> <span class="kw">undefined</span> <span class="co">// equivalent to above</span></code></pre></div>
-            
+                
+            </div>
         </div>
 
         <!-- On This Page -->
-        <div class="col-2 d-none d-md-block">
+        <div class="col-lg-2 d-none d-lg-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -93,6 +99,7 @@
         crossorigin="anonymous"></script>
 
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/sidenav.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>

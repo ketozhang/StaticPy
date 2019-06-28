@@ -6,19 +6,26 @@ import time
 from datetime import datetime
 import pypandoc as pandoc
 from collections import OrderedDict
-from flask import (Flask, render_template, url_for, send_from_directory,
-                   redirect)
+from flask import (Flask, abort, redirect, render_template,
+                   send_from_directory, url_for)
 from pathlib import Path
 from shutil import rmtree, copyfile
 from src.config_handler import get_config
-from src.source_handler import PROJECT_PATH, TEMPLATES_PATH, get_frontmatter, get_fpath, get_subpages
+from src.source_handler import PROJECT_PATH, TEMPLATES_PATH, get_frontmatter, get_fpath, get_subpages, infer_title
 
 # Load base_configurations
 base_config = get_config()
 SITE_URL = base_config['site_url']  # never ends in /
 
 app = Flask(__name__)
-log = app.logger
+
+# Logger
+log = logging.getLogger(__name__)
+c_format = logging.Formatter(
+    "%(levelname)s:[%(module)s#%(funcName)s, line %(lineno)d]: %(message)s")
+c_handler = logging.StreamHandler()
+c_handler.setFormatter(c_format)
+log.addHandler(c_handler)
 
 ########################
 # HELPER FUNCTIONS
@@ -34,7 +41,8 @@ def md_to_html(file_or_path, outputfile):
 
 
 def build(context):
-    """Converts the source directory (`source_path`) to a directory of html (`output_path`) outputted to the templates directory."""
+    """Converts the source directory (`source_path`) to a directory of html
+    (`output_path`) outputted to the templates directory."""
     source_path = PROJECT_PATH / context['source_path']
 
     url = context['url']
@@ -167,13 +175,12 @@ def home():
 
 @app.route('/<file>')
 def get_root_page(file):
-    """
-    Renders root level pages located in `TEMPLATES_PATH`/<file>.html .
+    """Renders root level pages located in `TEMPLATES_PATH`/<file>.html .
+
     This is often useful for the pages "about" and "contacts".
     """
     fpath = Path(file) if isinstance(file, str) else file
-    if fpath.suffix == "":
-        fpath = fpath.with_suffix(".html")
+    fpath = fpath.with_suffix(".html")
     return render_template(str(file))
 
 
@@ -204,12 +211,10 @@ def notes_home_page():
 def posts_home_page():
     """Renders the posts home page of URL /posts/index.html ."""
     def get_all_posts():
-        """
-        Get post urls (path relative to `TEMPLATES_PATH`).
+        """Get post urls (path relative to `TEMPLATES_PATH`).
 
         Returns
-        -------
-        posts: list[str]
+        -------list[str]
             A list of post urls as strings.
         """
         posts_path = TEMPLATES_PATH / 'posts'
@@ -236,56 +241,61 @@ def posts_home_page():
 
 
 @app.route(f'/<context>/<path:page>')
-def get_page(context, page='index.html'):
-    log.info(f"Parsing context: {context}\tpage: {page}")
+def get_page(context, page):
+    """Routes all other page URLs. This supports both file and directory URL.
 
-    if page[-1] == '/':
-        return redirect(f'/{context}/{page[:-1]}')
+    For files (e.g., /notes/file.html), the content of the markdown file
+    (e.g., /notes/file.md) is imported by the template.
 
-    # Attempt to find Flask route
-    if page == 'index.html':
-        try:  # If found redirect to /context/
-            return redirect(url_for(f"{context}_home_page"))
-        except Exception as e:  # TODO: Change to werkzeug BuildError
-            log.debug(e)
-            pass
+    For directories (e.g., /notes/dir/), if there exists a index file, the
+    directory is treated equivalent to the URL of the index file; otherwise,
+    the template is used with no content. Note tha all directory URL have
+    trailing slashes; its left to the server to always redirect directory URL
+    witout trailing slashes.
 
-    # Attempt finding the correct context
+    Context home pages (e.g., /note/index.html) are redirected to
+    `url_for(<context>_home_page)`
+    """
+    log.info(f"Getting page: {context}, page: {page}")
+    path = TEMPLATES_PATH / context / page
+
+    # Redirect context home pages
+    if path.name == 'index.html':
+        return redirect(url_for(f'{context}_home_page'))
+
+    # Attempt find the correct context
     try:
-        context = base_config['contexts'][context]
+        _context = base_config['contexts'][context]
+        source_path = PROJECT_PATH / _context['source_path']
     except KeyError as e:
-        log.error(
-            str(e) + f', when attempting with args get_page({context}, {page}).')
+        log.error(str(e) +
+                  f', when attempting with args get_page({context}, {page}).')
 
-    source_path = PROJECT_PATH / context['source_path']
+    if page[-1] == '/':  # Handle directories
+        if not path.is_dir():
+            abort(404)
+        _page = get_frontmatter(source_path / page / 'index.md')
+        _page['url'] = f'/{context}/{page}'
+        _page['parent'] = str(Path(_page['url']).parent) + '/'
+        _page['subpages'] = get_subpages(_page['url'])
+        _page['has_content'] = (path / 'index.html').exists()
+        _page['content_path'] = str(
+            (path / 'index.html').relative_to(TEMPLATES_PATH))
+    elif path.with_suffix('.html').exists():  # Handle files
+        path = path.with_suffix('.html')
+        _page = get_frontmatter((source_path / page).with_suffix('.md'))
+        _page['url'] = f'/{context}/{page}'
+        _page['parent'] = str(Path(_page['url']).parent) + '/'
+        _page['subpages'] = get_subpages(_page['url'])
+        _page['has_content'] = True
+        _page['content_path'] = str(path.relative_to(TEMPLATES_PATH))
+    else:
+        log.error(f'Page (/{context}/{page}) not found')
+        abort(404)
 
-    url = context['url']
-    if url[0] == '/':
-        url = url[1:]
-    output_path = TEMPLATES_PATH / url
+    kwargs = {'page': _page}
 
-    # If suffix is .html, then remove it with proper path
-    if Path(page).suffix == '.html':
-        page = str(Path(page).parent / Path(page).stem)
-
-    fm = get_frontmatter(source_path/(str(page) + '.md'))
-    page = output_path / (page + '.html')
-
-    # Resolve relative to template path
-    # The page should now point to the actual HTML file while its served at /<path:page>
-    # This decision was made to allow users to use any subdirectory url not just "domain.com/page"
-    page = page.relative_to(TEMPLATES_PATH).as_posix()
-    log.info(f"Rendering {page}")
-
-    context.update(dict(
-        content_path=str(page),
-        frontmatter=fm,
-    ))
-
-    if fm is None:
-        return render_template(str(page), **context)
-    else:  # Equivalent to checking if file is markdown.
-        return render_template(context['template'], **context)
+    return render_template(_context['template'], **kwargs)
 
 
 if __name__ == '__main__':
@@ -295,6 +305,7 @@ if __name__ == '__main__':
         SITE_URL = ''
         app.run(debug=True, port=8080)
     elif 'build' in args:
+        log.setLevel('INFO')
         elapsed_time = build_all()
         print(f"Building templates finished in {elapsed_time:.2f}secs")
     else:

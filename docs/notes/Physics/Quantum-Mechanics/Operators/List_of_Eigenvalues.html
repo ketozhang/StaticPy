@@ -28,13 +28,18 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <!-- <nav class="navbar navbar-expand-lg">
+        <button id="sidenavCollapse" class="btn btn-info" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </nav> -->
     <h1 class="title text-center pt-3">List of Eigenvalues</h1>
     <hr>
     <div class="row">
         <!-- Notebook Sidenav -->
-        <div class="col-lg-2 d-none d-lg-block">
+        <div class="col-lg-2 col-3 d-none d-md-block">
             <nav class="sidenav">
-                
                 <div class="row no-gutters">
                     <div class="col-9">
                         <p>List of Eigenvalues</p>
@@ -43,19 +48,19 @@
                         </ul>
                     </div>
                     <div class="col-2 offset-1">
-                        <a href="https://ketozhang.github.io/StaticPy/notes/Physics/Quantum-Mechanics/Operators" role="button">
+                        <a href="https://ketozhang.github.io/StaticPy/notes/Physics/Quantum-Mechanics/Operators/" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
                 </div>
-
             </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-8 col-10">
-            
-            <p>Quite commonly, without practice, you may forget the eigenvalues of some operator applied to your wavefunction.</p>
+        <div class="col-lg-8 col-9">
+            <div class="markdown-content">
+                
+                <p>Quite commonly, without practice, you may forget the eigenvalues of some operator applied to your wavefunction.</p>
 <h2 id="hydrogen">Hydrogen</h2>
 <dl>
 <dt>Hamiltonian</dt>
@@ -92,11 +97,12 @@ E_n &amp;= -\frac{m_e}{2\hbar^2}\left(\frac{e^2}{4\pi\epsilon_0}\right)^2\frac{1
     E_{n} =\hbar\omega\left(n + \frac{1}{2}\right)\\
     E_{(n_x, n_y, n_z, ...n_{x_N})} = \prod_{n}\hbar\omega\left(n + \frac{1}{2}\right)
 \end{equation} \]</span></p>
-            
+                
+            </div>
         </div>
 
         <!-- On This Page -->
-        <div class="col-2 d-none d-md-block">
+        <div class="col-lg-2 d-none d-lg-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -119,6 +125,7 @@ E_n &amp;= -\frac{m_e}{2\hbar^2}\left(\frac{e^2}{4\pi\epsilon_0}\right)^2\frac{1
         crossorigin="anonymous"></script>
 
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/sidenav.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>

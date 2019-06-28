@@ -28,13 +28,18 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <!-- <nav class="navbar navbar-expand-lg">
+        <button id="sidenavCollapse" class="btn btn-info" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </nav> -->
     <h1 class="title text-center pt-3">Data 8 Review</h1>
     <hr>
     <div class="row">
         <!-- Notebook Sidenav -->
-        <div class="col-lg-2 d-none d-lg-block">
+        <div class="col-lg-2 col-3 d-none d-md-block">
             <nav class="sidenav">
-                
                 <div class="row no-gutters">
                     <div class="col-9">
                         <p>Data 8 Review</p>
@@ -43,19 +48,19 @@
                         </ul>
                     </div>
                     <div class="col-2 offset-1">
-                        <a href="https://ketozhang.github.io/StaticPy/notes/Data_Science/DS8_Lecture_Notes" role="button">
+                        <a href="https://ketozhang.github.io/StaticPy/notes/Data_Science/DS8_Lecture_Notes/" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
                 </div>
-
             </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-8 col-10">
-            
-            <h2 id="summary-statistics">Summary Statistics</h2>
+        <div class="col-lg-8 col-9">
+            <div class="markdown-content">
+                
+                <h2 id="summary-statistics">Summary Statistics</h2>
 <dl>
 <dt>Total Variation Difference</dt>
 <dd><p>Given the residual between the model and sample, a good metric to measure the distance between the two is the <strong>TVD</strong>:</p>
@@ -65,11 +70,12 @@
 <p>This is often used when the distribution interested <span class="math inline">\(y\)</span> is multi-dimensional (e.g., ethnicities) where <span class="math inline">\(\sum _i Y_i - y_i = 0\)</span></p>
 </dd>
 </dl>
-            
+                
+            </div>
         </div>
 
         <!-- On This Page -->
-        <div class="col-2 d-none d-md-block">
+        <div class="col-lg-2 d-none d-lg-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -92,6 +98,7 @@
         crossorigin="anonymous"></script>
 
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/sidenav.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>

@@ -28,13 +28,18 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <!-- <nav class="navbar navbar-expand-lg">
+        <button id="sidenavCollapse" class="btn btn-info" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </nav> -->
     <h1 class="title text-center pt-3">Adiabatic Approximation</h1>
     <hr>
     <div class="row">
         <!-- Notebook Sidenav -->
-        <div class="col-lg-2 d-none d-lg-block">
+        <div class="col-lg-2 col-3 d-none d-md-block">
             <nav class="sidenav">
-                
                 <div class="row no-gutters">
                     <div class="col-9">
                         <p>Adiabatic Approximation</p>
@@ -43,19 +48,19 @@
                         </ul>
                     </div>
                     <div class="col-2 offset-1">
-                        <a href="https://ketozhang.github.io/StaticPy/notes/Physics/Quantum-Mechanics/Adiabatic Approxmation" role="button">
+                        <a href="https://ketozhang.github.io/StaticPy/notes/Physics/Quantum-Mechanics/Adiabatic Approxmation/" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
                 </div>
-
             </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-8 col-10">
-            
-            <p>The adiabatic approximation considers a time dependent Hamiltonian <span class="math inline">\(H(t)\)</span> that preserves the <strong>adibataic theorem</strong></p>
+        <div class="col-lg-8 col-9">
+            <div class="markdown-content">
+                
+                <p>The adiabatic approximation considers a time dependent Hamiltonian <span class="math inline">\(H(t)\)</span> that preserves the <strong>adibataic theorem</strong></p>
 <dl>
 <dt>Adiabatic Theorem</dt>
 <dd><p>If the initial Hamiltonian <span class="math inline">\(H^{i}\)</span> the system is in the <span class="math inline">\(n\)</span>th eigenstate <span class="math inline">\(\psi^{i}_n\)</span> then later on at some time <span class="math inline">\(t&gt;0\)</span> the Hamiltonian becomes <span class="math inline">\(H^{f}\)</span> such that the <strong>eigenstate is still</strong> on the <span class="math inline">\(n\)</span>th but of the current Hamiltonian <span class="math inline">\(\psi^{f}_n\)</span>.</p>
@@ -149,11 +154,12 @@
 \Psi = e^{ig}\Psi&#39;\\
 g(\mathbf r) \equiv \frac{q}{\hbar}\int_{\mathcal{O}}^{\mathbf r}{\mathbf A(\mathbf r&#39;)\cdot \d \mathbf r&#39;} = \pm \frac{q\Phi}{2\hbar}
 \]</span></p>
-            
+                
+            </div>
         </div>
 
         <!-- On This Page -->
-        <div class="col-2 d-none d-md-block">
+        <div class="col-lg-2 d-none d-lg-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -176,6 +182,7 @@ g(\mathbf r) \equiv \frac{q}{\hbar}\int_{\mathcal{O}}^{\mathbf r}{\mathbf A(\mat
         crossorigin="anonymous"></script>
 
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/sidenav.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>

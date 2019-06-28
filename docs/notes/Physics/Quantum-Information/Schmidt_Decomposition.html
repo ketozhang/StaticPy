@@ -28,13 +28,18 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <!-- <nav class="navbar navbar-expand-lg">
+        <button id="sidenavCollapse" class="btn btn-info" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </nav> -->
     <h1 class="title text-center pt-3">Schmidt Decomposition</h1>
     <hr>
     <div class="row">
         <!-- Notebook Sidenav -->
-        <div class="col-lg-2 d-none d-lg-block">
+        <div class="col-lg-2 col-3 d-none d-md-block">
             <nav class="sidenav">
-                
                 <div class="row no-gutters">
                     <div class="col-9">
                         <p>Schmidt Decomposition</p>
@@ -43,30 +48,31 @@
                         </ul>
                     </div>
                     <div class="col-2 offset-1">
-                        <a href="https://ketozhang.github.io/StaticPy/notes/Physics/Quantum-Information" role="button">
+                        <a href="https://ketozhang.github.io/StaticPy/notes/Physics/Quantum-Information/" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
                 </div>
-
             </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-8 col-10">
-            
-            <h2 id="schmidt-decomposition-by-density-matrix">Schmidt Decomposition by Density Matrix</h2>
+        <div class="col-lg-8 col-9">
+            <div class="markdown-content">
+                
+                <h2 id="schmidt-decomposition-by-density-matrix">Schmidt Decomposition by Density Matrix</h2>
 <p>The Schmidt decomposition can be seen as a form of the state <span class="math inline">\(\ket{\psi}\)</span> such that density operator of that state is a diagonal matrix. Consider the bipartite state,</p>
 <p><span class="math display">\[ \ket{\psi}_{AB} = \sum_{i,\mu}a_{i\mu}\ket{i\mu}\]</span></p>
 <p>Let's work with the density operator <span class="math inline">\(\rho_A\)</span> such that,</p>
 <p><span class="math display">\[ \rho_A \equiv \sum_{i,j,\mu}{a_{i\mu}a_{j\mu}^*\ket{i}\bra{j}}  \]</span></p>
 <p>Note that $ _B $ is not necessarily already diagonal but can be diagonalized. Consider the diagonalized matrix of <span class="math inline">\(\rho_A\)</span> to be <span class="math inline">\(\rho_A&#39;\)</span> with eigenvalues <span class="math inline">\(p_i \in \set{p_1,p_2,\ldots,p_n}\)</span> corresponding to the eigenvectors <span class="math inline">\(\ket{i&#39;}\)</span></p>
 <p><span class="math display">\[\boxed{ \ket{\psi}_{AB} = \sum_{i}\sqrt{p_i}\ket{i}\otimes\ket{i&#39;} }\]</span></p>
-            
+                
+            </div>
         </div>
 
         <!-- On This Page -->
-        <div class="col-2 d-none d-md-block">
+        <div class="col-lg-2 d-none d-lg-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -89,6 +95,7 @@
         crossorigin="anonymous"></script>
 
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/sidenav.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>

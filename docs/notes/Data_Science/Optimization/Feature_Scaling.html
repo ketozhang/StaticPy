@@ -28,13 +28,18 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <!-- <nav class="navbar navbar-expand-lg">
+        <button id="sidenavCollapse" class="btn btn-info" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </nav> -->
     <h1 class="title text-center pt-3">Feature Scaling</h1>
     <hr>
     <div class="row">
         <!-- Notebook Sidenav -->
-        <div class="col-lg-2 d-none d-lg-block">
+        <div class="col-lg-2 col-3 d-none d-md-block">
             <nav class="sidenav">
-                
                 <div class="row no-gutters">
                     <div class="col-9">
                         <p>Feature Scaling</p>
@@ -43,19 +48,19 @@
                         </ul>
                     </div>
                     <div class="col-2 offset-1">
-                        <a href="https://ketozhang.github.io/StaticPy/notes/Data_Science/Optimization" role="button">
+                        <a href="https://ketozhang.github.io/StaticPy/notes/Data_Science/Optimization/" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
                 </div>
-
             </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-8 col-10">
-            
-            <p>Feature scaling can improve gradient descent by scaling the contours that look too long (e.g., too elliptical) to something more symmetric (e.g., more spherical). The problem comes from units of features living in different orders of magntiudes.</p>
+        <div class="col-lg-8 col-9">
+            <div class="markdown-content">
+                
+                <p>Feature scaling can improve gradient descent by scaling the contours that look too long (e.g., too elliptical) to something more symmetric (e.g., more spherical). The problem comes from units of features living in different orders of magntiudes.</p>
 <p>For example, in houses area is measured in square footage which may be in the order of <span class="math inline">\(10^3\)</span> while the number of rooms are in the zeroth order. We can see that the area feature would stretch the contour much more than the number of rooms feature.</p>
 <h2 id="standardization">Standardization</h2>
 <p>A common useful method of feature scaling is to shift each feature column in <span class="math inline">\(X\)</span> to a zero mean and divide it by either size or the standard deviation.</p>
@@ -65,11 +70,12 @@
 <li><span class="math inline">\(\mu_j\)</span> : mean of the <span class="math inline">\(j\)</span>-th feature column</li>
 <li><span class="math inline">\(s_j\)</span> : Either the size or standar deviation of the <span class="math inline">\(j\)</span>-th feature column</li>
 </ul>
-            
+                
+            </div>
         </div>
 
         <!-- On This Page -->
-        <div class="col-2 d-none d-md-block">
+        <div class="col-lg-2 d-none d-lg-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -92,6 +98,7 @@
         crossorigin="anonymous"></script>
 
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/sidenav.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>

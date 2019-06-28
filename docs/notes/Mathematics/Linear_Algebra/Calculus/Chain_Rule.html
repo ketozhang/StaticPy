@@ -28,13 +28,18 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <!-- <nav class="navbar navbar-expand-lg">
+        <button id="sidenavCollapse" class="btn btn-info" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </nav> -->
     <h1 class="title text-center pt-3">Chain Rule</h1>
     <hr>
     <div class="row">
         <!-- Notebook Sidenav -->
-        <div class="col-lg-2 d-none d-lg-block">
+        <div class="col-lg-2 col-3 d-none d-md-block">
             <nav class="sidenav">
-                
                 <div class="row no-gutters">
                     <div class="col-9">
                         <p>Chain Rule</p>
@@ -43,19 +48,19 @@
                         </ul>
                     </div>
                     <div class="col-2 offset-1">
-                        <a href="https://ketozhang.github.io/StaticPy/notes/Mathematics/Linear_Algebra/Calculus" role="button">
+                        <a href="https://ketozhang.github.io/StaticPy/notes/Mathematics/Linear_Algebra/Calculus/" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
                 </div>
-
             </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-8 col-10">
-            
-            <h2 id="scalar-scalar">Scalar-Scalar</h2>
+        <div class="col-lg-8 col-9">
+            <div class="markdown-content">
+                
+                <h2 id="scalar-scalar">Scalar-Scalar</h2>
 <p>We want to take the derivative of a scalar composite function <span class="math inline">\(f​\)</span> with respect to a scalar <span class="math inline">\(x​\)</span>. <span class="math display">\[
 \begin{align}
 f(x) &amp;= f(g(x)) = f \circ g \circ x\\
@@ -70,11 +75,12 @@ f(x) &amp;= f \circ g \circ \vec{x}\\
 \nabla f(\vec x) &amp;= \left(\frac{\mathrm{d}f}{\mathrm{d} g}\frac{\mathrm{d}g}{\mathrm{d} \vec x}\right)^\top = \nabla g(x) \frac{\mathrm{d}f}{\mathrm{d} g} \label{eq:gradient}
 \end{align}
 \]</span> In <span class="math inline">\(\eqref{eq:gradient}​\)</span> the second product term is left transposed because <span class="math inline">\(g​\)</span> can</p>
-            
+                
+            </div>
         </div>
 
         <!-- On This Page -->
-        <div class="col-2 d-none d-md-block">
+        <div class="col-lg-2 d-none d-lg-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -97,6 +103,7 @@ f(x) &amp;= f \circ g \circ \vec{x}\\
         crossorigin="anonymous"></script>
 
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/sidenav.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>

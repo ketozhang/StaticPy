@@ -28,13 +28,18 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <!-- <nav class="navbar navbar-expand-lg">
+        <button id="sidenavCollapse" class="btn btn-info" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </nav> -->
     <h1 class="title text-center pt-3">Drag Force</h1>
     <hr>
     <div class="row">
         <!-- Notebook Sidenav -->
-        <div class="col-lg-2 d-none d-lg-block">
+        <div class="col-lg-2 col-3 d-none d-md-block">
             <nav class="sidenav">
-                
                 <div class="row no-gutters">
                     <div class="col-9">
                         <p>Drag Force</p>
@@ -43,19 +48,19 @@
                         </ul>
                     </div>
                     <div class="col-2 offset-1">
-                        <a href="https://ketozhang.github.io/StaticPy/notes/Physics/Classical_Mechanics/Systems" role="button">
+                        <a href="https://ketozhang.github.io/StaticPy/notes/Physics/Classical_Mechanics/Systems/" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
                 </div>
-
             </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-8 col-10">
-            
-            <p>The drag force <span class="math inline">\(f\)</span> is a force of friction that proportional to the velocity of an object and is applied directly opposite to the velocity. We may write such force as a vector simply as,</p>
+        <div class="col-lg-8 col-9">
+            <div class="markdown-content">
+                
+                <p>The drag force <span class="math inline">\(f\)</span> is a force of friction that proportional to the velocity of an object and is applied directly opposite to the velocity. We may write such force as a vector simply as,</p>
 <p><span class="math display">\[\boldsymbol{f} = -f(v) \boldsymbol{\hat v}\]</span></p>
 <p>A good approximation for the magnitude is the Taylor series noting that the first term goes to zero.</p>
 <p><span class="math display">\[ f(v) \approx bv + cv^2 + ... \]</span></p>
@@ -63,11 +68,12 @@
 <p>If the object traveling is a perfect sphere and traveling much less than the speed of sound then we may approximate using the first two terms of <span class="math inline">\(f(v)\)</span>,</p>
 <p><span class="math display">\[ f(\nu) = 2r\beta  + 4r^2\gamma  \]</span></p>
 <p><span class="math inline">\(r\)</span> : radius of the object</p>
-            
+                
+            </div>
         </div>
 
         <!-- On This Page -->
-        <div class="col-2 d-none d-md-block">
+        <div class="col-lg-2 d-none d-lg-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -90,6 +96,7 @@
         crossorigin="anonymous"></script>
 
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/sidenav.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>

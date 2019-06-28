@@ -28,13 +28,18 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <!-- <nav class="navbar navbar-expand-lg">
+        <button id="sidenavCollapse" class="btn btn-info" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </nav> -->
     <h1 class="title text-center pt-3">Introduction to Support Vector Machine</h1>
     <hr>
     <div class="row">
         <!-- Notebook Sidenav -->
-        <div class="col-lg-2 d-none d-lg-block">
+        <div class="col-lg-2 col-3 d-none d-md-block">
             <nav class="sidenav">
-                
                 <div class="row no-gutters">
                     <div class="col-9">
                         <p>Introduction to Support Vector Machine</p>
@@ -43,19 +48,19 @@
                         </ul>
                     </div>
                     <div class="col-2 offset-1">
-                        <a href="https://ketozhang.github.io/StaticPy/notes/Data_Science/Statistical_Modeling/Classification" role="button">
+                        <a href="https://ketozhang.github.io/StaticPy/notes/Data_Science/Statistical_Modeling/Classification/" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
                 </div>
-
             </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-8 col-10">
-            
-            <h2 id="decision-bound">Decision Bound</h2>
+        <div class="col-lg-8 col-9">
+            <div class="markdown-content">
+                
+                <h2 id="decision-bound">Decision Bound</h2>
 <p>A <strong>decision bound</strong> is a boundary chosen by the classifier to determine if data points are within a certain class or another. Typically a decision bound is a function <span class="math inline">\(f: x \in \mathbb R^d \rightarrow \mathbb R\)</span> such that <span class="math inline">\(f(x)=0\)</span>.</p>
 <h3 id="hyperplane-as-decision-bounds">Hyperplane as Decision Bounds</h3>
 <p>A hyperplane is a <span class="math inline">\(p-1\)</span> dimension subspace living in <span class="math inline">\(p\)</span>-dimension. The hyperplane is mathmetically described as the equation,</p>
@@ -79,11 +84,12 @@ y = \begin{cases}
 <li><span class="math inline">\(y=1\)</span> can be represent class A and <span class="math inline">\(y=-1\)</span> can be class B</li>
 <li>You can immediately tell that hyerplane are great for <strong>linearly separable</strong> data</li>
 </ul>
-            
+                
+            </div>
         </div>
 
         <!-- On This Page -->
-        <div class="col-2 d-none d-md-block">
+        <div class="col-lg-2 d-none d-lg-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -106,6 +112,7 @@ y = \begin{cases}
         crossorigin="anonymous"></script>
 
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/sidenav.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>

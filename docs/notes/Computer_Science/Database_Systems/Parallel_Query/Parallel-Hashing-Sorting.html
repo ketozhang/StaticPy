@@ -28,13 +28,18 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <!-- <nav class="navbar navbar-expand-lg">
+        <button id="sidenavCollapse" class="btn btn-info" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </nav> -->
     <h1 class="title text-center pt-3">Parallel Hashing and Sorting</h1>
     <hr>
     <div class="row">
         <!-- Notebook Sidenav -->
-        <div class="col-lg-2 d-none d-lg-block">
+        <div class="col-lg-2 col-3 d-none d-md-block">
             <nav class="sidenav">
-                
                 <div class="row no-gutters">
                     <div class="col-9">
                         <p>Parallel Hashing and Sorting</p>
@@ -43,19 +48,19 @@
                         </ul>
                     </div>
                     <div class="col-2 offset-1">
-                        <a href="https://ketozhang.github.io/StaticPy/notes/Computer_Science/Database_Systems/Parallel_Query" role="button">
+                        <a href="https://ketozhang.github.io/StaticPy/notes/Computer_Science/Database_Systems/Parallel_Query/" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
                 </div>
-
             </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-8 col-10">
-            
-            <h2 id="hash-join">Hash Join</h2>
+        <div class="col-lg-8 col-9">
+            <div class="markdown-content">
+                
+                <h2 id="hash-join">Hash Join</h2>
 <p>We first distribute the workload with <span class="math inline">\(h_n\)</span> and apply the divide phase. Then we continue with the next phase locally.</p>
 <ul>
 <li>Two tuples that need to join always end up at the same machine</li>
@@ -70,11 +75,12 @@
 </ul>
 <h2 id="symmetric-join">Symmetric Join</h2>
 <p>We can add symmetry to either hash or sort join to allow for a paralleled pipeline that's always streaming. We do this by doing a local merge on both <span class="math inline">\(R\)</span> and <span class="math inline">\(S\)</span> as the input comes.</p>
-            
+                
+            </div>
         </div>
 
         <!-- On This Page -->
-        <div class="col-2 d-none d-md-block">
+        <div class="col-lg-2 d-none d-lg-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -97,6 +103,7 @@
         crossorigin="anonymous"></script>
 
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/sidenav.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>

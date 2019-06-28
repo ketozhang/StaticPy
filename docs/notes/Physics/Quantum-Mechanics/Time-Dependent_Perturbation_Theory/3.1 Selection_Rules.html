@@ -28,13 +28,18 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <!-- <nav class="navbar navbar-expand-lg">
+        <button id="sidenavCollapse" class="btn btn-info" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </nav> -->
     <h1 class="title text-center pt-3">Selection Rules</h1>
     <hr>
     <div class="row">
         <!-- Notebook Sidenav -->
-        <div class="col-lg-2 d-none d-lg-block">
+        <div class="col-lg-2 col-3 d-none d-md-block">
             <nav class="sidenav">
-                
                 <div class="row no-gutters">
                     <div class="col-9">
                         <p>Selection Rules</p>
@@ -43,19 +48,19 @@
                         </ul>
                     </div>
                     <div class="col-2 offset-1">
-                        <a href="https://ketozhang.github.io/StaticPy/notes/Physics/Quantum-Mechanics/Time-Dependent_Perturbation_Theory" role="button">
+                        <a href="https://ketozhang.github.io/StaticPy/notes/Physics/Quantum-Mechanics/Time-Dependent_Perturbation_Theory/" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
                 </div>
-
             </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-8 col-10">
-            
-            <p>Recall that every emission rate requires the calculation of the matrix element <span class="math inline">\(\bra{\psi_b}\mathbf{r}\ket{\psi_a}\)</span></p>
+        <div class="col-lg-8 col-9">
+            <div class="markdown-content">
+                
+                <p>Recall that every emission rate requires the calculation of the matrix element <span class="math inline">\(\bra{\psi_b}\mathbf{r}\ket{\psi_a}\)</span></p>
 <p>The <strong>selection</strong> rule is defined for the Hydrogen wavefunction where certain combinations of <span class="math inline">\(n,l,m\)</span> will result the matrix element to zero. Not only is this convenient for math but it means there are certain transitions that are not allowed.</p>
 <p><span class="math display">\[ \bra{n&#39;l&#39;m&#39;}\mathbf{r}\ket{nlm} \]</span></p>
 <ol style="list-style-type: decimal">
@@ -81,11 +86,12 @@
 \boxed{\abs{\bra{n&#39;l&#39;m\pm 1}\mathbf{r}\ket{nlm}}^2 = 2\bigabs{\bra{n&#39;l&#39;m\pm 1}x\ket{nlm}}^2}
 \]</span></p>
 <!-- TODO: # Proof -->
-            
+                
+            </div>
         </div>
 
         <!-- On This Page -->
-        <div class="col-2 d-none d-md-block">
+        <div class="col-lg-2 d-none d-lg-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -108,6 +114,7 @@
         crossorigin="anonymous"></script>
 
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/sidenav.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>

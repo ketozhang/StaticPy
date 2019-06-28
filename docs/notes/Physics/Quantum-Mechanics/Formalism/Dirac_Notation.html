@@ -28,13 +28,18 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <!-- <nav class="navbar navbar-expand-lg">
+        <button id="sidenavCollapse" class="btn btn-info" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </nav> -->
     <h1 class="title text-center pt-3">Dirac Notation</h1>
     <hr>
     <div class="row">
         <!-- Notebook Sidenav -->
-        <div class="col-lg-2 d-none d-lg-block">
+        <div class="col-lg-2 col-3 d-none d-md-block">
             <nav class="sidenav">
-                
                 <div class="row no-gutters">
                     <div class="col-9">
                         <p>Dirac Notation</p>
@@ -43,19 +48,19 @@
                         </ul>
                     </div>
                     <div class="col-2 offset-1">
-                        <a href="https://ketozhang.github.io/StaticPy/notes/Physics/Quantum-Mechanics/Formalism" role="button">
+                        <a href="https://ketozhang.github.io/StaticPy/notes/Physics/Quantum-Mechanics/Formalism/" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
                 </div>
-
             </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-8 col-10">
-            
-            <p><em>alias: Bra-ket notation</em></p>
+        <div class="col-lg-8 col-9">
+            <div class="markdown-content">
+                
+                <p><em>alias: Bra-ket notation</em></p>
 <p>The dirac notation is widely used in quantum mechanics similar how vectors are widely used in electromagnetism. We use this because quantum mechanics is natural a linear algebra problem.</p>
 <p>A vector in Dirac notation is written as <span class="math inline">\(|\alpha\rangle\)</span> which is called a <strong>bra vector</strong> defined to be a general vector in <strong>any</strong> basis. For example we say that <span class="math inline">\(|\alpha\rangle\)</span> may be represented in a <span class="math inline">\(N\)</span>-dimension space using the cartesian basis,</p>
 <p><span class="math display">\[ |\alpha\rangle \rightarrow \boldsymbol{a} \equiv \begin{pmatrix} a_1 \\ a_2 \\ \vdots \\ a_N \end{pmatrix}\]</span></p>
@@ -92,11 +97,12 @@
 <li><p><strong>Schwarz inequality:</strong></p>
 <p><span class="math display">\[ \left\lvert{\int_a^b{f(x)^*g(x)\;dx} }\right\rvert \le \sqrt{\int_a^b{|f(x)|^2\;dx}\int_a^b{|g(x)|^2\;dx}}\]</span></p></li>
 </ul>
-            
+                
+            </div>
         </div>
 
         <!-- On This Page -->
-        <div class="col-2 d-none d-md-block">
+        <div class="col-lg-2 d-none d-lg-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -119,6 +125,7 @@
         crossorigin="anonymous"></script>
 
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/sidenav.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>

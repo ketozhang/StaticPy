@@ -15,8 +15,9 @@ TEMPLATES_PATH = Path(base_config['templates_path']).resolve()
 
 
 def get_fpath(file_or_path, resolve=True):
-    """
-    Helper function for the arguments `file`, `path`, or `file_or_path` used below.
+    """Helper function for the arguments `file`, `path`, or `file_or_path` used
+    below.
+
     Parses `file_or_path` that is either a string or pathlib.Path
     """
     if isinstance(file_or_path, str):
@@ -28,17 +29,17 @@ def get_fpath(file_or_path, resolve=True):
         fpath = fpath.resolve()
     return fpath
 
+
 def infer_title(fname):
     return fname.title().replace('_', ' ')
 
 
+
 def get_frontmatter(file_or_path, last_updated=True, title=True):
-    """
-    Get parsed YAML frontmatter
+    """Get parsed YAML frontmatter.
 
     Arguments
-    ---------
-    file_or_path : str or pathlib.Path
+    ---------ath : str or pathlib.Path
         If path to file, then the path should be to a markdown file. ".md" extension is assumed if missing.
         If path to directory, then the path should contain index.md.
         Because frontmatter is loaded on request, the argument should always be relative to project path.
@@ -96,14 +97,14 @@ def get_frontmatter(file_or_path, last_updated=True, title=True):
 
         return fm
 
+
 def get_subpages(path):
-    """
-    Get immediate subpages of a path ignoring "index.*" pages
+    """Get immediate subpages of a path ignoring "index.*" pages.
 
     Parameters
     ----------
     path : str or pathlib.Path
-        Directory relative to the project path or URL
+        Directory relative to the project path or URL with leading slash.
 
     Returns
     -------
@@ -128,7 +129,8 @@ def get_subpages(path):
 
     # Glob dirs
     # Unfortunately, Path.glob('*/) includes all files
-    subpaths.extend([p for p in path.glob(f'*/') if p.is_dir() and p.name[0] != '.'])
+    subpaths.extend([p for p in path.glob(f'*/')
+                     if p.is_dir() and p.name[0] != '.'])
 
     for subpath in sorted(subpaths):
         if subpath.stem == 'index':
@@ -144,4 +146,3 @@ def get_subpages(path):
         pages[str(url)] = fm
 
     return pages
-

@@ -1,16 +1,23 @@
 /* Global */
 
-.container-fluid {
-  width: 90%;
+html {
+  overflow-y: scroll;
 }
 
 .container {
-  width: 80%;
+  max-width: 80%;
+}
+
+.container-fluid {
+  max-width: 90%;
 }
 
 @media (min-width: 992px) {
   .container {
-    width: 75%;
+    max-width: 60%;
+  }
+  .container-fluid {
+    max-width: 80%;
   }
 }
 
@@ -64,8 +71,13 @@ body {
   padding-bottom: 80px;
 }
 
-p {
-  font-family: 'Open Sans', sans-serif;
+pre {
+  background: #2d2d2d;
+  padding: 1em;
+  overflow: auto;
+  color: white;
+  margin-top: 0 !important;
+  margin-bottom: 1rem !important;
 }
 
 pre, code {
@@ -136,10 +148,12 @@ hr.gradient {
   opacity: 0.7;
 }
 
-blockquote.blockquote {
-  background: #f9f9f9;
-  border-left: 3px solid #ccc;
-  padding: 0.5em 10px
+blockquote {
+  border-left: .25em solid #dfe2e5;
+  color: #6a737d;
+  padding: 0 1em;
+  margin-bottom: 16px;
+  margin-top: 0;
 }
 
 footer {
@@ -263,4 +277,49 @@ footer {
 
 #note .sidenav>* {
   padding-right: 0.5em;
+}
+
+.sidenav.active {
+  margin-left: -250px;
+}
+
+/* Markdown Styles */
+
+.markdown-content {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.markdown-content h1, .markdown-content h2, .markdown-content h3, .markdown-content h4, .markdown-content h5, .markdown-content h6 {
+  font-family: 'Quicksand', 'Open Sans', sans-serif;
+}
+
+.markdown-content table .markdown-content dl {
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+
+.markdown-content th {
+  border: 1px solid #dfe2e5;
+  border-bottom: 2px solid #dfe2e5;
+  padding: 6px 13px;
+}
+
+.markdown-content td {
+  border: 1px solid #dfe2e5;
+  padding: 6px 13px;
+}
+
+.markdown-content table tr.even {
+  background-color: #f6f8fa;
+}
+
+.markdown-content dd {
+  padding-left: 16px;
+}
+
+.markdown-content dt {
+  font-size: 1em;
+  font-style: italic;
+  font-weight: 600;
+  margin-top: 16px;
 }

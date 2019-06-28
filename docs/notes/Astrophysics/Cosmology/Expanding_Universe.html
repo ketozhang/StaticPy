@@ -28,13 +28,18 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <!-- <nav class="navbar navbar-expand-lg">
+        <button id="sidenavCollapse" class="btn btn-info" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </nav> -->
     <h1 class="title text-center pt-3">Expanding Universe</h1>
     <hr>
     <div class="row">
         <!-- Notebook Sidenav -->
-        <div class="col-lg-2 d-none d-lg-block">
+        <div class="col-lg-2 col-3 d-none d-md-block">
             <nav class="sidenav">
-                
                 <div class="row no-gutters">
                     <div class="col-9">
                         <p>Expanding Universe</p>
@@ -43,19 +48,19 @@
                         </ul>
                     </div>
                     <div class="col-2 offset-1">
-                        <a href="https://ketozhang.github.io/StaticPy/notes/Astrophysics/Cosmology" role="button">
+                        <a href="https://ketozhang.github.io/StaticPy/notes/Astrophysics/Cosmology/" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
                 </div>
-
             </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-8 col-10">
-            
-            <h2 id="scale-factor-and-comoving-distance">Scale Factor and Comoving Distance</h2>
+        <div class="col-lg-8 col-9">
+            <div class="markdown-content">
+                
+                <h2 id="scale-factor-and-comoving-distance">Scale Factor and Comoving Distance</h2>
 <p>To begin talking about the expanding universe, one must have the notion of the scale factor and comoving distance. Imagine a cartesian grid drawn on the universe. Each tick mark in the grid corresponds to the <strong>comoving distance</strong> and the distance of each tick marks corresponds to the <strong>scale factor</strong>.</p>
 <!-- TODO: Diagram of cartesian grid  -->
 <p>We may interpret this with defining distance <span class="math inline">\(r\)</span> in terms of the the scale factor <span class="math inline">\(a\)</span> and co-moving distance <span class="math inline">\(\chi\)</span>. A stationary object <span class="math inline">\(\chi\)</span> co-moving distance away is actually <span class="math inline">\(r\)</span> away where <span class="math inline">\(r\)</span> is,</p>
@@ -85,11 +90,12 @@
     \boxed{H(t) \equiv \frac{a&#39;(t)}{a(t)}}
 \end{equation}
 \]</span></p>
-            
+                
+            </div>
         </div>
 
         <!-- On This Page -->
-        <div class="col-2 d-none d-md-block">
+        <div class="col-lg-2 d-none d-lg-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -112,6 +118,7 @@
         crossorigin="anonymous"></script>
 
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/sidenav.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>

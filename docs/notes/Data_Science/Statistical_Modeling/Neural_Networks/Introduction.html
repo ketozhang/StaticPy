@@ -28,13 +28,18 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <!-- <nav class="navbar navbar-expand-lg">
+        <button id="sidenavCollapse" class="btn btn-info" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </nav> -->
     <h1 class="title text-center pt-3">Introduction</h1>
     <hr>
     <div class="row">
         <!-- Notebook Sidenav -->
-        <div class="col-lg-2 d-none d-lg-block">
+        <div class="col-lg-2 col-3 d-none d-md-block">
             <nav class="sidenav">
-                
                 <div class="row no-gutters">
                     <div class="col-9">
                         <p>Introduction</p>
@@ -43,26 +48,27 @@
                         </ul>
                     </div>
                     <div class="col-2 offset-1">
-                        <a href="https://ketozhang.github.io/StaticPy/notes/Data_Science/Statistical_Modeling/Neural_Networks" role="button">
+                        <a href="https://ketozhang.github.io/StaticPy/notes/Data_Science/Statistical_Modeling/Neural_Networks/" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
                 </div>
-
             </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-8 col-10">
-            
-            <h2 id="single-hidden-layer">Single Hidden Layer</h2>
+        <div class="col-lg-8 col-9">
+            <div class="markdown-content">
+                
+                <h2 id="single-hidden-layer">Single Hidden Layer</h2>
 <p>Adding a single hidden layer, the math gets quite verbose. It is easier to treat an input to a node as a transformation matrix <span class="math inline">\(T\)</span>. For the single hidden layer NN, there are two transformations <span class="math inline">\(T^{(1)}\)</span> and <span class="math inline">\(T^{(2)}\)</span>.</p>
 <p>Let's begin with a single sample <span class="math inline">\(x \in \mathbb R^{d}\)</span>. At every step along the way we will always add the ficticious dimension of value 1 for the intercept. * <span class="math inline">\(T^{(1)}\)</span> takes in <span class="math inline">\(x\)</span> as <span class="math inline">\(d+1\)</span> input nodes and outputs <span class="math inline">\(h \in \mathbb R^{m}\)</span> * <span class="math inline">\(T^{(2)}\)</span> takes in <span class="math inline">\(h\)</span> as <span class="math inline">\(m+1\)</span> nodes and outputs <span class="math inline">\(z \in \mathbb R^{k}\)</span></p>
-            
+                
+            </div>
         </div>
 
         <!-- On This Page -->
-        <div class="col-2 d-none d-md-block">
+        <div class="col-lg-2 d-none d-lg-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -85,6 +91,7 @@
         crossorigin="anonymous"></script>
 
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/sidenav.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>

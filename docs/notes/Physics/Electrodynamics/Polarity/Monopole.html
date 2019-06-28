@@ -28,13 +28,18 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <!-- <nav class="navbar navbar-expand-lg">
+        <button id="sidenavCollapse" class="btn btn-info" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </nav> -->
     <h1 class="title text-center pt-3">Monopole</h1>
     <hr>
     <div class="row">
         <!-- Notebook Sidenav -->
-        <div class="col-lg-2 d-none d-lg-block">
+        <div class="col-lg-2 col-3 d-none d-md-block">
             <nav class="sidenav">
-                
                 <div class="row no-gutters">
                     <div class="col-9">
                         <p>Monopole</p>
@@ -43,28 +48,29 @@
                         </ul>
                     </div>
                     <div class="col-2 offset-1">
-                        <a href="https://ketozhang.github.io/StaticPy/notes/Physics/Electrodynamics/Polarity" role="button">
+                        <a href="https://ketozhang.github.io/StaticPy/notes/Physics/Electrodynamics/Polarity/" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
                 </div>
-
             </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-8 col-10">
-            
-            <p>The monopole is the first term (<span class="math inline">\(n=0\)</span>) of the multipole expansion. For a charge source of total charge <span class="math inline">\(Q\)</span>,</p>
+        <div class="col-lg-8 col-9">
+            <div class="markdown-content">
+                
+                <p>The monopole is the first term (<span class="math inline">\(n=0\)</span>) of the multipole expansion. For a charge source of total charge <span class="math inline">\(Q\)</span>,</p>
 <p><span class="math display">\[
 V(\boldsymbol r) = \frac{1}{4\pi\epsilon_0} \frac{Q}{r}
 \]</span></p>
 <p>This equation mirrors the exact potential for a point charge at distance <span class="math inline">\(d=r\)</span> where we center the origin at the point charge.</p>
-            
+                
+            </div>
         </div>
 
         <!-- On This Page -->
-        <div class="col-2 d-none d-md-block">
+        <div class="col-lg-2 d-none d-lg-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -87,6 +93,7 @@ V(\boldsymbol r) = \frac{1}{4\pi\epsilon_0} \frac{Q}{r}
         crossorigin="anonymous"></script>
 
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/sidenav.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>

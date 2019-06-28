@@ -28,13 +28,18 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <!-- <nav class="navbar navbar-expand-lg">
+        <button id="sidenavCollapse" class="btn btn-info" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </nav> -->
     <h1 class="title text-center pt-3">Landau Theory of Phase Transitions</h1>
     <hr>
     <div class="row">
         <!-- Notebook Sidenav -->
-        <div class="col-lg-2 d-none d-lg-block">
+        <div class="col-lg-2 col-3 d-none d-md-block">
             <nav class="sidenav">
-                
                 <div class="row no-gutters">
                     <div class="col-9">
                         <p>Landau Theory of Phase Transitions</p>
@@ -43,19 +48,19 @@
                         </ul>
                     </div>
                     <div class="col-2 offset-1">
-                        <a href="https://ketozhang.github.io/StaticPy/notes/Physics/Thermodynamics" role="button">
+                        <a href="https://ketozhang.github.io/StaticPy/notes/Physics/Thermodynamics/" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
                 </div>
-
             </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-8 col-10">
-            
-            <h1 id="landau-theory-of-phase-transitions">Landau Theory of Phase Transitions</h1>
+        <div class="col-lg-8 col-9">
+            <div class="markdown-content">
+                
+                <h1 id="landau-theory-of-phase-transitions">Landau Theory of Phase Transitions</h1>
 <p>The Landau theory gives a systemic formulation of the mean field theory of phase transition applicable to various systems. The basis is to consider a system at constant volume and temperature such that the free energy <span class="math inline">\(F = U - \tau\sigma\)</span> is minimum at equilibrium.</p>
 <p>We consider a parameter that causes the the free energy to minimum <span class="math inline">\(\xi_0\)</span>. This parameter is the quantity relating to the properties of the system.</p>
 <p><span class="math display">\[
@@ -80,11 +85,12 @@
     F(\xi_2) &amp;= g_0(\tau) - \frac{\alpha^2}{4g_4}(\tau-\tau_0)^2 
 \end{aligned}
 \]</span></p>
-            
+                
+            </div>
         </div>
 
         <!-- On This Page -->
-        <div class="col-2 d-none d-md-block">
+        <div class="col-lg-2 d-none d-lg-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -107,6 +113,7 @@
         crossorigin="anonymous"></script>
 
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/sidenav.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>

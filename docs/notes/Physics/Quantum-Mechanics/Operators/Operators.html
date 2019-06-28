@@ -28,13 +28,18 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <!-- <nav class="navbar navbar-expand-lg">
+        <button id="sidenavCollapse" class="btn btn-info" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </nav> -->
     <h1 class="title text-center pt-3">Operators</h1>
     <hr>
     <div class="row">
         <!-- Notebook Sidenav -->
-        <div class="col-lg-2 d-none d-lg-block">
+        <div class="col-lg-2 col-3 d-none d-md-block">
             <nav class="sidenav">
-                
                 <div class="row no-gutters">
                     <div class="col-9">
                         <p>Operators</p>
@@ -43,19 +48,19 @@
                         </ul>
                     </div>
                     <div class="col-2 offset-1">
-                        <a href="https://ketozhang.github.io/StaticPy/notes/Physics/Quantum-Mechanics/Operators" role="button">
+                        <a href="https://ketozhang.github.io/StaticPy/notes/Physics/Quantum-Mechanics/Operators/" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
                 </div>
-
             </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-8 col-10">
-            
-            <p>An operator is a mathematical tool that is in the same category as functions. Like functions, operators can be made up of parameters, constants, and other operators. Operators are difficult to define but you're probably familiar to some like,</p>
+        <div class="col-lg-8 col-9">
+            <div class="markdown-content">
+                
+                <p>An operator is a mathematical tool that is in the same category as functions. Like functions, operators can be made up of parameters, constants, and other operators. Operators are difficult to define but you're probably familiar to some like,</p>
 <p><span class="math display">\[ \sum \tag{summation operator}\]</span> <span class="math display">\[ \frac{d}{dx} \tag{differential operator}\]</span></p>
 <p>We wish to use variables (makes our life easier) so by convention operator variables are always written with a hat (i.e., circumflex) like <span class="math inline">\(\hat x\)</span>.</p>
 <h2 id="hamiltonian-operator">Hamiltonian Operator</h2>
@@ -71,11 +76,12 @@
 <p>A hermitian operator is defined as an operator with the property,</p>
 <p><span class="math display">\[ \hat Q = \hat Q^* \]</span></p>
 <p>In general all observables are hermitian operators (e.g., <span class="math inline">\(\hat x\)</span>, <span class="math inline">\(\hat p\)</span>).</p>
-            
+                
+            </div>
         </div>
 
         <!-- On This Page -->
-        <div class="col-2 d-none d-md-block">
+        <div class="col-lg-2 d-none d-lg-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -98,6 +104,7 @@
         crossorigin="anonymous"></script>
 
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/sidenav.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>

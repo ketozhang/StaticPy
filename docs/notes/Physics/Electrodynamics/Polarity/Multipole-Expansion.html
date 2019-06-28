@@ -28,13 +28,18 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <!-- <nav class="navbar navbar-expand-lg">
+        <button id="sidenavCollapse" class="btn btn-info" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </nav> -->
     <h1 class="title text-center pt-3">Multipole Expansion</h1>
     <hr>
     <div class="row">
         <!-- Notebook Sidenav -->
-        <div class="col-lg-2 d-none d-lg-block">
+        <div class="col-lg-2 col-3 d-none d-md-block">
             <nav class="sidenav">
-                
                 <div class="row no-gutters">
                     <div class="col-9">
                         <p>Multipole Expansion</p>
@@ -43,19 +48,19 @@
                         </ul>
                     </div>
                     <div class="col-2 offset-1">
-                        <a href="https://ketozhang.github.io/StaticPy/notes/Physics/Electrodynamics/Polarity" role="button">
+                        <a href="https://ketozhang.github.io/StaticPy/notes/Physics/Electrodynamics/Polarity/" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
                 </div>
-
             </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-8 col-10">
-            
-            <p>At a large distance <span class="math inline">\(d\)</span> from a charge source, we can approximate the charge to be a point source. However, we wish to generalize for any distance away from a source. Consider a charge source well-structured in an <span class="math inline">\(n\)</span>-pole configuration. The potential located at <span class="math inline">\(\boldsymbol r\)</span> from the origin and <span class="math inline">\(d\)</span> distance away from the a geometric slice of the source <span class="math inline">\(\mathrm d \mathcal V\)</span> located at <span class="math inline">\(\boldsymbol r&#39;\)</span> is given by,</p>
+        <div class="col-lg-8 col-9">
+            <div class="markdown-content">
+                
+                <p>At a large distance <span class="math inline">\(d\)</span> from a charge source, we can approximate the charge to be a point source. However, we wish to generalize for any distance away from a source. Consider a charge source well-structured in an <span class="math inline">\(n\)</span>-pole configuration. The potential located at <span class="math inline">\(\boldsymbol r\)</span> from the origin and <span class="math inline">\(d\)</span> distance away from the a geometric slice of the source <span class="math inline">\(\mathrm d \mathcal V\)</span> located at <span class="math inline">\(\boldsymbol r&#39;\)</span> is given by,</p>
 <p><span class="math display">\[
 V(\boldsymbol{r}) = \frac{1}{4\pi \epsilon_0}\int{\frac{\rho(\boldsymbol{r&#39;})}{d} \mathrm d \mathcal V}
 \]</span></p>
@@ -67,11 +72,12 @@ V(\boldsymbol{r}) = \frac{1}{4\pi \epsilon_0}\int{\frac{\rho(\boldsymbol{r&#39;}
 <p><span class="math display">\[
 V(\boldsymbol{r}) = \frac{1}{4\pi\epsilon_0}\sum_{n=0}^{\infty}\frac{1}{r^{n+1}}\int{(r&#39;)^n}P_n(\cos\alpha)\rho(\boldsymbol r&#39;) \mathrm d \mathcal V
 \]</span></p>
-            
+                
+            </div>
         </div>
 
         <!-- On This Page -->
-        <div class="col-2 d-none d-md-block">
+        <div class="col-lg-2 d-none d-lg-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -94,6 +100,7 @@ V(\boldsymbol{r}) = \frac{1}{4\pi\epsilon_0}\sum_{n=0}^{\infty}\frac{1}{r^{n+1}}
         crossorigin="anonymous"></script>
 
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/sidenav.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>

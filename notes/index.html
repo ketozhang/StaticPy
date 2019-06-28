@@ -2,12 +2,14 @@
 {% block content %}
 {% include 'header.html' %}
 <div class="container">
-    <h1 class="title">Notes</h1>
-    <!-- page can either be a notebook or a note -->
-    {% for page_url, page in pages.items() %}
-    <ul class="no-list-style p-0"><li class="pb-1"><a href={{parse_url(page_url)}}>{{page['title']}}</a></li></ul>
+  <h1 class="title">Notes</h1>
+  <!-- page can either be a notebook or a note -->
+  <ul class="no-list-style p-0">
+  {% for page_url, page in pages.items() %}
+    <li class="pb-2"><a href={{parse_url(page_url)}}>{{page['title']}}</a></li>
     {% endfor %}
-    <!-- {% for url in notebook_urls %}
+  </ul>
+  <!-- {% for url in notebook_urls %}
     <p><a href={{url}}>{{url}}</a></p>
     {% endfor %} -->
 </div>

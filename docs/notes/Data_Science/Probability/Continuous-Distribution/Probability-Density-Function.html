@@ -28,13 +28,18 @@
 <body>
     
 <div class="container-fluid" id="note">
+    <!-- <nav class="navbar navbar-expand-lg">
+        <button id="sidenavCollapse" class="btn btn-info" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </nav> -->
     <h1 class="title text-center pt-3">Probability Density Function</h1>
     <hr>
     <div class="row">
         <!-- Notebook Sidenav -->
-        <div class="col-lg-2 d-none d-lg-block">
+        <div class="col-lg-2 col-3 d-none d-md-block">
             <nav class="sidenav">
-                
                 <div class="row no-gutters">
                     <div class="col-9">
                         <p>Probability Density Function</p>
@@ -43,19 +48,19 @@
                         </ul>
                     </div>
                     <div class="col-2 offset-1">
-                        <a href="https://ketozhang.github.io/StaticPy/notes/Data_Science/Probability/Continuous-Distribution" role="button">
+                        <a href="https://ketozhang.github.io/StaticPy/notes/Data_Science/Probability/Continuous-Distribution/" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
                 </div>
-
             </nav>
         </div>
 
         <!-- Content -->
-        <div class="col-lg-8 col-10">
-            
-            <p>For a continuous random variable <span class="math inline">\(X\)</span> there may exist a <strong>probability density function (PDF)</strong> <span class="math inline">\(f_X\)</span> which is the density of probability among its events. We can find the probability of a continuous event <span class="math inline">\(A = [a,b]\)</span> by integrating over the PDF,</p>
+        <div class="col-lg-8 col-9">
+            <div class="markdown-content">
+                
+                <p>For a continuous random variable <span class="math inline">\(X\)</span> there may exist a <strong>probability density function (PDF)</strong> <span class="math inline">\(f_X\)</span> which is the density of probability among its events. We can find the probability of a continuous event <span class="math inline">\(A = [a,b]\)</span> by integrating over the PDF,</p>
 <p><span class="math display">\[ P(a \le X \le b) = \int_a^b f_X ~\mathrm dx \]</span></p>
 <h2 id="properties">Properties</h2>
 <ul>
@@ -71,11 +76,12 @@
 <h2 id="joint-density-functions">Joint Density Functions</h2>
 <p>The probability of two events,</p>
 <p><span class="math display">\[ P(X \in A, Y \in B) = \int_B\int_A f_{XY}(x,y)~\mathrm dx \mathrm dy \]</span></p>
-            
+                
+            </div>
         </div>
 
         <!-- On This Page -->
-        <div class="col-2 d-none d-md-block">
+        <div class="col-lg-2 d-none d-lg-block">
             <div class="sticky-top onthispage">
                 <ul id="onthispage-list" class="no-list-style">On This Page</ul>
             </div>
@@ -98,6 +104,7 @@
         crossorigin="anonymous"></script>
 
     <script src="https://ketozhang.github.io/StaticPy/static/datetime.js"></script>
+    <script src="https://ketozhang.github.io/StaticPy/static/sidenav.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/codeHighlight.js"></script>
     <script src="https://ketozhang.github.io/StaticPy/static/prism.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
