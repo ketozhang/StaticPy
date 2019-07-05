@@ -59,8 +59,9 @@ def build(context):
     output_path.mkdir()
     try:
         # Convert Markdown/HTML notes to HTML
-        notes = list(source_path.glob('**/*.md')) + \
-            list(source_path.glob('**/*.html'))
+        notes = (list(source_path.glob('**/*.md')) +
+                 list(source_path.glob('**/*.html'))
+                 )
         for note in notes:
             parent = note.relative_to(source_path).parent  # /path/to/note/
 
@@ -98,10 +99,12 @@ def build_all():
 
 
 def get_all_context_pages():
-    """Retrieve all pages accessible determined if HTML file exists in templates path."""
-    pages = TEMPLATES_PATH.glob('*/**/*.html')
-    pages = [str(page.relative_to(TEMPLATES_PATH).as_posix())
-             for page in pages]  # Ignores files at first level
+    """
+    Retrieve all pages accessible determined if HTML file exists in templates path.
+    Ignores files that are at first level of templates path.
+    """
+    pages = [str(page.relative_to(TEMPLATES_PATH)) for page in TEMPLATES_PATH.glob('*/**/*.html')]
+    pages += [str(page.relative_to(TEMPLATES_PATH)) + '/' for page in TEMPLATES_PATH.glob('*/**/')]
     return pages
 
 

@@ -53,7 +53,7 @@ def get_frontmatter(file_or_path, last_updated=True, title=True):
     Returns
     -------
     frontmatter: dict
-        If `file_or_path` doesn't exist or frontmatter is can't be found then return None.
+        If `file_or_path` doesn't exist or frontmatter is can't be found then return empty dict.
         Otherwise, return a parse of the frontmatter YAML data to dict.
     """
     fpath = PROJECT_PATH / get_fpath(file_or_path)

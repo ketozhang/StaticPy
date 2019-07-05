@@ -20,7 +20,7 @@ def get_page():
        The arguments of app.py::get_page.
     """
     for page_url in get_all_context_pages():
-        log.info(f"Freezing {page_url}")
+        log.info(f"Freezing page: {page_url}")
         url_split = page_url.split("/")
         context = url_split[0]
 
@@ -49,7 +49,7 @@ def get_root_page():
        The arguments of app.py::get_page.
     """
     for root_page_path in base_config['root_pages'].values():
-        log.info(f"Converting {root_page_path} to static.")
+        log.info(f"Freezing root page: {root_page_path}.")
         yield {"file": root_page_path}
 
 
