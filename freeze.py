@@ -2,6 +2,7 @@
 import logging
 import sys
 import time
+from pathlib import Path
 from flask_frozen import Freezer
 from app import app, PROJECT_PATH, TEMPLATES_PATH, build_all, base_config, log, get_all_context_pages, get_root_page
 from shutil import rmtree
@@ -14,14 +15,26 @@ def get_page():
     A static URL generator for app.py::get_page.
 
     Yields
-    -------
+    ------
     args: dict
        The arguments of app.py::get_page.
     """
     for page_url in get_all_context_pages():
-        page_url = page_url.split("/")
-        context = page_url[0]
-        page = "/".join(page_url[1:])
+        log.info(f"Freezing {page_url}")
+        url_split = page_url.split("/")
+        context = url_split[0]
+
+        if url_split[1] == 'index.html':
+            # For root pages, app.py::get_page will handle it
+            # e.g., context/index.html
+            page ='index.html'
+        elif url_split[-1] == 'index.html':
+            # e.g., context/.../page/index.html -> page := .../page/
+            page = '/'.join(url_split[1:][:-1]) + '/'
+        else:
+            # e.g., context/.../page -> page := ../page
+            page = '/'.join(url_split[1:])
+
         yield {"context": context, "page": page}
 
 

@@ -98,7 +98,7 @@ def build_all():
 
 
 def get_all_context_pages():
-    """Retrieve all pages accessible."""
+    """Retrieve all pages accessible determined if HTML file exists in templates path."""
     pages = TEMPLATES_PATH.glob('*/**/*.html')
     pages = [str(page.relative_to(TEMPLATES_PATH).as_posix())
              for page in pages]  # Ignores files at first level

@@ -27,93 +27,61 @@
 
 <body>
     
-<header class="flex-md-row flex-column">
-    <div class="pt-5 text-center"><a class="brand" href="https://ketozhang.github.io/StaticPy/">StaticPy</a></div>
-    <nav class="navbar navbar-expand navbar-light">
-        <div class="d-flex mx-auto">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link active" href="https://ketozhang.github.io/StaticPy/">Home</a>
-                </li>
-                
-                <li class="nav-item"><a class="nav-link" href="https://ketozhang.github.io/StaticPy/notes">Notes</a></li>
-                
-                <li class="nav-item"><a class="nav-link" href="https://ketozhang.github.io/StaticPy/posts">Posts</a></li>
-                
-                <li class="nav-item"><a class="nav-link" href="https://ketozhang.github.io/StaticPy/docs">Docs</a></li>
-                
-                <!-- <li class="nav-item"><a class="nav-link" href="https://ketozhang.github.io/StaticPy/posts">Posts</a></li> -->
-                <!-- <li class="nav-item"><a class="nav-link" href="https://ketozhang.github.io/StaticPy/notes">Notes</a></li> -->
-                <!-- <li class="nav-item"><a class="nav-link" href="https://ketozhang.github.io/StaticPy/docs">Documentation</a></li> -->
-            </ul>
+<div class="container-fluid" id="note">
+    <!-- <nav class="navbar navbar-expand-lg">
+        <button id="sidenavCollapse" class="btn btn-info" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+    </nav> -->
+    <h1 class="title text-center pt-3">Cosmology</h1>
+    <hr>
+    <div class="row">
+        <!-- Notebook Sidenav -->
+        <div class="col-lg-2 col-3 d-none d-md-block">
+            <nav class="sidenav">
+                <div class="row no-gutters">
+                    <div class="col-9">
+                        <p>Cosmology</p>
+                        <ul class="no-list-style pl-2">
+                            
+                            <li class='pb-3'><a href="https://ketozhang.github.io/StaticPy/notes/Astrophysics/Cosmology/Cosmological_Redshift">Cosmological Redshift</a></li>
+                            
+                            <li class='pb-3'><a href="https://ketozhang.github.io/StaticPy/notes/Astrophysics/Cosmology/Expanding_Universe">Expanding Universe</a></li>
+                            
+                            <li class='pb-3'><a href="https://ketozhang.github.io/StaticPy/notes/Astrophysics/Cosmology/Friendmann_Equation/">Friendmann Equation</a></li>
+                            
+                            <li class='pb-3'><a href="https://ketozhang.github.io/StaticPy/notes/Astrophysics/Cosmology/Gravitational_Lensing">Gravitational Lensing</a></li>
+                            
+                            <li class='pb-3'><a href="https://ketozhang.github.io/StaticPy/notes/Astrophysics/Cosmology/Relativity/">Relativity</a></li>
+                            
+                        </ul>
+                    </div>
+                    <div class="col-2 offset-1">
+                        <a href="https://ketozhang.github.io/StaticPy/notes/Astrophysics/" role="button">
+                            <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
+                        </a>
+                    </div>
+                </div>
+            </nav>
         </div>
-    </nav>
-    <div id="socials">
-        <ul class="nav justify-content-center">
-            
-            <li class="nav-item mx-2">
-                <a class="social-link" href="https://ketozhang.github.io/StaticPy/static/CV.html" title="CV" target="_blank">
-                    <img src="https://img.icons8.com/material/24/0000 00/parse-resume.png">
-                </a>
-            </li>
-            
-            <li class="nav-item mx-2">
-                <a class="social-link" href="https://www.linkedin.com/in/ketozhang/" title="LinkedIn" target="_blank">
-                    <img src="https://img.icons8.com/material/24/000000/filled-message.png">
-                </a>
-            </li>
-            
-            <li class="nav-item mx-2">
-                <a class="social-link" href="mailto:keto.zhang@gmail.com" title="Email" target="_blank">
-                    <img src="https://img.icons8.com/ios-glyphs/24/000000/linkedin.png">
-                </a>
-            </li>
-            
-            <li class="nav-item mx-2">
-                <a class="social-link" href="https://www.github.com/ketozhang" title="GitHub" target="_blank">
-                    <img src="https://img.icons8.com/ios-glyphs/24/000000/github.png">
-                </a>
-            </li>
-            
-            <!-- 
-                <li class="nav-item mx-2"><a href="{&#39;text&#39;: &#39;CV&#39;, &#39;url&#39;: &#39;/static/CV.html&#39;, &#39;icon&#39;: &#39;https://img.icons8.com/material/24/0000 00/parse-resume.png&#39;}" title="CV" target="_blank"><img
-                            src="https://img.icons8.com/material/24/0000 00/parse-resume.png"></a></li>
+
+        <!-- Content -->
+        <div class="col-lg-8 col-9">
+            <div class="markdown-content">
                 
                 
-                <li class="nav-item mx-2"><a href="mailto:{&#39;text&#39;: &#39;Email&#39;, &#39;url&#39;: &#39;mailto:keto.zhang@gmail.com&#39;, &#39;icon&#39;: &#39;https://img.icons8.com/ios-glyphs/24/000000/linkedin.png&#39;}" title="Email" target="_blank"><img
-                            class="social-link" src="https://img.icons8.com/material/24/000000/filled-message.png"></a>
-                </li>
                 
-                
-                <li class="nav-item mx-2"><a href="{&#39;text&#39;: &#39;LinkedIn&#39;, &#39;url&#39;: &#39;https://www.linkedin.com/in/ketozhang/&#39;, &#39;icon&#39;: &#39;https://img.icons8.com/material/24/000000/filled-message.png&#39;}" title="LinkedIn" target="_blank"><img
-                            class="social-link" src="https://img.icons8.com/ios-glyphs/24/000000/linkedin.png"></a></li>
-                
-                
-                <li class="nav-item mx-2"><a href="{&#39;text&#39;: &#39;GitHub&#39;, &#39;url&#39;: &#39;https://www.github.com/ketozhang&#39;, &#39;icon&#39;: &#39;https://img.icons8.com/ios-glyphs/24/000000/github.png&#39;}" title="GitHub" target="_blank"><img
-                            class="social-link" src="https://img.icons8.com/ios-glyphs/24/000000/github.png"></a></li>
-                 -->
-        </ul>
+            </div>
+        </div>
+
+        <!-- On This Page -->
+        <div class="col-lg-2 d-none d-lg-block">
+            <div class="sticky-top onthispage">
+                <ul id="onthispage-list" class="no-list-style">On This Page</ul>
+            </div>
+        </div>
     </div>
-    <hr class="gradient">
-</header>
-<div class="container">
-  <h1 class="title">Notes</h1>
-  <!-- page can either be a notebook or a note -->
-  <ul class="no-list-style p-0">
-  
-    <li class="pb-2"><a href=https://ketozhang.github.io/StaticPy/notes/Astrophysics/>Astrophysics</a></li>
-    
-    <li class="pb-2"><a href=https://ketozhang.github.io/StaticPy/notes/Computer_Science/>Computer Science</a></li>
-    
-    <li class="pb-2"><a href=https://ketozhang.github.io/StaticPy/notes/Data_Science/>Data Science</a></li>
-    
-    <li class="pb-2"><a href=https://ketozhang.github.io/StaticPy/notes/Mathematics/>Mathematics</a></li>
-    
-    <li class="pb-2"><a href=https://ketozhang.github.io/StaticPy/notes/Others/>Others</a></li>
-    
-    <li class="pb-2"><a href=https://ketozhang.github.io/StaticPy/notes/Physics/>Physics</a></li>
-    
-  </ul>
-  <!--  -->
 </div>
 
     <footer class="py-2 bg-white">
