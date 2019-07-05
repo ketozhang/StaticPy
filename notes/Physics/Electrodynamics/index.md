@@ -1,4 +1,0 @@
----
-title: Electrodynamics
-layout: topic
----

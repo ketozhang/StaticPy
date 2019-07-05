@@ -29,10 +29,6 @@ contexts:
     source_path: 'posts'
     url: '/posts'
     template: 'post.html'
-  docs:
-    source_path: 'documentations'
-    url: '/docs'
-    template: 'note.html'
 
 navbar:
   notes:
@@ -41,24 +37,21 @@ navbar:
   posts:
     text: 'Posts'
     url: '/posts'
-  docs:
-    text: 'Docs'
-    url: '/docs'
 
 social_links:
   cv:
     text: 'CV'
     url: '/static/CV.html'
-    icon: "https://img.icons8.com/material/24/0000 00/parse-resume.png"
+    icon: 'https://img.icons8.com/material/24/0000 00/parse-resume.png'
   linkedin:
     text: 'LinkedIn'
-    url: 'https://www.linkedin.com/in/ketozhang/'
-    icon: "https://img.icons8.com/material/24/000000/filled-message.png"
+    url: '#'
+    icon: 'https://img.icons8.com/material/24/000000/filled-message.png'
   email:
-    text: "Email"
-    url: 'mailto:keto.zhang@gmail.com'
-    icon: "https://img.icons8.com/ios-glyphs/24/000000/linkedin.png"
+    text: 'Email'
+    url: 'mailto:test'
+    icon: 'https://img.icons8.com/ios-glyphs/24/000000/linkedin.png'
   github:
-    text: "GitHub"
-    url: 'https://www.github.com/ketozhang'
-    icon: "https://img.icons8.com/ios-glyphs/24/000000/github.png"
+    text: 'GitHub'
+    url: '#'
+    icon: 'https://img.icons8.com/ios-glyphs/24/000000/github.png'

@@ -16,9 +16,6 @@ html {
   .container {
     max-width: 60%;
   }
-  .container-fluid {
-    max-width: 80%;
-  }
 }
 
 html {
@@ -250,12 +247,12 @@ footer {
 
 .sidenav {
   overflow: hidden;
-  height: 500px;
 }
 
 .sidenav:hover {
-  overflow-y: scroll;
-  overflow-x: auto;
+  /* overflow-y: scroll; */
+  /* overflow-x: auto; */
+  overflow: auto;
 }
 
 .sidenav .sidenav-content {
@@ -289,11 +286,21 @@ footer {
 
 .onthispage {
   top: 1em;
-  height: 500px;
+  direction: rtl;
 }
 
 .onthispage .sidenav-content, .onthispage .sidenav {
   height: inherit;
+  direction: ltr;
+}
+
+.onthispage .sidenav-content {
+  padding-left: 3px;
+  padding-right: 0px;
+}
+
+.onthispage:hover .sidenav-content {
+  padding-left: 0px;
 }
 
 .onthispage ul {
@@ -353,10 +360,10 @@ footer {
   margin-top: 16px;
 }
 
+.markdown-content .sourceCode {
+  font-size: 0.95em;
+}
+
 #note .markdown-content, #post .markdown-content {
   height: 100%;
-  padding: 0em 1em 0em 1em;
-  border-width: 0px 1px 0px 1px;
-  border-style: solid;
-  border-color: rgba(97, 97, 97, .2)
 }

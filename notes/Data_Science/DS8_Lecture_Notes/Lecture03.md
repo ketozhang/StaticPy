@@ -1,4 +1,0 @@
----
-title: Lecture 3
----
-

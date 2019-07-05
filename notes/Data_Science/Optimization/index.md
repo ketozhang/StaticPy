@@ -1,4 +1,0 @@
----
-title: Optimizers
-layout: topic
----

@@ -204,13 +204,6 @@ def get_root_page(file):
     return render_template(str(file))
 
 
-@app.route('/docs/')
-def docs_home_page():
-    """Renders the notes home page of URL /documentations/index.html ."""
-    context = base_config['contexts']['docs']
-    return render_template(f"{context['url']}/index.html")
-
-
 @app.route('/notes/')
 def notes_home_page():
     """Renders the notes home page located in /notes/index.html ."""

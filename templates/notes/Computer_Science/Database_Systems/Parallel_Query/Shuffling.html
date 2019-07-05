@@ -1,5 +1,0 @@
-<p>You can optimize shuffling</p>
-<h2 id="asymetric-shuffling">Asymetric Shuffling</h2>
-<p>If either table <span class="math inline">\(R\)</span> or <span class="math inline">\(S\)</span> are already pre-partitioned then you can skip shuffling.</p>
-<h2 id="broadcast-join">Broadcast Join</h2>
-<p>Given a small table <span class="math inline">\(R\)</span> and any size table <span class="math inline">\(S\)</span> then we can broadcast <span class="math inline">\(R\)</span> to every machine which evaluated a partition of <span class="math inline">\(S\)</span> with all of <span class="math inline">\(R\)</span>.</p>

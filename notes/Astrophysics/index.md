@@ -1,4 +1,0 @@
----
-title: Astrophysics
-layout: book
----

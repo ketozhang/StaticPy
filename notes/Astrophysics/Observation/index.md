@@ -1,4 +1,0 @@
----
-title: Observation
-layout: topic
----
