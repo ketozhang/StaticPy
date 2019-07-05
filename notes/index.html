@@ -6,7 +6,7 @@
   <!-- page can either be a notebook or a note -->
   <ul class="no-list-style p-0">
   {% for page_url, page in pages.items() %}
-    <li class="pb-2"><a href={{parse_url(page_url)}}>{{page['title']}}</a></li>
+    <li class="pb-2"><a href={{parse_url(page_url)}} target='_blank'>{{page['title']}}</a></li>
     {% endfor %}
   </ul>
   <!-- {% for url in notebook_urls %}

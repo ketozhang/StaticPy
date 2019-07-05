@@ -7,7 +7,7 @@ from datetime import datetime
 import pypandoc as pandoc
 from collections import OrderedDict
 from flask import (Flask, abort, redirect, render_template,
-                   send_from_directory, url_for)
+                   send_file, send_from_directory, url_for)
 from pathlib import Path
 from shutil import rmtree, copyfile
 from src.config_handler import get_config
@@ -97,14 +97,31 @@ def build_all():
         build(context)
     return time.time() - start
 
+def get_context_pages(context):
+    """Returns a list of page urls"""
+    source_path = get_fpath(context['source_path']).relative_to(PROJECT_PATH)
+    pages = []
+    for page in source_path.glob('*/**/*'):
+        if page.name[0] == '.':
+            # ignore hidden files
+            pass
+        elif page.is_dir():
+            pages.append(str(page) + '/')
+        elif page.suffix == '.md':
+            pages.append(str(page.with_suffix('.html')))
+        else:
+            pages.append(str(page))
+    return pages
+
 
 def get_all_context_pages():
     """
     Retrieve all pages accessible determined if HTML file exists in templates path.
     Ignores files that are at first level of templates path.
     """
-    pages = [str(page.relative_to(TEMPLATES_PATH)) for page in TEMPLATES_PATH.glob('*/**/*.html')]
-    pages += [str(page.relative_to(TEMPLATES_PATH)) + '/' for page in TEMPLATES_PATH.glob('*/**/')]
+    pages = []
+    for context in base_config['contexts'].values():
+        pages += get_context_pages(context)
     return pages
 
 
@@ -273,6 +290,10 @@ def get_page(context, page):
     except KeyError as e:
         log.error(str(e) +
                   f', when attempting with args get_page({context}, {page}).')
+
+    if not path.is_dir() and path.suffix != '.html':
+        log.info(f"Fetching the file {str(source_path / page)}")
+        return send_file(str(source_path / page))
 
     if page[-1] == '/':  # Handle directories
         if not path.is_dir():
