@@ -250,8 +250,9 @@ footer {
 }
 
 .sidenav:hover {
-  overflow-y: scroll;
-  overflow-x: auto;
+  /* overflow-y: scroll; */
+  /* overflow-x: auto; */
+  overflow: auto;
 }
 
 .sidenav .sidenav-content {
