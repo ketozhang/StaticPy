@@ -291,7 +291,7 @@ def get_page(context, page):
         log.error(str(e) +
                   f', when attempting with args get_page({context}, {page}).')
 
-    if not path.is_dir() and path.suffix != '.html':
+    if path.is_file() and path.suffix != '.html':
         log.info(f"Fetching the file {str(source_path / page)}")
         return send_file(str(source_path / page))
 

@@ -9,18 +9,13 @@
     </nav> -->
     <h1 class="title text-center pt-3">{{page['title']}}</h1>
     <hr>
-    <div class="row no-gutters">
+    <div class="row">
         <!-- Notebook Sidenav -->
-        <div class="col-lg-2 col-3 d-none d-md-block">
-            <nav class="sidenav sticky-top">
-                <div class="sidenav-content row no-gutters">
+        <div class="col-lg-2 col-3 d-none d-md-block bg-light">
+            <div class="sticky-top vh-80">
+                <div class="row no-gutters py-3 px-3">
                     <div class="col-9">
-                        <p>{{page['title']}}</p>
-                        <ul class="no-list-style pl-2">
-                            {% for subpage_url, subpage in page['subpages'].items() %}
-                            <li class='pb-3'><a href="{{parse_url(subpage_url)}}">{{subpage['title']}}</a></li>
-                            {% endfor %}
-                        </ul>
+                        <strong>{{page['title']}}</strong>
                     </div>
                     <div class="col-2 offset-1">
                         <a class="go-up" href="{{parse_url(page['parent'])}}" role="button">
@@ -28,7 +23,16 @@
                         </a>
                     </div>
                 </div>
-            </nav>
+                <nav class="sidenav sticky-top">
+                    <div class="sidenav-content no-gutters">
+                        <ul class="no-list-style pl-2">
+                            {% for subpage_url, subpage in page['subpages'].items() %}
+                            <li class='pb-3'><a href="{{parse_url(subpage_url)}}">{{subpage['title']}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </nav>
+            </div>
         </div>
 
         <!-- Content -->
@@ -41,10 +45,13 @@
         </div>
 
         <!-- On This Page -->
-        <div class="col-lg-2 d-none d-lg-block">
-            <div class="sticky-top onthispage sidenav">
-                <div class="sidenav-content">
-                <ul id="onthispage-list" class="no-list-style">On This Page</ul>
+        <div class="col-lg-2 d-none d-lg-block bg-light">
+            <div class="sticky-top py-3 vh-80">
+                <strong>On This Page</strong>
+                <div class="onthispage sidenav">
+                    <div class="sidenav-content">
+                        <ul id="onthispage-list" class="no-list-style"></ul>
+                    </div>
                 </div>
             </div>
         </div>
