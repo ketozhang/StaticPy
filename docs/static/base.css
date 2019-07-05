@@ -225,22 +225,6 @@ footer {
   list-style-type: none;
 }
 
-.onthispage {
-  top: 1em;
-  overflow-y: auto;
-  height: 500px;
-  border-left: 1px solid rgba(97, 97, 97, .2);
-}
-
-.onthispage ul {
-  padding-left: 1.5em;
-}
-
-.onthispage li {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-}
-
 .sticky-top {
   z-index: auto;
 }
@@ -262,26 +246,71 @@ footer {
   object-fit: cover;
 }
 
-#onthispage-list {
+/* Sidenav */
+
+.sidenav {
+  overflow: hidden;
+  height: 500px;
+}
+
+.sidenav:hover {
+  overflow-y: scroll;
+  overflow-x: auto;
+}
+
+.sidenav .sidenav-content {
+  padding-right: 3px;
+}
+
+.sidenav:hover .sidenav-content {
+  padding-right: 0px;
+}
+
+.sidenav::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+.sidenav::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, .2);
+  border-radius: 20px;
+}
+
+.sidenav::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 20px;
+}
+
+#note .sidenav {
+  top: 1em;
+}
+
+/* On This Page */
+
+.onthispage {
+  top: 1em;
+  height: 500px;
+}
+
+.onthispage .sidenav-content, .onthispage .sidenav {
+  height: inherit;
+}
+
+.onthispage ul {
   padding-top: 0.5em;
-  padding-left: 0.5em;
+  padding-left: 1.5em;
+}
+
+.onthispage li {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
 }
 
 /* Context */
 
-#note .sidenav {
-  height: 500px;
-  overflow-x: auto;
-  border-right: 1px solid rgba(97, 97, 97, .2);
-}
-
-#note .sidenav>* {
-  padding-right: 0.5em;
-}
-
-.sidenav.active {
+/* .sidenav.active {
   margin-left: -250px;
-}
+} */
 
 /* Markdown Styles */
 
@@ -322,4 +351,12 @@ footer {
   font-style: italic;
   font-weight: 600;
   margin-top: 16px;
+}
+
+#note .markdown-content, #post .markdown-content {
+  height: 100%;
+  padding: 0em 1em 0em 1em;
+  border-width: 0px 1px 0px 1px;
+  border-style: solid;
+  border-color: rgba(97, 97, 97, .2)
 }
