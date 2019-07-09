@@ -12,7 +12,7 @@ author: 'StaticPy'
 build_path: 'docs/' # Use `docs/` for GitHub Pages compatibility.
 
 # Flask defaults
-templates_path: 'templates/'
+template_path: 'templates/'
 static_path: 'static/'
 
 root_pages:

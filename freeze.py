@@ -2,21 +2,58 @@
 import logging
 import sys
 import time
+from shutil import rmtree
 from pathlib import Path
 from flask_frozen import Freezer
-from app import app, PROJECT_PATH, TEMPLATES_PATH, build_all, base_config, log, get_all_context_pages, get_root_page
-from shutil import rmtree
+from app import app
+from staticpy import (build_all, log, get_fpath,
+                      BASE_CONFIG, PROJECT_PATH)
+
+
 freezer = Freezer(app)
+
+
+########################
+# HELPER FUNCTIONS
+########################
+def get_context_pages(context):
+    """Returns a list of page urls."""
+    source_path = get_fpath(context['source_path']).relative_to(PROJECT_PATH)
+    pages = []
+    for page in list(source_path.glob('*')):
+        if page.name[0] == '.':
+            # ignore hidden files
+            pass
+        elif page.is_dir():
+            pages.append(str(page) + '/')
+        elif page.suffix == '.md':
+            pages.append(str(page.with_suffix('.html')))
+        else:
+            pages.append(str(page))
+    return pages
+
+
+def get_all_context_pages():
+    """Retrieve all pages accessible determined if HTML file exists in
+    templates path.
+
+    Ignores files that are at first level of templates path.
+    """
+    pages = []
+    for context in BASE_CONFIG['contexts'].values():
+        print("LOADING CONTEXT", context)
+        pages += get_context_pages(context)
+        print(pages)
+    return pages
+
 
 
 @freezer.register_generator
 def get_page():
-    """
-    A static URL generator for app.py::get_page.
+    """A static URL generator for app.py::get_page.
 
     Yields
-    ------
-    args: dict
+    ------dict
        The arguments of app.py::get_page.
     """
     for page_url in get_all_context_pages():
@@ -40,15 +77,14 @@ def get_page():
 
 @freezer.register_generator
 def get_root_page():
-    """
-    A static URL generator for app.py::get_root_page.
+    """A static URL generator for app.py::get_root_page.
 
     Yields
     -------
     args: dict
        The arguments of app.py::get_page.
     """
-    for root_page_path in base_config['root_pages'].values():
+    for root_page_path in BASE_CONFIG['root_pages'].values():
         log.info(f"Freezing root page: {root_page_path}.")
         yield {"file": root_page_path}
 
@@ -58,8 +94,7 @@ def freeze():
     print(f"{'Template build time:':<30} {build_time:>6.2f} secs")
 
     start = time.time()
-    default_build_path = PROJECT_PATH / "build"  # Default specified by Frozen-Flask
-    build_path = PROJECT_PATH / base_config["build_path"]
+    build_path = PROJECT_PATH / BASE_CONFIG["build_path"]
     backup = PROJECT_PATH / (build_path.name + ".bak")
 
     if build_path.exists():
@@ -67,11 +102,8 @@ def freeze():
         build_path.rename(backup)
     try:
         log.info("Building files...")
+        app.config['FREEZER_DESTINATION'] = build_path
         freezer.freeze()
-
-        # Rename default build path to actual build path (e.g., build/ -> dev/)
-        log.info(f"{default_build_path.name} -> {build_path.name}")
-        default_build_path.rename(build_path)
 
         if backup.exists():
             log.info(f"deleting {backup.name}")
@@ -83,9 +115,9 @@ def freeze():
         if backup.exists():
             log.info(f"restoring {backup.name} -> {build_path.name}")
             backup.rename(build_path)
-        if default_build_path.exists():
-            log.info(f"deleting {default_build_path.name}")
-            rmtree(str(default_build_path))
+        if build_path.exists():
+            log.info(f"deleting {build_path.name}")
+            rmtree(str(build_path))
         return None
 
 

@@ -14,7 +14,7 @@ def get_config(name_or_path=base_config):
         fpath = CONFIGS_PATH / (name_or_path + '.yaml')
     else:
         raise ValueError("Argument (0) should either be a configuration name or path.")
-    
+
     with open(fpath) as file:
         config = yaml.safe_load(file)
 

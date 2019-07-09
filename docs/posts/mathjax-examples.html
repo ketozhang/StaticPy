@@ -93,95 +93,72 @@
     </div>
     <hr class="gradient">
 </header>
-<main>
-  <div class="container">
-
-    <!-- Main Showcase  -->
-    <div id="showcase" class="row d-flex align-items-stretch">
-      
-      <div class="col-md-4 d-flex flex-column">
-        <h2 class="title">Project 1</h2>
-        <!-- TODO: Find a better way for equal height -->
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
-        <p class="mt-auto"><a class="btn btn-warning" href="#" role="button">View details »</a></p>
-      </div>
-      
-      <div class="col-md-4 d-flex flex-column">
-        <h2 class="title">Project 2</h2>
-        <!-- TODO: Find a better way for equal height -->
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
-        <p class="mt-auto"><a class="btn btn-warning" href="#" role="button">View details »</a></p>
-      </div>
-      
-      <div class="col-md-4 d-flex flex-column">
-        <h2 class="title">Project 3</h2>
-        <!-- TODO: Find a better way for equal height -->
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
-        <p class="mt-auto"><a class="btn btn-warning" href="#" role="button">View details »</a></p>
-      </div>
-      
-    </div>
-    <hr>
-
-    <!-- Blogpost Cards -->
-    
-    <div class="card mb-3 box-shadow">
-      <div class="row no-gutter">
-        <div class="col-md-5 col-lg-4">
-          <a href=posts/markdown-examples><img class="card-img" src=https://ketozhang.github.io/StaticPy/static/images/1920x1080.png></a>
-        </div>
-        <div class="col-md-7 col-lg-8">
-          <div class="card-body">
-            <h4 class="card-title mb-0"><a href=posts/markdown-examples>Markdown Examples</a></h4>
-            <p class="card-text"><small class="text-muted">Last updated <time datetime="2019-07-05T04:10:32.540377"></time></small></p>
-            <p class="mt-2 card-text">A quick showcaes for Markdown</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="card mb-3 box-shadow">
-      <div class="row no-gutter">
-        <div class="col-md-5 col-lg-4">
-          <a href=posts/mathjax-examples><img class="card-img" src=https://via.placeholder.com/1280x960></a>
-        </div>
-        <div class="col-md-7 col-lg-8">
-          <div class="card-body">
-            <h4 class="card-title mb-0"><a href=posts/mathjax-examples>MathJax Examples</a></h4>
-            <p class="card-text"><small class="text-muted">Last updated <time datetime="2019-07-05T04:10:32.540377"></time></small></p>
-            <p class="mt-2 card-text">MathJax is a mathematics web display engine most popular for LaTeX. Here are some typical examples of MathJax support for LaTeX syntax.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-
-    <!-- Sitemap Collapsible -->
-    
+<div class="container-fluid" id="post">
     <div class="row">
-      <div class="col-12">
-        <div id="siteMap">
-          <div class="card">
-            <div class="card-header" id="siteMapHeading">
-              <button class="btn btn-block btn-link collapsed text-left" type="button" data-toggle="collapse"
-                data-target="#siteMapCollapse" aria-expanded="false" aria-controls="siteMapCollapse">
-                Site Map (this only shows up on debug mode)
-              </button>
+        <!-- Title Header -->
+        <div class="col-sm-12 col-lg-7 offset-lg-2">
+            <div class="title-header">
+                <h1 class="title">MathJax Examples</h1>
+                <div class="metadata">
+                    <p class="m-0">By StaticPy <span class="mx-1 align-middle" style="font-size: 30px">&#183</span>
+                        Last
+                        updated
+                        <time datetime="2019-07-05T04:10:32.540377"></time></p>
+                    
+                </div>
+                <p class="description">MathJax is a mathematics web display engine most popular for LaTeX. Here are some typical examples of MathJax support for LaTeX syntax.</p>
+                <img id="post-img" class="mx-auto d-block" src=https://via.placeholder.com/1280x960>
+                
+                <hr class="mb-0">
             </div>
-            <div id="siteMapCollapse" class="collapse" aria-labelledby="siteMapHeading" data-parent="#siteMap">
-              <div class="card-body">
-                <ul>
-                  
-                </ul>
-              </div>
+
+            <div class="markdown-content">
+                
+                <h2 id="inline-math">Inline Math</h2>
+<p>Newton's second law in simple scalar form is <span class="math inline">\(F=ma\)</span>.</p>
+<h2 id="display-math">Display Math</h2>
+<p>Newton's second law in simple scalar form is,</p>
+<p><span class="math display">\[
+F = ma
+\]</span></p>
+<h2 id="environment-math">Environment Math</h2>
+<h3 id="equation">Equation</h3>
+<p><span class="math display">\[
+\begin{equation}
+    F = ma
+\end{equation}
+\]</span></p>
+<h3 id="align">Align</h3>
+<p><span class="math display">\[
+\begin{align}
+    F &amp;= ma\\
+    \dot p &amp;= m \dot a
+\end{align}
+\]</span></p>
+<h3 id="gather">Gather</h3>
+<p><span class="math display">\[
+\begin{gather}
+    F = ma\\
+    \frac{\mathrm d p}{\mathrm d x} = m \frac{\mathrm d^2 x}{\mathrm d t^2}
+\end{gather}
+\]</span></p>
+                
             </div>
-          </div>
         </div>
-      </div>
+        <!-- On This Page -->
+        <div class="col-lg-3 d-none d-lg-block onthispage bg-light">
+            <div class="sticky-top vh-80">
+                <strong>On This Page</strong>
+                <div class="sidenav">
+                    <div class="sidenav-content">
+                        <ul id="onthispage-list" class="no-list-style"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    
-  </div>
-</main>
+</div>
+<!-- </div> -->
 
     <footer class="py-2 bg-white">
     <div class="container">

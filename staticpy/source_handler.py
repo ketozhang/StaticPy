@@ -1,17 +1,17 @@
-from src.config_handler import get_config
 """Handles all source for content and metadata needed by api request or Flask when generating templates"""
 import os
 import sys
 import frontmatter
 from pathlib import Path
 from datetime import datetime
+from .config_handler import get_config
 
 PROJECT_PATH = Path(__file__).resolve().parents[1]
 sys.path.insert(0, PROJECT_PATH)
 
 
 base_config = get_config()
-TEMPLATES_PATH = Path(base_config['templates_path']).resolve()
+TEMPLATE_PATH = Path(base_config['template_path']).resolve()
 
 
 def get_fpath(file_or_path, resolve=True):
