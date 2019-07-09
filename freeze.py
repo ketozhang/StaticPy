@@ -20,7 +20,7 @@ def get_context_pages(context):
     """Returns a list of page urls."""
     source_path = get_fpath(context['source_path']).relative_to(PROJECT_PATH)
     pages = []
-    for page in list(source_path.glob('*')):
+    for page in list(source_path.rglob('*')):
         if page.name[0] == '.':
             # ignore hidden files
             pass
@@ -41,9 +41,7 @@ def get_all_context_pages():
     """
     pages = []
     for context in BASE_CONFIG['contexts'].values():
-        print("LOADING CONTEXT", context)
         pages += get_context_pages(context)
-        print(pages)
     return pages
 
 
