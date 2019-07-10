@@ -18,7 +18,6 @@
 		if len(args) == 0:
 			app.run(debug=True, port=8080, local=True)
 		elif 'build' in args:
-			log.setLevel('INFO')
 			elapsed_time = build_all()
 			print(f"Building templates finished in {elapsed_time:.2f}secs")
 		else:
