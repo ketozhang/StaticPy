@@ -12,8 +12,8 @@
     <div class="row">
         <!-- Notebook Sidenav -->
         <div class="col-lg-2 col-3 d-none d-md-block bg-light">
-            <div class="sticky-top vh-80">
-                <div class="row no-gutters py-3 px-3">
+            <div class="sidenav sticky-top vh-80">
+                <div class="sidenav-title row no-gutters">
                     <div class="col-9">
                         <strong>{{page['title']}}</strong>
                     </div>
@@ -23,15 +23,13 @@
                         </a>
                     </div>
                 </div>
-                <nav class="sidenav sticky-top">
-                    <div class="sidenav-content no-gutters">
-                        <ul class="no-list-style pl-3">
-                            {% for subpage_url, subpage in page['subpages'].items() %}
-                            <li class='pb-3'><a href="{{parse_url(subpage_url)}}">{{subpage['title']}}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </nav>
+                <div class="sidenav-body no-gutters">
+                    <ul class="no-list-style pl-3">
+                        {% for subpage_url, subpage in page['subpages'].items() %}
+                        <li class='pb-3'><a href="{{parse_url(subpage_url)}}">{{subpage['title']}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -46,15 +44,14 @@
 
         <!-- On This Page -->
         <div class="col-lg-2 d-none d-lg-block bg-light">
-            <div class="sticky-top py-3 vh-80">
-                <strong>On This Page</strong>
-                <div class="onthispage sidenav">
-                    <div class="sidenav-content">
-                        <ul id="onthispage-list" class="no-list-style"></ul>
-                    </div>
+            <div class="onthispage sidenav sticky-top vh-80">
+                <strong class="sidenav-title">On This Page</strong>
+                <div class="sidenav-body">
+                    <ul id="onthispage-list" class="no-list-style"></ul>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 {% endblock %}

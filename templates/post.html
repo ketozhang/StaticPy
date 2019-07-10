@@ -3,22 +3,22 @@
 {% include 'header.html' %}
 <div class="container-fluid" id="post">
     <div class="row">
-        <!-- Title Header -->
-        <div class="col-sm-12 col-lg-7 offset-lg-2">
-            <div class="title-header">
-                <h1 class="title">{{page['title']}}</h1>
-                <div class="metadata">
-                    <p class="m-0">By {{author}} <span class="mx-1 align-middle" style="font-size: 30px">&#183</span>
-                        Last
-                        updated
-                        <time datetime="{{page['last_updated']}}"></time></p>
-                    {% if 'image' in page %}
+        <!-- Content -->
+        <div class="col-lg-7 col-12 offset-lg-1">
+                <div class="title-header">
+                    <h1 class="title">{{page['title']}}</h1>
+                    <div class="metadata">
+                        <p class="m-0">By {{author}} <span class="mx-1 align-middle" style="font-size: 30px">&#183</span>
+                            Last
+                            updated
+                            <time datetime="{{page['last_updated']}}"></time></p>
+                        {% if 'image' in page %}
+                    </div>
+                    <p class="description">{{page['description']}}</p>
+                    <img id="post-img" class="mx-auto d-block" src={{parse_url(page['image'])}}>
+                    {% endif %}
+                    <hr class="mb-0">
                 </div>
-                <p class="description">{{page['description']}}</p>
-                <img id="post-img" class="mx-auto d-block" src={{parse_url(page['image'])}}>
-                {% endif %}
-                <hr class="mb-0">
-            </div>
 
             <div class="markdown-content">
                 {% if page['has_content'] %}
@@ -27,11 +27,10 @@
             </div>
         </div>
         <!-- On This Page -->
-        <div class="col-lg-3 d-none d-lg-block onthispage bg-light">
-            <div class="sticky-top vh-80">
-                <strong>On This Page</strong>
-                <div class="sidenav">
-                    <div class="sidenav-content">
+        <div class="col-lg-2 d-lg-block d-none offset-lg-1 onthispage bg-light">
+            <div class="sticky-top vh-80 sidenav onthispage">
+                    <strong>On This Page</strong>
+                    <div class="sidenav-body">
                         <ul id="onthispage-list" class="no-list-style"></ul>
                     </div>
                 </div>

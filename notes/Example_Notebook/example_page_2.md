@@ -1,5 +1,5 @@
 ---
-title: Example Page 2
+title: Example Page
 ---
 
 ## First Section

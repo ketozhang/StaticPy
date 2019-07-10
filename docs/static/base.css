@@ -68,6 +68,11 @@ body {
   padding-bottom: 80px;
 }
 
+body h1, body h2, body h3, body h4, body h5, body h6 {
+  color: black;
+  line-height: 2;
+}
+
 pre {
   background: #2d2d2d;
   padding: 1em;
@@ -255,11 +260,11 @@ footer {
   overflow: auto;
 }
 
-.sidenav .sidenav-content {
+.sidenav .sidenav-body {
   padding-right: 3px;
 }
 
-.sidenav:hover .sidenav-content {
+.sidenav:hover .sidenav-body {
   padding-right: 0px;
 }
 
@@ -278,28 +283,28 @@ footer {
   border-radius: 20px;
 }
 
-#note .sidenav {
-  top: 1em;
+.sidenav-title {
+  padding: 1em
 }
 
 /* On This Page */
 
 .onthispage {
-  top: 1em;
+  margin-top: 1em;
   direction: rtl;
 }
 
-.onthispage .sidenav-content, .onthispage .sidenav {
+.onthispage .sidenav-body, .onthispage .sidenav {
   height: inherit;
   direction: ltr;
 }
 
-.onthispage .sidenav-content {
+.onthispage .sidenav-body {
   padding-left: 3px;
   padding-right: 0px;
 }
 
-.onthispage:hover .sidenav-content {
+.onthispage:hover .sidenav-body {
   padding-left: 0px;
 }
 

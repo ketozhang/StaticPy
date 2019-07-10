@@ -1,24 +1,43 @@
-## Installation
+## Quickstart
 
-1. Clone the repostiory:
+1. Clone the repostiory to your project path:
 
 	```
+	cd /path/to/project
 	git clone https://github.com/ketozhang/StaticPy
 	```
 
-2. Move all content (`.git` and `.gitignore`) to your project folder:
+2. Create your first `app.py`  with the following code:
+
+	```py
+	# app.py
+	import sys
+
+	if __name__ == '__main__':
+		args = sys.argv[1:]
+		if len(args) == 0:
+			app.run(debug=True, port=8080, local=True)
+		elif 'build' in args:
+			log.setLevel('INFO')
+			elapsed_time = build_all()
+			print(f"Building templates finished in {elapsed_time:.2f}secs")
+		else:
+			raise ValueError("Invalid command arguments. Use `python app.py [build]`")
+	```
+
+3. Build the web content
 
 	```
-	mv Staticpy/* /path/to/project/
+	python app.py build
 	```
 
-3. Run the web environment locally:
+4. Run the web environment locally:
 
 	```
-	make local # or python app.py
+	python app.py
 	```
 
-## Github Pages
+<!-- ## Github Pages
 
 If you would like to use github pages the instructions are the exact same if it's a project/organization page (e.g., `<username>.github.io/<projectname>`). However if it's a user page (e.g., `<username>.github.io`) then all the web content should either be in a `docs/` folder or the root of the repository.
 
@@ -58,6 +77,4 @@ If you would like to use github pages the instructions are the exact same if it'
 			git add -A; \
 			git commit; \
 			git push origin master;
-	```
-
-## Updating
+	``` -->
