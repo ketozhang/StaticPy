@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "header.html" %}
+<main>
+  <div class="container">
+
+    <!-- Main Showcase  -->
+    <div id="showcase" class="row d-flex align-items-stretch">
+      {% for project in projects %}
+      <div class="col-md-4 d-flex flex-column">
+        <h2 class="title">{{project['header']}}</h2>
+        <!-- TODO: Find a better way for equal height -->
+        <p>{{project['description']}}</p>
+        <p class="mt-auto"><a class="btn btn-warning" href="{{parse_url(project['view_details'])}}" role="button">View details »</a></p>
+      </div>
+      {% endfor %}
+    </div>
+    <hr>
+
+    <!-- Blogpost Cards -->
+    {% for post_url, post in posts.items() %}
+    <div class="card mb-3 box-shadow">
+      <div class="row no-gutter">
+        <div class="col-md-5 col-lg-4">
+          <a href={{parse_url(post_url)}}><img class="card-img" src={{parse_url(post['image'])}}></a>
+        </div>
+        <div class="col-md-7 col-lg-8">
+          <div class="card-body">
+            <h4 class="card-title mb-0"><a href={{parse_url(post_url)}}>{{post['title']}}</a></h4>
+            <p class="card-text"><small class="text-muted">Last updated <time datetime="{{post['last_updated']}}"></time></small></p>
+            <p class="mt-2 card-text">{{post['description']}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+    <!-- Sitemap Collapsible -->
+    {% if debug %}
+    <div class="row">
+      <div class="col-12">
+        <div id="siteMap">
+          <div class="card">
+            <div class="card-header" id="siteMapHeading">
+              <button class="btn btn-block btn-link collapsed text-left" type="button" data-toggle="collapse"
+                data-target="#siteMapCollapse" aria-expanded="false" aria-controls="siteMapCollapse">
+                Site Map (this only shows up on debug mode)
+              </button>
+            </div>
+            <div id="siteMapCollapse" class="collapse" aria-labelledby="siteMapHeading" data-parent="#siteMap">
+              <div class="card-body">
+                <ul>
+                  {% for page in pages %}
+                  <li><a href={{page}}>{{page}}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</main>
+{% endblock %}

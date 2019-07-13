@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+{% include 'header.html' %}
+<div class="container">
+  <h1 class="title">Posts</h1>
+  {% for post_url, post in posts.items() %}
+  <div class="card mb-3 box-shadow">
+    <div class="row no-gutter">
+      <div class="col-md-5 col-lg-4">
+        <a href={{parse_url(post_url)}}><img class="card-img" src={{parse_url(post['image'])}}></a>
+      </div>
+      <div class="col-md-7 col-lg-8">
+        <div class="card-body">
+          <h4 class="card-title mb-0"><a href={{parse_url(post_url)}}>{{post['title']}}</a></h4>
+          <p class="card-text"><small class="text-muted">Last updated <time datetime="{{post['last_updated']}}"></time></small></p>
+          <p class="mt-2 card-text">{{post['description']}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

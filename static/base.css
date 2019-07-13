@@ -1,0 +1,373 @@
+/* Global */
+
+html {
+  overflow-y: scroll;
+}
+
+.container {
+  max-width: 80%;
+}
+
+.container-fluid {
+  max-width: 90%;
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 60%;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+/* Header */
+
+header .nav-item {
+  font-weight: bold;
+}
+
+p .navbar-light .navbar-nav .nav-link.active::after {
+  content: "";
+  display: block;
+  margin: 0 auto;
+  padding-top: 5px;
+  border-bottom: 2px solid #FDB515;
+  width: 90%;
+  color: black;
+}
+
+/* Add some height for the border on hover */
+
+.navbar-light .navbar-nav .nav-link::after {
+  content: "";
+  display: block;
+  padding-top: 5px;
+  border-bottom: 2px solid transparent;
+}
+
+/* border on hover */
+
+.navbar-light .navbar-nav .nav-link:hover::after {
+  content: "";
+  display: block;
+  margin: 0 auto;
+  padding-top: 5px;
+  border-bottom: 2px solid rgba(253, 181, 21, 0.7);
+  width: 90%;
+  color: black;
+}
+
+/* Body */
+
+body {
+  color: #616161;
+  font-family: 'Quicksand', 'Open Sans', sans-serif;
+  padding-bottom: 80px;
+}
+
+body h1, body h2, body h3, body h4, body h5, body h6 {
+  color: black;
+  line-height: 2;
+}
+
+pre {
+  background: #2d2d2d;
+  padding: 1em;
+  overflow: auto;
+  color: white;
+  margin-top: 0 !important;
+  margin-bottom: 1rem !important;
+}
+
+pre, code {
+  font-family: 'Source Code Pro', 'Courier New', Courier, monospace;
+}
+
+p>code, li>code {
+  color: #358ccb;
+  border: 1px solid rgba(97, 97, 97, .4);
+  border-radius: 3px;
+  padding: 0px 2px 0px 2px;
+  margin: 0px 1px 0px 0px;
+  /* box-shadow: 0.5px 0.5px 1px rgba(97, 97, 97, 0.5); */
+}
+
+/* pre {
+  border: 1px solid rgba(97, 97, 97, .4);
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px rgba(97, 97, 97, 0.5);
+  background: rgba(97, 97, 97, 0.15);
+  margin: 3em 0 3em 0;
+  padding: 1em;
+  width: 75%;
+} */
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
+  text-decoration: none;
+}
+
+.title {
+  color: black;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.metadata {
+  margin-top: -1.5em;
+  margin-bottom: 1.5em;
+}
+
+.card-title {
+  color: black;
+}
+
+a.brand {
+  font-size: 36px;
+  text-decoration: none;
+  color: black;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: black;
+}
+
+hr.gradient {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(253, 181, 21, 0), rgb(253, 181, 21), rgba(253, 181, 21, 0));
+}
+
+.social-link img:hover {
+  opacity: 0.7;
+}
+
+blockquote {
+  border-left: .25em solid #dfe2e5;
+  color: #6a737d;
+  padding: 0 1em;
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+
+footer {
+  /* position: fixed; */
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgba(0, 0, 0, .1);
+}
+
+/* Background */
+
+.bg-warning {
+  background-color: #fdb515;
+}
+
+/* Buttons */
+
+.btn-link {
+  text-decoration: none;
+  font-weight: inherit;
+  color: inherit;
+}
+
+.btn-link:hover {
+  text-decoration: none;
+}
+
+.btn-warning {
+  background-color: #FDB515;
+}
+
+/* Card */
+
+.card-img {
+  border-right: 1px solid rgba(0, 0, 0, .125);
+  border-radius: 1px;
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+
+/* Icon */
+
+.icon {
+  height: 1em;
+}
+
+.limit-2-lines {
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  max-height: 3em;
+}
+
+.limit-2-lines::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: linear-gradient(transparent 150px, white);
+}
+
+.no-list-style {
+  list-style-type: none;
+}
+
+.sticky-top {
+  z-index: auto;
+}
+
+/* Ids */
+
+/* #note h1, #note h2, #note h3, #note h4, #note h5, #note h6, #post h1, #post h2, #post h3, #post h4, #post h5, #post h6 {
+  line-height: 2.5;
+} */
+
+.content h2, .content h3 {
+  line-height: 2;
+  margin-top: 1em;
+}
+
+#post-img {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+}
+
+/* Sidenav */
+
+.sidenav {
+  overflow: hidden;
+}
+
+.sidenav:hover {
+  /* overflow-y: scroll; */
+  /* overflow-x: auto; */
+  overflow: auto;
+}
+
+.sidenav .sidenav-body {
+  padding-right: 3px;
+}
+
+.sidenav:hover .sidenav-body {
+  padding-right: 0px;
+}
+
+.sidenav::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+.sidenav::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, .2);
+  border-radius: 20px;
+}
+
+.sidenav::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 20px;
+}
+
+.sidenav-title {
+  padding: 1em
+}
+
+/* On This Page */
+
+.onthispage {
+  padding-top: 1em;
+  direction: rtl;
+}
+
+.onthispage .sidenav-body, .onthispage .sidenav {
+  height: inherit;
+  direction: ltr;
+}
+
+.onthispage .sidenav-body {
+  padding-left: 3px;
+  padding-right: 0px;
+}
+
+.onthispage:hover .sidenav-body {
+  padding-left: 0px;
+}
+
+.onthispage ul {
+  padding-top: 0.5em;
+  padding-left: 1.5em;
+}
+
+.onthispage li {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+/* Context */
+
+/* .sidenav.active {
+  margin-left: -250px;
+} */
+
+/* Markdown Styles */
+
+.markdown-content {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.markdown-content h1, .markdown-content h2, .markdown-content h3, .markdown-content h4, .markdown-content h5, .markdown-content h6 {
+  font-family: 'Quicksand', 'Open Sans', sans-serif;
+}
+
+.markdown-content table .markdown-content dl {
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+
+.markdown-content th {
+  border: 1px solid #dfe2e5;
+  border-bottom: 2px solid #dfe2e5;
+  padding: 6px 13px;
+}
+
+.markdown-content td {
+  border: 1px solid #dfe2e5;
+  padding: 6px 13px;
+}
+
+.markdown-content table tr.even {
+  background-color: #f6f8fa;
+}
+
+.markdown-content dd {
+  padding-left: 16px;
+}
+
+.markdown-content dt {
+  font-size: 1em;
+  font-style: italic;
+  font-weight: 600;
+  margin-top: 16px;
+}
+
+.markdown-content .sourceCode {
+  font-size: 0.95em;
+}
+
+#note .markdown-content, #post .markdown-content {
+  height: 100%;
+}
