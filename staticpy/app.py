@@ -119,7 +119,7 @@ def get_page(context, page):
     Context home pages (e.g., /note/index.html) are redirected to
     `url_for(<context>_home_page)`
     """
-    log.info(f"Getting page: {context}, page: {page}")
+    log.info(f"Getting context: {context}, page: {page}")
     path = TEMPLATE_PATH / context / page
 
     # Redirect context home pages
