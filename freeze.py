@@ -17,7 +17,7 @@ freezer = Freezer(app)
 # HELPER FUNCTIONS
 ########################
 def get_context_pages(context):
-    """Returns a list of page urls."""
+    """Returns a list of the context's page urls."""
     source_path = get_fpath(context['source_path']).relative_to(PROJECT_PATH)
     pages = []
     for page in list(source_path.rglob('*')):
@@ -34,7 +34,7 @@ def get_context_pages(context):
 
 
 def get_all_context_pages():
-    """Retrieve all pages accessible determined if HTML file exists in
+    """Retrieve all pages accessible for each context. This is determined if the HTML file exists in
     templates path.
 
     Ignores files that are at first level of templates path.
@@ -45,7 +45,9 @@ def get_all_context_pages():
     return pages
 
 
-
+########################
+# MAIN
+########################
 @freezer.register_generator
 def get_page():
     """A static URL generator for app.py::get_page.

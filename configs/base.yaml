@@ -37,6 +37,9 @@ navbar:
   posts:
     text: 'Posts'
     url: '/posts'
+  about:
+    text: 'About'
+    url: '/about'
 
 social_links:
   cv:

@@ -4,7 +4,7 @@ from flask import (Flask, abort, redirect, render_template,
 from shutil import rmtree, copyfile
 from .config_handler import get_config
 from .doc_builder import build_all
-from .source_handler import get_frontmatter, get_subpages
+from .source_handler import get_frontmatter, get_subpages, get_fpath
 from .log import log
 from .globals import *
 
@@ -99,9 +99,9 @@ def get_root_page(file):
 
     This is often useful for the pages "about" and "contacts".
     """
-    fpath = Path(file) if isinstance(file, str) else file
+    fpath = get_fpath(TEMPLATE_PATH / file).relative_to(TEMPLATE_PATH)
     fpath = fpath.with_suffix(".html")
-    return render_template(str(file))
+    return render_template(str(fpath))
 
 @app.route(f'/<context>/<path:page>')
 def get_page(context, page):
