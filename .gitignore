@@ -1,7 +1,11 @@
 *__pycache__/
 *.vscode/
+
+.egg-info/
 node_modules/
 _dev/
-.egg-info/
+templates/notes/
+templates/posts/
+build/
 
 *.code-workspace

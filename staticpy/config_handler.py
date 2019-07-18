@@ -1,6 +1,6 @@
 import yaml
 from pathlib import Path
-PROJECT_PATH = Path(__file__).resolve().parents[1]
+PROJECT_PATH = Path.cwd()
 
 CONFIGS_PATH = PROJECT_PATH / 'configs'
 base_config = CONFIGS_PATH / 'base.yaml'

@@ -4,14 +4,7 @@ import sys
 import frontmatter
 from pathlib import Path
 from datetime import datetime
-from .config_handler import get_config
-
-PROJECT_PATH = Path(__file__).resolve().parents[1]
-sys.path.insert(0, PROJECT_PATH)
-
-
-base_config = get_config()
-TEMPLATE_PATH = Path(base_config['template_path']).resolve()
+from .globals import *
 
 
 def get_fpath(file_or_path, resolve=True):
