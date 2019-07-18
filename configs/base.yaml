@@ -17,7 +17,6 @@ static_path: 'static/'
 
 root_pages:
   about: 'about.html'
-  contacts: 'contacts.html'
 
 contexts:
   # keys should be url endpoint (e.g., for mysite.com/notes key is notes)

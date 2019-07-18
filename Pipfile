@@ -5,7 +5,9 @@ verify_ssl = true
 
 [dev-packages]
 rope = "*"
-gunicorn = "*"
+setuptools = "*"
+wheel = "*"
+twine = "*"
 
 [packages]
 flask = "*"
@@ -15,7 +17,6 @@ werkzeug = "*"
 python-frontmatter = "*"
 pyyaml = "*"
 # e1839a8 = {editable = true,path = "."}
-pyscss = "*"
 flask-assets = "*"
 
 [requires]
