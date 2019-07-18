@@ -10,9 +10,12 @@ static:
 
 freeze:
 	make static
-
 push:
 	make static
 	git add -A
 	git commit
 	git push origin master
+wheel:
+	pipenv run python setup.py sdist bdist_wheel
+	mv dist/*.whl .
+	rm -rf dist/ *.egg-info/
