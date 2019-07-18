@@ -15,9 +15,9 @@ pypandoc = "*"
 frozen-flask = "*"
 werkzeug = "*"
 python-frontmatter = "*"
-pyyaml = "*"
 # e1839a8 = {editable = true,path = "."}
 flask-assets = "*"
+pyyaml = "*"
 
 [requires]
 python_version = "3.7"
