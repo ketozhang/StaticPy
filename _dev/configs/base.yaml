@@ -51,12 +51,12 @@ social_links:
     url: '/static/CV.html'
     icon: 'https://img.icons8.com/material/24/0000 00/parse-resume.png'
   linkedin:
-    text: 'LinkedIn'
-    url: '#'
-    icon: 'https://img.icons8.com/material/24/000000/filled-message.png'
-  email:
     text: 'Email'
     url: 'mailto:test'
+    icon: 'https://img.icons8.com/material/24/000000/filled-message.png'
+  email:
+    text: 'LinkedIn'
+    url: '#'
     icon: 'https://img.icons8.com/ios-glyphs/24/000000/linkedin.png'
   github:
     text: 'GitHub'

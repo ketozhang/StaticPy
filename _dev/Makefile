@@ -7,8 +7,8 @@ build:
 .PHONY: static
 static:
 	pipenv run python freeze.py
-	mv build/* ..
-	rmdir build/
+	rsync -avh build/* ../
+	rm -rf build/
 
 freeze:
 	make static
