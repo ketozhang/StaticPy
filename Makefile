@@ -16,6 +16,6 @@ push:
 	git commit
 	git push origin master
 wheel:
-	pipenv run python setup.py sdist bdist_wheel
+	python setup.py sdist bdist_wheel
 	mv dist/*.whl .
 	rm -rf dist/ *.egg-info/
