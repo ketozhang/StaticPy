@@ -1,3 +1,3 @@
 ## Documentations
 
-The documentations are hosted in a StaticPy generated webpage. See the [home page](https://ketozhang.github.io/StaticPy) or [docs](https://ketozhang.github.io/StaticPy/docs).
+The [documentations](https://ketozhang.github.io/StaticPy/docs) are hosted in a StaticPy generated website.
