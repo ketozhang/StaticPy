@@ -62,7 +62,88 @@
         <div class="col-lg-8 col-9">
             <div class="markdown-content">
                 
-                
+                <p>In this tutorial we will creating the boilerplate website that you’re seeing right now.</p>
+<h2 id="installation">Installation</h2>
+<ol type="1">
+<li><p>Download the StaticPy’s boilerplate to your project folder (from here on called <code>myproject</code>). Make sure to remove all the git stuff.</p>
+<pre><code>git clone https://github.com/ketozhang/StaticPy-Boilerplate myproject
+rm -rf myproject/.git myproject/.gitignore</code></pre></li>
+<li><p>Download StaticPy. There are two ways to do this:</p>
+<ul>
+<li><p>Pip Install</p>
+<pre><code>pip install staticpy</code></pre></li>
+<li><p>Local Install</p>
+<ol type="1">
+<li><p><a href="https://github.com/ketozhang/StaticPy/releases">Download your preferred release</a> (latest recommended) and extract the contents into your project. It should look like this:</p>
+<pre><code>myproject
+├── &lt;BOILERPLATE CONTENTS&gt;
+├── app.py
+├── freeze.py
+├── configs
+├── template
+├── static
+├── Makefile
+├── .nojekyll
+├── notes
+├── posts
+├── &lt;STATICPY CONTENTS&gt;
+├── LICENSE
+├── Pipfile
+├── README.md*
+├── requirements.txt
+├── setup.py*
+└── staticpy</code></pre>
+<p>* You may freely delete these files</p></li>
+<li><p>Install the dependencies either using the <code>requirements.txt</code> (<code>pip install -r requirements.txt</code>) or the <code>Pipfile</code> (<code>pipenv install</code>)</p></li>
+</ol></li>
+</ul></li>
+</ol>
+<h2 id="startup-the-website">Startup the Website</h2>
+<ol type="1">
+<li><p>Build the web contents</p>
+<pre><code>python app.py build</code></pre></li>
+<li><p>Run the web environment locally:</p>
+<pre><code>python app.py</code></pre></li>
+</ol>
+<h2 id="deploying-the-static-website">Deploying the Static Website</h2>
+<ol type="1">
+<li><p>Freeze the website (i.e., make it static)</p>
+<pre><code>python freeze.py</code></pre>
+<p>This will general a build directory (by default <code>myproject/build/</code>)</p></li>
+<li><p>Push the contents of your build directory to your web server.</p>
+<blockquote>
+<p><strong>Info</strong>: See <a href="deployment">deployment options</a> for more information. Since this is just a walkthrough so you can ignore this deployment for now.</p>
+</blockquote></li>
+</ol>
+<h2 id="make-makes-life-easier">Make … Makes Life Easier</h2>
+<p>Provided in the boilerplate is the Makefile</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode makefile"><code class="sourceCode makefile"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># Run `make [command]` on terminal at this file&#39;s directory</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co"># Uncomment pipenv run if using pipenv</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="dv">local:</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">        <span class="co"># pipenv run \</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">        python app.py</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="dv">build:</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">        <span class="co"># pipenv run \</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">        python app.py build</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="ot">.PHONY:</span><span class="dt"> static</span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="dv">static:</span></a>
+<a class="sourceLine" id="cb7-15" data-line-number="15">        <span class="co"># pipenv run \</span></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">        python freeze.py</span></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb7-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="dv">freeze:</span></a>
+<a class="sourceLine" id="cb7-20" data-line-number="20">        make static</a></code></pre></div>
+<blockquote>
+<p><strong>Tip</strong>: Make allows multiple commands (e.g., <code>make build local</code>).</p>
+</blockquote>
+<h2 id="moving-foward">Moving Foward</h2>
+<p>Congratulations on sucessfully building StaticPy. If you weren’t able to get this to work, please, check the <a href="https://github.com/ketozhang/StaticPy/issues">repository’s issues</a>.</p>
+<p>If you’re ready to build something of your own, please head to <a href="Building_Your_Own_Website.md">Building Your Own Website</a></p>
+<p>Otherwise you may learn at your own pace back at the <a href="/docs">documentations homepage</a></p>
                 
             </div>
         </div>

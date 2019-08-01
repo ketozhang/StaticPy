@@ -2,82 +2,117 @@
 title: Getting Started
 ---
 
-## Quickstart
+In this tutorial we will creating the boilerplate website that you're seeing right now.
 
-1. Clone the repostiory to your project path:
+## Installation
+
+1. Download the StaticPy's boilerplate to your project folder (from here on called `myproject`). Make sure to remove all the git stuff.
 
 	```
-	cd /path/to/project
-	git clone https://github.com/ketozhang/StaticPy
+	git clone https://github.com/ketozhang/StaticPy-Boilerplate myproject
+	rm -rf myproject/.git myproject/.gitignore
 	```
 
-2. Create your first `app.py`  with the following code:
+2. Download StaticPy. There are two ways to do this:
 
-	```py
-	# app.py
-	import sys
+	* Pip Install
 
-	if __name__ == '__main__':
-		args = sys.argv[1:]
-		if len(args) == 0:
-			app.run(debug=True, port=8080, local=True)
-		elif 'build' in args:
-			elapsed_time = build_all()
-			print(f"Building templates finished in {elapsed_time:.2f}secs")
-		else:
-			raise ValueError("Invalid command arguments. Use `python app.py [build]`")
-	```
+		```
+		pip install staticpy
+		```
 
-3. Build the web content
+	* Local Install
+
+		1. [Download your preferred release](https://github.com/ketozhang/StaticPy/releases) (latest recommended) and extract the contents into your project. It should look like this:
+
+			```
+			myproject
+			├── <BOILERPLATE CONTENTS>
+			├── app.py
+			├── freeze.py
+			├── configs
+			├── template
+			├── static
+			├── Makefile
+			├── .nojekyll
+			├── notes
+			├── posts
+			├── <STATICPY CONTENTS>
+			├── LICENSE
+			├── Pipfile
+			├── README.md*
+			├── requirements.txt
+			├── setup.py*
+			└── staticpy
+			```
+
+			\* You may freely delete these files
+
+		2. Install the dependencies either using the `requirements.txt` (`pip install -r requirements.txt`) or the `Pipfile` (`pipenv install`)
+
+## Startup the Website
+
+1. Build the web contents
 
 	```
 	python app.py build
 	```
 
-4. Run the web environment locally:
+2. Run the web environment locally:
 
 	```
 	python app.py
 	```
 
-<!-- ## Github Pages
+## Deploying the Static Website
 
-If you would like to use github pages the instructions are the exact same if it's a project/organization page (e.g., `<username>.github.io/<projectname>`). However if it's a user page (e.g., `<username>.github.io`) then all the web content should either be in a `docs/` folder or the root of the repository.
-
-### User Page Recommended Solution
-
-1. Create project folder for your website:
+1. Freeze the website (i.e., make it static)
 
 	```
-	mkdir /path/to/project
-	cd /path/to/project
+	python freeze.py
 	```
 
-2. Clone StaticPy onto your project folder:
+	This will general a build directory (by default `myproject/build/`)
 
-	```
-	git clone https://github.com/ketozhang/StaticPy
-	```
+2. Push the contents of your build directory to your web server.
 
-3. Clone your user page repository
+	> **Info**: See [deployment options](deployment) for more information.
+	> Since this is just a walkthrough so you can ignore this deployment for now.
 
-	```
-	git clone https://github.com/<username>/<username>.github.io
-	```
+## Make ... Makes Life Easier
 
-4. Add this `Makefile` to `/path/to/project/`. It will be useful as a macro:
+Provided in the boilerplate is the Makefile
 
-	```Makefile
-	static:
-		$(MAKE) -C _dev static
-		cd ketozhang.github.io; \
-			git rm -rf --ignore-unmatch .;
-		cp -r _dev/docs/* ketozhang.github.io/
 
-	push:
-		make static
-		cd ketozhang.github.io; \
-			git add -A; \
-			git commit; \
-			git push origin master;
-	``` -->
+``` Makefile
+# Run `make [command]` on terminal at this file's directory
+# Uncomment pipenv run if using pipenv
+
+local:
+        # pipenv run \
+		python app.py
+
+build:
+        # pipenv run \
+		python app.py build
+
+
+.PHONY: static
+static:
+        # pipenv run \
+		python freeze.py
+
+
+freeze:
+        make static
+```
+
+> **Tip**: Make allows multiple commands (e.g., `make build local`).
+
+## Moving Foward
+
+Congratulations on sucessfully building StaticPy. If you weren't able to get this to work, please, check the [repository's issues](https://github.com/ketozhang/StaticPy/issues).
+
+If you're ready to build something of your own, please head to [Building Your Own Website](Building_Your_Own_Website.md)
+
+Otherwise you may learn at your own pace back at the [documentations homepage](/docs)

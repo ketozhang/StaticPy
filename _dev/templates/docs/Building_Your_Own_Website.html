@@ -1,0 +1,45 @@
+<h2 id="project-structure">Project Structure</h2>
+<p>While the boilerplate is nice, you want something of your own. To do so, you need to know what files you’re are suppose to touch. Recall the project structure (ommitting some files that don’t matter).</p>
+<pre><code>myproject
+├── &lt;BOILERPLATE CONTENTS&gt;
+├── ...
+├── app.py
+├── freeze.py
+├── configs
+├── template
+├── notes
+├── posts
+├── .nojekyll
+├── static
+├── &lt;STATICPY CONTENTS&gt;
+├── ...
+├── README.md*
+├── requirements.txt
+├── setup.py*
+└── staticpy</code></pre>
+<ul>
+<li><code>app.py</code>: Program that handles serving URL</li>
+<li><code>freeze.py</code>: Program that handles converting your website to static</li>
+<li><p><code>notes</code>, <code>posts</code>: These folders are called contexts which is the meat of your website and where markdown files live.</p>
+<p>See <code>posts/index.html</code>, that’s the landing page for the URL <localhost:8080/posts></p>
+<p>See <code>posts/markdown-examples.md</code>, the markdown content for for the URL <localhost:8080/posts/markdown-examples></p></li>
+<li><p><code>template</code>: Folder of HTML templates of your web contents. Most importantly <code>template/home.html</code> which is the HTML for your homepage.</p>
+<p>See <code>templates/post.md</code>, the HTML template for all posts pages like <localhost:8080/posts/markdown-examples></p></li>
+<li><p><code>configs</code>: Configurations for the whole site (<code>base.yaml</code>), homepage (<code>home.yaml</code>), and even contexts.</p>
+<p>Take a look at <code>base/home.yaml</code> and it should be straightforward how they affect the homepage.</p></li>
+<li><p><code>static</code>: Typical web static folder (i.e., hosts CSS, JS, etc)</p></li>
+<li><p><code>.nojekyll</code>: Required only if using <a href="https://pages.github.com/">Github Pages</a></p></li>
+</ul>
+<h2 id="practices-to-get-you-familiar">Practices to Get You Familiar</h2>
+<h3 id="adding-a-post">Adding a Post</h3>
+<p>Let’s add a new post to <code>posts/</code>. This instruction is applicable to adding any markdown files to any context.</p>
+<p><code>posts/new_post.md</code></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode md"><code class="sourceCode markdown"><a class="sourceLine" id="cb2-1" data-line-number="1">---</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">title: New Post</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">---</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="fu">## Header</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">Hello, World!</a></code></pre></div>
+<p>Rebuild and serve your website to see the new page at &lt;localhost:8080/posts/new_post.md&gt;. The boilerplate design also automatically recognize the new post at <localhost:8080/posts>.</p>
+<h3 id="adding-a-new-context">Adding a New Context</h3>
