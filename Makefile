@@ -19,6 +19,10 @@ push:
 	git add -A
 	git commit
 	git push origin master
+upload:
+	python setup.py sdist bdist_wheel
+	twine upload dist/*
+	rm -rf dist/ *.egg-info/
 
 wheel:
 	python setup.py sdist bdist_wheel
