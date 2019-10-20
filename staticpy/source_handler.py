@@ -6,12 +6,13 @@ from pathlib import Path
 from datetime import datetime
 from .globals import *
 
+DOC_EXTENSIONS = ["html", "md"]
+
 
 def get_fpath(file_or_path, resolve=True):
-    """Helper function for the arguments `file`, `path`, or `file_or_path` used
-    below.
-
-    Parses `file_or_path` that is either a string or pathlib.Path
+    """
+    Parse `file_or_path` as string or pathlib.Path
+    and returns pathlib.Path.
     """
     if isinstance(file_or_path, str):
         fpath = Path(file_or_path)
@@ -19,20 +20,20 @@ def get_fpath(file_or_path, resolve=True):
         fpath = file_or_path
 
     if resolve:
-        fpath = fpath.resolve()
+        fpath = fpath.absolute()
     return fpath
 
 
 def infer_title(fname):
-    return fname.title().replace('_', ' ')
-
+    return fname.title().replace("_", " ")
 
 
 def get_frontmatter(file_or_path, last_updated=True, title=True):
     """Get parsed YAML frontmatter.
 
     Arguments
-    ---------ath : str or pathlib.Path
+    ---------
+    file_or_path : str or pathlib.Path
         If path to file, then the path should be to a markdown file. ".md" extension is assumed if missing.
         If path to directory, then the path should contain index.md.
         Because frontmatter is loaded on request, the argument should always be relative to project path.
@@ -53,28 +54,33 @@ def get_frontmatter(file_or_path, last_updated=True, title=True):
 
     # Parse path
     if fpath.is_dir():
-        fpath = fpath / 'index.md'
+        fpath = fpath / "index.md"
     else:
-        if fpath.suffix == '':
-            fpath = fpath.with_suffix('.md')
+        if fpath.suffix == "":
+            fpath = fpath.with_suffix(".md")
+
+    if fpath.suffix[1:] not in DOC_EXTENSIONS:
+        raise ValueError(
+            f"Argument `file_or_path` must be refer to a file type {DOC_EXTENSIONS}"
+        )
 
     # Check exist
     if fpath.exists():
         fm = frontmatter.load(fpath).metadata
 
         # Add timestamp of most recent update to frontmatter
-        if not ('last_updated' in fm):
+        if not ("last_updated" in fm):
             last_updated = datetime.fromtimestamp(os.path.getctime(fpath))
             # fm['date'] = last_updated.strftime('%Y-%m-%d %I:%M %p %Z')
-            fm['last_updated'] = last_updated.isoformat()
+            fm["last_updated"] = last_updated.isoformat()
 
         # Add title parsed from filename to frontmatter
         # Title ignores underscores and converts to title case.
-        if not ('title' in fm):
-            if fpath.stem == 'index':
-                fm['title'] = infer_title(fpath.parent.stem)
+        if not ("title" in fm):
+            if fpath.stem == "index":
+                fm["title"] = infer_title(fpath.parent.stem)
             else:
-                fm['title'] = infer_title(fpath.stem)
+                fm["title"] = infer_title(fpath.stem)
 
         return fm
     else:
@@ -83,59 +89,84 @@ def get_frontmatter(file_or_path, last_updated=True, title=True):
         #       should we give fake frontmatter as well?
         fm = {}
 
-        if fpath.stem == 'index':
-            fm['title'] = infer_title(fpath.parent.stem)
+        if fpath.stem == "index":
+            fm["title"] = infer_title(fpath.parent.stem)
         else:
-            fm['title'] = infer_title(fpath.stem)
+            fm["title"] = infer_title(fpath.stem)
 
         return fm
 
 
-def get_subpages(path):
+def get_subpages(path, recursive=True):
+    # TODO: Allow recursion
     """Get immediate subpages of a path ignoring "index.*" pages.
 
     Parameters
     ----------
     path : str or pathlib.Path
-        Directory relative to the project path or URL with leading slash.
+        Directory path or URL relative to the project path or URL with leading slash.
+        If `/path/to/project/context/page`, `path` should be `/context/page`.
+        This follows conventions for URL paths as `/context/page` is the URL
+        to the page.
+
+        .. warning::
+            Using `index.html` will always return an empty dictionary. Instead
+            use the `index.html` parent path.
 
     Returns
     -------
-    pages : list
-        a list of dictionaries containing metadata of a page including the URL and frontmatter.
+    pages : dict
+        A dict with key as URL and value as dict containing metadata of
+        the page.
     """
-    if isinstance(path, str) and path[0] == '/':
+    # Remove trailing slash for file system
+    if isinstance(path, str) and path[0] == "/":
         path = path[1:]
 
     path = get_fpath(path)
 
+    # A file does not have subpages
     if not path.is_dir():
         return {}
 
-    pages = {}
+    subpages = []
     subpaths = []
 
-    # Glob files
-    extensions = ['md', 'html']
-    for ext in extensions:
-        subpaths.extend(path.glob(f'*.{ext}'))
+    # Glob all Markdown and HTML files to subpaths
+    for ext in DOC_EXTENSIONS:
+        subpaths.extend(path.glob(f"*.{ext}"))
 
-    # Glob dirs
+    # Glob all subdirectories
+    # first item is always itself (pathlib design choice)
+    subpaths.extend(list(path.glob("**/"))[1:])
+
     # Unfortunately, Path.glob('*/) includes all files
-    subpaths.extend([p for p in path.glob(f'*/')
-                     if p.is_dir() and p.name[0] != '.'])
+    # subpaths.extend([p for p in path.glob(f"**/") if p.is_dir() and p.name[0] != "."])
 
     for subpath in sorted(subpaths):
-        if subpath.stem == 'index':
+        # ignore hidden paths, index.html, and index.md
+        is_hidden = str(subpath)[0] == "."
+        is_index = subpath.name in [f"index.{ext}" for ext in DOC_EXTENSIONS]
+        if is_hidden or is_index:
             continue
-        subpath = subpath.resolve().relative_to(PROJECT_PATH)
-        fm = get_frontmatter(subpath)
+
+        # Convert subpath to URL
+        subpath = subpath.absolute().relative_to(PROJECT_PATH)
+        frontmatter = get_frontmatter(str(subpath))
 
         if subpath.is_dir():
-            url = '/' + str(subpath) + '/'
+            # directory URL ends in trailing slahses
+            url = "/" + str(subpath) + "/"
+
+            # Recursion: Get subpages of directory
+            if recursive:
+                subsubpages = get_subpages(url)
         else:
-            url = '/' + str(subpath.with_suffix(''))
+            # file URL does not
+            url = "/" + str(subpath.with_suffix(""))
+            subsubpages = []
 
-        pages[str(url)] = fm
+        subpages.append({"url": url, "subpages": subsubpages, **frontmatter})
 
-    return pages
+    print(subpages)
+    return subpages
