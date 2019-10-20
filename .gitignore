@@ -4,3 +4,5 @@
 build/
 
 *.code-workspace
+*.whl
+Pipfile.lock

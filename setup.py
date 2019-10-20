@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 setup(
     name="StaticPy",
     description="StaticPy a static site generator built with Python Flask supporting Pandoc and Mathjax.",
-    version="0.0.2",
+    version="0.0.3",
     url="http://github.com/ketozhang/StaticPy",
     author="Keto Zhang",
     author_email="keto.zhang@gmail.com",
