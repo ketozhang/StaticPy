@@ -4,6 +4,7 @@ from flask import (
     Flask,
     abort,
     redirect,
+    request,
     render_template,
     send_file,
     send_from_directory,
@@ -16,9 +17,16 @@ from .globals import *
 from .log import log
 from .source_handler import get_fpath, get_frontmatter, get_subpages
 
-app = Flask(__name__, template_folder=TEMPLATE_PATH, static_folder=STATIC_PATH)
-SITE_URL = app.config["APPLICATION_ROOT"]
 
+app = Flask(__name__, template_folder=TEMPLATE_PATH, static_folder=STATIC_PATH)
+log.setLevel("DEBUG")
+
+if app.config['ENV'] == 'production':
+    SITE_URL = BASE_CONFIG['site_url']
+else:
+    SITE_URL = '/'
+
+print(f" * Serving StaticPy app to site URL {SITE_URL}")
 # def run(*args, **kwargs):
 #     local = kwargs.pop("local", False)
 #     global SITE_URL
@@ -42,11 +50,6 @@ def global_var():
     # if site_url[-1] != "/":
     #     site_url += "/"
 
-    def parse_url(url):
-        if url[0] == "/":
-            url = SITE_URL + url
-        return url
-
     def exists(file_or_path):
         """Check if the path exists in templates path."""
         fpath = TEMPLATE_PATH / get_fpath(file_or_path, resolve=False)
@@ -55,13 +58,36 @@ def global_var():
     def include_raw(fpath):
         return Markup(app.jinja_loader.get_source(app.jinja_env, fpath)[0])
 
+    def new_url_for(endpoint, **kwargs):
+        log.info(f"Parsing {endpoint} {type(endpoint)}")
+        ignore_prefix = ['#', 'mailto']
+        should_ignore = map(lambda prefix: endpoint.startswith(prefix), ignore_prefix)
+
+        if endpoint is None:
+            url = ''
+        elif any(should_ignore):
+            # Handles external links
+            url = endpoint
+        elif endpoint[0] == '/':
+            # Handles internal links
+            url = SITE_URL + endpoint[1:]
+        elif len(endpoint.split(' ')) < 1:
+            # Handles flask-like url_for
+            url = url_for(endpoint, **kwargs)
+        else:
+            # Give up and return input
+            url = endpoint
+
+        log.info(f"Parsed as {url}")
+        return url
+
     var = dict(
         author=BASE_CONFIG["author"],
         debug=app.debug,
         navbar=BASE_CONFIG["navbar"],
         exists=exists,
         include_raw=include_raw,
-        parse_url=parse_url,
+        url_for=new_url_for,
         site_url=SITE_URL,
         get_subpages=get_subpages,
         site_brand=BASE_CONFIG["site_brand"],
