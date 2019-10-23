@@ -5,6 +5,7 @@ import frontmatter
 from pathlib import Path
 from datetime import datetime
 from .globals import *
+from .page import Page
 
 DOC_EXTENSIONS = ["html", "md"]
 
@@ -166,7 +167,8 @@ def get_subpages(path, recursive=True):
             url = "/" + str(subpath.with_suffix(""))
             subsubpages = []
 
-        subpages.append({"url": url, "subpages": subsubpages, **frontmatter})
+        subpage = Page(url, subpages=subsubpages, **frontmatter)
+        subpages.append(subpage)
 
     print(subpages)
     return subpages
