@@ -1,4 +1,8 @@
-__pycache__/
-staticpy/
+*__pycache__/
+*.vscode/
+*.egg-info/
+build/
+
 *.code-workspace
+*.whl
 Pipfile.lock
