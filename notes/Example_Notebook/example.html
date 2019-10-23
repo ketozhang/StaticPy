@@ -62,16 +62,43 @@
         <div class="col-lg-8 col-9">
             <div class="markdown-content">
                 
-                <h2 id="first-section">First Section</h2>
-<p>Hello, World!</p>
-<h2 id="second-section">Second Section</h2>
-<p>foo bar baz</p>
-<h2 id="third-section">Third Section</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi mauris dui, gravida in condimentum rutrum, rutrum vel erat. Etiam ut blandit nisl. Fusce condimentum urna at tempor vulputate. Morbi sed accumsan massa, et pretium nibh. Nullam eget fringilla urna, id placerat diam. Proin tristique nisi a sagittis varius. Mauris quam lorem, mollis quis sodales fringilla, iaculis ut ipsum. Maecenas vitae arcu ac turpis euismod faucibus nec laoreet dolor. Donec condimentum pellentesque ligula at cursus. Praesent porta augue at ultrices pulvinar. Donec sem lorem, tristique eget justo et, gravida porta ligula. Quisque facilisis pulvinar dui, et rutrum magna interdum eget.</p>
-<p>Phasellus sed massa nulla. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc ultricies lacus dolor, vel blandit tellus fermentum vitae. Suspendisse finibus fringilla felis eu vehicula. Fusce ornare pretium elit in pellentesque. Ut vel vulputate massa. Etiam pharetra imperdiet urna at tincidunt. Ut vel dignissim nibh, tristique semper nisl. Vivamus venenatis, leo vitae fringilla aliquam, velit tortor accumsan felis, ac ultrices nisl diam sed nisi. Phasellus nec sem sed ex lacinia posuere eu porttitor magna. Sed et mauris sed justo hendrerit gravida. In rhoncus, nunc nec mattis efficitur, erat tortor iaculis est, vitae placerat ipsum enim eu erat. Sed sed magna imperdiet, dignissim est et, tempus leo. Cras accumsan commodo consequat.</p>
-<p>Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam erat volutpat. Nam et odio non purus luctus lobortis eget sit amet nisl. Aenean sodales venenatis erat, et fringilla nisi tempus in. Fusce sollicitudin interdum lorem ut ornare. Nulla facilisi. Pellentesque in diam tempor, dapibus ante vehicula, pellentesque velit. Mauris volutpat in diam in accumsan. Vivamus consectetur tortor aliquam elit congue ultrices. Pellentesque in ligula hendrerit enim accumsan consectetur. Sed arcu massa, venenatis consequat vehicula eu, efficitur non ligula. Quisque dui quam, gravida a vehicula eu, ultricies at lectus. Morbi gravida, dolor et finibus tristique, orci tortor convallis massa, ac ullamcorper purus arcu nec lorem. Cras luctus porttitor dolor eget auctor.</p>
-<p>Nullam ac tempor augue, nec gravida erat. Aliquam ac magna eget tellus vestibulum aliquet. Nam posuere ante quis dui interdum, a pretium nisi fringilla. Quisque accumsan, leo vel pretium convallis, nisl nunc tempor nibh, sit amet consectetur erat purus posuere justo. Suspendisse porttitor, nisi nec faucibus eleifend, erat lectus rhoncus leo, tristique efficitur nulla mi sit amet lacus. Suspendisse vitae volutpat ante. Sed vehicula mauris augue, finibus egestas nisl venenatis in. Proin libero nulla, euismod non rhoncus at, vestibulum id lorem. Morbi id purus convallis, euismod lacus eget, elementum quam. Suspendisse potenti.</p>
-<p>Phasellus vitae elit vehicula, faucibus odio nec, iaculis odio. Suspendisse eget hendrerit tellus. Phasellus scelerisque mauris vel ante dictum mattis. Proin auctor dui eu semper accumsan. Mauris mollis est risus, sit amet sollicitudin eros iaculis nec. Duis semper enim ut mollis eleifend. Nulla nec scelerisque orci, non interdum diam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas eu ligula a odio ornare mattis. Etiam sem nibh, tristique fermentum magna ut, feugiat venenatis justo. Praesent suscipit est at tellus dapibus gravida vitae in sem. Nulla ut malesuada diam, eu posuere elit. Suspendisse eu ipsum non sapien cursus sollicitudin ac et ante. Duis elit purus, vestibulum eu gravida a, luctus non lorem.</p>
+                <p><img src="example.png" class="center" /></p>
+<h2 id="some-math">Some Math</h2>
+<p>The energy-momentum relation for a relativistic system is,</p>
+<p><span class="math display">\[
+\begin{equation}
+E^2 = (\abs{\vec p}c)^2 + (m_0 c^2)^2
+\end{equation}
+\]</span></p>
+<dl>
+<dt>Proof</dt>
+<dd><p>This is derived from the vector form of the four-momentum’s self inner product</p>
+<p><span class="math display">\[
+p^2 = \frac{E^2}{c^2} - \abs{\vec{p}}^2
+\]</span></p>
+<p>Since the inner product of four-momentum is Lorentz invariant we can take any reference frame and the easiest one to take is the frame at rest (the zero momentum frame).</p>
+<p><span class="math display">\[
+\begin{gather*}
+\vec{p} = 0     \\
+\big\Downarrow  \\
+p^2 = m_0 c^2   \\
+\big\Downarrow  \\
+m_0^2 c^2 = \frac{E^2}{c^2} - \abs{\vec{p}}^2
+\end{gather*}
+\]</span></p>
+</dd>
+</dl>
+<!-- Yep, as you may know Markdown rendering allows raw HTML -->
+<p><small> <strong>Note:</strong> The <code>\abs</code> is defined with <code>\newcommand</code> at the base HTML to be loaded onto the whole website. You may move this to the <code>note.html</code> template. This is the same reason why <code>\vec</code> is bolded instead of the arrow/anchor above. Alternatively, MathJax 3.0 has the physics extension (and many others) which natively supports regularly used syntax like <code>\abs, \braket, \vec</code> </small></p>
+<h2 id="some-code">Some Code</h2>
+<p>Here’s some random python code</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode py"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="im">import</span> numpy</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="im">import</span> matplotlib <span class="im">as</span> plt</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">x <span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>])</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">plt.plot(x, x<span class="op">**</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">plt.show()</a></code></pre></div>
+<p><small> <strong>Note:</strong> Syntax highlighted can be JS libraries like PrismJS (see StaticPy documentation) Otherwise, you can add your own CSS to <code>pre&gt;code</code> for block code or <code>p&gt;code</code> for inline paragraph code. </small></p>
                 
             </div>
         </div>

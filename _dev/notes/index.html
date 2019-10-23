@@ -1,16 +1,23 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block content %}
 {% include 'header.html' %}
-<div class="container">
-  <h1 class="title">Notes</h1>
-  <!-- page can either be a notebook or a note -->
-  <ul class="no-list-style p-0">
-    {% for page in pages %}
-    <li class="pb-2"><a href="{{url_for(page['url'])}}" target='_blank'>{{page['title']}}</a></li>
-    {% endfor %}
-  </ul>
-  <!-- {% for url in notebook_urls %}
-    <p><a href={{url}}>{{url}}</a></p>
-    {% endfor %} -->
-</div>
+<main class="container">
+  <header>
+    <h3>Notebooks:</h3>
+    <!-- TODO: get_subpages(page['url']) -->
+    {% set maxdepth = 2 %}
+    <ul style="list-style: none; padding-left: 0;">
+      {% for subpage in get_subpages("/notes") recursive %}
+
+      <li>
+        <a href="{{ url_for(subpage['url']) }}">{{subpage['title']}}</a>
+        {% if subpage['subpages'] %}
+        <ul>{{ loop(subpage['subpages']) }}</ul>
+        {% endif %}
+      </li>
+
+      {% endfor %}
+    </ul>
+  </header>
+</main>
 {% endblock %}
