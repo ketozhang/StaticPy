@@ -12,7 +12,6 @@ from flask import (
 from staticpy import (
     app,
     build_all,
-    run,
     log,
     get_subpages,
     get_config,
@@ -27,11 +26,15 @@ from collections import OrderedDict
 # ROUTES
 #########
 
+
 @app.route("/")
 def home():
     """Renders the home page."""
-    context = get_config('home')
-    return render_template("home.html", **context)
+    context = get_config("home")
+
+    posts = get_subpages(BASE_CONFIG['contexts']["posts"]["source_path"])
+    template_context = {**context, "posts": posts}
+    return render_template("home.html", **template_context)
 
 
 @app.route("/docs/")
@@ -66,26 +69,26 @@ def notes_home_page():
 def posts_home_page():
     """Renders the posts home page of URL /posts/index.html ."""
 
-    def get_all_posts():
-        """Get post urls (path relative to `TEMPLATE_PATH`).
+    # def get_all_posts():
+    #     """Get post urls (path relative to `TEMPLATE_PATH`).
 
-        Returns
-        -------list[str]
-            A list of post urls as strings.
-        """
-        posts_path = TEMPLATE_PATH / "posts"
-        posts = posts_path.glob("**/[!index]*.html")
-        posts = [str(post.relative_to(TEMPLATE_PATH).as_posix()) for post in posts]
+    #     Returns
+    #     -------list[str]
+    #         A list of post urls as strings.
+    #     """
+    #     posts_path = TEMPLATE_PATH / "posts"
+    #     posts = posts_path.glob("**/[!index]*.html")
+    #     posts = [str(post.relative_to(TEMPLATE_PATH).as_posix()) for post in posts]
 
-        return posts
+    #     return posts
 
-    posts = OrderedDict(get_subpages(PROJECT_PATH / "posts"))
+    posts = get_subpages(PROJECT_PATH / "posts")
 
     modified_times = []
-    for post in posts.values():
+    for post in posts:
         modified_times.append(post["last_updated"])
     sort_idx = sorted(range(len(modified_times)), key=modified_times.__getitem__)[::-1]
-    posts = OrderedDict((list(posts.items())[i]) for i in sort_idx)
+    posts = [posts[i] for i in sort_idx]
 
     context = dict(posts=posts)
 

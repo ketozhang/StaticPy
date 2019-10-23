@@ -6,7 +6,7 @@
                 <li class="nav-item"><a class="nav-link active" href="{{site_url}}">Home</a>
                 </li>
                 {% for nav in navbar.values() %}
-                <li class="nav-item"><a class="nav-link" href="{{parse_url(nav['url'])}}">{{ nav['text'] }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{url_for(nav['url'])}}">{{ nav['text'] }}</a></li>
                 {% endfor %}
                 <!-- <li class="nav-item"><a class="nav-link" href="{{site_url}}posts">Posts</a></li> -->
                 <!-- <li class="nav-item"><a class="nav-link" href="{{site_url}}notes">Notes</a></li> -->
@@ -18,7 +18,7 @@
         <ul class="nav justify-content-center">
             {% for social in social_links.values() %}
             <li class="nav-item mx-2">
-                <a class="social-link" href="{{parse_url(social['url'])}}" title="{{ social['text'] }}" target="_blank">
+                <a class="social-link" href="{{url_for(social['url'])}}" title="{{ social['text'] }}" target="_blank">
                     <img src="{{ social['icon'] }}">
                 </a>
             </li>

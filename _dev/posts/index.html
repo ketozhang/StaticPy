@@ -3,20 +3,20 @@
 {% include 'header.html' %}
 <div class="container">
   <h1 class="title">Posts</h1>
-  {% for post_url, post in posts.items() %}
+  {% for post in posts %}
   <div class="card mb-3 box-shadow">
     <div class="row no-gutter">
       <div class="col-md-5 col-lg-4">
         {% if 'image' in post %}
         {% set post_image = post['image']%}
         {% else %}
-        {% set post_image = '/static/images/default.jpg'%}
+        {% set post_image = url_for('/static/images/default.jpg')%}
         {% endif %}
-        <a href={{parse_url(post_url)}}><img class="card-img" src={{post_image}}></a>
+        <a href="{{url_for(post['url'])}}"><img class="card-img" src="{{url_for(post['image'])}}"></a>
       </div>
       <div class="col-md-7 col-lg-8">
         <div class="card-body">
-          <h4 class="card-title mb-0"><a href={{parse_url(post_url)}}>{{post['title']}}</a></h4>
+          <h4 class="card-title mb-0"><a href="{{url_for(post['url'])}}">{{post['title']}}</a></h4>
           <p class="card-text"><small class="text-muted">Last updated <time
                 datetime="{{post['last_updated']}}"></time></small></p>
           <p class="mt-2 card-text">{{post['description']}}</p>

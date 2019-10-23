@@ -1,5 +1,5 @@
-# The full url to be hosted (e.g., http://example.com/notes)
-site_url: 'https://ketozhang.github.io/StaticPy'
+# The full url to be hosted (e.g., http://example.com/notes/)
+site_url: 'https://ketozhang.github.io/StaticPy/'
 site_brand: 'StaticPy'
 site_title: 'StaticPy'
 author: 'StaticPy'

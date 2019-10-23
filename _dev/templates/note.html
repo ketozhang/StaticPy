@@ -18,15 +18,15 @@
                         <strong>{{page['title']}}</strong>
                     </div>
                     <div class="col-2 offset-1">
-                        <a class="go-up" href="{{parse_url(page['parent'])}}" role="button">
+                        <a class="go-up" href="{{url_for(page['parent'])}}" role="button">
                             <img src="https://img.icons8.com/dotty/80/000000/up.png" style="width: 25px; height: 25px">
                         </a>
                     </div>
                 </div>
                 <div class="sidenav-body no-gutters">
                     <ul class="no-list-style pl-3">
-                        {% for subpage_url, subpage in page['subpages'].items() %}
-                        <li class='pb-3'><a href="{{parse_url(subpage_url)}}">{{subpage['title']}}</a></li>
+                        {% for subpage in page['subpages'] %}
+                        <li class='pb-3'><a href="{{url_for(subpage['url'])}}">{{subpage['title']}}</a></li>
                         {% endfor %}
                     </ul>
                 </div>

@@ -5,8 +5,8 @@
   <h1 class="title">Documentations</h1>
   <!-- page can either be a notebook or a note -->
   <ul class="no-list-style p-0">
-  {% for page_url, page in pages.items() %}
-    <li class="pb-2"><a href={{parse_url(page_url)}} target='_blank'>{{page['title']}}</a></li>
+    {% for page in pages %}
+    <li class="pb-2"><a href="{{url_for(page['url'])}}" target='_blank'>{{page['title']}}</a></li>
     {% endfor %}
   </ul>
 </div>
