@@ -10,5 +10,8 @@ class Page(dict):
         if self['title'] == None:
             self['title'] = self['url'].split('/')[-1]
 
+    def __str__(self):
+        return f"Post: [{self.__str__}]"
+
     def __getitem__(self, key):
         return self.get(key)

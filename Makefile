@@ -9,7 +9,6 @@ build:
 static:
 	pipenv run python freeze.py
 
-
 freeze:
 	make static
 
@@ -19,6 +18,7 @@ push:
 	git add -A
 	git commit
 	git push origin master
+
 upload:
 	python setup.py sdist bdist_wheel
 	twine upload dist/*
