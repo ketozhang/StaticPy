@@ -98,6 +98,36 @@ def get_frontmatter(file_or_path, last_updated=True, title=True):
         return fm
 
 
+def get_page(path):
+    """
+    Parameters
+    ----------
+    path : str or pathlib.Path
+        File path or URL relative to the project path or URL with leading slash.
+    Returns
+    -------
+    pages : Page
+    """
+
+    # Remove trailing slash for file system
+    if isinstance(path, str) and path[0] == "/":
+        path = path[1:]
+
+    path = get_fpath(path)
+
+    if path.is_file() and path.suffix in DOC_EXTENSIONS:
+        url = "/" + str(path.stem)
+    elif any([path.with_suffix(f".{ext}") for ext in DOC_EXTENSIONS]):
+        url = "/" + str(path)
+    else:
+        raise ValueError(
+            f"Argument `path` does not point to any supporting files of extension: {DOC_EXTENSIONS}"
+        )
+
+    frontmatter = get_frontmatter(str(path))
+    return Page(url, **frontmatter)
+
+
 def get_subpages(path, recursive=True):
     # TODO: Allow recursion
     """Get immediate subpages of a path ignoring "index.*" pages.
@@ -116,9 +146,8 @@ def get_subpages(path, recursive=True):
 
     Returns
     -------
-    pages : dict
-        A dict with key as URL and value as dict containing metadata of
-        the page.
+    pages : list
+        A list of Page object.
     """
     # Remove trailing slash for file system
     if isinstance(path, str) and path[0] == "/":
@@ -174,3 +203,4 @@ def get_subpages(path, recursive=True):
         subpages.append(subpage)
 
     return subpages
+
