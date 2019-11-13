@@ -124,8 +124,7 @@ def get_root_page(file):
 
     This is often useful for the pages "about" and "contacts".
     """
-    fpath = get_fpath(TEMPLATE_PATH / file).relative_to(TEMPLATE_PATH)
-    fpath = fpath.with_suffix(".html")
+    fpath = get_fpath(TEMPLATE_PATH / Path(file).with_suffix('.html')).relative_to(TEMPLATE_PATH)
     return render_template(str(fpath))
 
 

@@ -139,7 +139,8 @@ def get_subpages(path, recursive=True):
 
     # Glob all subdirectories
     # first item is always itself (pathlib design choice)
-    subpaths.extend(list(path.glob("**/"))[1:])
+    subfiles_and_path = list(path.glob("*/"))[1:]
+    subpaths.extend([d for d in subfiles_and_path if d.is_dir()])
 
     # Unfortunately, Path.glob('*/) includes all files
     # subpaths.extend([p for p in path.glob(f"**/") if p.is_dir() and p.name[0] != "."])
@@ -159,9 +160,11 @@ def get_subpages(path, recursive=True):
             # directory URL ends in trailing slahses
             url = "/" + str(subpath) + "/"
 
-            # Recursion: Get subpages of directory
+            # # Recursion: Get subpages of directory
             if recursive:
                 subsubpages = get_subpages(url)
+            else:
+                subsubpages = None
         else:
             # file URL does not
             url = "/" + str(subpath.with_suffix(""))
@@ -170,5 +173,4 @@ def get_subpages(path, recursive=True):
         subpage = Page(url, subpages=subsubpages, **frontmatter)
         subpages.append(subpage)
 
-    print(subpages)
     return subpages
