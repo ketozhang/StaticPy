@@ -116,9 +116,9 @@ def get_page(path):
     path = get_fpath(path)
 
     if path.is_file() and path.suffix in DOC_EXTENSIONS:
-        url = "/" + str(path.stem)
+        url = "/" + str(path.absolute().relative_to(PROJECT_PATH).stem)
     elif any([path.with_suffix(f".{ext}") for ext in DOC_EXTENSIONS]):
-        url = "/" + str(path)
+        url = "/" + str(path.absolute().relative_to(PROJECT_PATH))
     else:
         raise ValueError(
             f"Argument `path` does not point to any supporting files of extension: {DOC_EXTENSIONS}"
