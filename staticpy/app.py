@@ -71,7 +71,7 @@ def global_var():
         elif endpoint[0] == '/':
             # Handles internal links
             url = SITE_URL + endpoint[1:]
-        elif len(endpoint.split(' ')) < 1:
+        elif kwargs:
             # Handles flask-like url_for
             url = url_for(endpoint, **kwargs)
         else:
