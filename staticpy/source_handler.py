@@ -167,8 +167,7 @@ def get_subpages(path, recursive=True):
         subpaths.extend(path.glob(f"*.{ext}"))
 
     # Glob all subdirectories
-    # first item is always itself (pathlib design choice)
-    subfiles_and_path = list(path.glob("*/"))[1:]
+    subfiles_and_path = list(path.glob("*/"))
     subpaths.extend([d for d in subfiles_and_path if d.is_dir()])
 
     # Unfortunately, Path.glob('*/) includes all files
