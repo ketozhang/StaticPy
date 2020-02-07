@@ -4,7 +4,6 @@ import sys
 import frontmatter
 from pathlib import Path
 from datetime import datetime
-from .globals import *
 from .page import Page
 
 DOC_EXTENSIONS = ["html", "md"]

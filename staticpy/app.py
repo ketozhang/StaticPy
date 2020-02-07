@@ -11,9 +11,9 @@ from flask import (
     url_for,
 )
 from jinja2 import Markup
+from . import BASE_CONFIG, TEMPLATE_PATH, STATIC_PATH, SITE_URL
 from .config_handler import get_config
 from .doc_builder import build_all
-from .globals import *
 from .log import log
 from .source_handler import get_fpath, get_frontmatter, get_subpages
 
@@ -21,10 +21,10 @@ from .source_handler import get_fpath, get_frontmatter, get_subpages
 app = Flask(__name__, template_folder=TEMPLATE_PATH, static_folder=STATIC_PATH)
 log.setLevel("DEBUG")
 
-if app.config['ENV'] == 'production':
-    SITE_URL = BASE_CONFIG['site_url']
+if app.config["ENV"] == "production":
+    SITE_URL = BASE_CONFIG["site_url"]
 else:
-    SITE_URL = '/'
+    SITE_URL = "/"
 
 print(f" * Serving StaticPy app to site URL {SITE_URL}")
 # def run(*args, **kwargs):
@@ -60,15 +60,15 @@ def global_var():
 
     def new_url_for(endpoint, **kwargs):
         log.info(f"Parsing {endpoint} {type(endpoint)}")
-        ignore_prefix = ['#', 'mailto']
+        ignore_prefix = ["#", "mailto"]
         should_ignore = map(lambda prefix: endpoint.startswith(prefix), ignore_prefix)
 
         if endpoint is None:
-            url = ''
+            url = ""
         elif any(should_ignore):
             # Handles external links
             url = endpoint
-        elif endpoint[0] == '/':
+        elif endpoint[0] == "/":
             # Handles internal links
             url = SITE_URL + endpoint[1:]
         elif kwargs:
@@ -124,7 +124,9 @@ def get_root_page(file):
 
     This is often useful for the pages "about" and "contacts".
     """
-    fpath = get_fpath(TEMPLATE_PATH / Path(file).with_suffix('.html')).relative_to(TEMPLATE_PATH)
+    fpath = get_fpath(TEMPLATE_PATH / Path(file).with_suffix(".html")).relative_to(
+        TEMPLATE_PATH
+    )
     return render_template(str(fpath))
 
 
@@ -158,10 +160,7 @@ def get_page(context, page):
         _context = BASE_CONFIG["contexts"][context]
         source_path = PROJECT_PATH / _context["source_path"]
     except KeyError as e:
-        log.error(
-            str(e)
-            + f", when attempting with args get_page({context}, {page})."
-        )
+        log.error(str(e) + f", when attempting with args get_page({context}, {page}).")
 
     if (source_path / page).is_file() and path.suffix != ".html":
         log.info(f"Fetching the file {str(source_path / page)}")
@@ -177,9 +176,7 @@ def get_page(context, page):
         _page["has_content"] = (path / "index.html").exists() and (
             path / "index.html"
         ).stat().st_size > 1
-        _page["content_path"] = str(
-            (path / "index.html").relative_to(TEMPLATE_PATH)
-        )
+        _page["content_path"] = str((path / "index.html").relative_to(TEMPLATE_PATH))
     elif path.with_suffix(".html").exists():  # Handle files
         path = path.with_suffix(".html")
         _page = get_frontmatter((source_path / page).with_suffix(".md"))

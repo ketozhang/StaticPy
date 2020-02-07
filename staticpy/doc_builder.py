@@ -4,7 +4,6 @@ import pypandoc as pandoc
 from shutil import rmtree, copyfile
 from .source_handler import get_fpath
 from .log import log
-from .globals import *
 
 
 def md_to_html(file_or_path, outputfile):
@@ -76,6 +75,8 @@ def build(context):
 
 def build_all():
     start = time.time()
+
     for context in BASE_CONFIG["contexts"].values():
         build(context)
+
     return time.time() - start
