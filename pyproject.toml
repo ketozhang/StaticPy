@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "staticpy"
-version = "0.0.3"
+version = "0.0.4"
 description = "A static site generator supporting Pandoc and Mathjax for STEM notes, blogpost, portfolio website, and more."
 authors = ["Keto Zhang <keto.zhang@gmail.com>"]
 license = "Apache-2.0"
@@ -16,6 +16,7 @@ flask-assets = "^2.0"
 pyyaml = "^5.3"
 
 [tool.poetry.dev-dependencies]
+pytest = "^5.3.5"
 
 [build-system]
 requires = ["poetry>=0.12"]
