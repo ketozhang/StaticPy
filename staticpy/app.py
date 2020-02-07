@@ -11,15 +11,13 @@ from flask import (
     url_for,
 )
 from jinja2 import Markup
-from . import BASE_CONFIG, TEMPLATE_PATH, STATIC_PATH, SITE_URL
+from . import BASE_CONFIG, TEMPLATE_PATH, STATIC_PATH, SITE_URL, log
 from .config_handler import get_config
 from .doc_builder import build_all
-from .log import log
 from .source_handler import get_fpath, get_frontmatter, get_subpages
 
 
 app = Flask(__name__, template_folder=TEMPLATE_PATH, static_folder=STATIC_PATH)
-log.setLevel("DEBUG")
 
 if app.config["ENV"] == "production":
     SITE_URL = BASE_CONFIG["site_url"]
@@ -27,17 +25,6 @@ else:
     SITE_URL = "/"
 
 print(f" * Serving StaticPy app to site URL {SITE_URL}")
-# def run(*args, **kwargs):
-#     local = kwargs.pop("local", False)
-#     global SITE_URL
-#     if local:
-#         SITE_URL = ""
-
-#     app._run(*args, **kwargs)
-
-
-# app._run = app.run
-# app.run = run
 
 
 ########################

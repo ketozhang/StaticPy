@@ -5,8 +5,7 @@ import frontmatter
 from pathlib import Path
 from datetime import datetime
 from .page import Page
-
-DOC_EXTENSIONS = ["html", "md"]
+from . import DOC_EXTENSIONS
 
 
 def get_fpath(file_or_path, resolve=True):

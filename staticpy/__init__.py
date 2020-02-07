@@ -28,6 +28,7 @@ def get_config(filepath):
     Returns config as dict if exists, otherwise throws exception.
     """
 
+    # Validate Argument
     if isinstance(filepath, Path):
         config_path = filepath
     elif isinstance(filepath, str):
@@ -38,23 +39,50 @@ def get_config(filepath):
     else:
         raise ValueError("Argument (0) `filepath` is not a valid file path.")
 
+    # Read and return config file
     try:
         with open(config_path) as file:
             config = yaml.safe_load(file)
         return config
     except FileNotFoundError as e:
-        raise e
+        raise FileNotFoundError(
+            "Configuration file not found. Make sure to create one (default: `/path/to/project/configs/base.yaml`). \
+             Use environment variable STATICPY_CONFIGS_PATH to change configs path."
+        )
 
 
 ###
 # GLOBAL VAR
 ###
 
-BASE_CONFIG = get_config("base.yaml")
-TEMPLATE_PATH = PROJECT_PATH / BASE_CONFIG["template_path"]
-STATIC_PATH = PROJECT_PATH / BASE_CONFIG["static_path"]
-SITE_URL = BASE_CONFIG["site_url"]
 
+def get_global_var(base_config):
+    # Flask templates path
+    template_path = PROJECT_PATH / base_config["template_path"]
+    if not template_path.exists():
+        raise FileNotFoundError(
+            "Templates folder not found. Make sure to create one (default: /path/to/project/templates)."
+        )
+
+    # Web Static Path
+    static_path = PROJECT_PATH / base_config["static_path"]
+    if not static_path.exists():
+        raise FileNotFoundError(
+            "Templates folder not found. Make sure to create one (default: /path/to/project/static)."
+        )
+
+    # Site URL
+    # Will modify with trailing slash
+    site_url = base_config["site_url"]
+    if site_url[-1] != "/":
+        site_url += "/"
+
+    return template_path, static_path, site_url
+
+
+BASE_CONFIG = get_config("base.yaml")
+TEMPLATE_PATH, STATIC_PATH, SITE_URL = get_global_var(BASE_CONFIG)
+DOC_EXTENSIONS = ["html", "md"]
 
 ###
 # LOGGING
