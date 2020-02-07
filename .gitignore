@@ -1,11 +1,11 @@
 *__pycache__/
 *.vscode/
 *.egg-info/
-*.venv/
+.venv/
 docs/
 build/
 test/
 
 *.code-workspace
 *.whl
-Pipfile.lock
+poetry.lock
