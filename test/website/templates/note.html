@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'header.html' %}
+<main class="container">
+  <article>
+
+    <header>
+      <h1 class="title">{{page['title']}}</h1>
+
+      <!-- Notebook Navigation -->
+      {% set subpages=get_subpages(page['url']) %}
+      {% if subpages %}
+      <h3>Pages:</h3>
+      <ul>
+        {% set maxdepth = 2 %}
+        {% for subpage in subpages recursive %}
+
+        <li>
+          <a href="{{ subpage['url'] }}">{{subpage['title']}}</a>
+          {% if subpage['subpages'] %}
+          <ul>{{ loop(subpage['subpages']) }}</ul>
+          {% endif %}
+        </li>
+
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </header>
+
+    <!-- Content -->
+    {% if page['has_content'] %}
+    <section class="content">{{ include_raw(page['content_path']) }}</section>
+    {% endif %}
+
+  </article>
+</main>
+{% endblock %}

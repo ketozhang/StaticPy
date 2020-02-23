@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'header.html' %}
+<main class="container">
+  <article>
+
+    <header>
+        <h1 class="title">{{page['title']}}</h1>
+        <small>Last updated: <time>{{page['last_updated'].split('T')[0]}}</time></small>
+        <div style="text-align: center">
+          <img src="{{page['image']}}" style="height: 300px; width: 300px;">
+        </div>
+
+    <!-- Content -->
+    {% if page['has_content'] %}
+    <section class="content">{{ include_raw(page['content_path']) }}</section>
+    {% endif %}
+
+  </article>
+</main>
+{% endblock %}

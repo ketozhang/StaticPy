@@ -1,0 +1,64 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+header {
+  margin-bottom: 1em;
+}
+
+main {
+  min-height: 90%;
+}
+
+article header .title {
+  margin-bottom: 0;
+}
+
+nav {
+  padding-bottom: 0.25em;
+  border-bottom: 1px solid black;
+}
+
+nav a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 1.25rem;
+  margin-right: 0.5em;
+  padding-right: 0.50em;
+}
+
+nav a:hover {
+  color: black;
+}
+
+footer {
+  height: 50px;
+  padding-top: 0.5em;
+  border-top: 1px solid black;
+}
+
+footer p {
+  text-align: right;
+}
+
+/* Classes */
+
+.container {
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-muted {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
