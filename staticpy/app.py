@@ -93,18 +93,6 @@ def get_favicon():
 ########################
 # MAIN
 ########################
-
-
-# @app.route("/")
-# def home():
-#     """Renders the home page."""
-#     config = get_config("home")
-
-#     context = dict(**config)
-
-#     return render_template(config.get("template", "home.html"), **context)
-
-
 @app.route("/<file>")
 def get_root_page(file):
     """Renders root level pages located in `TEMPLATE_PATH`/<file>.html .
@@ -136,7 +124,7 @@ def get_page(context, page):
     log.info(f"Getting context: {context}, page: {page}")
     path = TEMPLATE_PATH / context / page
 
-    # Redirect context home pages
+    # Got ``/<context>`/index.html`, redirect to context's homepage `/<context>`
     if path.name == "index.html":
         url = f"/{context}"
         log.info(f"Redirecting to: {url}")

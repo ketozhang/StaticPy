@@ -24,7 +24,7 @@ def build(context):
     (`output_path`) outputted to the templates directory."""
     source_path = PROJECT_PATH / context["source_path"]
 
-    url = context["url"]
+    url = context["source_path"]
     if url[0] == "/":
         url = url[1:]
     output_path = TEMPLATE_PATH / Path(url)
