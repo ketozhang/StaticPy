@@ -107,7 +107,7 @@ def get_root_page(file):
         abort(404)
 
     app.logger.debug(f"Serving root file {content_path}")
-        return render_template(str(content_path))
+    return render_template(str(content_path))
 
 
 # @app.route(f"/<context>/<path:page>")
@@ -184,13 +184,16 @@ def get_page(context, subpath):
 
     If URL is a directory (e.g., `/notes/dir`), `TEMPLATE_PATH/notes/dir/index.html` is rendered if it exist otherwise an context template itself is rendered.
     """
+    app.logger.debug(f"Context page requested")
     page_url = request.path
 
     # Check if context is registered in config
     try:
         context_config = BASE_CONFIG["contexts"][context]
         context = Context(**context_config)
+        app.logger.debug(f"Context found with map:\n\t{context.page_content_map}")
     except KeyError:
+        app.logger.debug(f"Context {context} not found")
         abort(404)
 
     # If URL is context's index file redirect to context root URL
@@ -201,15 +204,16 @@ def get_page(context, subpath):
     content_path = context.get_content_path(page_url)
 
     # Handle files
-    if (TEMPLATE_PATH / content_path).is_file():
-        # Render the page contents into the context's template
-        source_file_path = content_path
+    # if (TEMPLATE_PATH / content_path).is_file():
+    #     # Render the page contents into the context's template
+    #     source_file_path = content_path
 
-    # Handle directory
-    elif (TEMPLATE_PATH / content_path).is_dir():
-        source_file_path = f"{content_path}/index.html"
-    else:
-        abort(404)
+    # # Handle directory
+    # elif (TEMPLATE_PATH / content_path).is_dir():
+    #     source_file_path = f"{content_path}/index.html"
+    # else:
+    #     abort(404)
 
-    page = Page(source_file_path, page_url)
+    page = Page(page_url, context=context)
+    app.logger.debug(f"Serving context page:\n\t{page}")
     return render_template(context.template, page=page)

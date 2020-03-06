@@ -38,6 +38,13 @@ class Context:
 
         return self._page_content_map
 
+    def __repr__(self):
+        s = f"<Context: url={self.root_url}, template={self.template}>"
+        return s
+
+    def __str__(self):
+        return self.__repr__()
+
     def content_to_page(self, content_path):
         """Returns the page URL path given the content path relative to `TEMPLATE_PATH`
 
@@ -56,11 +63,11 @@ class Context:
 
         if content_path.suffix == ".html":
             if content_path.name == "index.html":
-                return f"/{content_path}"
+                return f"/{content_path}/"
             else:
                 return f"/{content_path.with_suffix('')}"
         else:
-            return f"/{content_path}"
+            return f"/{content_path}/"
 
     def page_to_content(self, page_url):
         """Returns the content path relative `TEMPLATE_PATH` given the page URL path relative to the context."""

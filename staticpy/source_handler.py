@@ -4,7 +4,7 @@ import sys
 import frontmatter
 from pathlib import Path
 from datetime import datetime
-from . import DOC_EXTENSIONS, PROJECT_PATH
+from . import DOC_EXTENSIONS, PROJECT_PATH, TEMPLATE_PATH
 
 
 class Page:
@@ -27,6 +27,9 @@ class Page:
         for k, v in get_frontmatter(self.source_path).items():
             setattr(self, k, v)
 
+        self._has_content = self.has_content
+        self._subpages = self.subpages
+
     # def __init__(self, url, subpages=[], title=None, **kwargs):
     #     self.update({
     #         'url': url,
@@ -38,14 +41,20 @@ class Page:
     #     self["title"] = self["url"].split("/")[-1]
 
     @property
+    def has_content(self):
+        self._has_content = Path(TEMPLATE_PATH / self.content_path).exists()
+        return self._has_content
+
+    @property
     def subpages(self):
-        return self.get_subpages(self.url)
+        self._subpages = self.get_subpages(self.url)
+        return self._subpages
 
     def __str__(self):
-        return str(self.__dict__)
+        return self.__repr__()
 
     def __repr__(self):
-        return self.__str__()
+        return str(self.__dict__)
 
     def __getitem__(self, key):
         """Returns key if exists else returns None."""

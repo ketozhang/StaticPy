@@ -8,7 +8,7 @@
       <h1 class="title">{{page['title']}}</h1>
 
       <!-- Notebook Navigation -->
-      {% set subpages=get_subpages(page['url']) %}
+      {% set subpages=page.subpages %}
       {% if subpages %}
       <h3>Pages:</h3>
       <ul>
@@ -28,7 +28,7 @@
     </header>
 
     <!-- Content -->
-    {% if page['has_content'] %}
+    {% if page['content_path'] %}
     <section class="content">{{ include_raw(page['content_path']) }}</section>
     {% endif %}
 
