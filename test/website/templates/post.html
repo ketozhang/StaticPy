@@ -10,11 +10,13 @@
       <small>Last updated: <time>{{page['last_updated'].split('T')[0]}}</time></small>
       {% endif %}
       <div style="text-align: center">
+        {% if page['image'] %}
         <img src="{{page['image']}}" style="height: 300px; width: 300px;">
+        {% endif %}
       </div>
 
       <!-- Content -->
-      {% if page['content_path'] %}
+      {% if page['has_content'] %}
       <section class="content">{{ include_raw(page['content_path']) }}</section>
       {% endif %}
 

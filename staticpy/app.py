@@ -185,7 +185,7 @@ def get_page(context, subpath):
 
     If URL is a directory (e.g., `/notes/dir`), `TEMPLATE_PATH/notes/dir/index.html` is rendered if it exist otherwise an context template itself is rendered.
     """
-    app.logger.debug(f"Context page requested")
+    app.logger.debug(f"Context {context} page requested")
     page_url = request.path
 
     # Check if context is registered in config
@@ -197,21 +197,25 @@ def get_page(context, subpath):
         app.logger.debug(f"Context {context} not found")
         abort(404)
 
-    # If URL is context's index file redirect to context root URL
-    if subpath == "index.html":
-        return redirect(context.root_url)
-
-    # If URL is an non-HTML file, the file itself is returned.
-    if (Path(context.content_dir) / subpath).is_file() and Path(
-        subpath
-    ).suffix != ".html":
+    if Path(subpath).suffix != "" and Path(subpath).suffix != ".html":
+        # If URL is an non-HTML file, the file itself is returned.
+        app.logger.debug(
+            f"Context non-HTML file found, serving {context.content_dir}/{subpath}"
+        )
         return send_from_directory(context.content_dir, subpath)
+    elif Path(subpath).name == "index.html":
+        # If URL is context's index file redirect to context root URL
+        app.logger.debug(
+            f"Context root index file found, redirecting to {context.root_url}/{Path(subpath).parent}/"
+        )
+        return redirect(f"{context.root_url}/{Path(subpath).parent}/")
+    else:
+        # Otherwise render the content with context's template
+        content_path = context.get_content_path(page_url)
+        if content_path is None:
+            app.logger.debug(f"{content_path} not found in context.")
+            abort(404)
 
-    # All URL are route to a path in TEMPLATES_PATH
-    content_path = context.get_content_path(page_url)
-
-    page = Page(page_url, context=context)
-    app.logger.debug(f"Serving context page:\n\t{page}")
-    return render_template(context.template, page=page)
-
-    # If URL is an non-HTML file, the file itself is returned.
+        page = Page(page_url, context=context)
+        app.logger.debug(f"Serving context page:\n\t{page}")
+        return render_template(context.template, page=page)

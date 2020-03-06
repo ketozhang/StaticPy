@@ -93,16 +93,10 @@ class Page:
         return Page(url, **frontmatter)
 
     def get_subpages(self, path, recursive=True):
-        # TODO: Allow recursion
         """Get immediate subpages of a path ignoring "index.*" pages.
 
-        Parameters
-        ----------
-        path : str or pathlib.Path
-            Directory path or URL relative to the project path or URL with leading slash.
-            If `/path/to/project/context/page`, `path` should be `/context/page`.
-            This follows conventions for URL paths as `/context/page` is the URL
-            to the page.
+        Parameters:
+        path (str or pathlib.Path): Directory path or URL relative to the project path or URL with leading slash. If `/path/to/project/context/page`, `path` should be `/context/page`. This follows conventions for URL paths as `/context/page` is the URL to the page.
 
             .. warning::
                 Using `index.html` will always return an empty dictionary. Instead

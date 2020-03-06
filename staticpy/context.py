@@ -31,10 +31,12 @@ class Context:
             str(p.relative_to(TEMPLATE_PATH))
             for p in sorted(Path(self.content_dir).glob("**/*"))
         ]
-        self._page_content_map = {
-            self.content_to_page(content_path): content_path
-            for content_path in content_paths
-        }
+
+        self._page_content_map = {}
+        for content_path in content_paths:
+            page_url = self.content_to_page(content_path)
+            if page_url is not None:
+                self._page_content_map[page_url] = content_path
 
         return self._page_content_map
 
@@ -50,30 +52,22 @@ class Context:
 
         Args:
          content_path (str): Content path relative to `TEMPLATE_PATH`
-
-        Examples:
-            ```
-            <source_path>/page.html -> /<root_url>/page
-            <source_path>/dir -> /<root_url>/dir
-            <source_path>/dir/index.html -> /<root_url>/dir/index.html
-            <source_path>/img.png -> /<root_url>/img.png
-            ```
         """
         content_path = Path(content_path)
 
         if content_path.suffix == "":
-            return f"/{content_path}/"
+            return None
         elif content_path.suffix == ".html":
             if content_path.name == "index.html":
-                return f"/{content_path}/"
+                return f"/{content_path.parent}/"
             else:
                 return f"/{content_path.with_suffix('')}"
         else:
             return f"/{content_path}"
 
     def page_to_content(self, page_url):
-        """Returns the content path relative `TEMPLATE_PATH` given the page URL path relative to the context."""
-        return self.page_content_map[page_url]
+        """Returns the content path relative `TEMPLATE_PATH` given the page URL path relative to the context if exists otherwise return None."""
+        return self.page_content_map.get(page_url, None)
 
     # Alias
     get_content_path = page_to_content

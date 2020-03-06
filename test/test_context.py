@@ -45,61 +45,23 @@ def test_context_constructor():
     assert expected == actual
 
 
-def test_context_map():
+def test_context_serve():
     expected = {
-        "/posts/markdown-examples": "posts/markdown-examples.html",
-        "/posts/index.html": "posts/index.html",
-        "/posts/mathjax-examples": "posts/mathjax-examples.html",
-        "/posts/post1": "posts/post1",
-        "/posts/post1/index.html": "posts/post1/index.html",
-    }
-
-    context_config = BASE_CONFIG["contexts"]["posts"]
-    context = Context(**context_config)
-    actual = context.page_content_map
-
-    assert expected == actual
-
-
-# PostContext
-# def test_postcontext_constructor():
-#     expected = BASE_CONFIG["contexts"]
-#     actual = {}
-
-#     for key, context_config in BASE_CONFIG["contexts"].items():
-#         context = PostContext(**context_config)
-#         actual[key] = {
-#             "source_path": context.source_path,
-#             "template": context.template,
-#         }
-
-#     assert expected == actual
-
-
-# def test_postcontext_map():
-#     expected = {
-#         "/posts/markdown-examples": "posts/markdown-examples.html",
-#         "/posts/mathjax-examples": "posts/mathjax-examples.html",
-#         "/posts/post1/index.html": "posts/post1/index.html",
-#         "/posts/post1": "posts/post1",
-#         "/posts/post1/index.html": "posts/post1/index.html",
-#     }
-
-#     context_config = BASE_CONFIG["contexts"]["posts"]
-#     context = Context(**context_config)
-#     actual = context.page_content_map
-
-#     assert expected == actual
-
-
-def test_postcontext_serve():
-    expected = {
+        "/": 200,
+        "/posts/": 200,
         "/posts/markdown-examples": 200,
         "/posts/mathjax-examples": 200,
-        "/posts/post1": 200,
-        "/posts/post1/index.html": 200,
+        "/posts/postdir/": 200,
+        "/posts/postdir/index.html": 302,
+        "/posts/empty_postdir/": 404,
         "/DOESNOTEXIST": 404,
-        "/subdir/DOESNOTEXIST": 404,
+        "/posts/DOESNOTEXIST": 404,
+        "/notes/": 200,
+        "/notes/Example_Notebook/": 404,
+        "/notes/index.html": 302,
+        "/notes/Example_Notebook/example": 200,
+        "/notes/Example_Notebook/example.png": 200,
+        "/notes/Example_Notebook/sometext": 200,
     }
     actual = {}
 
@@ -110,4 +72,32 @@ def test_postcontext_serve():
     assert expected == actual
 
 
-# NoteContext
+def test_postcontext_map():
+    expected = {
+        "/posts/markdown-examples": "posts/markdown-examples.html",
+        "/posts/": "posts/index.html",
+        "/posts/mathjax-examples": "posts/mathjax-examples.html",
+        "/posts/postdir/": "posts/postdir/index.html",
+        "/posts/empty_post": "posts/empty_post.html",
+    }
+
+    context_config = BASE_CONFIG["contexts"]["posts"]
+    context = Context(**context_config)
+    actual = context.page_content_map
+
+    assert expected == actual
+
+
+def test_notecontext_map():
+    expected = {
+        "/notes/": "notes/index.html",
+        "/notes/Example_Notebook/example": "notes/Example_Notebook/example.html",
+        "/notes/Example_Notebook/example.png": "notes/Example_Notebook/example.png",
+        "/notes/Example_Notebook/sometext": "notes/Example_Notebook/sometext.html",
+    }
+
+    context_config = BASE_CONFIG["contexts"]["notes"]
+    context = Context(**context_config)
+    actual = context.page_content_map
+
+    assert expected == actual

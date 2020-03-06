@@ -16,7 +16,7 @@
         {% for subpage in subpages recursive %}
 
         <li>
-          <a href="{{ subpage['url'] }}">{{subpage['title']}}</a>
+          <a href="{{ subpage.url }}">{{subpage.title}}</a>
           {% if subpage['subpages'] %}
           <ul>{{ loop(subpage['subpages']) }}</ul>
           {% endif %}
@@ -28,8 +28,8 @@
     </header>
 
     <!-- Content -->
-    {% if page['content_path'] %}
-    <section class="content">{{ include_raw(page['content_path']) }}</section>
+    {% if page.content_path %}
+    <section class="content">{{ include_raw(page.content_path) }}</section>
     {% endif %}
 
   </article>
