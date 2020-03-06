@@ -8,6 +8,10 @@ os.chdir(PROJECT_PATH)
 
 from staticpy import BASE_CONFIG, TEMPLATE_PATH
 from staticpy.context import Context, PostContext, NoteContext
+from website import app as site
+
+app = site.app
+site.build()
 
 # Context (base class)
 def test_context_constructor():
@@ -33,6 +37,22 @@ def test_context_constructor():
     assert expected == actual
 
 
+def test_context_map():
+    expected = {
+        "posts/index.html": "posts/index.html",
+        "posts/markdown-examples.html": "posts/markdown-examples.html",
+        "posts/mathjax-examples.html": "posts/mathjax-examples.html",
+        "posts/post1": "posts/post1",
+        "posts/post1/index.html": "posts/post1/index.html",
+    }
+
+    context_config = BASE_CONFIG["contexts"]["posts"]
+    context = Context(**context_config)
+    actual = context.page_content_map
+
+    assert expected == actual
+
+
 # PostContext
 # def test_postcontext_constructor():
 #     expected = BASE_CONFIG["contexts"]
@@ -46,6 +66,31 @@ def test_context_constructor():
 #         }
 
 #     assert expected == actual
+
+
+def test_postcontext_map():
+    expected = {
+        "posts/index.html": "posts/index.html",
+        "posts/markdown-examples.html": "posts/markdown-examples.html",
+        "posts/mathjax-examples.html": "posts/mathjax-examples.html",
+        "posts/post1": "posts/post1",
+        "posts/post1/index.html": "posts/post1/index.html",
+    }
+
+    context_config = BASE_CONFIG["contexts"]["posts"]
+    context = Context(**context_config)
+    actual = context.page_content_map
+
+    print(expected)
+    print(actual)
+    assert expected == actual
+
+
+def test_postcontext_serve():
+    with app.test_client() as c:
+        response = c.get("/posts/markdown-examples")
+        print(response)
+    assert False
 
 
 # NoteContext

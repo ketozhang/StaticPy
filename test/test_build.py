@@ -27,6 +27,4 @@ def test_all_context_build_to_template():
             [p.relative_to(PROJECT_PATH / "templates") for p in template_paths]
         )
 
-    print(actual)
-    print(expected)
     assert set(actual) == set(expected)
