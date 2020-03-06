@@ -6,7 +6,6 @@ from flask import (
     redirect,
     request,
     render_template,
-    send_file,
     send_from_directory,
     url_for,
 )
@@ -178,9 +177,11 @@ def get_root_page(file):
 def get_page(context, subpath):
     """Most commonly used route to route pages belonging to a context.
 
-    If URL is a file (e.g., `/notes/file.html`), then it should have a HTML file in `TEMPLATE_PATH/<context>/<page>`. This file is imported to the context template specified in base configuration file `BASE_CONFIG` (e.g., `TEMPLATE_PATH/note.html`) and rendered.
+    If URL is a HTML file (e.g., `/notes/file.html`), then it should have a HTML file in `TEMPLATE_PATH/<context>/<page>`. This file is imported to the context template specified in base configuration file `BASE_CONFIG` (e.g., `TEMPLATE_PATH/note.html`) and rendered.
 
-    If URL is a file is the index of the context (e.g., `/note/index.html`), the user is redirected to the context root URL (e.g., `/note`).
+    If URL is an index HTML file of the context (e.g., `/note/index.html`), the user is redirected to the context root URL (e.g., `/note`).
+
+    If URL is an non-HTML file, the file itself is returned.
 
     If URL is a directory (e.g., `/notes/dir`), `TEMPLATE_PATH/notes/dir/index.html` is rendered if it exist otherwise an context template itself is rendered.
     """
@@ -200,20 +201,17 @@ def get_page(context, subpath):
     if subpath == "index.html":
         return redirect(context.root_url)
 
+    # If URL is an non-HTML file, the file itself is returned.
+    if (Path(context.content_dir) / subpath).is_file() and Path(
+        subpath
+    ).suffix != ".html":
+        return send_from_directory(context.content_dir, subpath)
+
     # All URL are route to a path in TEMPLATES_PATH
     content_path = context.get_content_path(page_url)
-
-    # Handle files
-    # if (TEMPLATE_PATH / content_path).is_file():
-    #     # Render the page contents into the context's template
-    #     source_file_path = content_path
-
-    # # Handle directory
-    # elif (TEMPLATE_PATH / content_path).is_dir():
-    #     source_file_path = f"{content_path}/index.html"
-    # else:
-    #     abort(404)
 
     page = Page(page_url, context=context)
     app.logger.debug(f"Serving context page:\n\t{page}")
     return render_template(context.template, page=page)
+
+    # If URL is an non-HTML file, the file itself is returned.

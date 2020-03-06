@@ -61,13 +61,15 @@ class Context:
         """
         content_path = Path(content_path)
 
-        if content_path.suffix == ".html":
+        if content_path.suffix == "":
+            return f"/{content_path}/"
+        elif content_path.suffix == ".html":
             if content_path.name == "index.html":
                 return f"/{content_path}/"
             else:
                 return f"/{content_path.with_suffix('')}"
         else:
-            return f"/{content_path}/"
+            return f"/{content_path}"
 
     def page_to_content(self, page_url):
         """Returns the content path relative `TEMPLATE_PATH` given the page URL path relative to the context."""
