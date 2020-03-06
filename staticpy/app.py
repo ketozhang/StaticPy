@@ -15,6 +15,7 @@ from . import BASE_CONFIG, TEMPLATE_PATH, STATIC_PATH, SITE_URL, log
 from .config_handler import get_config
 from .doc_builder import build_all
 from .source_handler import get_fpath, get_frontmatter, get_subpages
+from .context import Context
 
 
 app = Flask(__name__, template_folder=TEMPLATE_PATH, static_folder=STATIC_PATH)
@@ -105,65 +106,106 @@ def get_root_page(file):
     return render_template(str(fpath))
 
 
-@app.route(f"/<context>/<path:page>")
-def get_page(context, page):
-    """Routes all other page URLs. This supports both file and directory URL.
+# @app.route(f"/<context>/<path:page>")
+# def get_page(context, page):
+#     """Routes all other page URLs. This supports both file and directory URL.
 
-    For files (e.g., /notes/file.html), the content of the markdown file
-    (e.g., /notes/file.md) is imported by the template.
+#     For files (e.g., /notes/file.html), the content of the markdown file
+#     (e.g., /notes/file.md) is imported by the template.
 
-    For directories (e.g., /notes/dir/), if there exists a index file, the
-    directory is treated equivalent to the URL of the index file; otherwise,
-    the template is used with no content. Note that all directory URL have
-    trailing slashes; its left to the server to always redirect directory URL
-    without trailing slashes.
+#     For directories (e.g., /notes/dir/), if there exists a index file, the
+#     directory is treated equivalent to the URL of the index file; otherwise,
+#     the template is used with no content. Note that all directory URL have
+#     trailing slashes; its left to the server to always redirect directory URL
+#     without trailing slashes.
 
-    Context home pages (e.g., /note/index.html) are redirected to
-    `/<context>`.
+#     Context home pages (e.g., /note/index.html) are redirected to
+#     `/<context>`.
+#     """
+#     log.info(f"Getting context: {context}, page: {page}")
+#     path = TEMPLATE_PATH / context / page
+
+#     # Got `/<context>/index.html`, redirect to context's homepage `/<context>`
+#     if path.name == "index.html":
+#         url = f"/{context}"
+#         log.info(f"Redirecting to: {url}")
+#         return redirect(f"/{context}")
+
+#     # Attempt find the correct context
+#     try:
+#         _context = BASE_CONFIG["contexts"][context]
+#         source_path = PROJECT_PATH / _context["source_path"]
+#     except KeyError as e:
+#         log.error(str(e) + f", when attempting with args get_page({context}, {page}).")
+
+#     if (source_path / page).is_file() and path.suffix != ".html":
+#         log.info(f"Fetching the file {str(source_path / page)}")
+#         return send_file(str(source_path / page))
+
+#     if page[-1] == "/":  # Handle directories
+#         if not path.is_dir():
+#             abort(404)
+#         _page = get_frontmatter(source_path / page / "index.md")
+#         _page["url"] = f"/{context}/{page}"
+#         _page["parent"] = str(Path(_page["url"]).parent) + "/"
+#         _page["subpages"] = get_subpages(_page["url"])
+#         _page["has_content"] = (path / "index.html").exists() and (
+#             path / "index.html"
+#         ).stat().st_size > 1
+#         _page["content_path"] = str((path / "index.html").relative_to(TEMPLATE_PATH))
+#     elif path.with_suffix(".html").exists():  # Handle files
+#         path = path.with_suffix(".html")
+#         _page = get_frontmatter((source_path / page).with_suffix(".md"))
+#         _page["url"] = f"/{context}/{page}"
+#         _page["parent"] = str(Path(_page["url"]).parent) + "/"
+#         _page["subpages"] = get_subpages(_page["url"])
+#         _page["has_content"] = True
+#         _page["content_path"] = str(path.relative_to(TEMPLATE_PATH))
+#     else:
+#         log.error(f"Page (/{context}/{page}) not found")
+#         abort(404)
+
+#     kwargs = {"page": _page}
+
+#     return render_template(_context["template"], **kwargs)
+
+
+@app.route(f"/<context>/<path:page_url>")
+def get_page(context, page_url):
+    """Most commonly used route to route pages belonging to a context.
+
+    If URL is a file (e.g., `/notes/file.html`), then it should have a HTML file in `TEMPLATE_PATH/<context>/<page>`. This file is imported to the context template specified in base configuration file `BASE_CONFIG` (e.g., `TEMPLATE_PATH/note.html`) and rendered.
+
+    If URL is a file is the index of the context (e.g., `/note/index.html`), the user is redirected to the context root URL (e.g., `/note`).
+
+    If URL is a directory (e.g., `/notes/dir`), `TEMPLATE_PATH/notes/dir/index.html` is rendered if it exist otherwise an context template itself is rendered.
     """
-    log.info(f"Getting context: {context}, page: {page}")
-    path = TEMPLATE_PATH / context / page
-
-    # Got ``/<context>`/index.html`, redirect to context's homepage `/<context>`
-    if path.name == "index.html":
-        url = f"/{context}"
-        log.info(f"Redirecting to: {url}")
-        return redirect(f"/{context}")
-
-    # Attempt find the correct context
+    # Check if context is registered in config
     try:
-        _context = BASE_CONFIG["contexts"][context]
-        source_path = PROJECT_PATH / _context["source_path"]
-    except KeyError as e:
-        log.error(str(e) + f", when attempting with args get_page({context}, {page}).")
-
-    if (source_path / page).is_file() and path.suffix != ".html":
-        log.info(f"Fetching the file {str(source_path / page)}")
-        return send_file(str(source_path / page))
-
-    if page[-1] == "/":  # Handle directories
-        if not path.is_dir():
-            abort(404)
-        _page = get_frontmatter(source_path / page / "index.md")
-        _page["url"] = f"/{context}/{page}"
-        _page["parent"] = str(Path(_page["url"]).parent) + "/"
-        _page["subpages"] = get_subpages(_page["url"])
-        _page["has_content"] = (path / "index.html").exists() and (
-            path / "index.html"
-        ).stat().st_size > 1
-        _page["content_path"] = str((path / "index.html").relative_to(TEMPLATE_PATH))
-    elif path.with_suffix(".html").exists():  # Handle files
-        path = path.with_suffix(".html")
-        _page = get_frontmatter((source_path / page).with_suffix(".md"))
-        _page["url"] = f"/{context}/{page}"
-        _page["parent"] = str(Path(_page["url"]).parent) + "/"
-        _page["subpages"] = get_subpages(_page["url"])
-        _page["has_content"] = True
-        _page["content_path"] = str(path.relative_to(TEMPLATE_PATH))
-    else:
-        log.error(f"Page (/{context}/{page}) not found")
+        context_config = BASE_CONFIG["contexts"][context]
+        context = Context(**context_config)
+    except KeyError:
         abort(404)
 
-    kwargs = {"page": _page}
+    # If URL is context's index file redirect to context root URL
+    if page_url == "index.html":
+        return redirect(context.root_url)
 
-    return render_template(_context["template"], **kwargs)
+    # All URL are route to a path in TEMPLATES_PATH
+    content_path = context.get_content_path(page_url)
+
+    # Handle files
+    if content_path.is_file():
+        # Render the page contents into the context's template
+        return render_template(
+            context.template, {"page": context.get_content_path(page_url)}
+        )
+
+    elif content_path.is_dir():
+        raise NotImplementedError
+    else:
+        abort(404)
+
+    return render_template(template_path, {"page": page_html_path})
+
+    # Handle directory

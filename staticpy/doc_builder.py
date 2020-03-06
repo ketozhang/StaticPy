@@ -20,8 +20,7 @@ def md_to_html(file_or_path, outputfile):
 
 
 def build(context):
-    """Converts the source directory (`source_path`) to a directory of html
-    (`output_path`) outputted to the templates directory."""
+    """Converts the contents of context's source directory to a directory of the same name in `TEMPLATE_PATH`."""
     source_path = PROJECT_PATH / context["source_path"]
 
     url = context["source_path"]

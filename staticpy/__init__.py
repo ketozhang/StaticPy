@@ -68,7 +68,7 @@ def get_global_var(base_config):
     static_path = PROJECT_PATH / base_config["static_path"]
     if not static_path.exists():
         raise FileNotFoundError(
-            "Templates folder not found. Make sure to create one (default: /path/to/project/static)."
+            "Static folder not found. Make sure to create one (default: /path/to/project/static)."
         )
 
     # Site URL
