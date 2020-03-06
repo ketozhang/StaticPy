@@ -96,14 +96,18 @@ def get_favicon():
 ########################
 @app.route("/<file>")
 def get_root_page(file):
-    """Renders root level pages located in `TEMPLATE_PATH`/<file>.html .
+    """Renders root level pages located in `TEMPLATE_PATH`/<file>.
 
     This is often useful for the pages "about" and "contacts".
     """
-    fpath = get_fpath(TEMPLATE_PATH / Path(file).with_suffix(".html")).relative_to(
-        TEMPLATE_PATH
-    )
-    return render_template(str(fpath))
+    content_path = Path(file)
+    if content_path.suffix == "":
+        content_path = content_path.with_suffix(".html")
+
+    if content_path.exists():
+        return render_template(str(content_path))
+    else:
+        abort(404)
 
 
 # @app.route(f"/<context>/<path:page>")
