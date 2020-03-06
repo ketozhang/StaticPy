@@ -1,60 +1,42 @@
-<p>
-<img src="example.png" class="center" />
-</p>
-<h2 id="some-math">
-Some Math
-</h2>
-<p>
+---
+title: Example Page
+---
+
+![](example.png){.center}
+
+## Some Math
+
 The energy-momentum relation for a relativistic system is,
-</p>
-<p>
-<span class="math display">[ <span class="math display">[<span class="math display">[<span class="math display">\[\begin{equation}
-E^2 = (\abs{\vec p}c)^2 + (m_0 c^2)^2
-\end{equation}\]</span>]</span>]</span> ]</span>
-</p>
-<dl>
-<dt>
-Proof
-</dt>
-<dd>
-<p>
-This is derived from the vector form of the four-momentum’s self inner product
-</p>
-<p>
-<span class="math display">[ p^2 = - ^2 ]</span>
-</p>
-<p>
-Since the inner product of four-momentum is Lorentz invariant we can take any reference frame and the easiest one to take is the frame at rest (the zero momentum frame).
-</p>
-<p>
-<span class="math display">[ <span class="math display">[<span class="math display">[<span class="math display">\[\begin{gather*}
-\vec{p} = 0     \\
-\big\Downarrow  \\
-p^2 = m_0 c^2   \\
-\big\Downarrow  \\
-m_0^2 c^2 = \frac{E^2}{c^2} - \abs{\vec{p}}^2
-\end{gather*}\]</span>]</span>]</span> ]</span>
-</p>
-</dd>
-</dl>
+
+$$
+E^2 = (pc)^2 + (m_0 c^2)^2
+$$
+
+This is derived from the vector form of the four-momentum self inner product
+
+$$
+p^2 = \frac{E^2}{c^2} - \abs{\vec{p}}^2
+$$
+
 <!-- Yep, as you may know Markdown rendering allows raw HTML -->
-<p>
-<small> <strong>Note:</strong> The <code></code> is defined with <code>\newcommand</code> at the base HTML to be loaded onto the whole website. You may move this to the <code>note.html</code> template. This is the same reason why <code></code> is bolded instead of the arrow/anchor above. Alternatively, MathJax 3.0 has the physics extension (and many others) which natively supports regularly used syntax like <code>, , </code> </small>
-</p>
-<h2 id="some-code">
-Some Code
-</h2>
-<p>
-Here’s some random python code
-</p>
-<div id="cb1" class="sourceCode">
-<pre class="sourceCode py"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="im">import</span> numpy</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="im">import</span> matplotlib <span class="im">as</span> plt</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">x <span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>])</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">plt.plot(x, x<span class="op">**</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">plt.show()</a></code></pre>
-</div>
-<p>
-<small> <strong>Note:</strong> Syntax highlighted can be JS libraries like PrismJS (see StaticPy documentation) Otherwise, you can add your own CSS to <code>pre&gt;code</code> for block code or <code>p&gt;code</code> for inline paragraph code. </small>
-</p>
+<small>
+Note: The `\abs` is defined with `\newcommand` at the base HTML to be loaded onto the whole website. You may move this to the `note.html` template. This is the same reason why `\vec` is bolded instead of the arrow/anchor above.
+Alternatively, MathJax 3.0 has the physics extension (and many others) which natively supports regularly used syntax like `\abs, \braket, \vec`
+</small>
+
+## Some Code
+Some Python
+
+```py
+import numpy
+import matplotlib as plt
+
+x = np.array([1,2,3])
+plt.plot(x, x**2)
+plt.show()
+```
+
+<small>
+Syntax highlighted can be JS libraries like PrismJS (see StaticPy documentation)
+Otherwise you can add your own CSS to `pre>code` for block code or `p>code` for inline paragraph code.
+</small>

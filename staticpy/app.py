@@ -14,7 +14,7 @@ from jinja2 import Markup
 from . import BASE_CONFIG, TEMPLATE_PATH, STATIC_PATH, SITE_URL, log
 from .config_handler import get_config
 from .doc_builder import build_all
-from .source_handler import get_fpath, get_frontmatter, get_subpages
+from .source_handler import Page, get_fpath, get_frontmatter, get_subpages
 from .context import Context
 
 
@@ -174,8 +174,8 @@ def get_root_page(file):
 #     return render_template(_context["template"], **kwargs)
 
 
-@app.route(f"/<context>/<path:page_url>")
-def get_page(context, page_url):
+@app.route(f"/<context>/<path:subpath>")
+def get_page(context, subpath):
     """Most commonly used route to route pages belonging to a context.
 
     If URL is a file (e.g., `/notes/file.html`), then it should have a HTML file in `TEMPLATE_PATH/<context>/<page>`. This file is imported to the context template specified in base configuration file `BASE_CONFIG` (e.g., `TEMPLATE_PATH/note.html`) and rendered.
@@ -184,6 +184,8 @@ def get_page(context, page_url):
 
     If URL is a directory (e.g., `/notes/dir`), `TEMPLATE_PATH/notes/dir/index.html` is rendered if it exist otherwise an context template itself is rendered.
     """
+    page_url = request.path
+
     # Check if context is registered in config
     try:
         context_config = BASE_CONFIG["contexts"][context]
@@ -192,24 +194,22 @@ def get_page(context, page_url):
         abort(404)
 
     # If URL is context's index file redirect to context root URL
-    if page_url == "index.html":
+    if subpath == "index.html":
         return redirect(context.root_url)
 
     # All URL are route to a path in TEMPLATES_PATH
     content_path = context.get_content_path(page_url)
 
     # Handle files
-    if content_path.is_file():
+    if (TEMPLATE_PATH / content_path).is_file():
         # Render the page contents into the context's template
-        return render_template(
-            context.template, {"page": context.get_content_path(page_url)}
-        )
+        source_file_path = content_path
 
-    elif content_path.is_dir():
-        raise NotImplementedError
+    # Handle directory
+    elif (TEMPLATE_PATH / content_path).is_dir():
+        source_file_path = f"{content_path}/index.html"
     else:
         abort(404)
 
-    return render_template(template_path, {"page": page_html_path})
-
-    # Handle directory
+    page = Page(source_file_path, page_url)
+    return render_template(context.template, page=page)

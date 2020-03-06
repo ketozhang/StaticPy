@@ -1,44 +1,45 @@
-<h2 id="inline-math">
-Inline Math
-</h2>
-<p>
-Newton’s second law in simple scalar form is <span class="math inline">(F=ma)</span>.
-</p>
-<h2 id="display-math">
-Display Math
-</h2>
-<p>
-Newton’s second law in simple scalar form is,
-</p>
-<p>
-<span class="math display">[ F = ma ]</span>
-</p>
-<h2 id="environment-math">
-Environment Math
-</h2>
-<h3 id="equation">
-Equation
-</h3>
-<p>
-<span class="math display">[ <span class="math display">[<span class="math display">[<span class="math display">\[\begin{equation}
+---
+title: MathJax Examples
+description: MathJax is a mathematics web display engine most popular for LaTeX. Here are some typical examples of MathJax support for LaTeX syntax.
+image: /static/images/1920x1080.png
+---
+
+## Inline Math
+
+Newton's second law in simple scalar form is $F=ma$.
+
+## Display Math
+
+Newton's second law in simple scalar form is,
+
+$$
+F = ma
+$$
+
+## Environment Math
+
+### Equation
+
+$$
+\begin{equation}
     F = ma
-\end{equation}\]</span>]</span>]</span> ]</span>
-</p>
-<h3 id="align">
-Align
-</h3>
-<p>
-<span class="math display">[ <span class="math display">[<span class="math display">[<span class="math display">\[\begin{align}
-    F &amp;amp;amp;amp;= ma\\
-    \dot p &amp;amp;amp;amp;= m \dot a
-\end{align}\]</span>]</span>]</span> ]</span>
-</p>
-<h3 id="gather">
-Gather
-</h3>
-<p>
-<span class="math display">[ <span class="math display">[<span class="math display">[<span class="math display">\[\begin{gather}
+\end{equation}
+$$
+
+### Align
+
+$$
+\begin{align}
+    F &= ma\\
+    \dot p &= m \dot a
+\end{align}
+$$
+
+### Gather
+
+$$
+\begin{gather}
     F = ma\\
     \frac{\mathrm d p}{\mathrm d x} = m \frac{\mathrm d^2 x}{\mathrm d t^2}
-\end{gather}\]</span>]</span>]</span> ]</span>
-</p>
+\end{gather}
+$$

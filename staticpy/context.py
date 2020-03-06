@@ -3,7 +3,7 @@ context_config = BASE_CONFIG["contexts"][context]
 notes = Context(**context_config)
 """
 from pathlib import Path
-from . import PROJECT_PATH, TEMPLATE_PATH
+from . import PROJECT_PATH, TEMPLATE_PATH, SITE_URL
 
 
 class Context:
@@ -20,15 +20,16 @@ class Context:
             page_content_map (dict): Maps page URL (key) to content path (value) relative to `TEMPLATE_PATH`.
 
         """
-        self.root_url = source_path
-        self.source_path = PROJECT_PATH / source_path
-        self.content_dir = TEMPLATE_PATH / source_path
-        self.template = TEMPLATE_PATH / template
+        self.root_url = f"/{source_path}"
+        self.source_path = str(PROJECT_PATH / source_path)
+        self.content_dir = str(TEMPLATE_PATH / source_path)
+        self.template = template
 
     @property
     def page_content_map(self):
         content_paths = [
-            str(p.relative_to(TEMPLATE_PATH)) for p in self.content_dir.glob("**/*")
+            str(p.relative_to(TEMPLATE_PATH))
+            for p in sorted(Path(self.content_dir).glob("**/*"))
         ]
         self._page_content_map = {
             self.content_to_page(content_path): content_path
@@ -45,13 +46,21 @@ class Context:
 
         Examples:
             ```
-            <source_path>/page.html -> /<root_url>/page.html
+            <source_path>/page.html -> /<root_url>/page
             <source_path>/dir -> /<root_url>/dir
             <source_path>/dir/index.html -> /<root_url>/dir/index.html
             <source_path>/img.png -> /<root_url>/img.png
             ```
         """
-        return content_path
+        content_path = Path(content_path)
+
+        if content_path.suffix == ".html":
+            if content_path.name == "index.html":
+                return f"/{content_path}"
+            else:
+                return f"/{content_path.with_suffix('')}"
+        else:
+            return f"/{content_path}"
 
     def page_to_content(self, page_url):
         """Returns the content path relative `TEMPLATE_PATH` given the page URL path relative to the context."""
@@ -84,7 +93,7 @@ class PostContext(Context):
         <source_path>/post2/img2.png -> /<root_url>/post2/img2.png
         ```
         """
-        return content_path
+        return super().get_content_path(self, content_path)
 
 
 class NoteContext(Context):

@@ -10,7 +10,7 @@
       {% for subpage in get_subpages("/notes") recursive %}
 
       <li>
-        <a href="{{ url_for(subpage['url']) }}">{{subpage['title']}}</a>
+        <a href="{{ parse_url(subpage['url']) }}">{{subpage['title']}}</a>
         {% if subpage['subpages'] %}
         <ul>{{ loop(subpage['subpages']) }}</ul>
         {% endif %}

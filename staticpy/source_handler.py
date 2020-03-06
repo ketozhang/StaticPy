@@ -4,8 +4,33 @@ import sys
 import frontmatter
 from pathlib import Path
 from datetime import datetime
-from .page import Page
-from . import DOC_EXTENSIONS
+from . import DOC_EXTENSIONS, PROJECT_PATH
+
+
+class Page(dict):
+    def __init__(self, source_file_path, url):
+        self["url"] = url
+        self.update(get_frontmatter(source_file_path))
+
+    # def __init__(self, url, subpages=[], title=None, **kwargs):
+    #     self.update({
+    #         'url': url,
+    #         'title': title,
+    #         'subpages':  subpages,
+    #         **kwargs})
+
+    # if self["title"] == None:
+    #     self["title"] = self["url"].split("/")[-1]
+
+    @property
+    def subpages(self):
+        return []
+
+    def __str__(self):
+        return f"Page: {super().__str__()}"
+
+    def __getitem__(self, key):
+        return self.get(key)
 
 
 def get_fpath(file_or_path, resolve=True):
