@@ -14,7 +14,7 @@ from jinja2 import Markup
 from . import BASE_CONFIG, TEMPLATE_PATH, STATIC_PATH, SITE_URL, log
 from .config_handler import get_config
 from .doc_builder import build_all
-from .source_handler import Page, get_fpath, get_frontmatter, get_subpages
+from .source_handler import Page, get_fpath, get_frontmatter
 from .context import Context
 
 
@@ -25,19 +25,12 @@ if app.config["ENV"] == "production":
 else:
     SITE_URL = "/"
 
-print(f" * Serving StaticPy app to site URL {SITE_URL}")
-
 
 ########################
 # META
 ########################
 @app.context_processor
 def global_var():
-    # TODO SITE_URL best handled by a base config parser
-    # site_url = SITE_URL if SITE_URL else "/"
-    # if site_url[-1] != "/":
-    #     site_url += "/"
-
     def exists(file_or_path):
         """Check if the path exists in templates path."""
         fpath = TEMPLATE_PATH / get_fpath(file_or_path, resolve=False)
@@ -69,15 +62,19 @@ def global_var():
         log.info(f"Parsed as {url}")
         return url
 
+    def get_current_page():
+        url = request.path
+        return Page(url)
+
     var = dict(
         author=BASE_CONFIG["author"],
+        page=get_current_page(),
         debug=app.debug,
         navbar=BASE_CONFIG["navbar"],
         exists=exists,
         include_raw=include_raw,
         url_for=new_url_for,
         site_url=SITE_URL,
-        get_subpages=get_subpages,
         site_brand=BASE_CONFIG["site_brand"],
         site_title=BASE_CONFIG["site_title"],
         social_links=BASE_CONFIG["social_links"],
@@ -100,14 +97,17 @@ def get_root_page(file):
 
     This is often useful for the pages "about" and "contacts".
     """
+    app.logger.debug(f"Root page requested")
     content_path = Path(file)
     if content_path.suffix == "":
         content_path = content_path.with_suffix(".html")
 
-    if content_path.exists():
-        return render_template(str(content_path))
-    else:
+    if not (TEMPLATE_PATH / content_path).exists():
+        app.logger.debug(f"Failed to serve root file {content_path}")
         abort(404)
+
+    app.logger.debug(f"Serving root file {content_path}")
+        return render_template(str(content_path))
 
 
 # @app.route(f"/<context>/<path:page>")

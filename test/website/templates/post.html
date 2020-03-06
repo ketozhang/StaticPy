@@ -14,7 +14,7 @@
       </div>
 
       <!-- Content -->
-      {% if page['has_content'] %}
+      {% if page['content_path'] %}
       <section class="content">{{ include_raw(page['content_path']) }}</section>
       {% endif %}
 

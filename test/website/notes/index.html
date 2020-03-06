@@ -4,13 +4,12 @@
 <main class="container">
   <header>
     <h3>Notebooks:</h3>
-    <!-- TODO: get_subpages(page['url']) -->
     {% set maxdepth = 2 %}
     <ul style="list-style: none; padding-left: 0;">
-      {% for subpage in get_subpages("/notes") recursive %}
+      {% for subpage in page.subpages recursive %}
 
       <li>
-        <a href="{{ parse_url(subpage['url']) }}">{{subpage['title']}}</a>
+        <a href="{{ url_for(subpage['url']) }}">{{subpage['title']}}</a>
         {% if subpage['subpages'] %}
         <ul>{{ loop(subpage['subpages']) }}</ul>
         {% endif %}

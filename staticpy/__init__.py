@@ -103,9 +103,3 @@ log.addHandler(c_handler)
 ###
 
 from .app import app, build_all
-from .source_handler import (
-    get_fpath,
-    get_frontmatter,
-    get_page,
-    get_subpages,
-)
