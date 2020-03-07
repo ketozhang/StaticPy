@@ -35,10 +35,19 @@ class Context:
         self._page_content_map = {}
         for content_path in content_paths:
             page_url = self.content_to_page(content_path)
-            if page_url is not None:
+            if page_url is None:
+                # Handles directories, should be overwritten if /path/to/dir/index.html exists
+                self._page_content_map[
+                    f"/{content_path}/"
+                ] = f"{content_path}/index.html"
+            else:
                 self._page_content_map[page_url] = content_path
 
         return self._page_content_map
+
+    @property
+    def page_urls(self):
+        return self.page_content_map.keys()
 
     def __repr__(self):
         s = f"<Context: url={self.root_url}, template={self.template}>"
@@ -56,13 +65,17 @@ class Context:
         content_path = Path(content_path)
 
         if content_path.suffix == "":
+            # Dirs have no content, should be handled as index file upstream
             return None
         elif content_path.suffix == ".html":
             if content_path.name == "index.html":
+                # Index files maps to its parent directory (e.g., /dir)
                 return f"/{content_path.parent}/"
             else:
+                # HTML files maps to itself without suffix (e.g., /page)
                 return f"/{content_path.with_suffix('')}"
         else:
+            # Non-HTML files maps to itself (e.g., /img.png)
             return f"/{content_path}"
 
     def page_to_content(self, page_url):

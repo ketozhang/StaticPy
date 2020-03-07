@@ -8,6 +8,7 @@ os.chdir(PROJECT_PATH)
 
 from staticpy import BASE_CONFIG, TEMPLATE_PATH, SITE_URL
 from staticpy.context import Context, PostContext, NoteContext
+from staticpy.source_handler import Page
 from website import app as site
 
 app = site.app
@@ -57,7 +58,7 @@ def test_context_serve():
         "/DOESNOTEXIST": 404,
         "/posts/DOESNOTEXIST": 404,
         "/notes/": 200,
-        "/notes/Example_Notebook/": 404,
+        "/notes/Example_Notebook/": 200,
         "/notes/index.html": 302,
         "/notes/Example_Notebook/example": 200,
         "/notes/Example_Notebook/example.png": 200,
@@ -92,12 +93,39 @@ def test_notecontext_map():
     expected = {
         "/notes/": "notes/index.html",
         "/notes/Example_Notebook/example": "notes/Example_Notebook/example.html",
+        "/notes/Example_Notebook/": "notes/Example_Notebook/index.html",
         "/notes/Example_Notebook/example.png": "notes/Example_Notebook/example.png",
         "/notes/Example_Notebook/sometext": "notes/Example_Notebook/sometext.html",
+        "/notes/Example_Notebook/Section1/": "notes/Example_Notebook/Section1/index.html",
+        "/notes/Example_Notebook/Section1/example": "notes/Example_Notebook/Section1/example.html",
+        "/notes/Example_Notebook/Section1/example.png": "notes/Example_Notebook/Section1/example.png",
+        "/notes/Example_Notebook/Section2/": "notes/Example_Notebook/Section2/index.html",
+        "/notes/Example_Notebook/Section2/example": "notes/Example_Notebook/Section2/example.html",
+        "/notes/Example_Notebook/Section2/example.png": "notes/Example_Notebook/Section2/example.png",
     }
 
     context_config = BASE_CONFIG["contexts"]["notes"]
     context = Context(**context_config)
     actual = context.page_content_map
+
+    assert actual == expected
+
+
+def test_subpages():
+    expected = sorted(
+        [
+            "/notes/Example_Notebook/example",
+            "/notes/Example_Notebook/sometext",
+            "/notes/Example_Notebook/Section1/",
+            "/notes/Example_Notebook/Section2/",
+        ]
+    )
+
+    context_config = BASE_CONFIG["contexts"]["notes"]
+    context = Context(**context_config)
+    url = "/notes/Example_Notebook/"
+    page = Page(url, context=context)
+
+    actual = sorted([subpage.url for subpage in page.subpages])
 
     assert expected == actual

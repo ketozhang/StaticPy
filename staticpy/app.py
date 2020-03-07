@@ -173,8 +173,9 @@ def get_root_page(file):
 #     return render_template(_context["template"], **kwargs)
 
 
+@app.route(f"/<context>/")
 @app.route(f"/<context>/<path:subpath>")
-def get_page(context, subpath):
+def get_page(context, subpath=None):
     """Most commonly used route to route pages belonging to a context.
 
     If URL is a HTML file (e.g., `/notes/file.html`), then it should have a HTML file in `TEMPLATE_PATH/<context>/<page>`. This file is imported to the context template specified in base configuration file `BASE_CONFIG` (e.g., `TEMPLATE_PATH/note.html`) and rendered.
@@ -197,7 +198,19 @@ def get_page(context, subpath):
         app.logger.debug(f"Context {context} not found")
         abort(404)
 
-    if Path(subpath).suffix != "" and Path(subpath).suffix != ".html":
+    if subpath is None:
+        # Render context root page
+        content_path = context.get_content_path(page_url)
+        if content_path is None:
+            app.logger.debug(
+                f"Cannot find content file in context associated with URL {page_url}."
+            )
+            abort(404)
+
+        page = Page(page_url, context=context)
+        app.logger.debug(f"Serving context root page:\n\t{page}")
+        return render_template(content_path, page=page)
+    elif Path(subpath).suffix != "" and Path(subpath).suffix != ".html":
         # If URL is an non-HTML file, the file itself is returned.
         app.logger.debug(
             f"Context non-HTML file found, serving {context.content_dir}/{subpath}"
@@ -213,7 +226,9 @@ def get_page(context, subpath):
         # Otherwise render the content with context's template
         content_path = context.get_content_path(page_url)
         if content_path is None:
-            app.logger.debug(f"{content_path} not found in context.")
+            app.logger.debug(
+                f"Cannot find content file in context associated with URL {page_url}."
+            )
             abort(404)
 
         page = Page(page_url, context=context)

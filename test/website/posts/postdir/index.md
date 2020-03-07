@@ -1,3 +1,3 @@
 ---
-title: Post
+title: Post in Directory
 ---

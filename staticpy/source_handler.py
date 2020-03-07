@@ -9,6 +9,19 @@ from . import DOC_EXTENSIONS, PROJECT_PATH, TEMPLATE_PATH
 
 class Page:
     def __init__(self, url, context=None):
+        """
+
+        Args:
+            url (str): absolute URL of the page
+            context (staticpy.Context, optional): Defaults to None.
+
+        Attributes:
+            url (str): See Args description
+            context (staticpy.Context or None): See Args description
+            content_path (str): Path to HTML content of the page
+            source_path (str): Path to the source of the page
+            **frontmatter: Frontmatter from Markdown sources will be imported as attributes.
+        """
         self.url = url
         self.context = context
 
@@ -54,7 +67,11 @@ class Page:
         return self.__repr__()
 
     def __repr__(self):
-        return str(self.__dict__)
+        import copy
+
+        d = copy.deepcopy(self.__dict__)
+        d.pop("_subpages")
+        return str(d)
 
     def __getitem__(self, key):
         """Returns key if exists else returns None."""
@@ -92,74 +109,73 @@ class Page:
         frontmatter = get_frontmatter(str(path))
         return Page(url, **frontmatter)
 
-    def get_subpages(self, path, recursive=True):
+    def get_subpages(self, recursive=True):
         """Get immediate subpages of a path ignoring "index.*" pages.
 
         Parameters:
-        path (str or pathlib.Path): Directory path or URL relative to the project path or URL with leading slash. If `/path/to/project/context/page`, `path` should be `/context/page`. This follows conventions for URL paths as `/context/page` is the URL to the page.
+            path (str or pathlib.Path): Directory path or URL relative to the project path or URL with leading slash. If `/path/to/project/context/page`, `path` should be `/context/page`. This follows conventions for URL paths as `/context/page` is the URL to the page.
 
-            .. warning::
-                Using `index.html` will always return an empty dictionary. Instead
-                use the `index.html` parent path.
+                .. warning::
+                    Using `index.html` will always return an empty dictionary. Instead
+                    use the `index.html` parent path.
 
-        Returns
-        -------
-        pages : list
-            A list of Page object.
+        Returns:
+            pages (list): A list of Page object.
         """
-        # Remove trailing slash for file system
-        if isinstance(path, str) and path[0] == "/":
-            path = path[1:]
-
-        path = get_fpath(path)
-
-        # A file does not have subpages
-        if not path.is_dir():
-            return {}
-
         subpages = []
-        subpaths = []
 
-        # Glob all Markdown and HTML files to subpaths
-        for ext in DOC_EXTENSIONS:
-            subpaths.extend(path.glob(f"*.{ext}"))
+        # Non-context pages are not supported
+        if self.context is None:
+            return []
 
-        # Glob all subdirectories
-        subfiles_and_path = list(path.glob("*/"))
-        subpaths.extend([d for d in subfiles_and_path if d.is_dir()])
-
-        # Unfortunately, Path.glob('*/) includes all files
-        # subpaths.extend([p for p in path.glob(f"**/") if p.is_dir() and p.name[0] != "."])
-
-        for subpath in sorted(subpaths):
-            # ignore hidden paths, index.html, and index.md
-            is_hidden = str(subpath)[0] == "."
-            is_index = subpath.name in [f"index.{ext}" for ext in DOC_EXTENSIONS]
-            if is_hidden or is_index:
+        for url in self.context.page_urls:
+            is_subpage = all(
+                [
+                    f"{Path(url).parent}/" == self.url,  # is a direct sub-URL
+                    Path(url).suffix == "",  # is an HTML URL
+                ]
+            )
+            if not is_subpage:
                 continue
 
-            # Convert subpath to URL
-            subpath = subpath.absolute().relative_to(PROJECT_PATH)
-            frontmatter = get_frontmatter(str(subpath))
+            subpages.append(Page(url, self.context))
+            # subpages.append(url)
 
-            if subpath.is_dir():
-                # directory URL ends in trailing slahses
-                url = "/" + str(subpath) + "/"
+        self._subpages = subpages
+        return self._subpages
 
-                # # Recursion: Get subpages of directory
-                if recursive:
-                    subsubpages = self.get_subpages(url)
-                else:
-                    subsubpages = None
-            else:
-                # file URL does not
-                url = "/" + str(subpath.with_suffix(""))
-                subsubpages = []
+        # # Unfortunately, Path.glob('*/) includes all files
+        # # subpaths.extend([p for p in path.glob(f"**/") if p.is_dir() and p.name[0] != "."])
 
-            subpage = Page(url, context=self.context)
-            subpages.append(subpage)
+        # for subpath in sorted(subpaths):
+        #     # ignore hidden paths, index.html, and index.md
+        #     is_hidden = str(subpath)[0] == "."
+        #     is_index = subpath.name in [f"index.{ext}" for ext in DOC_EXTENSIONS]
+        #     if is_hidden or is_index:
+        #         continue
 
-        return subpages
+        #     # Convert subpath to URL
+        #     subpath = subpath.absolute().relative_to(PROJECT_PATH)
+        #     frontmatter = get_frontmatter(str(subpath))
+
+        #     if subpath.is_dir():
+        #         # directory URL ends in trailing slahses
+        #         url = "/" + str(subpath) + "/"
+
+        #         # # Recursion: Get subpages of directory
+        #         if recursive:
+        #             subsubpages = self.get_subpages(url)
+        #         else:
+        #             subsubpages = None
+        #     else:
+        #         # file URL does not
+        #         url = "/" + str(subpath.with_suffix(""))
+        #         subsubpages = []
+
+        #     subpage = Page(url, context=self.context)
+        #     subpages.append(subpage)
+
+        # return subpages
 
 
 def get_fpath(file_or_path, resolve=True):

@@ -28,7 +28,7 @@
     </header>
 
     <!-- Content -->
-    {% if page.content_path %}
+    {% if page.has_content %}
     <section class="content">{{ include_raw(page.content_path) }}</section>
     {% endif %}
 
