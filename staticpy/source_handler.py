@@ -41,7 +41,7 @@ class Page:
             setattr(self, k, v)
 
         self._has_content = self.has_content
-        self._subpages = self.subpages
+        self._subpages = None  # May be too large to cache initially
 
     # def __init__(self, url, subpages=[], title=None, **kwargs):
     #     self.update({
@@ -70,6 +70,9 @@ class Page:
         import copy
 
         d = copy.deepcopy(self.__dict__)
+
+        # DEBUG = os.environ.get("FLASK_ENV") == "development"
+        # if not DEBUG:
         d.pop("_subpages")
         return str(d)
 
@@ -129,10 +132,11 @@ class Page:
             return []
 
         for url in self.context.page_urls:
+            content_path = self.context.get_content_path(url)
             is_subpage = all(
                 [
                     f"{Path(url).parent}/" == self.url,  # is a direct sub-URL
-                    Path(url).suffix == "",  # is an HTML URL
+                    Path(content_path).suffix == ".html",  # is an URL of HTML file
                 ]
             )
             if not is_subpage:

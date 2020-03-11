@@ -6,7 +6,9 @@ from shutil import rmtree
 from pathlib import Path
 from flask_frozen import Freezer
 from app import app
-from staticpy import build_all, log, get_fpath, BASE_CONFIG, PROJECT_PATH
+from staticpy import build_all, log, BASE_CONFIG, PROJECT_PATH
+from staticpy.source_handler import get_fpath
+from staticpy.context import Context
 
 freezer = Freezer(app)
 
@@ -14,23 +16,6 @@ freezer = Freezer(app)
 ########################
 # HELPER FUNCTIONS
 ########################
-def get_context_pages(context):
-    """Returns a list of the context's page urls."""
-    source_path = get_fpath(context["source_path"]).relative_to(PROJECT_PATH)
-    pages = []
-    for page in list(source_path.rglob("*")):
-        if page.name[0] == ".":
-            # ignore hidden files
-            pass
-        elif page.is_dir():
-            pages.append(str(page) + "/")
-        elif page.suffix == ".md":
-            pages.append(str(page.with_suffix(".html")))
-        else:
-            pages.append(str(page))
-    return pages
-
-
 def get_all_context_pages():
     """Retrieve all pages accessible for each context. This is determined if the HTML file exists in
     templates path.
@@ -38,8 +23,9 @@ def get_all_context_pages():
     Ignores files that are at first level of templates path.
     """
     pages = []
-    for context in BASE_CONFIG["contexts"].values():
-        pages += get_context_pages(context)
+    for context_config in BASE_CONFIG["contexts"].values():
+        context = Context(**context_config)
+        pages += context.page_urls
     return pages
 
 
@@ -56,21 +42,24 @@ def get_page():
     """
     for page_url in get_all_context_pages():
         log.info(f"Freezing page: {page_url}")
-        url_split = page_url.split("/")
-        context = url_split[0]
+        yield page_url
+    # for page_url in get_all_context_pages():
+    #     log.info(f"Freezing page: {page_url}")
+    #     url_split = page_url.split("/")
+    #     context = url_split[0]
 
-        if url_split[1] == "index.html":
-            # For root pages, app.py::get_page will handle it
-            # e.g., context/index.html
-            page = "index.html"
-        elif url_split[-1] == "index.html":
-            # e.g., context/.../page/index.html -> page := .../page/
-            page = "/".join(url_split[1:][:-1]) + "/"
-        else:
-            # e.g., context/.../page -> page := ../page
-            page = "/".join(url_split[1:])
+    #     if url_split[1] == "index.html":
+    #         # For root pages, app.py::get_page will handle it
+    #         # e.g., context/index.html
+    #         page = "index.html"
+    #     elif url_split[-1] == "index.html":
+    #         # e.g., context/.../page/index.html -> page := .../page/
+    #         page = "/".join(url_split[1:][:-1]) + "/"
+    #     else:
+    #         # e.g., context/.../page -> page := ../page
+    #         page = "/".join(url_split[1:])
 
-        yield {"context": context, "page": page}
+    #     yield {"context": context, "page": page}
 
 
 @freezer.register_generator
@@ -137,10 +126,6 @@ if __name__ == "__main__":
     elapsed_times = freeze(**kwargs)
     if elapsed_times is not None:
         print(f"{'Static convert time:':<30} {elapsed_times[0]:>6.2f} secs")
-        print(
-            f"{'Total time:':<30} {elapsed_times[0] + elapsed_times[1]:>6.2f} secs"
-        )
+        print(f"{'Total time:':<30} {elapsed_times[0] + elapsed_times[1]:>6.2f} secs")
     else:
-        print(
-            "Static conversion failed \nTry running `python freeze.py debug`"
-        )
+        print("Static conversion failed \nTry running `python freeze.py debug`")

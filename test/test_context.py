@@ -129,3 +129,35 @@ def test_subpages():
     actual = sorted([subpage.url for subpage in page.subpages])
 
     assert expected == actual
+
+
+def test_subpages_deep():
+    expected = sorted(
+        [
+            "/notes/Deep_Notebook/Depth1/",
+            "/notes/Deep_Notebook/Depth1/example",
+            "/notes/Deep_Notebook/Depth1/Depth2/",
+            "/notes/Deep_Notebook/Depth1/Depth2/example",
+            "/notes/Deep_Notebook/Depth1/Depth2/Depth3/",
+            "/notes/Deep_Notebook/Depth1/Depth2/Depth3/example",
+            "/notes/Deep_Notebook/example",
+        ]
+    )
+
+    context_config = BASE_CONFIG["contexts"]["notes"]
+    context = Context(**context_config)
+    url = "/notes/Deep_Notebook/"
+    page = Page(url, context=context)
+    actual = []
+
+    def find_all_pages(page):
+        if len(page.subpages) == 0:
+            return
+
+        for subpage in page.subpages:
+            actual.append(subpage.url)
+            find_all_pages(subpage)
+
+    find_all_pages(page)
+
+    assert expected == actual

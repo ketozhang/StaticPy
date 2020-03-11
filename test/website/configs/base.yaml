@@ -29,9 +29,9 @@ contexts:
 
 navbar:
   - text: "Notes"
-    url: "/notes"
+    url: "/notes/"
   - text: "Posts"
-    url: "/posts"
+    url: "/posts/"
   - text: "About"
     url: "/about"
 

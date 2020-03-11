@@ -39,7 +39,7 @@ def global_var():
         return Markup(app.jinja_loader.get_source(app.jinja_env, fpath)[0])
 
     def new_url_for(endpoint, **kwargs):
-        log.info(f"Parsing {endpoint} {type(endpoint)}")
+        log.debug(f"Parsing {endpoint} {type(endpoint)}")
         ignore_prefix = ["#", "mailto"]
         should_ignore = map(lambda prefix: endpoint.startswith(prefix), ignore_prefix)
 
@@ -58,7 +58,7 @@ def global_var():
             # Give up and return input
             url = endpoint
 
-        log.info(f"Parsed as {url}")
+        log.debug(f"Parsed as {url}")
         return url
 
     def get_current_page():

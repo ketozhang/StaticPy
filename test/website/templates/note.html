@@ -17,8 +17,8 @@
 
         <li>
           <a href="{{ subpage.url }}">{{subpage.title}}</a>
-          {% if subpage['subpages'] %}
-          <ul>{{ loop(subpage['subpages']) }}</ul>
+          {% if subpage.subpages and loop.index < maxdepth %}
+          <ul>{{ loop(subpage.subpages) }}</ul>
           {% endif %}
         </li>
 
