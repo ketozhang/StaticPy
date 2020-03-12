@@ -62,8 +62,9 @@ def global_var():
         return url
 
     def get_current_page():
-        url = request.path
-        return Page(url)
+        return {}
+        # url = request.path
+        # return Page(url)
 
     var = dict(
         author=BASE_CONFIG["author"],
@@ -109,70 +110,6 @@ def get_root_page(file):
     return render_template(str(content_path))
 
 
-# @app.route(f"/<context>/<path:page>")
-# def get_page(context, page):
-#     """Routes all other page URLs. This supports both file and directory URL.
-
-#     For files (e.g., /notes/file.html), the content of the markdown file
-#     (e.g., /notes/file.md) is imported by the template.
-
-#     For directories (e.g., /notes/dir/), if there exists a index file, the
-#     directory is treated equivalent to the URL of the index file; otherwise,
-#     the template is used with no content. Note that all directory URL have
-#     trailing slashes; its left to the server to always redirect directory URL
-#     without trailing slashes.
-
-#     Context home pages (e.g., /note/index.html) are redirected to
-#     `/<context>`.
-#     """
-#     log.info(f"Getting context: {context}, page: {page}")
-#     path = TEMPLATE_PATH / context / page
-
-#     # Got `/<context>/index.html`, redirect to context's homepage `/<context>`
-#     if path.name == "index.html":
-#         url = f"/{context}"
-#         log.info(f"Redirecting to: {url}")
-#         return redirect(f"/{context}")
-
-#     # Attempt find the correct context
-#     try:
-#         _context = BASE_CONFIG["contexts"][context]
-#         source_path = PROJECT_PATH / _context["source_path"]
-#     except KeyError as e:
-#         log.error(str(e) + f", when attempting with args get_page({context}, {page}).")
-
-#     if (source_path / page).is_file() and path.suffix != ".html":
-#         log.info(f"Fetching the file {str(source_path / page)}")
-#         return send_file(str(source_path / page))
-
-#     if page[-1] == "/":  # Handle directories
-#         if not path.is_dir():
-#             abort(404)
-#         _page = get_frontmatter(source_path / page / "index.md")
-#         _page["url"] = f"/{context}/{page}"
-#         _page["parent"] = str(Path(_page["url"]).parent) + "/"
-#         _page["subpages"] = get_subpages(_page["url"])
-#         _page["has_content"] = (path / "index.html").exists() and (
-#             path / "index.html"
-#         ).stat().st_size > 1
-#         _page["content_path"] = str((path / "index.html").relative_to(TEMPLATE_PATH))
-#     elif path.with_suffix(".html").exists():  # Handle files
-#         path = path.with_suffix(".html")
-#         _page = get_frontmatter((source_path / page).with_suffix(".md"))
-#         _page["url"] = f"/{context}/{page}"
-#         _page["parent"] = str(Path(_page["url"]).parent) + "/"
-#         _page["subpages"] = get_subpages(_page["url"])
-#         _page["has_content"] = True
-#         _page["content_path"] = str(path.relative_to(TEMPLATE_PATH))
-#     else:
-#         log.error(f"Page (/{context}/{page}) not found")
-#         abort(404)
-
-#     kwargs = {"page": _page}
-
-#     return render_template(_context["template"], **kwargs)
-
-
 @app.route(f"/<context>/")
 @app.route(f"/<context>/<path:subpath>")
 def get_page(context, subpath=None):
@@ -207,13 +144,13 @@ def get_page(context, subpath=None):
             )
             abort(404)
 
-        page = Page(page_url, context=context)
+        page = context.get_page(page_url)
         app.logger.debug(f"Serving context root page:\n\t{page}")
         return render_template(content_path, page=page)
     elif Path(subpath).suffix != "" and Path(subpath).suffix != ".html":
         # If URL is an non-HTML file, the file itself is returned.
         app.logger.debug(
-            f"Context non-HTML file found, serving {context.content_dir}/{subpath}"
+            f"Non-HTML file found, serving {context.content_dir}/{subpath}"
         )
         return send_from_directory(context.content_dir, subpath)
     elif Path(subpath).name == "index.html":
@@ -231,6 +168,6 @@ def get_page(context, subpath=None):
             )
             abort(404)
 
-        page = Page(page_url, context=context)
+        page = context.get_page(page_url)
         app.logger.debug(f"Serving context page:\n\t{page}")
         return render_template(context.template, page=page)

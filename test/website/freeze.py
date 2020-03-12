@@ -1,5 +1,6 @@
 # Converts the Flask setup to build static files.
 import logging
+import os
 import sys
 import time
 from shutil import rmtree
@@ -11,7 +12,6 @@ from staticpy.source_handler import get_fpath
 from staticpy.context import Context
 
 freezer = Freezer(app)
-
 
 ########################
 # HELPER FUNCTIONS

@@ -8,7 +8,7 @@ from . import DOC_EXTENSIONS, PROJECT_PATH, TEMPLATE_PATH
 
 
 class Page:
-    def __init__(self, url, context=None):
+    def __init__(self, url, content_path, context=None):
         """
 
         Args:
@@ -23,13 +23,8 @@ class Page:
             **frontmatter: Frontmatter from Markdown sources will be imported as attributes.
         """
         self.url = url
+        self.content_path = content_path
         self.context = context
-
-        if context:
-            self.content_path = context.get_content_path(url)
-        else:
-            self.content_path = url
-
         if (PROJECT_PATH / self.content_path).exists():
             self.source_path = str(PROJECT_PATH / self.content_path)
         else:
@@ -41,7 +36,8 @@ class Page:
             setattr(self, k, v)
 
         self._has_content = self.has_content
-        self._subpages = None  # May be too large to cache initially
+        self._has_subpages = None
+        self._subpages = None  # Handles too large to cache
 
     # def __init__(self, url, subpages=[], title=None, **kwargs):
     #     self.update({
@@ -55,13 +51,24 @@ class Page:
 
     @property
     def has_content(self):
-        self._has_content = Path(TEMPLATE_PATH / self.content_path).exists()
+        self._has_content = Path(self.source_path).exists()
         return self._has_content
 
     @property
     def subpages(self):
-        self._subpages = self.get_subpages(self.url)
+        self._subpages = self.get_subpages()
         return self._subpages
+
+    @property
+    def has_subpages(self):
+        self._has_subpages = False
+        for url in self.context.page_urls:
+            if url.startswith(self.url) and url != self.url:
+                self._has_subpages = True
+                break
+        return self._has_subpages
+
+        return self._has_subpages
 
     def __str__(self):
         return self.__repr__()
@@ -132,18 +139,14 @@ class Page:
             return []
 
         for url in self.context.page_urls:
-            content_path = self.context.get_content_path(url)
-            is_subpage = all(
-                [
-                    f"{Path(url).parent}/" == self.url,  # is a direct sub-URL
-                    Path(content_path).suffix == ".html",  # is an URL of HTML file
-                ]
+            is_subpage = (
+                f"{Path(url).parent}/" == self.url  # is a direct sub-URL
+                and Path(url).suffix == ""  # is an URL of HTML file
             )
             if not is_subpage:
                 continue
 
-            subpages.append(Page(url, self.context))
-            # subpages.append(url)
+            subpages.append(self.context.get_page(url))
 
         self._subpages = subpages
         return self._subpages

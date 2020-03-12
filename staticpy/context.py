@@ -4,6 +4,7 @@ notes = Context(**context_config)
 """
 from pathlib import Path
 from . import PROJECT_PATH, TEMPLATE_PATH, SITE_URL
+from .source_handler import Page
 
 
 class Context:
@@ -24,9 +25,30 @@ class Context:
         self.source_path = str(PROJECT_PATH / source_path)
         self.content_dir = str(TEMPLATE_PATH / source_path)
         self.template = template
+        self._page_content_map = {}
 
     @property
     def page_content_map(self):
+        # queue = [self.content_dir]
+
+        # while queue:
+        #     current_dir = queue.pop(0)
+        #     current_content_paths = sorted(Path(current_dir).glob("*"))
+        #     for content_path in current_content_paths:
+        #         if content_path.is_dir():
+        #             queue.append(content_path)
+
+        #         content_path = content_path.relative_to(TEMPLATE_PATH)
+
+        #         page_url = self.content_to_page(content_path)
+        #         if page_url is None:
+        #             # Handles directories, should be overwritten if /path/to/dir/index.html exists
+        #             self._page_content_map[
+        #                 f"/{content_path}/"
+        #             ] = f"{content_path}/index.html"
+        #         else:
+        #             self._page_content_map[page_url] = content_path
+
         content_paths = [
             str(p.relative_to(TEMPLATE_PATH))
             for p in sorted(Path(self.content_dir).glob("**/*"))
@@ -55,6 +77,10 @@ class Context:
 
     def __str__(self):
         return self.__repr__()
+
+    def get_page(self, url):
+        content_path = self.get_content_path(url)
+        return Page(url, content_path, self)
 
     def content_to_page(self, content_path):
         """Returns the page URL path given the content path relative to `TEMPLATE_PATH`

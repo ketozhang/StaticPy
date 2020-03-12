@@ -7,11 +7,10 @@
     {% set maxdepth = 2 %}
     <ul style="list-style: none; padding-left: 0;">
       {% for subpage in page.subpages recursive %}
-
       <li>
         <a href="{{ url_for(subpage['url']) }}">{{subpage['title']}}</a>
-        {% if subpage['subpages'] %}
-        <ul>{{ loop(subpage['subpages']) }}</ul>
+        {% if subpage.has_subpages and loop.depth < maxdepth %}
+        <ul>{{ loop(subpage.subpages) }}</ul>
         {% endif %}
       </li>
 
