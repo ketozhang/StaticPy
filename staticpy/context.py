@@ -95,11 +95,11 @@ class Context:
             return None
         elif content_path.suffix == ".html":
             if content_path.name == "index.html":
-                # Index files maps to its parent directory (e.g., /dir)
+                # Index files maps to its parent directory (e.g., /dir/)
                 return f"/{content_path.parent}/"
             else:
-                # HTML files maps to itself without suffix (e.g., /page)
-                return f"/{content_path.with_suffix('')}"
+                # HTML files maps to itself without suffix (e.g., /page/)
+                return f"/{content_path.with_suffix('')}/"
         else:
             # Non-HTML files maps to itself (e.g., /img.png)
             return f"/{content_path}"
