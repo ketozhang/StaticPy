@@ -52,7 +52,21 @@ def get_config(filepath):
 
 
 ###
-# GLOBAL VAR
+# LOGGING
+###
+import logging
+
+log = logging.getLogger(__name__)
+c_format = logging.Formatter(
+    "%(levelname)s:[%(module)s#%(funcName)s, line %(lineno)d]: %(message)s"
+)
+c_handler = logging.StreamHandler()
+c_handler.setFormatter(c_format)
+log.addHandler(c_handler)
+
+
+###
+# FORWARD API AND GLOBAL VARS
 ###
 
 
@@ -84,22 +98,10 @@ BASE_CONFIG = get_config("base.yaml")
 TEMPLATE_PATH, STATIC_PATH, SITE_URL = get_global_var(BASE_CONFIG)
 DOC_EXTENSIONS = ["html", "md"]
 
-###
-# LOGGING
-###
-import logging
+from .context import Context
 
-log = logging.getLogger(__name__)
-c_format = logging.Formatter(
-    "%(levelname)s:[%(module)s#%(funcName)s, line %(lineno)d]: %(message)s"
-)
-c_handler = logging.StreamHandler()
-c_handler.setFormatter(c_format)
-log.addHandler(c_handler)
-
-
-###
-# FORWARD APIs
-###
-
+CONTEXTS = {
+    context_name: Context(**config)
+    for context_name, config in BASE_CONFIG["contexts"].items()
+}
 from .app import app, build_all

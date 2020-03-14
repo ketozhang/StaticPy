@@ -43,6 +43,9 @@ def get_page():
     for page_url in get_all_context_pages():
         log.info(f"Freezing page: {page_url}")
         yield page_url
+        # context = page_url.split("/")[0]
+        # subpath = "/".join(page_url.split("/")[1:])
+        # yield {"context": context, "subpath": subpath}
     # for page_url in get_all_context_pages():
     #     log.info(f"Freezing page: {page_url}")
     #     url_split = page_url.split("/")

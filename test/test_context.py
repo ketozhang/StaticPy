@@ -46,33 +46,6 @@ def test_context_constructor():
     assert expected == actual
 
 
-def test_context_serve():
-    expected = {
-        "/": 200,
-        "/posts/": 200,
-        "/posts/markdown-examples": 200,
-        "/posts/mathjax-examples": 200,
-        "/posts/postdir/": 200,
-        "/posts/postdir/index.html": 302,
-        "/posts/empty_postdir/": 404,
-        "/DOESNOTEXIST": 404,
-        "/posts/DOESNOTEXIST": 404,
-        "/notes/": 200,
-        "/notes/Example_Notebook/": 200,
-        "/notes/index.html": 302,
-        "/notes/Example_Notebook/example": 200,
-        "/notes/Example_Notebook/example.png": 200,
-        "/notes/Example_Notebook/sometext": 200,
-    }
-    actual = {}
-
-    for url in expected.keys():
-        with app.test_client() as c:
-            response = c.get(url)
-            actual[url] = response.status_code
-    assert expected == actual
-
-
 def test_postcontext_map():
     expected = {
         "/posts/markdown-examples": "posts/markdown-examples.html",
@@ -114,8 +87,8 @@ def test_postcontext_map():
 def test_subpages():
     expected = sorted(
         [
-            "/notes/Example_Notebook/example",
-            "/notes/Example_Notebook/sometext",
+            "/notes/Example_Notebook/example/",
+            "/notes/Example_Notebook/sometext/",
             "/notes/Example_Notebook/Section1/",
             "/notes/Example_Notebook/Section2/",
         ]
@@ -135,12 +108,12 @@ def test_subpages_deep():
     expected = sorted(
         [
             "/notes/Deep_Notebook/Depth1/",
-            "/notes/Deep_Notebook/Depth1/example",
+            "/notes/Deep_Notebook/Depth1/example/",
             "/notes/Deep_Notebook/Depth1/Depth2/",
-            "/notes/Deep_Notebook/Depth1/Depth2/example",
+            "/notes/Deep_Notebook/Depth1/Depth2/example/",
             "/notes/Deep_Notebook/Depth1/Depth2/Depth3/",
-            "/notes/Deep_Notebook/Depth1/Depth2/Depth3/example",
-            "/notes/Deep_Notebook/example",
+            "/notes/Deep_Notebook/Depth1/Depth2/Depth3/example/",
+            "/notes/Deep_Notebook/example/",
         ]
     )
 

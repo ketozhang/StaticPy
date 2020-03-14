@@ -10,7 +10,7 @@ from flask import (
     url_for,
 )
 from jinja2 import Markup
-from . import BASE_CONFIG, TEMPLATE_PATH, STATIC_PATH, SITE_URL, log
+from . import BASE_CONFIG, CONTEXTS, TEMPLATE_PATH, STATIC_PATH, SITE_URL, log
 from .config_handler import get_config
 from .doc_builder import build_all
 from .source_handler import Page, get_fpath, get_frontmatter
@@ -111,6 +111,7 @@ def get_root_page(file):
 
 
 @app.route(f"/<context>/")
+@app.route(f"/<context>/<path:subpath>/")
 @app.route(f"/<context>/<path:subpath>")
 def get_page(context, subpath=None):
     """Most commonly used route to route pages belonging to a context.
@@ -128,8 +129,7 @@ def get_page(context, subpath=None):
 
     # Check if context is registered in config
     try:
-        context_config = BASE_CONFIG["contexts"][context]
-        context = Context(**context_config)
+        context = CONTEXTS[context]
         app.logger.debug(f"Context found with map:\n\t{context.page_content_map}")
     except KeyError:
         app.logger.debug(f"Context {context} not found")
