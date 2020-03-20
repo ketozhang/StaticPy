@@ -3,7 +3,7 @@ context_config = BASE_CONFIG["contexts"][context]
 notes = Context(**context_config)
 """
 from pathlib import Path
-from . import BASE_CONFIG, PROJECT_PATH, TEMPLATE_PATH, SITE_URL
+from . import PROJECT_PATH, TEMPLATE_PATH, SITE_URL
 from .source_handler import Page
 
 

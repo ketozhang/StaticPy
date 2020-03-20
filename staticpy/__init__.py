@@ -8,18 +8,23 @@ then forwarding the following API for the user:
 * log
 * get_fpath, get_frontmatter, get_page, get_subpage
 """
+import logging
 import os
 from pathlib import Path
 
-# All relative paths must be relative to the CWD.
-# User must make sure CWD is the root of their web project.
-PROJECT_PATH = Path.cwd()
-CONFIGS_PATH = os.environ.get("STATICPY_CONFIGS_PATH", PROJECT_PATH / "configs")
-
-###
-# LOAD CONFIG
-###
 import yaml
+from flask import Flask
+
+#########
+# LOGGING
+#########
+log = logging.getLogger(__name__)
+c_format = logging.Formatter(
+    "%(levelname)s:[%(module)s#%(funcName)s, line %(lineno)d]: %(message)s"
+)
+c_handler = logging.StreamHandler()
+c_handler.setFormatter(c_format)
+log.addHandler(c_handler)
 
 
 def get_config(filepath):
@@ -51,33 +56,26 @@ def get_config(filepath):
         )
 
 
-###
-# LOGGING
-###
-import logging
-
-log = logging.getLogger(__name__)
-c_format = logging.Formatter(
-    "%(levelname)s:[%(module)s#%(funcName)s, line %(lineno)d]: %(message)s"
-)
-c_handler = logging.StreamHandler()
-c_handler.setFormatter(c_format)
-log.addHandler(c_handler)
+def get_configs_path():
+    configs_path = os.environ.get("STATICPY_CONFIGS_PATH", PROJECT_PATH / "configs")
+    if not configs_path.exists():
+        raise FileNotFoundError(
+            "Configs folder not found. Make sure to create one (default: /path/to/project/templates) or set environment variable STATICPY_CONFIGS_PATH."
+        )
+    return configs_path
 
 
-###
-# FORWARD API AND GLOBAL VARS
-###
-
-
-def get_global_var(base_config):
+def get_template_path(base_config):
     # Flask templates path
     template_path = PROJECT_PATH / base_config["template_path"]
     if not template_path.exists():
         raise FileNotFoundError(
             "Templates folder not found. Make sure to create one (default: /path/to/project/templates)."
         )
+    return template_path
 
+
+def get_static_path(base_config):
     # Web Static Path
     static_path = PROJECT_PATH / base_config["static_path"]
     if not static_path.exists():
@@ -85,23 +83,48 @@ def get_global_var(base_config):
             "Static folder not found. Make sure to create one (default: /path/to/project/static)."
         )
 
+    return static_path
+
+
+def get_site_url(base_config):
     # Site URL
     # Will modify with trailing slash
     site_url = base_config["site_url"]
     if site_url[-1] != "/":
         site_url += "/"
 
-    return template_path, static_path, site_url
+    return site_url
 
 
+##################
+# GLOBAL VARIABLES
+##################
+# All relative paths must be relative to the CWD.
+# User must make sure CWD is the root of their web project.
+PROJECT_PATH = Path.cwd()
+CONFIGS_PATH = get_configs_path()
 BASE_CONFIG = get_config("base.yaml")
-TEMPLATE_PATH, STATIC_PATH, SITE_URL = get_global_var(BASE_CONFIG)
+TEMPLATE_PATH = get_template_path(BASE_CONFIG)
+STATIC_PATH = get_static_path(BASE_CONFIG)
+SITE_URL = get_site_url(BASE_CONFIG)
 DOC_EXTENSIONS = ["html", "md"]
-
 from .context import Context
 
 CONTEXTS = {
     context_name: Context(**config)
     for context_name, config in BASE_CONFIG["contexts"].items()
 }
-from .app import app, build_all
+
+################
+# INITIALIZATION
+################
+from .doc_builder import build_all
+
+app = Flask(__name__, template_folder=TEMPLATE_PATH, static_folder=STATIC_PATH)
+
+if app.config["ENV"] == "production":
+    SITE_URL = BASE_CONFIG["site_url"]
+else:
+    SITE_URL = "/"
+
+from . import routes

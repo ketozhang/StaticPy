@@ -1,33 +1,15 @@
 from pathlib import Path
-from shutil import copyfile, rmtree
-from flask import (
-    Flask,
-    abort,
-    redirect,
-    request,
-    render_template,
-    send_from_directory,
-    url_for,
-)
+
+from flask import abort, redirect, render_template, request, send_from_directory
 from jinja2 import Markup
-from . import BASE_CONFIG, CONTEXTS, TEMPLATE_PATH, STATIC_PATH, SITE_URL, log
+
+from . import BASE_CONFIG, CONTEXTS, SITE_URL, STATIC_PATH, TEMPLATE_PATH, app, log
 from .config_handler import get_config
+from .context import Context
 from .doc_builder import build_all
 from .source_handler import Page, get_fpath, get_frontmatter
-from .context import Context
 
 
-app = Flask(__name__, template_folder=TEMPLATE_PATH, static_folder=STATIC_PATH)
-
-if app.config["ENV"] == "production":
-    SITE_URL = BASE_CONFIG["site_url"]
-else:
-    SITE_URL = "/"
-
-
-########################
-# META
-########################
 @app.context_processor
 def global_var():
     def exists(file_or_path):
@@ -88,9 +70,6 @@ def get_favicon():
     return send_from_directory(STATIC_PATH, "favicon.ico")
 
 
-########################
-# MAIN
-########################
 @app.route("/<file>")
 def get_root_page(file):
     """Renders root level pages located in `TEMPLATE_PATH`/<file>.

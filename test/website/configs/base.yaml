@@ -23,6 +23,8 @@ contexts:
   notes:
     source_path: "notes"
     template: "note.html"
+    ignore_paths:
+      - "Ignore/"
   posts:
     source_path: "posts"
     template: "post.html"
