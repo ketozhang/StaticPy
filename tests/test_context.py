@@ -62,6 +62,40 @@ def test_postcontext_map():
     assert expected == actual
 
 
+def test_context_source_files():
+    expected = [
+        "notes/Deep_Notebook",
+        "notes/Example_Notebook",
+        "notes/index.html",
+        "notes/Deep_Notebook/Depth1",
+        "notes/Deep_Notebook/example.md",
+        "notes/Deep_Notebook/example.png",
+        "notes/Example_Notebook/example.md",
+        "notes/Example_Notebook/example.png",
+        "notes/Example_Notebook/Section1",
+        "notes/Example_Notebook/Section2",
+        "notes/Example_Notebook/sometext.md",
+        "notes/Deep_Notebook/Depth1/Depth2",
+        "notes/Deep_Notebook/Depth1/example.md",
+        "notes/Deep_Notebook/Depth1/example.png",
+        "notes/Example_Notebook/Section1/example.md",
+        "notes/Example_Notebook/Section1/example.png",
+        "notes/Example_Notebook/Section2/example.md",
+        "notes/Example_Notebook/Section2/example.png",
+        "notes/Deep_Notebook/Depth1/Depth2/Depth3",
+        "notes/Deep_Notebook/Depth1/Depth2/example.md",
+        "notes/Deep_Notebook/Depth1/Depth2/example.png",
+        "notes/Deep_Notebook/Depth1/Depth2/Depth3/example.md",
+        "notes/Deep_Notebook/Depth1/Depth2/Depth3/example.png",
+    ]
+
+    context_config = BASE_CONFIG["contexts"]["notes"]
+    context = Context(**context_config)
+    actual = context.source_files
+
+    assert expected == actual
+
+
 # def test_notecontext_map():
 #     expected = {
 #         "/notes/": "notes/index.html",

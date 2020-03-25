@@ -28,3 +28,7 @@ def test_all_context_build_to_template():
         )
 
     assert set(actual) == set(expected)
+
+
+if __name__ == "__main__":
+    test_all_context_build_to_template()
