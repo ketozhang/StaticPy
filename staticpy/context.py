@@ -8,7 +8,7 @@ from .source_handler import Page
 
 
 class Context:
-    def __init__(self, source_path, template, **kwargs):
+    def __init__(self, source_path=None, template=None, **kwargs):
         """A context is a root-level object that describes the structure of the context.
 
         Args:
@@ -25,6 +25,11 @@ class Context:
         self.source_path = str(PROJECT_PATH / source_path)
         self.content_dir = str(TEMPLATE_PATH / source_path)
         self.template = template
+        # Use pathlib.Path name convention
+        self.ignore_paths = [str(Path(p)) for p in kwargs.pop("ignore_paths", [])]
+
+        for k, v in kwargs.items():
+            setattr(self, k, v)
         self._page_content_map = {}
 
     @property
@@ -70,6 +75,23 @@ class Context:
     @property
     def page_urls(self):
         return self.page_content_map.keys()
+
+    @property
+    def source_files(self):
+        """Return a list of source files excluding ignored files"""
+
+        self._source_files = []
+
+        queue = [Path(self.source_path)]
+        while len(queue) > 0:
+            current_path = queue.pop(0)
+            subpaths = current_path.glob("*")
+            for subpath in subpaths:
+                if str(subpath.relative_to(subpath.parent)) not in self.ignore_paths:
+                    queue.append(subpath)
+                    self._source_files.append(str(subpath.relative_to(PROJECT_PATH)))
+
+        return self._source_files
 
     def __repr__(self):
         s = f"<Context: url={self.root_url}, template={self.template}>"

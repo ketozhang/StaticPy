@@ -7,14 +7,14 @@ from . import BASE_CONFIG, CONTEXTS, SITE_URL, STATIC_PATH, TEMPLATE_PATH, app, 
 from .config_handler import get_config
 from .context import Context
 from .doc_builder import build_all
-from .source_handler import Page, get_fpath, get_frontmatter
+from .source_handler import Page, get_frontmatter
 
 
 @app.context_processor
 def global_var():
     def exists(file_or_path):
         """Check if the path exists in templates path."""
-        fpath = TEMPLATE_PATH / get_fpath(file_or_path, resolve=False)
+        fpath = TEMPLATE_PATH / file_or_path
         return fpath.exists()
 
     def include_raw(fpath):

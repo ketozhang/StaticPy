@@ -185,21 +185,6 @@ class Page:
         # return subpages
 
 
-def get_fpath(file_or_path, resolve=True):
-    """
-    Parse `file_or_path` as string or pathlib.Path
-    and returns pathlib.Path.
-    """
-    if isinstance(file_or_path, str):
-        fpath = Path(file_or_path)
-    else:
-        fpath = file_or_path
-
-    if resolve:
-        fpath = fpath.absolute()
-    return fpath
-
-
 def infer_title(fname):
     return fname.title().replace("_", " ")
 
