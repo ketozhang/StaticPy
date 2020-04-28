@@ -28,7 +28,9 @@ def global_var():
         return Markup(app.jinja_loader.get_source(app.jinja_env, fpath)[0])
 
     def new_url_for(endpoint, **kwargs):
-        log.debug(f"Parsing {endpoint} {type(endpoint)}...")
+        msg = f"Parsing {endpoint} of type {type(endpoint)}..."
+        log.debug(f"{msg:.<80}")
+
         ignore_prefix = ["#", "mailto"]
         should_ignore = map(lambda prefix: endpoint.startswith(prefix), ignore_prefix)
 
@@ -116,7 +118,8 @@ def get_page(context, subpath=None):
     # Check if context is registered in config
     try:
         context = CONTEXTS[context]
-        app.logger.debug(f"Context found with map:\n\t{context.page_content_map}")
+        app.logger.debug(f"Context found {context}")
+        # app.logger.debug(context.page_content_map)
     except KeyError:
         app.logger.debug(f"Context {context} not found")
         abort(404)
@@ -131,14 +134,14 @@ def get_page(context, subpath=None):
             abort(404)
 
         page = context.get_page(page_url)
-        app.logger.debug(f"Serving context root page:\n\t{page}")
+        app.logger.debug(f"Serving context root page: {page}")
         return render_template(content_path, page=page)
     elif Path(subpath).suffix != "" and Path(subpath).suffix != ".html":
         # If URL is an non-HTML file, the file itself is returned.
         app.logger.debug(
-            f"Non-HTML file found, serving {context.content_dir}/{subpath}"
+            f"Non-HTML file found, serving {context.content_folder}/{subpath}"
         )
-        return send_from_directory(context.content_dir, subpath)
+        return send_from_directory(context.content_folder, subpath)
     elif Path(subpath).name == "index.html":
         # If URL is context's index file redirect to context root URL
         app.logger.debug(
@@ -146,7 +149,7 @@ def get_page(context, subpath=None):
         )
         return redirect(f"{context.root_url}/{Path(subpath).parent}/")
     else:
-        # Otherwise render the content with context's template
+        # Otherwise render the content with context's content template
         content_path = context.get_content_path(page_url)
         if content_path is None:
             app.logger.debug(
@@ -155,5 +158,5 @@ def get_page(context, subpath=None):
             abort(404)
 
         page = context.get_page(page_url)
-        app.logger.debug(f"Serving context page:\n\t{page}")
-        return render_template(context.template, page=page)
+        app.logger.debug(f"Serving context page: {page}")
+        return render_template(context.content_template, page=page)

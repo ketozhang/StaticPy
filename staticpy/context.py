@@ -8,11 +8,11 @@ from .source_handler import Page
 
 
 class Context:
-    def __init__(self, source_path=None, template=None, **kwargs):
+    def __init__(self, source_folder=None, template=None, **kwargs):
         """A context is a root-level object that describes the structure of the context.
 
         Args:
-            source_path (str): Path to context. This is the same as the source path where its contents are stored.
+            source_path (str): Path to context folder relative to `PROJECT_PATH`. Files inside this folder are called source files.
             template (str): File path of the HTML template for contents relative to TEMPLATES_PATH.
 
         Attributes:
@@ -21,10 +21,10 @@ class Context:
             page_content_map (dict): Maps page URL (key) to content path (value) relative to `TEMPLATE_PATH`.
 
         """
-        self.root_url = f"/{source_path}"
-        self.source_path = str(PROJECT_PATH / source_path)
-        self.content_dir = str(TEMPLATE_PATH / source_path)
-        self.template = template
+        self.root_url = f"/{source_folder}"
+        self.source_folder = str(PROJECT_PATH / source_folder)
+        self.content_folder = str(TEMPLATE_PATH / source_folder)
+        self.content_template = template
         # Use pathlib.Path name convention
         self.ignore_paths = [str(Path(p)) for p in kwargs.pop("ignore_paths", [])]
 
@@ -54,19 +54,20 @@ class Context:
         #         else:
         #             self._page_content_map[page_url] = content_path
 
+        # List of path to contents relative to the TEMPLATE_PATH
         content_paths = [
             str(p.relative_to(TEMPLATE_PATH))
-            for p in sorted(Path(self.content_dir).glob("**/*"))
+            for p in sorted(Path(self.content_folder).glob("**/*"))
         ]
 
         self._page_content_map = {}
         for content_path in content_paths:
-            page_url = self.content_to_page(content_path)
-            if page_url is None:
+            page_url = self.content_to_page_url(content_path)
+            if Path(content_path).suffix == "":
                 # Handles directories, should be overwritten if /path/to/dir/index.html exists
-                self._page_content_map[
-                    f"/{content_path}/"
-                ] = f"{content_path}/index.html"
+                self._page_content_map[page_url] = str(
+                    Path(content_path) / "index.html"
+                )
             else:
                 self._page_content_map[page_url] = content_path
 
@@ -78,23 +79,31 @@ class Context:
 
     @property
     def source_files(self):
-        """Return a list of source files excluding ignored files. The source files are relative to `PROJECT_PATH`"""
+        """Return a list of source files excluding ignored files. The source files are relative to `self.source_path`"""
 
         self._source_files = []
 
+        def is_ignored(path):
+            parents = [str(p) for p in path.parents]
+            parent_is_ignored = bool(set() & set(self.ignore_paths))
+            itself_is_ignored = str(path) in self.ignore_paths
+
+            return parent_is_ignored or itself_is_ignored
+
         def dfs(path):
+            # If path is ignored, stop
+            if is_ignored(path.relative_to(self.source_folder)):
+                return
+
+            # If path is a file, record it
+            if path.is_file():
+                self._source_files.append(str(path.relative_to(self.source_folder)))
+
+            # Search path's child
             for subpath in path.glob("*"):
-                if subpath.relative_to(subpath.parent) in self.ignore_paths:
-                    continue
-
-                if subpath.is_file():
-                    # If subpath is a file record it
-                    self._source_files.append(subpath.relative_to(PROJECT_PATH))
-
-                # Search subpath's child
                 dfs(subpath)
 
-        dfs(Path(self.source_path))
+        dfs(Path(self.source_folder))
         return self._source_files
 
         # queue = [Path(self.source_path)]
@@ -107,17 +116,18 @@ class Context:
         #             self._source_files.append(str(subpath.relative_to(PROJECT_PATH)))
 
     def __repr__(self):
-        s = f"<Context: url={self.root_url}, template={self.template}>"
+        s = f"<Context: url={self.root_url}, content_template={self.content_template}>"
         return s
 
     def __str__(self):
         return self.__repr__()
 
     def get_page(self, url):
+        """Returns Page searched by its URL"""
         content_path = self.get_content_path(url)
         return Page(url, content_path, self)
 
-    def content_to_page(self, content_path):
+    def content_to_page_url(self, content_path):
         """Returns the page URL path given the content path relative to `TEMPLATE_PATH`
 
         Args:
@@ -126,8 +136,8 @@ class Context:
         content_path = Path(content_path)
 
         if content_path.suffix == "":
-            # Dirs have no content, should be handled as index file upstream
-            return None
+            # Folders itself have no content so an empty "index.html" is referenced
+            return f"/{content_path}/"
         elif content_path.suffix == ".html":
             if content_path.name == "index.html":
                 # Index files maps to its parent directory (e.g., /dir/)
@@ -143,8 +153,9 @@ class Context:
         """Returns the content path relative `TEMPLATE_PATH` given the page URL path relative to the context if exists otherwise return None."""
         return self.page_content_map.get(page_url, None)
 
-    # Alias
-    get_content_path = page_to_content
+    def get_content_path(self, *args, **kwargs):
+        """An alias to self.page_to_content"""
+        return self.page_to_content(*args, **kwargs)
 
 
 class PostContext(Context):

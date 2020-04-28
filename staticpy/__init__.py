@@ -129,3 +129,4 @@ else:
     SITE_URL = "/"
 
 from . import routes
+from .freezer import freezer

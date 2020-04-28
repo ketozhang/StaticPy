@@ -19,7 +19,7 @@ class Page:
             url (str): See Args description
             context (staticpy.Context or None): See Args description
             content_path (str): Path to HTML content of the page
-            source_path (str): Path to the source of the page
+            source_folder (str): Path to the source of the page
             **frontmatter: Frontmatter from Markdown sources will be imported as attributes.
         """
         self.url = url

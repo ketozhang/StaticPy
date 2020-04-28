@@ -1,8 +1,11 @@
+"""Build sources files located in each context's source folder to each context's content folder"""
+
 import multiprocessing as mp
 import time
 import pypandoc as pandoc
 from pathlib import Path
 from shutil import rmtree, copyfile
+from timeit import default_timer as timer
 from . import (
     BASE_CONFIG,
     PROJECT_PATH,
@@ -11,6 +14,7 @@ from . import (
     DOC_EXTENSIONS,
     CONTEXTS,
     log,
+    Context,
 )
 
 
@@ -35,27 +39,32 @@ def md_to_html(filepath, output_filepath):
     return output_filepath
 
 
-def build(context):
+def build(context: Context):
     """
-    Builds all files in the context's source path and output it to `TEMPLATES_PATH` with its named specified by the context's URL.
+    Builds all files in the context's source path and output the source files to a file of the same name in the context's content path.
 
-    * Markdown files are converted to HTML with Pandoc.
-    * Other files are directly copied to the output.
+    The build process the files with the following rules:
+        * Markdown files are converted to HTML with Pandoc.
+        * Other files are directly copied to the output.
+
+    The following source files/folders are ignored:
+        * Empty folders
+        * Files and subfiles of folders specificed by the config (`BASE_CONFIG[<context>]["ignored_paths"]`).
     """
     # Get path of source input folder
-    source_path = Path(context.source_path)
+    source_folder = Path(context.source_folder)
 
-    # Get path of output folder
-    output_path = TEMPLATE_PATH / source_path.stem
-    log.info(f"Building context files to {output_path}")
+    # Get path of output content folder
+    output_folder = Path(context.content_folder)
+    log.info(f"Building context files to {output_folder}")
 
-    # Backup the output folder
-    backup = output_path.with_suffix(".bak")
-    if output_path.exists():
-        log.info(f"{output_path.name} -> {backup.name}")
-        output_path.rename(backup)
+    # Backup the output content folder
+    backup = output_folder.with_suffix(".bak")
+    if output_folder.exists():
+        log.info(f"{output_folder.name} -> {backup.name}")
+        output_folder.rename(backup)
 
-    output_path.mkdir()
+    output_folder.mkdir()
 
     def subproccess_md_to_html(source_file):
         """
@@ -63,25 +72,28 @@ def build(context):
             source_file (str): File path to the source file relative to `PROJECT_PATH`.
         """
         source_file = Path(source_file)
-        log.info(f"Processing source file {source_file}")
-
-        # Make parent folders
-        parent = source_file.parent
-        log.info(f"mkdir {TEMPLATE_PATH / parent}")
-        Path.mkdir(TEMPLATE_PATH / parent, parents=True, exist_ok=True)
+        msg = f"Processing source file {output_folder.stem / source_file}"
+        log.info("{:.<80}".format(msg))
 
         # Determine output filename
+        outputfile = output_folder / source_file
+
+        # Make parent folders of the output file
+        parent = outputfile.parent
+        log.info(f"mkdir {parent.relative_to(PROJECT_PATH)}")
+        Path.mkdir(parent, parents=True, exist_ok=True)
+
         if source_file.suffix[1:] in DOC_EXTENSIONS:
-            outputfile = TEMPLATE_PATH / source_file.with_suffix(".html")
-        else:
-            outputfile = TEMPLATE_PATH / source_file
+            outputfile = outputfile.with_suffix(".html")
 
         # Write to file
-        log.info(f"{PROJECT_PATH / source_file} -> {outputfile}")
+        log.info(
+            f"{source_folder.stem / source_file} -> {outputfile.relative_to(PROJECT_PATH)}"
+        )
         if source_file.suffix == ".md":
-            outputfile = md_to_html(PROJECT_PATH / source_file, outputfile)
+            outputfile = md_to_html(source_folder / source_file, outputfile)
         else:
-            copyfile(PROJECT_PATH / source_file, outputfile)
+            copyfile(source_folder / source_file, outputfile)
 
         # Check output file was created.
         if not outputfile.exists():
@@ -106,16 +118,17 @@ def build(context):
 
     except Exception as e:  # Recover backup when fails
         log.exception(e)
-        rmtree(str(output_path))
+        rmtree(str(output_folder))
         if backup.exists():
-            backup.rename(output_path)
+            backup.rename(output_folder)
 
 
 def build_all():
     """Run build on all context found in configuration."""
-    start = time.time()
+    print("\n" + f"{' BUILDING ':=^80}")
+    start = timer()
 
     for context in CONTEXTS.values():
         build(context)
 
-    return time.time() - start
+    return timer() - start
