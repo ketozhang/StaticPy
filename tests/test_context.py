@@ -9,7 +9,7 @@ os.chdir(PROJECT_PATH)
 from staticpy import BASE_CONFIG, TEMPLATE_PATH, SITE_URL
 from staticpy.context import Context, PostContext, NoteContext
 from staticpy.source_handler import Page
-from website import app as site
+from .website import app as site
 
 app = site.app
 site.build()

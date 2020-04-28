@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'header.html' %}
+<main class="container">
+  <h3>Blogposts:</h3>
+  <!-- TODO: get_subpages(page['url']) -->
+  {% set maxdepth = 2 %}
+  <ul style="list-style: none; padding-left: 0;">
+    {% for subpage in page.subpages recursive %}
+
+    <li>
+      <a href="{{ url_for(subpage['url']) }}">{{subpage['title']}}</a>
+      {% if subpage['subpages'] %}
+      <ul>{{ loop(subpage['subpages']) }}</ul>
+      {% endif %}
+    </li>
+
+    {% endfor %}
+  </ul>
+</main>
+{% endblock %}

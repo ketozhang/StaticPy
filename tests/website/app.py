@@ -3,10 +3,8 @@ import sys
 from flask import render_template
 from staticpy import app, log, build_all, BASE_CONFIG, get_config
 
-# if app.debug:
-#     log.setLevel("DEBUG")
-# else:
-#     log.setlevel("WARNING")
+if app.debug:
+    log.setLevel("DEBUG")
 
 ########################
 # CUSTOM ROUTES
@@ -19,7 +17,7 @@ def home():
 
 def build():
     elapsed_time = build_all()
-    print(f"Building templates finished in {elapsed_time:.2f}secs")
+    print(f"Templates built in {elapsed_time:.2f} secs")
 
 
 if __name__ == "__main__":

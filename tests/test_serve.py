@@ -5,7 +5,7 @@ from pathlib import Path
 
 PROJECT_PATH = Path(__file__).resolve().parent / "website"
 os.chdir(PROJECT_PATH)
-from website import app as site
+from .website import app as site
 
 app = site.app
 

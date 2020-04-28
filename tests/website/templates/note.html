@@ -11,7 +11,7 @@
       {% set subpages=page.subpages %}
       {% if subpages %}
       <h3>Pages:</h3>
-      <ul>
+      <ul style="list-style: none; padding-left: 0;">
         {% set maxdepth = 2 %}
         {% for subpage in subpages recursive %}
 
