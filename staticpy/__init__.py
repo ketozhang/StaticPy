@@ -107,6 +107,7 @@ BASE_CONFIG = get_config("base.yaml")
 TEMPLATE_PATH = get_template_path(BASE_CONFIG)
 STATIC_PATH = get_static_path(BASE_CONFIG)
 SITE_URL = get_site_url(BASE_CONFIG)
+PANDOC_EXTENSIONS = os.environ.get("PANDOC_EXTENSIONS", "html")
 DOC_EXTENSIONS = ["html", "md"]
 from .context import Context
 

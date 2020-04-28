@@ -3,7 +3,15 @@ import time
 import pypandoc as pandoc
 from pathlib import Path
 from shutil import rmtree, copyfile
-from . import BASE_CONFIG, PROJECT_PATH, TEMPLATE_PATH, DOC_EXTENSIONS, CONTEXTS, log
+from . import (
+    BASE_CONFIG,
+    PROJECT_PATH,
+    TEMPLATE_PATH,
+    PANDOC_EXTENSIONS,
+    DOC_EXTENSIONS,
+    CONTEXTS,
+    log,
+)
 
 
 def md_to_html(filepath, output_filepath):
@@ -11,17 +19,16 @@ def md_to_html(filepath, output_filepath):
     Use Pandoc to convert Markdown file to HTML.
 
     Args:
-        filepath (str): Markdown file path relative to `PROJECT_PATH`
-        outputpath_filepath (str): Output HTML file path relative to `PROJECT_PATH`
+        filepath (str): File path to markdown file
+        outputpath_filepath (str): File path to output HTML file
 
     Returns:
         outputpath_filepath (pathlib.Path): Output HTML file path relative to `PROJECT_PATH`
     """
-    filepath = PROJECT_PATH / Path(filepath)
-    output_filepath = PROJECT_PATH / Path(output_filepath)
     pandoc.convert_file(
-        filepath,
-        "html+fenced_divs+definition_lists+link_attributes",
+        str(filepath),
+        PANDOC_EXTENSIONS,
+        # "html+definition_lists+link_attributes",
         outputfile=str(output_filepath),
         extra_args=["--mathjax"],
     )
@@ -35,69 +42,58 @@ def build(context):
     * Markdown files are converted to HTML with Pandoc.
     * Other files are directly copied to the output.
     """
-    print(context)
-    source_path = context.source_path
+    # Get path of source input folder
+    source_path = Path(context.source_path)
 
-    url = context.root_url
-    if url[0] == "/":
-        url = url[1:]
-    output_path = TEMPLATE_PATH / Path(url)
-    log.info(f"Building context files to: {output_path}")
+    # Get path of output folder
+    output_path = TEMPLATE_PATH / source_path.stem
+    log.info(f"Building context files to {output_path}")
 
-    # Backup the build directory in templates
-    backup = Path(TEMPLATE_PATH / f"{output_path.name}.bak")
+    # Backup the output folder
+    backup = output_path.with_suffix(".bak")
     if output_path.exists():
-        log.debug(f"{output_path.name} -> {backup.name}")
+        log.info(f"{output_path.name} -> {backup.name}")
         output_path.rename(backup)
 
     output_path.mkdir()
+
+    def subproccess_md_to_html(source_file):
+        """
+        Args:
+            source_file (str): File path to the source file relative to `PROJECT_PATH`.
+        """
+        source_file = Path(source_file)
+        log.info(f"Processing source file {source_file}")
+
+        # Make parent folders
+        parent = source_file.parent
+        log.info(f"mkdir {TEMPLATE_PATH / parent}")
+        Path.mkdir(TEMPLATE_PATH / parent, parents=True, exist_ok=True)
+
+        # Determine output filename
+        if source_file.suffix[1:] in DOC_EXTENSIONS:
+            outputfile = TEMPLATE_PATH / source_file.with_suffix(".html")
+        else:
+            outputfile = TEMPLATE_PATH / source_file
+
+        # Write to file
+        log.info(f"{PROJECT_PATH / source_file} -> {outputfile}")
+        if source_file.suffix == ".md":
+            outputfile = md_to_html(PROJECT_PATH / source_file, outputfile)
+        else:
+            copyfile(PROJECT_PATH / source_file, outputfile)
+
+        # Check output file was created.
+        if not outputfile.exists():
+            raise FileNotFoundError(
+                "Output file(s) were deleted in middle of process. Please clean and restart the build."
+            )
+
     try:
-        # Convert Markdown, HTML notes to HTML
-        # notes = []
-        # for note in sorted(source_path.glob(f"**/*")):
-        #     if not note.is_file():
-        #         continue
-        #     if hasattr(context, "ignore_path"):
-        #         if str(note.relative_to(source_path)) in context.ignore_path:
-        #             continue
-        #         if set(note.relative_to(source_path).parents) & set(
-        #             Path(p) for p in context.ignore_path
-        #         ):
-        #             continue
-        #     notes.append(note)
-
-        def subproccess_md_to_html(note):
-            # Add parent directory
-            note = Path(note)
-            note = note.relative_to(
-                list(note.parents)[-2]
-            )  # e.g., notebook, notebook/note.md
-            Path.mkdir(output_path / note, parents=True, exist_ok=True)
-
-            # Determine output filename
-            if note.suffix[1:] in DOC_EXTENSIONS:
-                outputfile = output_path / (note.stem + ".html")
-            else:
-                outputfile = output_path / note
-
-            # Write to file
-            log.debug(f"{note} > {outputfile}")
-            print(note, outputfile)
-            if note.suffix == ".md":
-                outputfile = md_to_html(note.absolute(), outputfile)
-            else:
-                print(context.source_path / note, str(outputfile))
-                copyfile(context.source_path / note, str(outputfile))
-
-            # Check output file was created.
-            if not outputfile.exists():
-                raise FileNotFoundError(
-                    "Output file(s) were deleted in middle of process. Please clean and restart the build."
-                )
-
         processes = []
-        for note in context.source_files:
-            p = mp.Process(target=subproccess_md_to_html, args=(note,))
+        for source_file in context.source_files:
+            # source_file is relative to PROJECT_PATH
+            p = mp.Process(target=subproccess_md_to_html, args=(source_file,))
             processes.append(p)
             p.start()
 
@@ -107,6 +103,7 @@ def build(context):
         # Success, remove backup
         if backup.exists():
             rmtree(str(backup))
+
     except Exception as e:  # Recover backup when fails
         log.exception(e)
         rmtree(str(output_path))

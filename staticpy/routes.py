@@ -1,6 +1,13 @@
 from pathlib import Path
 
-from flask import abort, redirect, render_template, request, send_from_directory
+from flask import (
+    abort,
+    redirect,
+    render_template,
+    request,
+    send_from_directory,
+    url_for,
+)
 from jinja2 import Markup
 
 from . import BASE_CONFIG, CONTEXTS, SITE_URL, STATIC_PATH, TEMPLATE_PATH, app, log
@@ -21,7 +28,7 @@ def global_var():
         return Markup(app.jinja_loader.get_source(app.jinja_env, fpath)[0])
 
     def new_url_for(endpoint, **kwargs):
-        log.debug(f"Parsing {endpoint} {type(endpoint)}")
+        log.debug(f"Parsing {endpoint} {type(endpoint)}...")
         ignore_prefix = ["#", "mailto"]
         should_ignore = map(lambda prefix: endpoint.startswith(prefix), ignore_prefix)
 

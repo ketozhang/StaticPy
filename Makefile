@@ -1,8 +1,7 @@
-local:
-	pipenv run python app.py
-
-build:
-	pipenv run python app.py build
+debug:
+	FLASK_ENV=development \
+	FLASK_APP=./tests/website/app.py \
+	.venv/bin/flask run -p 8080
 
 
 .PHONY: static

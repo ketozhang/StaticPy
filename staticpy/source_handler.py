@@ -105,8 +105,6 @@ class Page:
         if isinstance(path, str) and path[0] == "/":
             path = path[1:]
 
-        path = get_fpath(path)
-
         if path.is_file() and path.suffix in DOC_EXTENSIONS:
             url = "/" + str(path.absolute().relative_to(PROJECT_PATH).stem)
         elif any([path.with_suffix(f".{ext}") for ext in DOC_EXTENSIONS]):
@@ -195,6 +193,7 @@ def get_frontmatter(file_or_path, last_updated=True, title=True):
     Arguments
     ---------
     file_or_path : str or pathlib.Path
+        File or path relative to `PROJECT_PATH`.
         If path to file, then the path should be to a markdown file. ".md" extension is assumed if missing.
         If path to directory, then the path should contain index.md.
         Because frontmatter is loaded on request, the argument should always be relative to project path.
@@ -211,7 +210,7 @@ def get_frontmatter(file_or_path, last_updated=True, title=True):
         If `file_or_path` doesn't exist or frontmatter is can't be found then return empty dict.
         Otherwise, return a parse of the frontmatter YAML data to dict.
     """
-    fpath = PROJECT_PATH / get_fpath(file_or_path)
+    fpath = PROJECT_PATH / file_or_path
 
     # Parse path
     if fpath.is_dir():

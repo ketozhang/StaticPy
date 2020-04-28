@@ -78,20 +78,33 @@ class Context:
 
     @property
     def source_files(self):
-        """Return a list of source files excluding ignored files"""
+        """Return a list of source files excluding ignored files. The source files are relative to `PROJECT_PATH`"""
 
         self._source_files = []
 
-        queue = [Path(self.source_path)]
-        while len(queue) > 0:
-            current_path = queue.pop(0)
-            subpaths = current_path.glob("*")
-            for subpath in subpaths:
-                if str(subpath.relative_to(subpath.parent)) not in self.ignore_paths:
-                    queue.append(subpath)
-                    self._source_files.append(str(subpath.relative_to(PROJECT_PATH)))
+        def dfs(path):
+            for subpath in path.glob("*"):
+                if subpath.relative_to(subpath.parent) in self.ignore_paths:
+                    continue
 
+                if subpath.is_file():
+                    # If subpath is a file record it
+                    self._source_files.append(subpath.relative_to(PROJECT_PATH))
+
+                # Search subpath's child
+                dfs(subpath)
+
+        dfs(Path(self.source_path))
         return self._source_files
+
+        # queue = [Path(self.source_path)]
+        # while len(queue) > 0:
+        #     current_path = queue.pop(0)
+        #     subpaths = current_path.glob("*")
+        #     for subpath in subpaths:
+        #         if str(subpath.relative_to(subpath.parent)) not in self.ignore_paths:
+        #             queue.append(subpath)
+        #             self._source_files.append(str(subpath.relative_to(PROJECT_PATH)))
 
     def __repr__(self):
         s = f"<Context: url={self.root_url}, template={self.template}>"
