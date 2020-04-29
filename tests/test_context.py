@@ -7,7 +7,7 @@ PROJECT_PATH = Path(__file__).resolve().parent / "website"
 os.chdir(PROJECT_PATH)
 
 from staticpy import BASE_CONFIG, TEMPLATE_PATH, SITE_URL
-from staticpy.context import Context, PostContext, NoteContext
+from staticpy.context import Context
 from staticpy.source_handler import Page
 from .website import app as site
 
@@ -45,17 +45,17 @@ def test_context_constructor():
     assert expected == actual
 
 
-def test_postcontext_map():
-    expected = {
-        "/posts/markdown-examples/": "posts/markdown-examples.html",
-        "/posts/": "posts/index.html",
-        "/posts/mathjax-examples/": "posts/mathjax-examples.html",
-        "/posts/postdir/": "posts/postdir/index.html",
-        "/posts/empty_post/": "posts/empty_post.html",
-    }
-
+def test_context_map():
     context_config = BASE_CONFIG["contexts"]["posts"]
     context = Context(**context_config)
+
+    expected = {
+        "/posts/markdown-examples/": f"{context.content_folder}/markdown-examples.html",
+        "/posts/": f"{context.content_folder}/index.html",
+        "/posts/mathjax-examples/": f"{context.content_folder}/mathjax-examples.html",
+        "/posts/postdir/": f"{context.content_folder}/postdir/index.html",
+        "/posts/empty_post/": f"{context.content_folder}/empty_post.html",
+    }
 
     actual = context.page_content_map
     assert expected == actual
@@ -66,23 +66,23 @@ def test_context_source_files():
     context = Context(**context_config)
 
     expected = [
-        "index.html",
-        "Example_Notebook/sometext.md",
-        "Example_Notebook/example.png",
-        "Example_Notebook/example.md",
-        "Example_Notebook/Section2/example.png",
-        "Example_Notebook/Section2/example.md",
-        "Example_Notebook/Section1/example.png",
-        "Example_Notebook/Section1/example.md",
-        "Deep_Notebook/example.png",
-        "Deep_Notebook/example.md",
-        "Deep_Notebook/Depth1/example.png",
-        "Deep_Notebook/Depth1/example.md",
-        "Deep_Notebook/Depth1/Depth2/example.png",
-        "Deep_Notebook/Depth1/Depth2/example.md",
-        "Deep_Notebook/Depth1/Depth2/Depth3/example.png",
-        "Deep_Notebook/Depth1/Depth2/Depth3/example.md",
-        "Deep_Notebook/Depth1/Depth2/Depth3/example.html",
+        f"{context.source_folder}/index.html",
+        f"{context.source_folder}/Example_Notebook/sometext.md",
+        f"{context.source_folder}/Example_Notebook/example.png",
+        f"{context.source_folder}/Example_Notebook/example.md",
+        f"{context.source_folder}/Example_Notebook/Section2/example.png",
+        f"{context.source_folder}/Example_Notebook/Section2/example.md",
+        f"{context.source_folder}/Example_Notebook/Section1/example.png",
+        f"{context.source_folder}/Example_Notebook/Section1/example.md",
+        f"{context.source_folder}/Deep_Notebook/example.png",
+        f"{context.source_folder}/Deep_Notebook/example.md",
+        f"{context.source_folder}/Deep_Notebook/Depth1/example.png",
+        f"{context.source_folder}/Deep_Notebook/Depth1/example.md",
+        f"{context.source_folder}/Deep_Notebook/Depth1/Depth2/example.png",
+        f"{context.source_folder}/Deep_Notebook/Depth1/Depth2/example.md",
+        f"{context.source_folder}/Deep_Notebook/Depth1/Depth2/Depth3/example.png",
+        f"{context.source_folder}/Deep_Notebook/Depth1/Depth2/Depth3/example.md",
+        f"{context.source_folder}/Deep_Notebook/Depth1/Depth2/Depth3/example.html",
     ]
 
     actual = context.source_files

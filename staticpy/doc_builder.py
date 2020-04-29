@@ -66,17 +66,13 @@ def build(context: Context):
 
     output_folder.mkdir()
 
-    def subproccess_md_to_html(source_file):
-        """
-        Args:
-            source_file (str): File path to the source file relative to `PROJECT_PATH`.
-        """
+    def convert_source_to_content(source_file):
         source_file = Path(source_file)
-        msg = f"Processing source file {output_folder.stem / source_file}"
+        msg = f"Processing source file {source_file.relative_to(PROJECT_PATH)}"
         log.info("{:.<80}".format(msg))
 
-        # Determine output filename
-        outputfile = output_folder / source_file
+        # Determine output content file path
+        outputfile = Path(context.source_to_content(source_file))
 
         # Make parent folders of the output file
         parent = outputfile.parent
@@ -88,12 +84,12 @@ def build(context: Context):
 
         # Write to file
         log.info(
-            f"{source_folder.stem / source_file} -> {outputfile.relative_to(PROJECT_PATH)}"
+            f"{source_file.relative_to(PROJECT_PATH)} -> {outputfile.relative_to(PROJECT_PATH)}"
         )
         if source_file.suffix == ".md":
-            outputfile = md_to_html(source_folder / source_file, outputfile)
+            outputfile = md_to_html(source_file, outputfile)
         else:
-            copyfile(source_folder / source_file, outputfile)
+            copyfile(source_file, outputfile)
 
         # Check output file was created.
         if not outputfile.exists():
@@ -105,7 +101,7 @@ def build(context: Context):
         processes = []
         for source_file in context.source_files:
             # source_file is relative to PROJECT_PATH
-            p = mp.Process(target=subproccess_md_to_html, args=(source_file,))
+            p = mp.Process(target=convert_source_to_content, args=(source_file,))
             processes.append(p)
             p.start()
 

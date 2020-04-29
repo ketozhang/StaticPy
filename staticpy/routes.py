@@ -126,7 +126,7 @@ def get_page(context, subpath=None):
 
     if subpath is None:
         # Render context root page
-        content_path = context.get_content_path(page_url)
+        content_path = context.page_url_to_content(page_url)
         if content_path is None:
             app.logger.debug(
                 f"Cannot find content file in context associated with URL {page_url}."
@@ -150,7 +150,7 @@ def get_page(context, subpath=None):
         return redirect(f"{context.root_url}/{Path(subpath).parent}/")
     else:
         # Otherwise render the content with context's content template
-        content_path = context.get_content_path(page_url)
+        content_path = context.page_url_to_content(page_url)
         if content_path is None:
             app.logger.debug(
                 f"Cannot find content file in context associated with URL {page_url}."
