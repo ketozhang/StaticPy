@@ -126,16 +126,18 @@ def get_page(context, subpath=None):
 
     if subpath is None:
         # Render context root page
-        content_path = context.page_url_to_content(page_url)
-        if content_path is None:
+        content_file = context.page_url_to_content(page_url)
+        if content_file is None:
             app.logger.debug(
                 f"Cannot find content file in context associated with URL {page_url}."
             )
             abort(404)
+        else:
+            content_file = Path(content_file)
 
         page = context.get_page(page_url)
         app.logger.debug(f"Serving context root page: {page}")
-        return render_template(content_path, page=page)
+        return render_template(str(content_file.relative_to(TEMPLATE_PATH)), page=page)
     elif Path(subpath).suffix != "" and Path(subpath).suffix != ".html":
         # If URL is an non-HTML file, the file itself is returned.
         app.logger.debug(
@@ -150,12 +152,14 @@ def get_page(context, subpath=None):
         return redirect(f"{context.root_url}/{Path(subpath).parent}/")
     else:
         # Otherwise render the content with context's content template
-        content_path = context.page_url_to_content(page_url)
-        if content_path is None:
+        content_file = context.page_url_to_content(page_url)
+        if content_file is None:
             app.logger.debug(
                 f"Cannot find content file in context associated with URL {page_url}."
             )
             abort(404)
+        else:
+            content_file = Path(content_file)
 
         page = context.get_page(page_url)
         app.logger.debug(f"Serving context page: {page}")

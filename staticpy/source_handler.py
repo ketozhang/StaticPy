@@ -23,8 +23,14 @@ class Page:
             **frontmatter: Frontmatter from Markdown sources will be imported as attributes.
         """
         self.url = url
-        self.content_path = content_path
+
+        if Path(content_path).is_absolute():
+            self._content_path = content_path
+        else:
+            self._content_path = TEMPLATE_PATH / content_path
+
         self.context = context
+
         if (PROJECT_PATH / self.content_path).exists():
             self.source_path = str(PROJECT_PATH / self.content_path)
         else:
@@ -48,6 +54,10 @@ class Page:
 
     # if self["title"] == None:
     #     self["title"] = self["url"].split("/")[-1]
+
+    @property
+    def content_path(self):
+        return str(Path(self._content_path).relative_to(TEMPLATE_PATH))
 
     @property
     def has_content(self):
