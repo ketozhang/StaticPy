@@ -121,7 +121,9 @@ CONTEXTS = {
 ################
 from .doc_builder import build_all
 
-app = Flask(__name__, template_folder=TEMPLATE_PATH, static_folder=STATIC_PATH)
+app = Flask(
+    __name__, template_folder=str(TEMPLATE_PATH), static_folder=str(STATIC_PATH)
+)
 
 if app.config["ENV"] == "production":
     SITE_URL = BASE_CONFIG["site_url"]
