@@ -137,7 +137,9 @@ def get_page(context, subpath=None):
 
         page = context.get_page(page_url)
         app.logger.debug(f"Serving context root page: {page}")
-        return render_template(str(content_file.relative_to(TEMPLATE_PATH)), page=page)
+        return render_template(
+            str(content_file.relative_to(TEMPLATE_PATH)), context=context, page=page
+        )
     elif Path(subpath).suffix != "" and Path(subpath).suffix != ".html":
         # If URL is an non-HTML file, the file itself is returned.
         app.logger.debug(
@@ -163,4 +165,4 @@ def get_page(context, subpath=None):
 
         page = context.get_page(page_url)
         app.logger.debug(f"Serving context page: {page}")
-        return render_template(context.content_template, page=page)
+        return render_template(context.content_template, context=context, page=page)

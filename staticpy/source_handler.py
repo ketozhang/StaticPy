@@ -2,6 +2,7 @@
 import os
 import sys
 import frontmatter
+import json
 from pathlib import Path
 from datetime import datetime
 from . import DOC_EXTENSIONS, PROJECT_PATH, TEMPLATE_PATH
@@ -39,7 +40,10 @@ class Page:
             )
 
         for k, v in get_frontmatter(self.source_path).items():
-            setattr(self, k, v)
+            try:
+                setattr(self, k, v)
+            except AttributeError:
+                raise ValueError(f"Frontmatter key {k} is not allowed")
 
         self._has_content = self.has_content
         self._has_subpages = None
@@ -69,9 +73,25 @@ class Page:
         self._subpages = self.get_subpages()
         return self._subpages
 
-    @property
-    def has_subpages(self):
-        self._has_subpages = False
+    def get_serializable(self):
+        def is_serializable(v):
+            try:
+                json.dumps(v)
+                return True
+            except TypeError:
+                return False
+
+        _dict__serializable = {
+            k: v for k, v in self.__dict__.items() if is_serializable(v)
+        }
+
+        return _dict__serializable
+
+    def json(self):
+        return json.dumps(self.get_serializable())
+
+    def __has_subpages(self):
+        has_subpages = False
         for url in self.context.page_urls:
             if url.startswith(self.url) and url != self.url:
                 self._has_subpages = True
@@ -84,6 +104,7 @@ class Page:
         return self.__repr__()
 
     def __repr__(self):
+<<<<<<< Updated upstream
         import copy
 
         d = copy.deepcopy(self.__dict__)
@@ -92,6 +113,9 @@ class Page:
         # if not DEBUG:
         d.pop("_subpages")
         return str(d)
+=======
+        return str(self.__dict__)
+>>>>>>> Stashed changes
 
     def __getitem__(self, key):
         """Returns key if exists else returns None."""

@@ -3,7 +3,7 @@ context_config = BASE_CONFIG["contexts"][context]
 notes = Context(**context_config)
 """
 from pathlib import Path
-from . import PROJECT_PATH, TEMPLATE_PATH, SITE_URL
+from . import PROJECT_PATH, TEMPLATE_PATH, SITE_URL, DOC_EXTENSIONS
 from .source_handler import Page
 
 
@@ -40,7 +40,21 @@ class Context:
         return self.__repr__()
 
     @property
-    def page_content_map(self):
+    def page_urls(self):
+        return [
+            page_url
+            for page_url in self.page_content_map.keys()
+            if Path(page_url).suffix == ""
+        ]
+
+    def json(self):
+        import json
+
+        return json.dumps(
+            [self.get_page(page_url).get_serializable() for page_url in self.page_urls]
+        )
+
+    def build_page_content_map(self):
         def _content_to_page_url(content_path):
             """Returns the page URL path given the content path."""
             content_path = Path(content_path).relative_to(TEMPLATE_PATH)
