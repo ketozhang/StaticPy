@@ -266,7 +266,6 @@ def get_frontmatter(file_or_path, last_updated=True, title=True):
             )
         else:
             fm["last_updated"] = datetime.fromtimestamp(os.path.getctime(fpath))
-        print("TYPE", fm["last_updated"], type(fm["last_updated"]))
 
         # Add title parsed from filename to frontmatter
         # Title ignores underscores and converts to title case.

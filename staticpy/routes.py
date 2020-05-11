@@ -129,7 +129,7 @@ def get_page(context, subpath=None):
         content_file = context.page_url_to_content(page_url)
         if content_file is None:
             app.logger.debug(
-                f"Cannot find content file in context associated with URL {page_url}."
+                f"Cannot find content file in context associated with URL {page_url}. Make sure you have build the source files."
             )
             abort(404)
         else:
@@ -157,7 +157,7 @@ def get_page(context, subpath=None):
         content_file = context.page_url_to_content(page_url)
         if content_file is None:
             app.logger.debug(
-                f"Cannot find content file in context associated with URL {page_url}."
+                f"Cannot find content file in context associated with URL {page_url}. Make sure you have build the source files."
             )
             abort(404)
         else:

@@ -1,5 +1,6 @@
 """Build sources files located in each context's source folder to each context's content folder"""
-
+import os
+import itertools
 import multiprocessing as mp
 import time
 import pypandoc as pandoc
@@ -66,47 +67,24 @@ def build(context: Context):
 
     output_folder.mkdir()
 
-    def convert_source_to_content(source_file):
-        source_file = Path(source_file)
-        msg = f"Processing source file {source_file.relative_to(PROJECT_PATH)}"
-        log.info("{:.<80}".format(msg))
-
-        # Determine output content file path
-        outputfile = Path(context.source_to_content(source_file))
-
-        # Make parent folders of the output file
-        parent = outputfile.parent
-        log.info(f"mkdir {parent.relative_to(PROJECT_PATH)}")
-        Path.mkdir(parent, parents=True, exist_ok=True)
-
-        if source_file.suffix[1:] in DOC_EXTENSIONS:
-            outputfile = outputfile.with_suffix(".html")
-
-        # Write to file
-        log.info(
-            f"{source_file.relative_to(PROJECT_PATH)} -> {outputfile.relative_to(PROJECT_PATH)}"
-        )
-        if source_file.suffix == ".md":
-            outputfile = md_to_html(source_file, outputfile)
-        else:
-            copyfile(source_file, outputfile)
-
-        # Check output file was created.
-        if not outputfile.exists():
-            raise FileNotFoundError(
-                "Output file(s) were deleted in middle of process. Please clean and restart the build."
-            )
-
     try:
-        processes = []
-        for source_file in context.source_files:
-            # source_file is relative to PROJECT_PATH
-            p = mp.Process(target=convert_source_to_content, args=(source_file,))
-            processes.append(p)
-            p.start()
+        # Convert source file to content file
+        # Multiprocess with process pool
+        n_cpu = int(os.environ.get("STATICPY_MAX_CPU_USE", mp.cpu_count()))
+        with mp.Pool(processes=n_cpu) as pool:
+            args = itertools.product([context], context.source_files)
+            pool.starmap(convert_source_to_content, args)
 
-        for process in processes:
-            process.join()
+        # Multiprocess with process object
+        # processes = []
+        # for source_file in context.source_files:
+        #     # source_file is relative to PROJECT_PATH
+        #     p = mp.Process(target=convert_source_to_content, args=(source_file,))
+        #     processes.append(p)
+        #     p.start()
+
+        # for process in processes:
+        #     process.join()
 
         # Success, remove backup
         if backup.exists():
@@ -128,3 +106,35 @@ def build_all():
         build(context)
 
     return timer() - start
+
+
+def convert_source_to_content(context, source_file):
+    source_file = Path(source_file)
+    msg = f"Processing source file {source_file.relative_to(PROJECT_PATH)}"
+    log.info("{:.<80}".format(msg))
+
+    # Determine output content file path
+    outputfile = Path(context.source_to_content(source_file))
+
+    # Make parent folders of the output file
+    parent = outputfile.parent
+    log.info(f"mkdir {parent.relative_to(PROJECT_PATH)}")
+    Path.mkdir(parent, parents=True, exist_ok=True)
+
+    if source_file.suffix[1:] in DOC_EXTENSIONS:
+        outputfile = outputfile.with_suffix(".html")
+
+    # Write to file
+    log.info(
+        f"{source_file.relative_to(PROJECT_PATH)} -> {outputfile.relative_to(PROJECT_PATH)}"
+    )
+    if source_file.suffix == ".md":
+        outputfile = md_to_html(source_file, outputfile)
+    else:
+        copyfile(source_file, outputfile)
+
+    # Check output file was created.
+    if not outputfile.exists():
+        raise FileNotFoundError(
+            "Output file(s) were deleted in middle of process. Please clean and restart the build."
+        )
