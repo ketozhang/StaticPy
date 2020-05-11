@@ -104,18 +104,7 @@ class Page:
         return self.__repr__()
 
     def __repr__(self):
-<<<<<<< Updated upstream
-        import copy
-
-        d = copy.deepcopy(self.__dict__)
-
-        # DEBUG = os.environ.get("FLASK_ENV") == "development"
-        # if not DEBUG:
-        d.pop("_subpages")
-        return str(d)
-=======
         return str(self.__dict__)
->>>>>>> Stashed changes
 
     def __getitem__(self, key):
         """Returns key if exists else returns None."""

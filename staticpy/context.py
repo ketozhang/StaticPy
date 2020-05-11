@@ -30,7 +30,7 @@ class Context:
 
         for k, v in kwargs.items():
             setattr(self, k, v)
-        self._page_content_map = {}
+        self.page_content_map = self.get_page_content_map()
 
     def __repr__(self):
         s = f"<Context: url={self.root_url}, content_template={self.content_template}>"
@@ -51,10 +51,14 @@ class Context:
         import json
 
         return json.dumps(
-            [self.get_page(page_url).get_serializable() for page_url in self.page_urls]
+            [
+                self.get_page(page_url).get_serializable()
+                for page_url in self.page_urls
+                if Path(page_url).suffix == ""
+            ]
         )
 
-    def build_page_content_map(self):
+    def get_page_content_map(self):
         def _content_to_page_url(content_path):
             """Returns the page URL path given the content path."""
             content_path = Path(content_path).relative_to(TEMPLATE_PATH)
@@ -76,18 +80,16 @@ class Context:
         # List of path to contents relative to the TEMPLATE_PATH
         content_paths = [str(p) for p in sorted(Path(self.content_folder).glob("**/*"))]
 
-        self._page_content_map = {}
+        self.page_content_map = {}
         for content_path in content_paths:
             page_url = _content_to_page_url(content_path)
             if Path(content_path).suffix == "":
                 # Handles directories, should be overwritten if /path/to/dir/index.html exists
-                self._page_content_map[page_url] = str(
-                    Path(content_path) / "index.html"
-                )
+                self.page_content_map[page_url] = str(Path(content_path) / "index.html")
             else:
-                self._page_content_map[page_url] = content_path
+                self.page_content_map[page_url] = content_path
 
-        return self._page_content_map
+        return self.page_content_map
 
     @property
     def page_urls(self):
