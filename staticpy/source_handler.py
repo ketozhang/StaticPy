@@ -39,25 +39,12 @@ class Page:
                 (PROJECT_PATH / self.content_path).with_suffix(".md")
             )
 
-        for k, v in get_frontmatter(self.source_path).items():
+        frontmatter = get_frontmatter(self.source_path)
+        for k, v in frontmatter.items():
             try:
                 setattr(self, k, v)
             except AttributeError:
                 raise ValueError(f"Frontmatter key {k} is not allowed")
-
-        self._has_content = self.has_content
-        self._has_subpages = None
-        self._subpages = None  # Handles too large to cache
-
-    # def __init__(self, url, subpages=[], title=None, **kwargs):
-    #     self.update({
-    #         'url': url,
-    #         'title': title,
-    #         'subpages':  subpages,
-    #         **kwargs})
-
-    # if self["title"] == None:
-    #     self["title"] = self["url"].split("/")[-1]
 
     @property
     def content_path(self):
@@ -72,6 +59,23 @@ class Page:
     def subpages(self):
         self._subpages = self.get_subpages()
         return self._subpages
+
+    def get_serializable(self):
+        def is_serializable(v):
+            try:
+                json.dumps(v)
+                return True
+            except TypeError:
+                return False
+
+        _dict__serializable = {
+            k: v for k, v in self.__dict__.items() if is_serializable(v)
+        }
+
+        return _dict__serializable
+
+    def json(self):
+        return json.dumps(self.get_serializable())
 
     def get_serializable(self):
         def is_serializable(v):
@@ -251,11 +255,18 @@ def get_frontmatter(file_or_path, last_updated=True, title=True):
     if fpath.exists():
         fm = frontmatter.load(fpath).metadata
 
-        # Add timestamp of most recent update to frontmatter
-        if not ("last_updated" in fm):
-            last_updated = datetime.fromtimestamp(os.path.getctime(fpath))
-            # fm['date'] = last_updated.strftime('%Y-%m-%d %I:%M %p %Z')
-            fm["last_updated"] = last_updated.isoformat()
+        if "last_updated" in fm:
+            last_updated_date = fm["last_updated"]
+            fm["last_updated"] = datetime(
+                last_updated_date.year,
+                last_updated_date.month,
+                last_updated_date.day,
+                0,
+                0,
+            )
+        else:
+            fm["last_updated"] = datetime.fromtimestamp(os.path.getctime(fpath))
+        print("TYPE", fm["last_updated"], type(fm["last_updated"]))
 
         # Add title parsed from filename to frontmatter
         # Title ignores underscores and converts to title case.

@@ -102,17 +102,31 @@ class Context:
         self._source_files = []
 
         def is_ignored(path):
+            # Check if empty folder
+            if path.is_dir() and len(list(path.glob("*"))) == 0:
+                return True
+
+            # Use relative path
             path = path.relative_to(self.source_folder)
 
-            parents = [str(p) for p in path.parents]
-            parent_is_ignored = bool(set() & set(self.ignore_paths))
+            # Check if dot file or folder.
+            # Exception path="." which is the source_folder itself
+            if str(path) != "." and str(path)[0] == ".":
+                return True
 
-            itself_is_ignored = str(path) in self.ignore_paths
+            # Check parent folders is specified in ignore_paths
+            # parents = [str(p) for p in path.parents]
+            # if bool(set() & set(self.ignore_paths)):
+            #     return True
 
-            return parent_is_ignored or itself_is_ignored
+            # Check itself is specified in ignore_paths
+            if str(path) in self.ignore_paths:
+                return True
+
+            return False
 
         def dfs(path):
-            # If path is ignored, stop
+            # If path is ignored, stop including all its children
             if is_ignored(path):
                 return
 
