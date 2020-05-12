@@ -11,7 +11,7 @@ from . import (
     BASE_CONFIG,
     PROJECT_PATH,
     TEMPLATE_PATH,
-    PANDOC_EXTENSIONS,
+    PANDOC_OUTPUT,
     DOC_EXTENSIONS,
     CONTEXTS,
     log,
@@ -32,7 +32,8 @@ def md_to_html(filepath, output_filepath):
     """
     pandoc.convert_file(
         str(filepath),
-        PANDOC_EXTENSIONS,
+        "html",
+        PANDOC_OUTPUT,
         # "html+definition_lists+link_attributes",
         outputfile=str(output_filepath),
         extra_args=["--mathjax"],

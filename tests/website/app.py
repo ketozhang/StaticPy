@@ -36,7 +36,7 @@ if __name__ == "__main__":
         freeze_time = freezer.freeze()
         if freeze_time is not None:
             print(f"{'Static convert time:':<30} {freeze_time:.2f} secs")
-            times.append(build_time)
+            times.append(freeze_time)
 
         else:
             print(
