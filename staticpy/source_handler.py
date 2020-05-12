@@ -11,7 +11,6 @@ from . import DOC_EXTENSIONS, PROJECT_PATH, TEMPLATE_PATH
 class Page:
     def __init__(self, url, content_path, context=None):
         """
-
         Args:
             url (str): absolute URL of the page
             context (staticpy.Context, optional): Defaults to None.
@@ -19,36 +18,43 @@ class Page:
         Attributes:
             url (str): See Args description
             context (staticpy.Context or None): See Args description
-            content_path (str): Path to HTML content of the page
+            content_path (str): Path to HTML content of the page relative to TEMPLATE_PATH
             source_folder (str): Path to the source of the page
             **frontmatter: Frontmatter from Markdown sources will be imported as attributes.
         """
         self.url = url
-
-        if Path(content_path).is_absolute():
-            self._content_path = content_path
-        else:
-            self._content_path = TEMPLATE_PATH / content_path
-
         self.context = context
 
-        if (PROJECT_PATH / self.content_path).exists():
-            self.source_path = str(PROJECT_PATH / self.content_path)
+        # `self_content_path` will be absolute while `self.content_path` is a property that returns path relative to TEMPLATE_PATH
+        self.absolute_content_path = content_path
+        self.content = self.get_content()
+
+        source_path = PROJECT_PATH / self.content_path
+        if source_path.exists():
+            self.source_path = str(source_path)
         else:
-            self.source_path = str(
-                (PROJECT_PATH / self.content_path).with_suffix(".md")
-            )
+            self.source_path = str(source_path.with_suffix(".md"))
 
         frontmatter = get_frontmatter(self.source_path)
         for k, v in frontmatter.items():
             try:
                 setattr(self, k, v)
             except AttributeError:
-                raise ValueError(f"Frontmatter key {k} is not allowed")
+                raise ValueError(
+                    f"Frontmatter key {k} is not allowed and found in {self.source_path}"
+                )
+
+    @property
+    def parent_page(self):
+        return self.context.get_page(self.parent_url)
+
+    @property
+    def parent_url(self):
+        return str(Path(self.url).parent) + "/"
 
     @property
     def content_path(self):
-        return str(Path(self._content_path).relative_to(TEMPLATE_PATH))
+        return str(Path(self.absolute_content_path).relative_to(TEMPLATE_PATH))
 
     @property
     def has_content(self):
@@ -57,8 +63,19 @@ class Page:
 
     @property
     def subpages(self):
-        self._subpages = self.get_subpages()
-        return self._subpages
+        return self.get_subpages()
+
+    def get_content(self, n_lines=None):
+        try:
+            with open(self.absolute_content_path, "r") as f:
+                if n_lines is None:
+                    content = f.read()
+                else:
+                    content = f.readlines(n_lines)
+        except (FileNotFoundError, NotADirectoryError):
+            content = None
+
+        return content
 
     def get_serializable(self):
         def is_serializable(v):
@@ -94,28 +111,12 @@ class Page:
     def json(self):
         return json.dumps(self.get_serializable())
 
-    def __has_subpages(self):
-        has_subpages = False
-        for url in self.context.page_urls:
-            if url.startswith(self.url) and url != self.url:
-                self._has_subpages = True
-                break
-        return self._has_subpages
-
-        return self._has_subpages
-
-    def __str__(self):
-        return self.__repr__()
-
-    def __repr__(self):
-        return str(self.__dict__)
-
-    def __getitem__(self, key):
-        """Returns key if exists else returns None."""
+    def get(self, key, default=None):
+        """Returns value from key if exists else returns `default.`"""
         if hasattr(self, key):
             return getattr(self, key)
         else:
-            return None
+            return default
 
     def get_page(self, path):
         """
@@ -148,7 +149,9 @@ class Page:
         """Get immediate subpages of a path ignoring "index.*" pages.
 
         Parameters:
-            path (str or pathlib.Path): Directory path or URL relative to the project path or URL with leading slash. If `/path/to/project/context/page`, `path` should be `/context/page`. This follows conventions for URL paths as `/context/page` is the URL to the page.
+            path (str or pathlib.Path): Directory path or URL relative to the project path or URL with leading slash.
+                                        If `/path/to/project/context/page`, `path` should be `/context/page`.
+                                        This follows conventions for URL paths as `/context/page` is the URL to the page.
 
                 .. warning::
                     Using `index.html` will always return an empty dictionary. Instead
@@ -168,13 +171,10 @@ class Page:
                 f"{Path(url).parent}/" == self.url  # is a direct sub-URL
                 and Path(url).suffix == ""  # is an URL of HTML file
             )
-            if not is_subpage:
-                continue
+            if is_subpage:
+                subpages.append(self.context.get_page(url))
 
-            subpages.append(self.context.get_page(url))
-
-        self._subpages = subpages
-        return self._subpages
+        return subpages
 
         # # Unfortunately, Path.glob('*/) includes all files
         # # subpaths.extend([p for p in path.glob(f"**/") if p.is_dir() and p.name[0] != "."])
@@ -209,12 +209,33 @@ class Page:
 
         # return subpages
 
+    def __has_subpages(self):
+        has_subpages = False
+        for url in self.context.page_urls:
+            if url.startswith(self.url) and url != self.url:
+                self._has_subpages = True
+                break
+        return self._has_subpages
 
-def infer_title(fname):
+        return self._has_subpages
+
+    def __str__(self):
+        return self.__repr__()
+
+    def __repr__(self):
+        ignore = ["content"]
+        return str({k: v for k, v in self.__dict__.items() if k not in ignore})
+
+    def __getitem__(self, key):
+        """Returns value from key if exists else returns None."""
+        return self.get(key, default=None)
+
+
+def format_title(fname):
     return fname.title().replace("_", " ")
 
 
-def get_frontmatter(file_or_path, last_updated=True, title=True):
+def get_frontmatter(source_file, last_updated=True, title=True):
     """Get parsed YAML frontmatter.
 
     Arguments
@@ -237,54 +258,35 @@ def get_frontmatter(file_or_path, last_updated=True, title=True):
         If `file_or_path` doesn't exist or frontmatter is can't be found then return empty dict.
         Otherwise, return a parse of the frontmatter YAML data to dict.
     """
-    fpath = PROJECT_PATH / file_or_path
-
-    # Parse path
-    if fpath.is_dir():
-        fpath = fpath / "index.md"
-    else:
-        if fpath.suffix == "":
-            fpath = fpath.with_suffix(".md")
-
-    if fpath.suffix[1:] not in DOC_EXTENSIONS:
-        raise ValueError(
-            f"Argument `file_or_path` must be refer to a file type {DOC_EXTENSIONS}"
-        )
-
-    # Check exist
-    if fpath.exists():
-        fm = frontmatter.load(fpath).metadata
+    source_file = Path(source_file)
+    if source_file.exists():
+        fm = frontmatter.load(source_file).metadata
 
         if "last_updated" in fm:
             last_updated_date = fm["last_updated"]
             fm["last_updated"] = datetime(
-                last_updated_date.year,
-                last_updated_date.month,
-                last_updated_date.day,
-                0,
-                0,
+                last_updated_date.year, last_updated_date.month, last_updated_date.day,
             )
         else:
-            fm["last_updated"] = datetime.fromtimestamp(os.path.getctime(fpath))
+            fm["last_updated"] = datetime.fromtimestamp(os.path.getctime(source_file))
 
         # Add title parsed from filename to frontmatter
         # Title ignores underscores and converts to title case.
         if not ("title" in fm):
-            if fpath.stem == "index":
-                fm["title"] = infer_title(fpath.parent.stem)
+            if source_file.stem == "index":
+                fm["title"] = format_title(source_file.parent.stem)
             else:
-                fm["title"] = infer_title(fpath.stem)
+                fm["title"] = format_title(source_file.stem)
 
         return fm
     else:
-        # Allow dir to not have index file
-        # TODO: Deal with if fpath really do not exist,
-        #       should we give fake frontmatter as well?
+        # Allow dir to not have source file
+        # TODO: Deal with if fpath really does not exist,
         fm = {}
 
-        if fpath.stem == "index":
-            fm["title"] = infer_title(fpath.parent.stem)
+        if source_file.stem == "index":
+            fm["title"] = format_title(source_file.parent.stem)
         else:
-            fm["title"] = infer_title(fpath.stem)
+            fm["title"] = format_title(source_file.stem)
 
         return fm

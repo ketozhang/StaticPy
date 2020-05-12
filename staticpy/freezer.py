@@ -3,7 +3,7 @@ from pathlib import Path
 from shutil import rmtree
 from flask_frozen import Freezer
 from timeit import default_timer as timer
-from . import BASE_CONFIG, PROJECT_PATH, app, build_all, log, Context
+from . import BASE_CONFIG, PROJECT_PATH, CONTEXTS, app, build_all, log, Context
 
 freezer = Freezer(app)
 
@@ -15,8 +15,7 @@ def get_all_context_pages():
     Ignores files that are at first level of templates path.
     """
     pages = []
-    for context_config in BASE_CONFIG["contexts"].values():
-        context = Context(**context_config)
+    for context in CONTEXTS.values():
         pages += context.page_urls
     return pages
 
@@ -43,7 +42,7 @@ def get_root_page():
     args: dict
        The arguments of app.py::get_page.
     """
-    for root_page_path in BASE_CONFIG["root_pages"].values():
+    for root_page_path in BASE_CONFIG["root_pages"]:
         log.info(f"Freezing root page: {root_page_path}.")
         yield {"file": root_page_path}
 
